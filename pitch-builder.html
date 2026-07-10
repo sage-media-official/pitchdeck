@@ -1104,16 +1104,14 @@ function renderLib(){
    </div>`}).join(''):'<p style="color:var(--mute);font-size:.9rem">Nothing saved yet — generate a pitch and it lands here automatically.</p>'}
 async function copyLinkFor(id){const a=libAll();const e=a.find(x=>x.id===id);if(!e)return;
   let live=e.share&&e.share.on!==false&&e.share.exp>Date.now();
-  if(!live){
-    const payload={v:1,exp:Date.now()+14*864e5,design:e.design??14,theme:e.theme??0,pricing:e.pricing||null,d:e.data};
-    const url=location.origin+location.pathname+'#v='+b64u(await gzipStr(JSON.stringify(payload)));
-    e.share={url,exp:payload.exp,on:true};libWrite(a)}
+  if(!live){e.share=await mintLink(e.id,e.data,e.design??14,e.theme??0,e.pricing);libWrite(a)}
   try{await navigator.clipboard.writeText(e.share.url);toast(live?'Link copied':'New 14-day link created & copied')}
   catch(x){$('shareOut').value=e.share.url;$('shareExp').textContent=new Date(e.share.exp).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});$('shareModal').classList.add('show')}
   renderLib()}
-function offLinkFor(id){const a=libAll();const e=a.find(x=>x.id===id);if(!e||!e.share)return;
-  e.share.on=false;libWrite(a);renderLib();
-  toast('Link turned off here — copies already sent keep working until their 14-day expiry')}
+async function offLinkFor(id){const a=libAll();const e=a.find(x=>x.id===id);if(!e||!e.share)return;
+  if(e.share.short){try{await fetch('/api/share?slug='+encodeURIComponent(id),{method:'DELETE'})}catch(x){}}
+  const wasShort=e.share.short; e.share.on=false;libWrite(a);renderLib();
+  toast(wasShort?'Link killed — dead for everyone, immediately':'Link turned off here — copies already sent keep working until their 14-day expiry')}
 function openFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
   apply(e.data); comments=e.comments||[];
   applyDesign(e.design??14); applyTheme(e.theme??0); $('libModal').classList.remove('show');
@@ -1151,29 +1149,53 @@ function b64u(bytes){let s='';bytes.forEach(b=>s+=String.fromCharCode(b));return
 function b64ud(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';return Uint8Array.from(atob(str),c=>c.charCodeAt(0))}
 async function gzipStr(str){return new Uint8Array(await new Response(new Blob([str]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer())}
 async function gunzipBytes(bytes){return await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}
+async function mintLink(id,data,design,theme,pricing){
+  const body={v:1,design,theme,pricing:pricing||null,d:data};
+  try{ /* short brand link via server storage; falls back to the long self-contained link */
+    const r=await fetch('/api/share?slug='+encodeURIComponent(id),{method:'POST',
+      headers:{'content-type':'application/json'},body:JSON.stringify({slug:id,payload:body})});
+    if(r.ok){const j=await r.json();return{url:j.url,exp:j.exp,on:true,short:true}}
+  }catch(x){}
+  const exp=Date.now()+14*864e5;
+  return{url:location.origin+location.pathname+'#v='+b64u(await gzipStr(JSON.stringify({...body,exp}))),exp,on:true,short:false}}
 async function sharePitch(){
   const d=collect(); if(!d.f_name){toast('Generate a pitch first');return}
   saveCurrent();
-  const payload={v:1,exp:Date.now()+14*864e5,design:curD,theme:curT,pricing:capturePricing(),d};
-  const link=location.origin+location.pathname+'#v='+b64u(await gzipStr(JSON.stringify(payload)));
+  const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');
+  const share=await mintLink(id,d,curD,curT,capturePricing());
+  const payload={exp:share.exp};
+  const link=share.url;
   $('shareOut').value=link;
   $('shareExp').textContent=new Date(payload.exp).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
   $('shareModal').classList.add('show');
-  {const a=libAll();const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');const e=a.find(x=>x.id===id);
-   if(e){e.share={url:link,exp:payload.exp,on:true};libWrite(a)}}
+  {const a=libAll();const e=a.find(x=>x.id===id);
+   if(e){e.share=share;libWrite(a)}}
+  if(!share.short)toast('Long link (enable Storage on Vercel for short brand links)');
   try{await navigator.clipboard.writeText(link);toast('Link copied — valid 14 days')}catch(e){}
 }
+function expiredScreen(){document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>'}
+function renderShared(p){
+  apply(p.d); applyDesign(p.design??14); applyTheme(p.theme??0); generate(); restorePricing(p.pricing);
+  document.querySelectorAll('.pitch-bar .btn').forEach(b=>{if(!/PDF|Print/.test(b.textContent))b.style.display='none'});
+  document.querySelector('.magic-fab').style.display='none';
+  document.querySelector('.pricehint')&&(document.querySelector('.pricehint').style.display='none');
+  if(p.exp)toast('Valid till '+new Date(p.exp).toLocaleDateString('en-IN',{day:'numeric',month:'short'}))}
+async function tryShortViewer(){
+  const m=location.pathname.match(/\/p\/([a-z0-9-]{1,60})/); if(!m)return false;
+  try{
+    const r=await fetch('/api/pitch?slug='+m[1]);
+    if(r.status===410||r.status===404){expiredScreen();return true}
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const doc=await r.json(); renderShared({...doc.payload,exp:doc.exp});
+  }catch(e){toast('Could not open pitch: '+e.message)}
+  return true}
 async function tryViewerMode(){
+  if(await tryShortViewer())return;
   if(!location.hash.startsWith('#v='))return;
   try{
     const p=JSON.parse(await gunzipBytes(b64ud(location.hash.slice(3))));
-    if(p.exp&&Date.now()>p.exp){
-      document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Share links are valid for 14 days.<br>Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>';return}
-    apply(p.d); applyDesign(p.design??14); applyTheme(p.theme??0); generate(); restorePricing(p.pricing);
-    document.querySelectorAll('.pitch-bar .btn').forEach(b=>{if(!/PDF|Print/.test(b.textContent))b.style.display='none'});
-    document.querySelector('.magic-fab').style.display='none';
-    document.querySelector('.pricehint')&&(document.querySelector('.pricehint').style.display='none');
-    toast('Valid till '+new Date(p.exp).toLocaleDateString('en-IN',{day:'numeric',month:'short'}));
+    if(p.exp&&Date.now()>p.exp){expiredScreen();return}
+    renderShared(p);
   }catch(e){toast('Could not open shared pitch: '+e.message)}
 }
 window.addEventListener('DOMContentLoaded',tryViewerMode);

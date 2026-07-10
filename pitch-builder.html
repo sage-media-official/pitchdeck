@@ -296,9 +296,10 @@
 
   /* clean rendering while the PDF engine captures each section */
   body.pdfing .blob,body.pdfing .ghostnum,body.pdfing .coverblocks,body.pdfing .mg-flag{display:none!important}
+  body.pdfing .psec{padding:14px 0;border-bottom:none}
   body.pdfing .reveal{opacity:1!important;transform:none!important;transition:none!important}
   body.pdfing .pcard,body.pdfing .chartcard,body.pdfing .ctable,body.pdfing .lst,body.pdfing .senti,body.pdfing .tq,body.pdfing .fstage{box-shadow:none!important}
-  body.pdfing .pcover{min-height:620px;padding:40px 0;justify-content:center}
+  body.pdfing .pcover{min-height:380px;padding:26px 0;justify-content:center}
   body.pdfing .topbar,body.pdfing .genbar{display:none!important}
   /* html2canvas can't do background-clip:text — render the title in solid ink instead */
   body.pdfing .pcover h1 .g{background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;color:var(--sage-9)!important}
@@ -971,19 +972,22 @@ async function downloadPDF(){
     const rgb=(bg.match(/\d+/g)||[253,251,238]).slice(0,3).map(Number);
     const secs=[...$('pitch').querySelectorAll('.psec')];
     const doc=new jspdf.jsPDF({unit:'mm',format:'a4',orientation:'landscape'});
-    const PW=297,PH=210,M=10,uw=PW-2*M,uh=PH-2*M;
+    const PW=297,PH=210,M=8,uw=PW-2*M,uh=PH-2*M,GAP=3;
+    const fill=()=>{doc.setFillColor(rgb[0],rgb[1],rgb[2]);doc.rect(0,0,PW,PH,'F')};
+    fill(); let y=M,pages=1;
+    /* flow packing: sections stack continuously; page-break only when the next one doesn't fit */
     for(let i=0;i<secs.length;i++){
-      toast(`Rendering page ${i+1}/${secs.length}…`);
-      const canvas=await html2canvas(secs[i],{scale:2,useCORS:true,backgroundColor:bg,windowWidth:1400,logging:false});
+      toast(`Rendering section ${i+1}/${secs.length}…`);
+      const canvas=await html2canvas(secs[i],{scale:2,useCORS:true,backgroundColor:bg,windowWidth:1750,logging:false});
       const img=canvas.toDataURL('image/jpeg',.93);
-      const ar=canvas.width/canvas.height;
-      let w=uw,h=w/ar; if(h>uh){h=uh;w=h*ar}
-      if(i>0)doc.addPage('a4','landscape');
-      doc.setFillColor(rgb[0],rgb[1],rgb[2]); doc.rect(0,0,PW,PH,'F');
-      doc.addImage(img,'JPEG',(PW-w)/2,(PH-h)/2,w,h);
+      let w=uw,h=w*canvas.height/canvas.width;
+      if(h>uh){h=uh;w=h*canvas.width/canvas.height}
+      if(y+h>PH-M+.5){doc.addPage('a4','landscape');fill();y=M;pages++}
+      doc.addImage(img,'JPEG',M+(uw-w)/2,y,w,h);
+      y+=h+GAP;
     }
     doc.save(name+'-pitch-sagemedia.pdf');
-    toast('PDF downloaded ✓ — '+secs.length+' landscape pages');
+    toast('PDF downloaded ✓ — '+pages+' landscape pages');
   }catch(e){toast('PDF failed: '+e.message)}
   finally{document.body.classList.remove('pdfing');pdfBusy=false}
 }

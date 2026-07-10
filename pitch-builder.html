@@ -838,16 +838,28 @@ function saveKey(){const v=$('keyIn').value.trim();if(!v){toast('Paste your API 
   localStorage.setItem('sage_key',v);$('keyModal').classList.remove('show');toast('Key saved (this browser only)');createPitchDeck()}
 async function createPitchDeck(){
   const d=collect(); if(!d.f_name){toast('Add a brand name first');return}
-  const key=localStorage.getItem('sage_key'); if(!key){openKeyModal();return}
   showOv(); ovCtl=new AbortController();
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:ovCtl.signal,
-      headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-5',max_tokens:8000,
-        tools:[{type:'web_search_20250305',name:'web_search',max_uses:8}],
-        messages:[{role:'user',content:researchPrompt(d)}]})});
-    const j=await res.json();
-    if(j.error)throw new Error(j.error.message||('HTTP '+res.status));
+    let j=null;
+    /* 1) hosted research service (key lives server-side on Vercel — no modal for visitors) */
+    try{
+      const r=await fetch('/api/research',{method:'POST',signal:ovCtl.signal,
+        headers:{'content-type':'application/json'},body:JSON.stringify({prompt:researchPrompt(d)})});
+      if(r.ok)j=await r.json();
+      else if(![404,405,501].includes(r.status)){const e=await r.json().catch(()=>({}));throw new Error((e.error&&(e.error.message||e.error))||('HTTP '+r.status))}
+    }catch(x){if(x.name==='AbortError')throw x; if(!String(x.message).startsWith('HTTP')&&!(x instanceof TypeError))throw x}
+    /* 2) fallback: direct browser call with a locally-saved key (for file:// / unconfigured hosts) */
+    if(!j){
+      const key=localStorage.getItem('sage_key'); if(!key){hideOv();openKeyModal();return}
+      const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:ovCtl.signal,
+        headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body:JSON.stringify({model:'claude-sonnet-5',max_tokens:8000,
+          tools:[{type:'web_search_20250305',name:'web_search',max_uses:8}],
+          messages:[{role:'user',content:researchPrompt(d)}]})});
+      j=await res.json();
+      if(j.error)throw new Error(j.error.message||('HTTP '+res.status));
+    }
+    if(j&&j.error)throw new Error(j.error.message||j.error);
     const text=(j.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
     const m=text.match(/\{[\s\S]*\}/); if(!m)throw new Error('no JSON in the response — try again');
     research=JSON.parse(m[0]);

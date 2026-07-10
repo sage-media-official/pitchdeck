@@ -305,6 +305,138 @@
   body.pdfing .pcover h1 .g{background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;color:var(--sage-9)!important}
   body.pdfing .theme-1 .pcover h1 .g{color:#fff!important}
 
+
+  /* ===================== 20 STRUCTURAL THEMES (t-*) ===================== */
+  /* motion variants */
+  .t-rise .reveal{transform:translateY(26px)}
+  .t-scale .reveal{transform:scale(.93);opacity:0}.t-scale .reveal.in{transform:scale(1)}
+  .t-left .reveal{transform:translateX(-32px)}.t-left .reveal.in{transform:none}
+  .t-right .reveal{transform:translateX(32px)}.t-right .reveal.in{transform:none}
+  .t-blur .reveal{transform:none;filter:blur(10px)}.t-blur .reveal.in{filter:none}
+  .t-clipL .reveal{transform:none;opacity:1;clip-path:inset(0 100% 0 0);transition:clip-path .8s cubic-bezier(.2,.7,.2,1)}.t-clipL .reveal.in{clip-path:inset(0 0 0 0)}
+  .t-pop .reveal{transform:scale(.85);transition-timing-function:cubic-bezier(.34,1.56,.64,1)}
+  .t-drop .reveal{transform:translateY(-22px)}
+  .t-tilt .reveal{transform:rotate(1.2deg) translateY(18px)}.t-tilt .reveal.in{transform:none}
+
+  /* 02 Center Stage — keynote: everything centered */
+  .t-center .psec{text-align:center}
+  .t-center .psec .lead,.t-center .peyebrow{margin-left:auto;margin-right:auto}
+  .t-center .peyebrow{justify-content:center}
+  .t-center .chips,.t-center .funnel{justify-content:center}
+  .t-center .ghostnum{display:none}
+  .t-center .psec h2{font-size:clamp(1.8rem,4.2vw,2.9rem)}
+
+  /* 03 Split Rail — header rail left, content right */
+  @media(min-width:980px){
+    .t-rail .psec{display:grid;grid-template-columns:280px 1fr;gap:34px;align-items:start}
+    .t-rail .psec>.reveal:has(.peyebrow){position:sticky;top:84px}
+    .t-rail .psec h2{font-size:1.7rem}
+    .t-rail .ghostnum{display:none}
+    .t-rail .psec>*{grid-column:2}
+    .t-rail .psec>.reveal:has(.peyebrow){grid-column:1;border-left:4px solid var(--accent);padding-left:18px}
+  }
+  /* 04 Poster Bold — huge uppercase headers */
+  .t-poster .psec h2{text-transform:uppercase;font-size:clamp(2rem,5.5vw,4rem);letter-spacing:-.01em;line-height:.98}
+  .t-poster .peyebrow{font-size:.82rem}
+  .t-poster .ghostnum{opacity:.9;font-size:clamp(7rem,16vw,13rem);top:-40px}
+  .t-poster .pcard h3{text-transform:uppercase;font-size:.95rem;letter-spacing:.03em}
+  /* 05 Minimal Zen — airy, borderless */
+  .t-zen .psec{padding:clamp(56px,8vw,96px) 0}
+  .t-zen .pcard,.t-zen .chartcard,.t-zen .lst,.t-zen .senti,.t-zen .tq{border:none;box-shadow:none;background:transparent;padding-left:0;padding-right:0}
+  .t-zen .ghostnum{display:none}
+  .t-zen .psec h2{font-weight:400;letter-spacing:0}
+  .t-zen .chips .chip{box-shadow:none;background:transparent;border:1px solid var(--line)}
+  .t-zen .psec{border-bottom:1px solid var(--line)}
+  /* 06 Deck Frame — every section is a slide card */
+  .t-deck .psec{background:var(--card,#fff);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,3.5vw,44px);margin:16px 0;border-bottom:1px solid var(--line);box-shadow:var(--shadow-1)}
+  .t-deck .psec.dark{background:transparent;border:none;box-shadow:none;padding:0}
+  .t-deck .pcard{background:var(--cream-2);box-shadow:none}
+  .t-deck .ghostnum{top:6px;right:10px;font-size:clamp(3rem,6vw,4.5rem);opacity:.6}
+  /* 07 Gradient Ink — gradient headlines, glass cards */
+  .t-grad .psec h2{background:linear-gradient(100deg,var(--sage-9),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .t-grad .pcard{backdrop-filter:blur(6px);background:rgba(255,255,255,.55)}
+  .t-grad .band{background:linear-gradient(120deg,var(--band),var(--accent-2))}
+  /* 08 Brutalist — hard edges, offset shadows */
+  .t-brut .pcard,.t-brut .chartcard,.t-brut .ctable,.t-brut .lst,.t-brut .senti,.t-brut .tq,.t-brut .pricebox{border-radius:0;border:2px solid var(--sage-9);box-shadow:7px 7px 0 var(--sage-9)}
+  .t-brut .chip,.t-brut .need,.t-brut .btn{border-radius:0}
+  .t-brut .band,.t-brut .cta2{border-radius:0}
+  .t-brut .psec h2{text-transform:uppercase}
+  .t-brut .fstage{border-radius:0}
+  .t-brut .pcard:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--sage-9)}
+  /* 09 Soft Orbs — oversized blurred orbs behind sections */
+  .t-orbs .psec{overflow:visible}
+  .t-orbs .psec::after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--accent-l),transparent 70%);opacity:.25;filter:blur(30px);right:-80px;top:-40px;pointer-events:none}
+  .t-orbs .psec:nth-child(even)::after{left:-90px;right:auto}
+  .t-orbs .pcard,.t-orbs .chartcard{border-radius:26px}
+  .t-orbs .ghostnum{display:none}
+  /* 10 Magazine — kicker rules & underlined heads */
+  .t-mag .psec{border-top:3px solid var(--sage-9);border-bottom:none;padding-top:26px}
+  .t-mag .peyebrow{color:var(--sage-9)}
+  .t-mag .psec h2{padding-bottom:12px;position:relative}
+  .t-mag .psec h2::after{content:"";position:absolute;left:0;bottom:0;width:88px;height:5px;background:var(--accent)}
+  .t-mag .ghostnum{opacity:.5}
+  /* 11 Night Bands — alternating dark sections */
+  .t-bands .psec:nth-child(odd):not(.pcover){background:var(--band);border-radius:26px;padding-left:clamp(22px,3vw,44px);padding-right:clamp(22px,3vw,44px);margin:18px 0;border-bottom:none}
+  .t-bands .psec:nth-child(odd):not(.pcover) h2{color:#fff}
+  .t-bands .psec:nth-child(odd):not(.pcover) .lead{color:rgba(253,251,238,.78)}
+  .t-bands .psec:nth-child(odd):not(.pcover) .peyebrow{color:var(--accent-l)}
+  .t-bands .psec:nth-child(odd):not(.pcover) .pcard{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)}
+  .t-bands .psec:nth-child(odd):not(.pcover) .pcard h3{color:#fff}
+  .t-bands .psec:nth-child(odd):not(.pcover) .pcard p{color:rgba(253,251,238,.8)}
+  .t-bands .psec:nth-child(odd):not(.pcover) .ghostnum{color:rgba(255,255,255,.07)}
+  /* 12 Number Spine — giant side numbers */
+  @media(min-width:980px){
+    .t-spine .psec{padding-left:120px}
+    .t-spine .ghostnum{left:-6px;right:auto;top:34px;font-size:4.6rem;color:transparent;-webkit-text-stroke:2px var(--accent);opacity:1}
+  }
+  /* 13 Capsule — everything pill-round & bouncy */
+  .t-caps .pcard,.t-caps .chartcard,.t-caps .lst,.t-caps .senti,.t-caps .tq{border-radius:30px}
+  .t-caps .peyebrow{background:var(--accent);color:#fff;padding:7px 16px;border-radius:99px}
+  .t-caps .peyebrow .n{color:rgba(255,255,255,.75)}
+  .t-caps .ghostnum{display:none}
+  .t-caps .band,.t-caps .cta2{border-radius:40px}
+  /* 14 Outline — line-art, no fills */
+  .t-line .pcard,.t-line .chartcard,.t-line .lst,.t-line .senti,.t-line .tq{background:transparent;box-shadow:none;border:1.5px solid var(--sage-9)}
+  .t-line .chip{background:transparent;box-shadow:none;border:1.5px solid var(--sage-9)}
+  .t-line .ghostnum{color:transparent;-webkit-text-stroke:1.5px var(--cream-3)}
+  .t-line .statrow{background:transparent}
+  .t-line .statrow .st{background:transparent}
+  /* 15 Boardroom — condensed corporate precision */
+  .t-corp .psec{padding:26px 0}
+  .t-corp .psec h2{font-size:clamp(1.25rem,2.4vw,1.7rem);letter-spacing:0}
+  .t-corp .peyebrow{letter-spacing:.28em}
+  .t-corp .pcard,.t-corp .chartcard{border-radius:6px;box-shadow:none}
+  .t-corp .ctable{border-radius:6px}
+  .t-corp .ghostnum{display:none}
+  .t-corp .psec .lead{font-size:.88rem}
+  /* 16 Hero Strips — banded section headers */
+  .t-hero .psec>.reveal:has(.peyebrow){background:var(--band);border-radius:16px;padding:22px 26px;margin-bottom:18px}
+  .t-hero .psec>.reveal:has(.peyebrow) h2{color:#fff}
+  .t-hero .psec>.reveal:has(.peyebrow) .lead{color:rgba(253,251,238,.8)}
+  .t-hero .psec>.reveal:has(.peyebrow) .peyebrow{color:var(--accent-l)}
+  .t-hero .ghostnum{display:none}
+  /* 17 Diagonal — skewed accents */
+  .t-diag .psec>.reveal:has(.peyebrow){position:relative;padding-left:24px}
+  .t-diag .psec>.reveal:has(.peyebrow)::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:10px;background:var(--accent);transform:skewY(-12deg)}
+  .t-diag .pcard:hover{transform:translateY(-3px) rotate(-.5deg)}
+  .t-diag .ghostnum{transform:skewY(-6deg)}
+  /* 18 Paper — layered, slightly tilted cards */
+  .t-paper .pcard,.t-paper .chartcard,.t-paper .lst{box-shadow:0 1px 2px rgba(20,30,20,.08),0 12px 24px -12px rgba(20,30,20,.25),0 24px 48px -24px rgba(20,30,20,.2)}
+  .t-paper .pgrid .pcard:nth-child(odd){transform:rotate(-.6deg)}
+  .t-paper .pgrid .pcard:nth-child(even){transform:rotate(.5deg)}
+  .t-paper .pgrid .pcard:hover{transform:rotate(0) translateY(-4px)}
+  /* 19 Glass — frosted panels on gradient wash */
+  .t-glass .pitch,.t-glass.pitch{background:linear-gradient(160deg,var(--cream),var(--cream-3))}
+  .t-glass .pcard,.t-glass .chartcard,.t-glass .lst,.t-glass .senti,.t-glass .tq{background:rgba(255,255,255,.45);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.7)}
+  .t-glass .ghostnum{opacity:.35}
+  /* 20 Timeline — spine line connecting sections */
+  @media(min-width:980px){
+    .t-time .psec{padding-left:56px;position:relative}
+    .t-time .psec::before{content:"";position:absolute;left:14px;top:0;bottom:0;width:2px;background:var(--line)}
+    .t-time .psec::after{content:"";position:absolute;left:8px;top:52px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--cream)}
+    .t-time .ghostnum{display:none}
+  }
+
   @media print{
     *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
     @page{margin:9mm}
@@ -384,7 +516,8 @@
   <button class="btn accent big" onclick="openPasteModal()">With Claude (copy → paste)</button>
   <button class="btn" onclick="createPitchDeck()">Create pitch deck</button>
   <button class="btn" onclick="generate()">Instant preview</button>
-  <button class="btn" onclick="shuffleDesign()">Shuffle design</button>
+  <button class="btn" onclick="shuffleTheme()">Theme</button>
+  <button class="btn" onclick="shufflePalette()">Colours</button>
   <span class="note">Copy the request, paste it to Claude, paste the reply back — deck builds itself.</span>
 </div>
 
@@ -394,7 +527,8 @@
     <div class="brand"><span class="mk">S</span><span id="pbTitle">Pitch</span></div>
     <div class="topbtns">
       <button class="btn" onclick="closePitch()">← Builder</button>
-      <button class="btn" onclick="shuffleDesign()">🎲 Shuffle</button>
+      <button class="btn" onclick="shuffleTheme()">Theme</button>
+      <button class="btn" onclick="shufflePalette()">Colours</button>
       <button class="btn accent" onclick="downloadPDF()">⬇ Download PDF</button>
       <button class="btn" onclick="printPitch()">⎙ Print</button>
       <button class="btn" onclick="saveCurrent();toast('Saved to 🗂 My pitches')">Save</button>
@@ -672,7 +806,7 @@ function generate(){
      <div class="pfooter">Prepared by Sage Media · ${name} · generated with the Sage Pitch Builder${research?'':' · research pending — send the brief to Claude'}</div>`);
 
   const pw=$('pitch');pw.innerHTML=h;
-  pw.className='pitch theme-'+DESIGNS[curD].layout;
+  pw.className='pitch theme-'+THEMES[curT].layout+' '+THEMES[curT].cls;
   $('pbTitle').textContent=d.f_name+' · Pitch';
   $('pitchWrap').classList.add('show');$('pitchWrap').scrollTop=0;
   runAnims(); renderFlags();
@@ -702,6 +836,39 @@ const DESIGNS=[
  {name:'Crimson Bold',tag:'sports / automotive',layout:0,o:{bg:'#FAF7F5',bg2:'#F4EEEA',bg3:'#ECE3DC',head:'#1C1517',acc:'#D62828',acc2:'#8F1717',accl:'#EE8A8A',band:'#1C1517'}},
  {name:'Espresso Minimal',tag:'premium F&B',layout:2,o:{bg:'#F6F1EA',bg2:'#EFE7DB',bg3:'#E5D9C7',head:'#2B1D12',acc:'#7A4A21',acc2:'#553114',accl:'#C29A6C',band:'#2B1D12',r:'10px'}}
 ];
+const THEMES=[
+ {name:'Classic Editorial',cls:'t-rise',layout:0,tag:'agency classic'},
+ {name:'Center Stage',cls:'t-center t-scale',layout:2,tag:'keynote'},
+ {name:'Split Rail',cls:'t-rail t-left',layout:0,tag:'consulting'},
+ {name:'Poster Bold',cls:'t-poster t-blur',layout:1,tag:'campaign poster'},
+ {name:'Minimal Zen',cls:'t-zen',layout:2,tag:'whitespace'},
+ {name:'Deck Frame',cls:'t-deck t-pop',layout:1,tag:'slides feel'},
+ {name:'Gradient Ink',cls:'t-grad',layout:0,tag:'tech gradient'},
+ {name:'Brutalist',cls:'t-brut t-drop',layout:1,tag:'hard edges'},
+ {name:'Soft Orbs',cls:'t-orbs t-scale',layout:2,tag:'organic glow'},
+ {name:'Magazine',cls:'t-mag t-clipL',layout:0,tag:'editorial rules'},
+ {name:'Night Bands',cls:'t-bands',layout:1,tag:'alternating dark'},
+ {name:'Number Spine',cls:'t-spine t-left',layout:0,tag:'outlined numerals'},
+ {name:'Capsule',cls:'t-caps t-pop',layout:2,tag:'pill soft'},
+ {name:'Outline',cls:'t-line t-clipL',layout:0,tag:'line art'},
+ {name:'Boardroom',cls:'t-corp',layout:0,tag:'dense corporate'},
+ {name:'Hero Strips',cls:'t-hero t-right',layout:1,tag:'banded headers'},
+ {name:'Diagonal',cls:'t-diag t-tilt',layout:0,tag:'skewed energy'},
+ {name:'Paper Layers',cls:'t-paper t-drop',layout:2,tag:'stacked tilt'},
+ {name:'Neo Glass',cls:'t-glass t-blur',layout:1,tag:'frosted'},
+ {name:'Timeline Spine',cls:'t-time t-left',layout:0,tag:'connected dots'}
+];
+let curT=0;
+function applyTheme(i){curT=((i%THEMES.length)+THEMES.length)%THEMES.length;
+  const p=$('pitch'); if(p)p.className='pitch theme-'+THEMES[curT].layout+' '+THEMES[curT].cls;
+  return THEMES[curT]}
+function shuffleTheme(){const t=applyTheme(curT+1+Math.floor(Math.random()*(THEMES.length-1)));
+  if($('pitchWrap').classList.contains('show')){generate()}
+  toast('Theme '+(curT+1)+'/'+THEMES.length+' · '+t.name+' — '+t.tag)}
+function shufflePalette(){const jump=1+Math.floor(Math.random()*(DESIGNS.length-1));
+  const d=applyDesign(curD+jump);
+  if($('pitchWrap').classList.contains('show'))generate();
+  toast('Colours '+(curD+1)+'/'+DESIGNS.length+' · '+d.name+' — '+d.tag)}
 let curD=0;
 function hexRgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
 function mixHex(a,b,t){const A=hexRgb(a),B=hexRgb(b);return'#'+[0,1,2].map(i=>Math.round(A[i]+(B[i]-A[i])*t).toString(16).padStart(2,'0')).join('')}
@@ -715,10 +882,7 @@ function applyDesign(i){curD=((i%DESIGNS.length)+DESIGNS.length)%DESIGNS.length;
   const rs=document.documentElement.style;for(const k in m)rs.setProperty(k,m[k]);
   $('f_accent').value=o.acc;$('f_theme').value=String(d.layout);
   return d}
-function shuffleDesign(){const jump=1+Math.floor(Math.random()*(DESIGNS.length-1));
-  const d=applyDesign(curD+jump);
-  if($('pitchWrap').classList.contains('show'))generate();
-  toast(`🎨 ${curD+1}/${DESIGNS.length} · ${d.name} — ${d.tag}`)}
+function shuffleDesign(){shufflePalette()}
 applyDesign(14);
 function closePitch(){saveCurrent();$('pitchWrap').classList.remove('show');document.body.classList.remove('magic');$('mgBtn').classList.remove('on');$('mgBtn').innerHTML='✨ Magic edit'}
 /* real editable PPTX, generated in the browser — opens directly in Google Slides / PowerPoint */
@@ -916,7 +1080,7 @@ function saveCurrent(){
   const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');
   const a=libAll(); const old=a.find(x=>x.id===id);
   const entry={id,name:d.f_name,cat:d.f_category||'',created:old?old.created:new Date().toISOString(),
-    updated:new Date().toISOString(),design:curD,data:d,comments:comments,
+    updated:new Date().toISOString(),design:curD,theme:curT,data:d,comments:comments,
     pricing:$('pitchWrap').classList.contains('show')?capturePricing():(old?old.pricing:null)};
   const i=a.findIndex(x=>x.id===id); if(i>=0)a[i]=entry; else a.unshift(entry);
   libWrite(a)}
@@ -935,7 +1099,7 @@ function renderLib(){
    </div>`).join(''):'<p style="color:var(--mute);font-size:.9rem">Nothing saved yet — generate a pitch and it lands here automatically.</p>'}
 function openFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
   apply(e.data); comments=e.comments||[];
-  applyDesign(e.design??14); $('libModal').classList.remove('show');
+  applyDesign(e.design??14); applyTheme(e.theme??0); $('libModal').classList.remove('show');
   generate(); restorePricing(e.pricing); renderChanges(); renderFlags();
   toast('Opened "'+e.name+'" — edit away, changes save automatically')}
 function exportFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
@@ -973,7 +1137,7 @@ async function gunzipBytes(bytes){return await new Response(new Blob([bytes]).st
 async function sharePitch(){
   const d=collect(); if(!d.f_name){toast('Generate a pitch first');return}
   saveCurrent();
-  const payload={v:1,exp:Date.now()+14*864e5,design:curD,pricing:capturePricing(),d};
+  const payload={v:1,exp:Date.now()+14*864e5,design:curD,theme:curT,pricing:capturePricing(),d};
   const link=location.origin+location.pathname+'#v='+b64u(await gzipStr(JSON.stringify(payload)));
   $('shareOut').value=link;
   $('shareExp').textContent=new Date(payload.exp).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
@@ -986,7 +1150,7 @@ async function tryViewerMode(){
     const p=JSON.parse(await gunzipBytes(b64ud(location.hash.slice(3))));
     if(p.exp&&Date.now()>p.exp){
       document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Share links are valid for 14 days.<br>Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>';return}
-    apply(p.d); applyDesign(p.design??14); generate(); restorePricing(p.pricing);
+    apply(p.d); applyDesign(p.design??14); applyTheme(p.theme??0); generate(); restorePricing(p.pricing);
     document.querySelectorAll('.pitch-bar .btn').forEach(b=>{if(!/PDF|Print/.test(b.textContent))b.style.display='none'});
     document.querySelector('.magic-fab').style.display='none';
     document.querySelector('.pricehint')&&(document.querySelector('.pricehint').style.display='none');

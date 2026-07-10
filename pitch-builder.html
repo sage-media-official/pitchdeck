@@ -380,12 +380,10 @@
 
 <div class="genbar">
   <button class="btn accent big" onclick="createPitchDeck()">🚀 Create pitch deck</button>
-  <button class="btn primary" onclick="copyResearchRequest()">⧉ Copy for Claude</button>
-  <button class="btn primary" onclick="openPasteModal()">📋 Paste research</button>
+  <button class="btn primary" onclick="openPasteModal()">🤝 With Claude (copy → paste)</button>
   <button class="btn" onclick="generate()">⚡ Instant preview</button>
   <button class="btn" onclick="shuffleDesign()">🎲 Shuffle design</button>
-  <button class="btn" onclick="openKeyModal()">🔑</button>
-  <span class="note">No API key? <b>⧉ Copy for Claude</b> → paste to Claude → <b>📋 Paste research</b> → deck builds itself.</span>
+  <span class="note">🚀 auto-researches if the site has a key — otherwise it opens the copy → paste flow.</span>
 </div>
 
 <!-- ===================== PITCH ===================== -->
@@ -440,13 +438,17 @@
 </div>
 
 <div class="ov" id="pasteModal">
-  <div class="ovcard" style="text-align:left;max-width:560px">
-    <h3>📋 Paste research from Claude</h3>
-    <p class="small" style="margin:6px 0 10px">Paste the JSON Claude gave you below — the pitch deck builds instantly. (Works with the full JSON or just the research block; markdown fences are fine.)</p>
-    <textarea id="pasteIn" placeholder='{"heard":[…],"mktsize":"…", …}' style="width:100%;min-height:180px;padding:11px;border:1px solid var(--line);border-radius:11px;background:#fff;font-family:monospace;font-size:.78rem"></textarea>
-    <div style="margin-top:12px;display:flex;gap:8px">
+  <div class="ovcard" style="text-align:left;max-width:640px">
+    <h3>🤝 Create with Claude — copy, paste, done</h3>
+    <p class="small" style="margin:6px 0 4px"><b>Step 1</b> — copy this research request and paste it to Claude (claude.ai):</p>
+    <textarea id="reqOut" readonly onclick="this.select()" style="width:100%;min-height:110px;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--cream-2);font-family:monospace;font-size:.72rem"></textarea>
+    <div style="margin:8px 0 14px"><button class="btn primary" onclick="copyReq()">⧉ Copy request</button></div>
+    <p class="small" style="margin:0 0 4px"><b>Step 2</b> — paste Claude's JSON reply here:</p>
+    <textarea id="pasteIn" placeholder='{"heard":[…],"mktsize":"…", …}' style="width:100%;min-height:140px;padding:11px;border:1px solid var(--line);border-radius:11px;background:#fff;font-family:monospace;font-size:.72rem"></textarea>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
       <button class="btn primary" onclick="applyPasted()">✨ Build the pitch</button>
       <button class="btn" onclick="document.getElementById('pasteModal').classList.remove('show')">Close</button>
+      <button class="btn" style="margin-left:auto" onclick="document.getElementById('pasteModal').classList.remove('show');openKeyModal()">Use my own API key…</button>
     </div>
   </div>
 </div>
@@ -758,8 +760,13 @@ function finishAnims(){
   p.querySelectorAll('.fl[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
   p.querySelectorAll('.pin[data-left]').forEach(x=>x.style.left=x.dataset.left+'%');
 }
-/* paste-from-Claude flow: no API key needed */
-function openPasteModal(){$('pasteIn').value='';$('pasteModal').classList.add('show');$('pasteIn').focus()}
+/* copy/paste-with-Claude flow: no API key needed */
+function openPasteModal(){
+  const d=collect(); if(!d.f_name){toast('Add a brand name first');return}
+  $('reqOut').value=researchPrompt(d).replace(' using web search and',' and');
+  $('pasteIn').value='';$('pasteModal').classList.add('show')}
+function copyReq(){const t=$('reqOut');t.select();
+  navigator.clipboard.writeText(t.value).then(()=>toast('Copied — paste it to Claude')).catch(()=>{document.execCommand('copy');toast('Copied — paste it to Claude')})}
 function applyPasted(){
   let t=$('pasteIn').value.trim();
   if(!t){toast('Paste the JSON from Claude first');return}
@@ -881,7 +888,7 @@ async function createPitchDeck(){
     }catch(x){if(x.name==='AbortError')throw x; if(!String(x.message).startsWith('HTTP')&&!(x instanceof TypeError))throw x}
     /* 2) fallback: direct browser call with a locally-saved key (for file:// / unconfigured hosts) */
     if(!j){
-      const key=localStorage.getItem('sage_key'); if(!key){hideOv();openKeyModal();return}
+      const key=localStorage.getItem('sage_key'); if(!key){hideOv();openPasteModal();return}
       const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:ovCtl.signal,
         headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
         body:JSON.stringify({model:'claude-sonnet-5',max_tokens:8000,

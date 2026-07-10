@@ -829,7 +829,8 @@ function researchPrompt(d){return `You are Sage Media's strategist. Research thi
 let ovTimer=null,ovCtl=null;
 const OVSTEPS=['Reading the website…','Scanning social presence…','Sizing the market & CAGR…','Mapping the top competitors…','Checking sentiment & reviews…','Writing the 21-section plan…','Polishing the numbers…'];
 function showOv(){$('ov').classList.add('show');const t0=Date.now();let i=0;
-  ovTimer=setInterval(()=>{const sec=Math.floor((Date.now()-t0)/1000);$('ovTime').textContent=sec+'s';
+  ovTimer=setInterval(()=>{const sec=Math.floor((Date.now()-t0)/1000);const rem=75-sec;
+    $('ovTime').textContent=sec+'s'+(rem>0?' · ~'+rem+'s left':' · finishing up…');
     if(sec>0&&sec%8===0){i=(i+1)%OVSTEPS.length;$('ovStep').textContent=OVSTEPS[i]}},1000)}
 function hideOv(){clearInterval(ovTimer);$('ov').classList.remove('show');$('ovTime').textContent='0s';$('ovStep').textContent=OVSTEPS[0]}
 function cancelResearch(){if(ovCtl)ovCtl.abort();hideOv();toast('Cancelled')}

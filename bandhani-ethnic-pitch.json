@@ -1,0 +1,111 @@
+{
+  "f_name": "Bandhani",
+  "f_category": "Women's ethnic wear — bandhej, kurtis, Anarkalis, gowns & lehengas",
+  "f_region": "India · Gujarat & Rajasthan",
+  "f_website": "bandhaniethnic.com",
+  "f_social": "@bandhani_officeal · 137K",
+  "f_for": "Bandhani | The Ethnic Store",
+  "f_accent": "#E8734A",
+  "f_theme": "1",
+  "needs": ["Social media", "Influencer & UGC", "PR & media"],
+  "f_brief": "Jodhpur-born ethnic wear brand (2019, Nai Sarak — Rajasthan's largest ethnic outlet). Three stores today (Jodhpur ×2 + Ahmedabad), launching two new stores — one more in Ahmedabad, second city to be confirmed. Wants styling-led content instead of plain product posts, and wants to speak to Gujarati and Rajasthani audiences in their own language. Strong Instagram base (137K) to build on. Scope: social media, influencer & UGC, PR around the store launches.",
+  "research": {
+    "heard": [
+      "Jodhpur-born ethnic-wear brand — started 2019 at Nai Sarak, Rajasthan's largest ethnic outlet",
+      "Three stores running (Jodhpur Nai Sarak, Sardarpura + Ahmedabad); two new stores launching — one in Ahmedabad, second city TBC",
+      "Wants styling-led content — lookbooks, drape & styling reels, not just product posts",
+      "Core audiences: Gujarati & Rajasthani women — content should speak their language",
+      "Already has a 137K-follower Instagram base and a Shopify store shipping to US & Canada",
+      "Scope: social media + influencer & UGC + PR around the new store launches"
+    ],
+    "mktsize": "$19.1B",
+    "mktlabel": "India ethnic wear market, 2023 — headed to $30.4B by 2030 (Grand View Research)",
+    "cagr": 6.9,
+    "forecast": [
+      {"y": 2024, "v": 20.4},
+      {"y": 2025, "v": 21.8},
+      {"y": 2026, "v": 23.3},
+      {"y": 2027, "v": 24.9},
+      {"y": 2028, "v": 26.6},
+      {"y": 2029, "v": 28.5},
+      {"y": 2030, "v": 30.4}
+    ],
+    "tailwinds": [
+      {"l": "Women's ethnic wear (India)", "v": 8.5},
+      {"l": "India ethnic wear overall", "v": 6.9},
+      {"l": "Online fashion (India, est.)", "v": 12},
+      {"l": "Festive & wedding wear (est.)", "v": 9}
+    ],
+    "channels": ["Instagram", "Facebook", "YouTube Shorts", "WhatsApp Business", "Google Business / Maps", "Pinterest", "In-store events", "Shopify (US & Canada)"],
+    "personas": [
+      {"t": "The Wedding Shopper", "meta": "22–45 · bride & family", "d": "Shopping the full occasion wardrobe — lehengas, gowns, family sets. Decides in-store; discovers on Instagram."},
+      {"t": "The Festive Dresser", "meta": "25–40 · Gujarati / Rajasthani", "d": "Navratri, Diwali, weddings every season. Saves styling reels, wants 'how do I wear this' content in her language."},
+      {"t": "The Diaspora Daughter", "meta": "NRI · US & Canada", "d": "Heritage-proud, buys bandhej online for festivals abroad — the Shopify store already ships to her."}
+    ],
+    "competitors": [
+      {"n": "Biba", "g": "National scale, mall presence, big festive campaigns", "b": "Mass-produced feel — no regional bandhej authenticity"},
+      {"n": "Fabindia", "g": "Craft credibility and deep trust", "b": "Premium-priced, muted styling, skews older"},
+      {"n": "Libas", "g": "Online-first value, marketplace dominance", "b": "Thin offline presence, generic designs, no heritage story"},
+      {"n": "Soch", "g": "Occasion-wear breadth, strong retail", "b": "Weaker in West India, little creator-led content"},
+      {"n": "Asopalav (Ahmedabad)", "g": "Landmark bridal destination in Gujarat", "b": "Heavy bridal price point, dated digital & social presence"}
+    ],
+    "doingwell": [
+      "Big festive campaign spends & celebrity faces",
+      "Wide marketplace + mall distribution",
+      "Large-format destination stores",
+      "Polished catalogue-style photography"
+    ],
+    "gaps": [
+      "Regional heritage (bandhej) told generically — no authentic Rajasthan-Gujarat voice",
+      "Almost no styling / how-to-wear content — feeds are catalogues",
+      "Vernacular (Gujarati, Marwari) content barely exists",
+      "UGC & community rarely activated — customers never become the content",
+      "Store launches happen quietly — no PR moments"
+    ],
+    "advantage": [
+      "Own the bandhej heritage story — a real Jodhpur landmark, not a label",
+      "Styling-first content engine: lookbooks, drape reels, 'one kurti, three ways'",
+      "Speak Gujarati & Marwari — vernacular reels and voiceovers the majors won't do",
+      "Turn 3→5 store launches into PR + influencer moments",
+      "Make customers the models — try-on UGC from the stores every week"
+    ],
+    "positioning": "\"Bandhani — Rajasthan's ethnic-wear landmark, now styling Gujarat. Heritage bandhej, styled for today.\"",
+    "pillars": [
+      {"t": "Styling & lookbooks", "d": "Drape reels, 'style it three ways', festive looks — the content she saves."},
+      {"t": "Heritage & craft", "d": "Bandhej stories, craftsmen, Jodhpur roots — the trust the majors can't copy."},
+      {"t": "Festive & occasion edits", "d": "Navratri, Diwali, shaadi-season capsules dropped like collections."},
+      {"t": "Community & store life", "d": "Customer try-ons, UGC features, store vlogs and launch events."}
+    ],
+    "webaudit": "Shopify store is live with US & Canada shipping — but thin: no styling content or lookbooks, no reviews, minimal brand story, pricing hidden on landing. Quick wins: styling galleries, store pages with maps, festive edits, review capture.",
+    "socialaudit": "@bandhani_officeal has a strong 137K base with 3.2K posts — but the feed is product-catalogue heavy. Shift to styling reels, vernacular voiceovers, store vlogs and a UGC hashtag; the audience is already there, the format isn't.",
+    "sentiment": 72,
+    "sentlabel": "Locally loved, under-told online",
+    "sentsummary": "A known Jodhpur landmark with warm local press (CityShor coverage) and loyal store footfall; online reviews are sparse and the digital story lags the offline reputation — a perception gap content can close fast.",
+    "gtm": [
+      {"t": "Styling Engine", "d": "Content system + templates, styling shoots, vernacular formats, profile revamp."},
+      {"t": "Launch Moments", "d": "Ahmedabad store #2 + new city as PR + creator events — openings become campaigns."},
+      {"t": "Community Flywheel", "d": "UGC hashtag, customer features, try-on reels, WhatsApp broadcast & loyalty."},
+      {"t": "Festive Scale", "d": "Navratri–Diwali–shaadi season blitz; diaspora push on the Shopify store."}
+    ],
+    "mix": [
+      {"l": "Styling content & production", "v": 30},
+      {"l": "Influencer & UGC", "v": 25},
+      {"l": "Social management", "v": 20},
+      {"l": "PR & store launches", "v": 15},
+      {"l": "Boosting & retargeting", "v": 10}
+    ],
+    "funnel": [
+      {"v": "Awareness", "l": "Styling reels + Gujarati/Rajasthani creators reach her feed"},
+      {"v": "Consideration", "l": "Lookbooks, saves, WhatsApp enquiries, store-visit intent"},
+      {"v": "Conversion", "l": "Store footfall + Shopify (incl. US & Canada)"},
+      {"v": "Retention", "l": "Community features, festive drops, repeat occasions"}
+    ],
+    "roadmap": [
+      {"q": "Q1 · M1–3", "t": "Styling Engine", "items": ["Content system & templates", "First styling shoots", "Vernacular reel formats", "UGC hashtag launch"]},
+      {"q": "Q2 · M4–6", "t": "Store Launches", "items": ["Ahmedabad #2 launch campaign", "20+ Guj/Raj creator collabs", "Local press & CityShor-style features", "Launch-week events"]},
+      {"q": "Q3 · M7–9", "t": "Festive Blitz", "items": ["Navratri & Diwali capsules", "Lookbook drops", "Customer-model UGC push", "WhatsApp broadcasts"]},
+      {"q": "Q4 · M10–12", "t": "New City + Diaspora", "items": ["Store #5 launch moment", "Shaadi-season push", "US/Canada diaspora campaign", "Year review & Year-2 plan"]}
+    ],
+    "kpis": ["Reach in Gujarat & Rajasthan", "Styling-content saves", "Store footfall from social", "WhatsApp / DM enquiries", "UGC volume", "Press features", "Online sales (incl. diaspora)", "Follower growth"]
+  }
+}

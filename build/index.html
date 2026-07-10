@@ -7,7 +7,7 @@
 <meta name="description" content="Sage Media Pitch Builder v2 — give the brand basics and a spoken or typed brief; get a dense 21-section research-backed pitch with a detailed marketing plan, editable pricing and magic-edit comments." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;600;800&family=Sora:wght@400;600;700&family=Syne:wght@600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Poppins:wght@400;600;700&family=Urbanist:wght@400;600;700&family=Unbounded:wght@500;700&family=Playfair+Display:wght@600;700&family=IBM+Plex+Sans:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
 @font-face{font-family:'Glacial Indifference';font-style:normal;font-weight:400;font-display:swap;src:url(./gi-regular.woff2) format('woff2');}
 @font-face{font-family:'Glacial Indifference';font-style:normal;font-weight:700;font-display:swap;src:url(./gi-bold.woff2) format('woff2');}
@@ -308,6 +308,67 @@
   body.pdfing .theme-1 .pcover h1 .g{color:#fff!important}
 
 
+  /* ===================== BEHANCE-INSPIRED THEMES (own fonts) ===================== */
+  .t-b2b .pcard,.t-b2b .chartcard,.t-b2b .lst,.t-b2b .tq{border-radius:10px;border-top:3px solid var(--accent);box-shadow:none}
+  .t-b2b .peyebrow{border-left:3px solid var(--accent);padding-left:10px}
+  .t-b2b .ghostnum{display:none}
+  .t-b2b .statrow .st .v{font-size:clamp(1.4rem,2.8vw,2rem)}
+  .t-saas .peyebrow{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:7px 15px;border-radius:9px}
+  .t-saas .peyebrow .n{color:rgba(255,255,255,.7)}
+  .t-saas .pcard{border:1px solid transparent;background:linear-gradient(var(--card,#fff),var(--card,#fff)) padding-box,linear-gradient(120deg,var(--accent),var(--accent-l)) border-box}
+  .t-saas .ghostnum{display:none}
+  .t-chk .pgrid .pcard:nth-child(odd){transform:rotate(-1.1deg)}
+  .t-chk .pgrid .pcard:nth-child(even){transform:rotate(1deg)}
+  .t-chk .pcard{border:2.5px solid var(--sage-9);border-radius:18px;box-shadow:5px 5px 0 var(--accent-l)}
+  .t-chk .psec h2{font-size:clamp(1.9rem,4.6vw,3.2rem)}
+  .t-chk .peyebrow .n{background:var(--accent);color:#fff;border-radius:50%;min-width:28px;height:28px;display:inline-grid;place-items:center;opacity:1;transform:rotate(-8deg)}
+  .t-fin .psec h2{font-weight:500;font-size:clamp(1.8rem,4.2vw,3rem);letter-spacing:0}
+  .t-fin .pcard,.t-fin .chartcard,.t-fin .lst{border:none;border-bottom:2px solid var(--sage-9);border-radius:0;box-shadow:none;background:transparent}
+  .t-fin .peyebrow{letter-spacing:.34em}
+  .t-fin .ghostnum{opacity:.4}
+  .t-fin .psec{border-bottom:1px solid var(--line)}
+  .t-grd2 .pitch,.t-grd2.pitch{background:linear-gradient(170deg,var(--cream) 60%,var(--cream-3))}
+  .t-grd2 .psec h2{background:linear-gradient(95deg,var(--accent-2),var(--accent) 60%,var(--accent-l));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .t-grd2 .band,.t-grd2 .cta2{background:linear-gradient(130deg,var(--band),var(--accent-2) 80%)}
+  .t-grd2 .pcard{border-radius:20px}
+  .t-grd2 .ghostnum{display:none}
+  .t-sus .pcard,.t-sus .chartcard,.t-sus .lst,.t-sus .tq{border-radius:22px;background:var(--cream-2);border-color:transparent;box-shadow:none}
+  .t-sus .psec::before{content:"";position:absolute;left:-120px;top:20%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,var(--accent-l),transparent 70%);opacity:.14;pointer-events:none}
+  .t-sus .peyebrow{border:1.5px solid var(--accent);border-radius:99px;padding:6px 14px}
+  .t-sus .ghostnum{display:none}
+  .t-ai .psec h2{font-size:clamp(1.3rem,3vw,2rem);letter-spacing:.01em}
+  .t-ai .pcard,.t-ai .chartcard,.t-ai .tq{border:1px solid var(--accent);box-shadow:0 0 22px -8px var(--accent);border-radius:14px}
+  .t-ai .peyebrow{font-family:var(--f-num);color:var(--accent)}
+  .t-ai .ghostnum{color:transparent;-webkit-text-stroke:1px var(--accent);opacity:.35}
+  .t-folio .psec h2{font-weight:600;font-size:clamp(2rem,5vw,3.6rem);letter-spacing:-.01em;line-height:1.05}
+  .t-folio .psec{padding:clamp(46px,7vw,80px) 0;border-bottom:1px solid var(--line)}
+  .t-folio .peyebrow{color:var(--mute)}
+  .t-folio .pcard{border:none;box-shadow:none;background:transparent;padding-left:0}
+  .t-folio .ghostnum{font-size:clamp(6rem,13vw,10rem);opacity:.5}
+  .t-data .pcard,.t-data .lst,.t-data .tq{border:1.5px dashed var(--sage-9);border-radius:8px;box-shadow:none}
+  .t-data .chartcard{border:2px solid var(--sage-9);border-radius:8px}
+  .t-data .peyebrow{font-family:var(--f-num);background:var(--sage-9);color:var(--cream);padding:5px 12px;border-radius:5px}
+  .t-data .peyebrow .n{color:var(--accent-l);opacity:1}
+  .t-virtue .psec>.reveal:has(.peyebrow){border-left:6px solid var(--accent);padding-left:22px}
+  .t-virtue .pcard,.t-virtue .chartcard{border-radius:18px;box-shadow:0 18px 44px -18px rgba(20,30,20,.35);border:none}
+  .t-virtue .band,.t-virtue .cta2{border-radius:30px}
+  .t-virtue .ghostnum{display:none}
+
+  /* embedded assets / references / AI visuals */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:13px;margin-top:18px}
+  .emb{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--card,#fff);box-shadow:var(--shadow-1)}
+  .emb img{width:100%;height:240px;object-fit:cover;display:block}
+  .emb.vid{aspect-ratio:16/9}
+  .emb.vid iframe,.emb.vid video{width:100%;height:100%;border:none;display:block}
+  .refrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px;margin-top:16px}
+  .refcard{display:flex;gap:11px;align-items:center;background:var(--card,#fff);border:1px solid var(--line);border-radius:13px;padding:12px 14px;box-shadow:var(--shadow-1);text-decoration:none;color:var(--ink);transition:.18s}
+  .refcard:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .refcard img{width:30px;height:30px;border-radius:8px}
+  .refcard b{display:block;color:var(--sage-9);font-size:.85rem}
+  .refcard span{font-size:.7rem;color:var(--mute);word-break:break-all;display:block;max-height:2.1em;overflow:hidden}
+  .pimg{margin:-18px -18px 12px;height:150px;overflow:hidden;border-radius:var(--r) var(--r) 0 0}
+  .pimg img{width:100%;height:100%;object-fit:cover;display:block}
+
   /* ===================== 20 STRUCTURAL THEMES (t-*) ===================== */
   /* motion variants */
   .t-rise .reveal{transform:translateY(26px)}
@@ -511,6 +572,16 @@
     </div>
   </div>
 
+  <div class="panel">
+    <h3><span class="n">4</span> References &amp; brand assets <span class="why">— optional. Links only, one per line.</span></h3>
+    <div class="grid2">
+      <div class="field"><label>Design references <span class="hint">(Behance / Dribbble / sites you like — shown as a "direction" board)</span></label>
+        <textarea id="f_refs" rows="3" placeholder="https://www.behance.net/gallery/…&#10;https://…"></textarea></div>
+      <div class="field"><label>Brand assets <span class="hint">(image / video / YouTube / Drive links — embedded inside the pitch)</span></label>
+        <textarea id="f_assets" rows="3" placeholder="https://…/hero.jpg&#10;https://youtu.be/…"></textarea></div>
+    </div>
+  </div>
+
   <input type="hidden" id="f_accent" value="#5FA80E"><input type="hidden" id="f_theme" value="0">
 </div>
 
@@ -662,8 +733,9 @@ function toggleMic(){
 /* ================= brief <-> json ================= */
 function collect(){return{f_name:$('f_name').value,f_category:$('f_category').value,f_region:$('f_region').value,
  f_website:$('f_website').value,f_social:$('f_social').value,f_for:$('f_for').value,
+ f_refs:$('f_refs').value,f_assets:$('f_assets').value,
  needs:selNeeds(),f_brief:$('f_brief').value,f_accent:$('f_accent').value,f_theme:$('f_theme').value,research}}
-function apply(d){['f_name','f_category','f_region','f_website','f_social','f_for','f_brief','f_theme'].forEach(k=>{if(d[k]!==undefined&&$(k))$(k).value=d[k]});
+function apply(d){['f_name','f_category','f_region','f_website','f_social','f_for','f_brief','f_theme','f_refs','f_assets'].forEach(k=>{if(d[k]!==undefined&&$(k))$(k).value=d[k]});
  if(d.needs)paintNeeds(d.needs);
  if(d.research)research=d.research}
 function exportBrief(){const d=collect();const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(d.f_name||'brand').replace(/\W+/g,'-').toLowerCase()+'-pitch.json';a.click();toast('Exported')}
@@ -674,10 +746,24 @@ function copyResearchRequest(){const d=collect();
 
 /* ================= generator ================= */
 const PH='<span class="todo">⟡ Claude research</span>';
-const S=(n,eyb,title,lead,body,cls)=>`<section class="psec ${cls||''}" data-mg="Section ${n}: ${esc(eyb)}"><div class="ghostnum">${n<10?'0'+n:n}</div>
-  <div class="reveal"><span class="peyebrow"><span class="n">${n<10?'0'+n:n}</span> ${esc(eyb)}</span><h2 data-mg="Heading: ${esc(eyb)}">${title}</h2>${lead?`<p class="lead" data-mg="Intro: ${esc(eyb)}">${lead}</p>`:''}</div>${body}</section>`;
+let secN=1;
+const S=(n,eyb,title,lead,body,cls)=>{const nn=++secN,ns=nn<10?'0'+nn:''+nn;return `<section class="psec ${cls||''}" data-mg="Section ${nn}: ${esc(eyb)}"><div class="ghostnum">${ns}</div>
+  <div class="reveal"><span class="peyebrow"><span class="n">${ns}</span> ${esc(eyb)}</span><h2 data-mg="Heading: ${esc(eyb)}">${title}</h2>${lead?`<p class="lead" data-mg="Intro: ${esc(eyb)}">${lead}</p>`:''}</div>${body}</section>`};
 function sentences(t){return (t||'').split(/(?<=[.!?])\s+|\n+/).map(x=>x.trim()).filter(x=>x.length>8).slice(0,7)}
 
+function parseLinks(t){return (t||'').split(/\s+/).map(x=>x.trim()).filter(x=>/^https?:\/\//i.test(x))}
+function aiImg(prompt,w,h,seed){return 'https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt)+'?width='+w+'&height='+h+'&seed='+seed+'&nologo=true'}
+function assetEmbed(u){
+  const yt=u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+  if(yt)return `<div class="emb vid" data-mg="Video asset"><iframe src="https://www.youtube.com/embed/${yt[1]}" loading="lazy" allowfullscreen></iframe></div>`;
+  const vm=u.match(/vimeo\.com\/(\d+)/);
+  if(vm)return `<div class="emb vid" data-mg="Video asset"><iframe src="https://player.vimeo.com/video/${vm[1]}" loading="lazy" allowfullscreen></iframe></div>`;
+  if(/\.(mp4|webm|mov)(\?|$)/i.test(u))return `<div class="emb vid" data-mg="Video asset"><video src="${esc(u)}" controls muted playsinline></video></div>`;
+  const dr=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);
+  if(dr)return `<div class="emb img" data-mg="Image asset"><img src="https://drive.google.com/thumbnail?id=${dr[1]}&sz=w1400" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`;
+  return `<div class="emb img" data-mg="Image asset"><img src="${esc(u)}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`}
+function refCard(u){let dom='link';try{dom=new URL(u).hostname.replace('www.','')}catch(e){}
+  return `<a class="refcard" href="${esc(u)}" target="_blank" rel="noopener" data-mg="Reference: ${esc(dom)}"><img src="https://www.google.com/s2/favicons?domain=${esc(dom)}&sz=64" alt=""><div><b>${esc(dom)}</b><span>${esc(u.replace(/^https?:\/\//,'').slice(0,64))}</span></div></a>`}
 function generate(){
   const d=collect(); if(!d.f_name){toast('Add a brand name');return}
   const R=research||{};
@@ -696,6 +782,8 @@ function generate(){
   const kpis=R.kpis||['CAC','ROAS','Repeat %','Run-rate','AOV / LTV','Reach & saves','Reviews','Share of search'];
   const sent=Math.max(0,Math.min(100,parseFloat(R.sentiment)||0));
   const needsSel=d.needs&&d.needs.length?d.needs:['Branding & identity','Website / Shopify','Social media'];
+  secN=1;
+  const assets=parseLinks(d.f_assets), refs=parseLinks(d.f_refs);
   let h='';
 
   /* 1 cover */
@@ -732,7 +820,7 @@ function generate(){
     `<div class="chips reveal d1" data-mg="Channels">${(R.channels||['D2C / own store','Amazon','Flipkart','Quick-commerce','Offline & retail']).map(c=>`<span class="chip">${esc(c)}</span>`).join('')}</div>`);
   /* 7 consumers */
   h+=S(7,'The Consumer','Who we win.','',
-    `<div class="pgrid g3">${per.map((p,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Persona: ${esc(p.t)}"><span class="tagm">${esc(p.meta||'persona')}</span><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p></div>`).join('')}</div>`);
+    `<div class="pgrid g3">${per.map((p,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Persona: ${esc(p.t)}"><div class="pimg"><img src="${aiImg('editorial lifestyle photograph of '+(p.meta||'customer')+', '+(p.t||'')+', in the world of '+(d.f_category||'the brand')+', '+(d.f_region||'India')+', natural light, premium brand campaign, no text',640,320,11+i)}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.pimg').style.display='none'"></div><span class="tagm">${esc(p.meta||'persona')}</span><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p></div>`).join('')}</div>`);
   /* 8 competitors */
   h+=S(8,'The Landscape','Top players — and the doors they leave open.',comp.length?'':'Top-5 real competitors with strengths &amp; gaps — filled by Claude research. '+PH,
     comp.length?`<div class="ctable reveal d1" data-mg="Competitor table"><table><thead><tr><th>Brand</th><th>What they do well</th><th>Where they fall short</th></tr></thead><tbody>${comp.map(c=>`<tr><td class="cn">${esc(c.n)}</td><td class="good">${esc(c.g)}</td><td class="gap">${esc(c.b)}</td></tr>`).join('')}</tbody></table></div>`:'');
@@ -743,13 +831,24 @@ function generate(){
     <div class="reveal d2"><div class="lst warn" data-mg="Market falls short"><h4><span class="d"></span>Where it falls short</h4><ul>${(gp.length?gp:['— research —']).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div></div>`);
   /* 10 advantage — dark band */
   const adv=R.advantage||['Own the sharpest gap in the category','Premium, story-first brand system','Channel sequencing that compounds'];
-  h+=`<section class="psec dark" data-mg="Section 10: The Advantage"><div class="band"><div class="gridbg"></div><div class="ghostnum">10</div>
-    <div class="reveal"><span class="peyebrow"><span class="n">10</span> The Advantage</span><h2 data-mg="Heading: Advantage">How ${name} wins.</h2></div>
+  const AN=++secN, ANS=AN<10?'0'+AN:''+AN;
+  h+=`<section class="psec dark" data-mg="Section ${AN}: The Advantage"><div class="band"><div class="gridbg"></div><div class="ghostnum">${ANS}</div>
+    <div class="reveal"><span class="peyebrow"><span class="n">${ANS}</span> The Advantage</span><h2 data-mg="Heading: Advantage">How ${name} wins.</h2></div>
     <div class="pgrid g3">${adv.map((a,i)=>`<div class="pcard darkc reveal d${(i%3)+1}" data-mg="Advantage ${i+1}"><span class="tagm">Move 0${i+1}</span><p style="color:#fff;font-size:.96rem;font-weight:500">${esc(a)}</p></div>`).join('')}</div></div></section>`;
   /* 11 positioning */
   h+=S(11,'Positioning','One line to own.','',
     `<div class="pcard reveal d1" style="padding:28px" data-mg="Positioning statement"><span class="tagm">Positioning</span>
      <h3 style="font-size:clamp(1.15rem,2.5vw,1.6rem);line-height:1.25">${esc(R.positioning||`"${d.f_name} — the ${(d.f_category||'brand').toLowerCase()} built for ${d.f_region||'India'}'s next generation."`)}</h3></div>`);
+  /* brand world: uploaded assets, else AI mood board for the brand & TG */
+  h+=S(0,'Brand World',assets.length?'The brand, in pictures.':'Visual direction.',
+    assets.length?'Assets shared by the brand — woven through the campaign.':'AI-generated mood — replace with brand shots anytime via References & assets.',
+    `<div class="gallery reveal d1" data-mg="Brand gallery">${
+      assets.length?assets.map(assetEmbed).join(''):
+      [aiImg('hero product photograph, '+(d.f_category||'brand')+' brand, premium minimal styling, studio light, no text',800,520,3),
+       aiImg('lifestyle campaign photo, target audience of '+(d.f_category||'the brand')+' in '+(d.f_region||'India')+', candid, warm, editorial, no text',800,520,4),
+       aiImg('brand texture macro detail, '+(d.f_category||'product')+', rich color, art direction, no text',800,520,5)
+      ].map(u=>`<div class="emb img"><img src="${u}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`).join('')
+    }</div>`);
   /* 12 audit */
   h+=S(12,'Brand Audit','Presence & perception today.',(R.webaudit||R.socialaudit)?'':'Claude audits the real site, socials &amp; public sentiment. '+PH,
     `<div class="pgrid g2">
@@ -793,6 +892,9 @@ function generate(){
      <div class="ctable reveal d1" data-mg="Returns timeline"><table><thead><tr><th>Phase</th><th>Investment</th><th>What comes back</th><th>KPIs that prove it</th></tr></thead><tbody>
      ${(bp.returns||[]).map(r=>`<tr><td class="cn num">${esc(r.when)}</td><td class="num">${esc(r.invest)}</td><td>${esc(r.back)}</td><td class="good">${esc((r.kpis||[]).join(' · '))}</td></tr>`).join('')}
      </tbody></table></div>`);
+  /* direction references (only when provided) */
+  if(refs.length)h+=S(0,'Direction','References we\'re aligned on.','The look & feel north stars for this engagement — click through.',
+    `<div class="refrow reveal d1" data-mg="Reference board">${refs.map(refCard).join('')}</div>`);
   /* 20 pricing */
   h+=S(20,'Investment','Scope & pricing.','Every cell below is editable — click and type when commercials are ready.',
     `<div class="pricebox reveal d1" data-mg="Pricing table"><div class="pricehint">✏️ Editable — click any cell. Rows come from the selected scope.</div>
@@ -812,7 +914,7 @@ function generate(){
   $('pbTitle').textContent=d.f_name+' · Pitch';
   $('pitchWrap').classList.add('show');$('pitchWrap').scrollTop=0;
   runAnims(); renderFlags();
-  toast(research?'Pitch generated — 21 sections':'Generated — send brief to Claude to light up the research');
+  toast(research?('Pitch generated — '+secN+' sections'):'Generated — send brief to Claude to light up the research');
   saveCurrent();
 }
 /* ===== 20 researched deck designs (industry-inspired) ===== */
@@ -858,12 +960,27 @@ const THEMES=[
  {name:'Diagonal',cls:'t-diag t-tilt',layout:0,tag:'skewed energy'},
  {name:'Paper Layers',cls:'t-paper t-drop',layout:2,tag:'stacked tilt'},
  {name:'Neo Glass',cls:'t-glass t-blur',layout:1,tag:'frosted'},
- {name:'Timeline Spine',cls:'t-time t-left',layout:0,tag:'connected dots'}
+ {name:'Timeline Spine',cls:'t-time t-left',layout:0,tag:'connected dots'},
+ {name:'B2B SaaS',cls:'t-b2b t-rise',layout:0,tag:'Behance · SaaS B2B',font:{d:"'Manrope'",b:"'Manrope'"}},
+ {name:'SaaS Modern',cls:'t-saas t-scale',layout:1,tag:'Behance · SaaS deck',font:{d:"'Sora'",b:"'Inter'"}},
+ {name:'Chuckle Playful',cls:'t-chk t-pop',layout:2,tag:'Behance · creative fun',font:{d:"'Syne'",b:"'Inter'"}},
+ {name:'Finora Finance',cls:'t-fin',layout:0,tag:'Behance · fintech elegant',font:{d:"'Fraunces'",b:"'Inter'"}},
+ {name:'Vivid Gradient',cls:'t-grd2 t-blur',layout:1,tag:'Behance · gradient',font:{d:"'Poppins'",b:"'Poppins'"}},
+ {name:'Sustainify',cls:'t-sus t-rise',layout:2,tag:'Behance · sustainability',font:{d:"'Urbanist'",b:"'Urbanist'"}},
+ {name:'Gemini AI',cls:'t-ai t-clipL',layout:1,tag:'Behance · AI futuristic',font:{d:"'Unbounded'",b:"'Inter'"}},
+ {name:'Folio Editorial',cls:'t-folio t-left',layout:0,tag:'Behance · portfolio 2026',font:{d:"'Playfair Display'",b:"'Inter'"}},
+ {name:'Data Branding',cls:'t-data t-drop',layout:0,tag:'Behance · data creative',font:{d:"'IBM Plex Sans'",b:"'IBM Plex Sans'"}},
+ {name:'Virtue Digital',cls:'t-virtue t-right',layout:1,tag:'Behance · innovation',font:{d:"'Outfit'",b:"'Outfit'"}}
 ];
 let curT=0;
 function applyTheme(i){curT=((i%THEMES.length)+THEMES.length)%THEMES.length;
-  const p=$('pitch'); if(p)p.className='pitch theme-'+THEMES[curT].layout+' '+THEMES[curT].cls;
-  return THEMES[curT]}
+  const t=THEMES[curT], p=$('pitch');
+  if(p){p.className='pitch theme-'+t.layout+' '+t.cls;
+    if(t.font){p.style.setProperty('--f-display',t.font.d+',\"Glacial Indifference\",sans-serif');
+      p.style.setProperty('--f-num',(t.font.n||t.font.d)+',\"Space Grotesk\",sans-serif');
+      p.style.setProperty('--f-body',(t.font.b||'\"Inter\"')+',system-ui,sans-serif')}
+    else{p.style.removeProperty('--f-display');p.style.removeProperty('--f-num');p.style.removeProperty('--f-body')}}
+  return t}
 function shuffleTheme(){const t=applyTheme(curT+1+Math.floor(Math.random()*(THEMES.length-1)));
   if($('pitchWrap').classList.contains('show')){generate()}
   toast('Theme '+(curT+1)+'/'+THEMES.length+' · '+t.name+' — '+t.tag)}
@@ -960,7 +1077,17 @@ async function downloadSlides(){
     s=slide('Positioning','One line to own.');
     s.addShape('roundRect',{x:.65,y:2.3,w:12,h:1.9,rectRadius:.1,fill:{color:BG2},line:{color:'DDDDD0',width:1}});
     s.addText(R.positioning||('"'+name+'"'),{x:1,y:2.55,w:11.3,h:1.4,fontFace:FD,fontSize:20,bold:true,color:HEAD});
-    /* 12 audit */
+    /* brand world: uploaded assets, else AI mood board for the brand & TG */
+  h+=S(0,'Brand World',assets.length?'The brand, in pictures.':'Visual direction.',
+    assets.length?'Assets shared by the brand — woven through the campaign.':'AI-generated mood — replace with brand shots anytime via References & assets.',
+    `<div class="gallery reveal d1" data-mg="Brand gallery">${
+      assets.length?assets.map(assetEmbed).join(''):
+      [aiImg('hero product photograph, '+(d.f_category||'brand')+' brand, premium minimal styling, studio light, no text',800,520,3),
+       aiImg('lifestyle campaign photo, target audience of '+(d.f_category||'the brand')+' in '+(d.f_region||'India')+', candid, warm, editorial, no text',800,520,4),
+       aiImg('brand texture macro detail, '+(d.f_category||'product')+', rich color, art direction, no text',800,520,5)
+      ].map(u=>`<div class="emb img"><img src="${u}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`).join('')
+    }</div>`);
+  /* 12 audit */
     s=slide('Brand Audit','Presence & perception today.');
     cards(s,[{k:'Website',t:'',d:R.webaudit||'—'},{k:'Social',t:'',d:R.socialaudit||'—'}],1.95,2.5);
     if(R.sentiment)s.addText('Sentiment '+R.sentiment+'/100 — '+(R.sentlabel||'')+'. '+(R.sentsummary||''),{x:.65,y:4.75,w:12,h:1.4,fontFace:FB,fontSize:12,color:'333333',lineSpacing:18});
@@ -990,7 +1117,10 @@ async function downloadSlides(){
     const bp=R.budgetplan; if(bp){s=slide('Budget & Returns','What to invest — and what comes back, when.');
       cards(s,(bp.tiers||[]).map(t=>({k:t.t,t:t.v,d:t.d})),1.85,1.9);
       table(s,['Phase','Investment','What comes back','KPIs'],(bp.returns||[]).map(r=>[r.when,r.invest,r.back,(r.kpis||[]).join(' · ')]),4,[1.3,1.5,5.4,4])}
-    /* 20 pricing */
+    /* direction references (only when provided) */
+  if(refs.length)h+=S(0,'Direction','References we\'re aligned on.','The look & feel north stars for this engagement — click through.',
+    `<div class="refrow reveal d1" data-mg="Reference board">${refs.map(refCard).join('')}</div>`);
+  /* 20 pricing */
     const needsSel=(d.needs&&d.needs.length?d.needs:['Branding & identity','Website / Shopify','Social media']);
     s=slide('Investment','Scope & pricing.');
     table(s,['#','Deliverable','Qty / term','Price (INR)'],needsSel.map((x,i)=>[String(i+1),x,'1 month','—']).concat([['','Total','','—']]),1.95,[.7,6.5,2.5,2.5]);

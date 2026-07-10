@@ -980,11 +980,16 @@ async function downloadPDF(){
     /* flow packing: sections stack continuously; page-break only when the next one doesn't fit */
     for(let i=0;i<secs.length;i++){
       toast(`Rendering section ${i+1}/${secs.length}…`);
-      const canvas=await html2canvas(secs[i],{scale:2,useCORS:true,backgroundColor:bg,windowWidth:1750,logging:false});
+      const canvas=await html2canvas(secs[i],{scale:2,useCORS:true,backgroundColor:bg,windowWidth:1440,logging:false});
       const img=canvas.toDataURL('image/jpeg',.93);
       let w=uw,h=w*canvas.height/canvas.width;
       if(h>uh){h=uh;w=h*canvas.width/canvas.height}
-      if(y+h>PH-M+.5){doc.addPage('a4','landscape');fill();y=M;pages++}
+      const rem=PH-M-y;
+      if(h>rem){
+        /* squeeze-fit: shrink at most 10% to finish the page instead of leaving a gap */
+        if(h<=rem*1.10&&rem>uh*.3){const k=rem/h;h=rem;w*=k}
+        else{doc.addPage('a4','landscape');fill();y=M;pages++}
+      }
       doc.addImage(img,'JPEG',M+(uw-w)/2,y,w,h);
       y+=h+GAP;
     }

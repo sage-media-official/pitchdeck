@@ -380,10 +380,12 @@
 
 <div class="genbar">
   <button class="btn accent big" onclick="createPitchDeck()">🚀 Create pitch deck</button>
-  <button class="btn primary" onclick="generate()">⚡ Instant preview</button>
+  <button class="btn primary" onclick="copyResearchRequest()">⧉ Copy for Claude</button>
+  <button class="btn primary" onclick="openPasteModal()">📋 Paste research</button>
+  <button class="btn" onclick="generate()">⚡ Instant preview</button>
   <button class="btn" onclick="shuffleDesign()">🎲 Shuffle design</button>
   <button class="btn" onclick="openKeyModal()">🔑</button>
-  <span class="note">Create = auto-research in the background (~30–90s) → finished deck. Preview = instant, no research.</span>
+  <span class="note">No API key? <b>⧉ Copy for Claude</b> → paste to Claude → <b>📋 Paste research</b> → deck builds itself.</span>
 </div>
 
 <!-- ===================== PITCH ===================== -->
@@ -434,6 +436,18 @@
     <div class="ovtime num" id="ovTime">0s</div>
     <div class="ovnote">Live research: website · socials · market size · competitors · sentiment. Usually 30–90 seconds.</div>
     <div style="margin-top:14px"><button class="btn" onclick="cancelResearch()">Cancel</button></div>
+  </div>
+</div>
+
+<div class="ov" id="pasteModal">
+  <div class="ovcard" style="text-align:left;max-width:560px">
+    <h3>📋 Paste research from Claude</h3>
+    <p class="small" style="margin:6px 0 10px">Paste the JSON Claude gave you below — the pitch deck builds instantly. (Works with the full JSON or just the research block; markdown fences are fine.)</p>
+    <textarea id="pasteIn" placeholder='{"heard":[…],"mktsize":"…", …}' style="width:100%;min-height:180px;padding:11px;border:1px solid var(--line);border-radius:11px;background:#fff;font-family:monospace;font-size:.78rem"></textarea>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary" onclick="applyPasted()">✨ Build the pitch</button>
+      <button class="btn" onclick="document.getElementById('pasteModal').classList.remove('show')">Close</button>
+    </div>
   </div>
 </div>
 
@@ -743,6 +757,22 @@ function finishAnims(){
   p.querySelectorAll('.bar[data-h]').forEach(b=>b.style.height=b.dataset.h+'%');
   p.querySelectorAll('.fl[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
   p.querySelectorAll('.pin[data-left]').forEach(x=>x.style.left=x.dataset.left+'%');
+}
+/* paste-from-Claude flow: no API key needed */
+function openPasteModal(){$('pasteIn').value='';$('pasteModal').classList.add('show');$('pasteIn').focus()}
+function applyPasted(){
+  let t=$('pasteIn').value.trim();
+  if(!t){toast('Paste the JSON from Claude first');return}
+  t=t.replace(/```(json)?/g,'');
+  const m=t.match(/\{[\s\S]*\}/); if(!m){toast('No JSON object found in what you pasted');return}
+  try{
+    const o=JSON.parse(m[0]);
+    if(o.research||o.f_name!==undefined){apply(o);if(o.research)research=o.research}
+    else research=o;
+    $('pasteModal').classList.remove('show');
+    if(!$('f_name').value){toast('Research loaded — add the brand name, then ⚡ Instant preview');return}
+    generate();toast('Pitch built from Claude research ✨');
+  }catch(e){toast('Invalid JSON: '+e.message)}
 }
 function printPitch(){finishAnims();setTimeout(()=>window.print(),80)}
 window.addEventListener('beforeprint',finishAnims);

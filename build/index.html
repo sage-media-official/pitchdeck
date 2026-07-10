@@ -1089,16 +1089,33 @@ function saveCurrent(){
 function openLib(){renderLib();$('libModal').classList.add('show')}
 function renderLib(){
   const a=libAll().slice().sort((x,y)=>(y.updated||'').localeCompare(x.updated||''));
-  $('libList').innerHTML=a.length?a.map(e=>`
+  $('libList').innerHTML=a.length?a.map(e=>{
+    const live=e.share&&e.share.on!==false&&e.share.exp>Date.now();
+    const till=live?new Date(e.share.exp).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):null;
+    return `
    <div class="mg-item" style="background:#fff">
      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
        <div style="flex:1;min-width:150px"><b style="color:var(--sage-9)">${esc(e.name)}</b>
-         <div style="font-size:.72rem;color:var(--mute)">${esc(e.cat)} · ${e.data&&e.data.research?'researched ✓':'draft'} · updated ${new Date(e.updated).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</div></div>
+         <div style="font-size:.72rem;color:var(--mute)">${esc(e.cat)} · ${e.data&&e.data.research?'researched ✓':'draft'} · updated ${new Date(e.updated).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</div>
+         <div style="font-size:.72rem;margin-top:3px;font-weight:600;color:${live?'var(--accent-2)':'var(--mute)'}">${live?'● Link live · till '+till:'○ No live link'}</div></div>
        <button class="btn primary" onclick="openFromLib('${e.id}')">Open</button>
-       <button class="btn" onclick="exportFromLib('${e.id}')">↓</button>
+       <button class="btn" onclick="copyLinkFor('${e.id}')">${live?'Copy link':'Get link'}</button>
+       ${live?`<button class="btn" onclick="offLinkFor('${e.id}')">Turn off</button>`:''}
        <button class="btn danger" onclick="deleteFromLib('${e.id}')">✕</button>
      </div>
-   </div>`).join(''):'<p style="color:var(--mute);font-size:.9rem">Nothing saved yet — generate a pitch and it lands here automatically.</p>'}
+   </div>`}).join(''):'<p style="color:var(--mute);font-size:.9rem">Nothing saved yet — generate a pitch and it lands here automatically.</p>'}
+async function copyLinkFor(id){const a=libAll();const e=a.find(x=>x.id===id);if(!e)return;
+  let live=e.share&&e.share.on!==false&&e.share.exp>Date.now();
+  if(!live){
+    const payload={v:1,exp:Date.now()+14*864e5,design:e.design??14,theme:e.theme??0,pricing:e.pricing||null,d:e.data};
+    const url=location.origin+location.pathname+'#v='+b64u(await gzipStr(JSON.stringify(payload)));
+    e.share={url,exp:payload.exp,on:true};libWrite(a)}
+  try{await navigator.clipboard.writeText(e.share.url);toast(live?'Link copied':'New 14-day link created & copied')}
+  catch(x){$('shareOut').value=e.share.url;$('shareExp').textContent=new Date(e.share.exp).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});$('shareModal').classList.add('show')}
+  renderLib()}
+function offLinkFor(id){const a=libAll();const e=a.find(x=>x.id===id);if(!e||!e.share)return;
+  e.share.on=false;libWrite(a);renderLib();
+  toast('Link turned off here — copies already sent keep working until their 14-day expiry')}
 function openFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
   apply(e.data); comments=e.comments||[];
   applyDesign(e.design??14); applyTheme(e.theme??0); $('libModal').classList.remove('show');
@@ -1144,6 +1161,8 @@ async function sharePitch(){
   $('shareOut').value=link;
   $('shareExp').textContent=new Date(payload.exp).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
   $('shareModal').classList.add('show');
+  {const a=libAll();const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');const e=a.find(x=>x.id===id);
+   if(e){e.share={url:link,exp:payload.exp,on:true};libWrite(a)}}
   try{await navigator.clipboard.writeText(link);toast('Link copied — valid 14 days')}catch(e){}
 }
 async function tryViewerMode(){

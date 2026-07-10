@@ -398,7 +398,8 @@
       <button class="btn" onclick="shuffleDesign()">🎲 Shuffle</button>
       <button class="btn accent" onclick="downloadPDF()">⬇ Download PDF</button>
       <button class="btn" onclick="printPitch()">⎙ Print</button>
-      <button class="btn accent" onclick="slidesInfo()">▤ Slides</button>
+      <button class="btn" onclick="saveCurrent();toast('Saved to 🗂 My pitches')">Save</button>
+      <button class="btn accent" onclick="downloadSlides()">Slides (.pptx)</button>
     </div>
   </div>
   <div class="pitch" id="pitch"></div>
@@ -708,7 +709,123 @@ function shuffleDesign(){const jump=1+Math.floor(Math.random()*(DESIGNS.length-1
   toast(`🎨 ${curD+1}/${DESIGNS.length} · ${d.name} — ${d.tag}`)}
 applyDesign(14);
 function closePitch(){saveCurrent();$('pitchWrap').classList.remove('show');document.body.classList.remove('magic');$('mgBtn').classList.remove('on');$('mgBtn').innerHTML='✨ Magic edit'}
-function slidesInfo(){alert('Editable Google Slides / PPTX:\n\nExport the brief (↓ Export) and hand it to Claude/Sage Media — the same JSON drives the editable .pptx deck template (like the Echon & Mach Five decks), so the web pitch and the slides always match.')}
+/* real editable PPTX, generated in the browser — opens directly in Google Slides / PowerPoint */
+let pptBusy=false;
+async function downloadSlides(){
+  if(pptBusy)return; pptBusy=true;
+  try{
+    saveCurrent(); toast('Building editable slides…');
+    if(!window.PptxGenJS)await loadScript('https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.min.js');
+    const d=collect(), R=research||{};
+    const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim().replace('#','');
+    const hex=(x,f)=>/^[0-9A-Fa-f]{6}$/.test(x)?x:f;
+    const BG=hex(cv('--cream'),'FDFBEE'),BG2=hex(cv('--cream-2'),'F6F3E2'),HEAD=hex(cv('--sage-9'),'22321F'),
+      ACC=hex(cv('--accent'),'5FA80E'),ACC2=hex(cv('--accent-2'),'2E5406'),BAND=hex(cv('--band'),'22321F'),
+      MUTE='6A7168',WHT='FFFFFF';
+    const FD='Glacial Indifference',FB='Inter';
+    const p=new PptxGenJS(); p.defineLayout({name:'W',width:13.33,height:7.5}); p.layout='W';
+    const name=d.f_name||'Brand', reg=d.f_region||'India', cat=d.f_category||'';
+    let num=0;
+    function slide(eyb,title,dark){num++;const s=p.addSlide();s.background={color:dark?BAND:BG};
+      if(eyb)s.addText((num<10?'0'+num:num)+'  ·  '+eyb.toUpperCase(),{x:.6,y:.42,w:9,h:.4,fontFace:FB,fontSize:11,bold:true,charSpacing:3,color:dark?'A8C3A0':ACC2});
+      if(title)s.addText(title,{x:.55,y:.78,w:12.2,h:1,fontFace:FD,fontSize:30,bold:true,color:dark?WHT:HEAD});
+      return s}
+    const bullets=(s,arr,x,y,w,dark,fs)=>s.addText(arr.map(t=>({text:t,options:{bullet:{code:'2022',indent:12},color:dark?'E8EDE4':'333333',breakLine:true}})),{x,y,w,h:5.4-y+1.2,fontFace:FB,fontSize:fs||13,lineSpacing:(fs||13)*1.55,valign:'top'});
+    function cards(s,items,y,h,dark){const n=items.length,gap=.25,w=(12.2-gap*(n-1))/n;items.forEach((it,i)=>{const x=.6+i*(w+gap);
+      s.addShape('roundRect',{x,y,w,h,rectRadius:.09,fill:{color:dark?'FFFFFF':WHT,transparency:dark?88:0},line:{color:dark?'FFFFFF':'DDDDD0',transparency:dark?70:0,width:1}});
+      s.addText(it.k.toUpperCase(),{x:x+.18,y:y+.14,w:w-.36,h:.32,fontFace:FB,fontSize:9.5,bold:true,charSpacing:2,color:dark?'A8C3A0':ACC2});
+      s.addText(it.t,{x:x+.18,y:y+.44,w:w-.36,h:.5,fontFace:FD,fontSize:15,bold:true,color:dark?WHT:HEAD});
+      s.addText(it.d||'',{x:x+.18,y:y+.92,w:w-.36,h:h-1.05,fontFace:FB,fontSize:10.5,color:dark?'D8DFD2':MUTE,lineSpacing:14,valign:'top'})})}
+    function table(s,head,rows,y,widths){s.addTable([head.map(t=>({text:t,options:{bold:true,color:BG,fill:{color:HEAD},fontFace:FB,fontSize:10}})),
+      ...rows.map(r=>r.map(c=>({text:c,options:{fontFace:FB,fontSize:10.5,color:'333333'}})))],
+      {x:.6,y,w:12.2,colW:widths,border:{type:'solid',color:'E2DFCF',pt:.5},autoPage:false,rowH:.42,fill:{color:WHT}})}
+    /* 1 cover */
+    let s=p.addSlide(); s.background={color:BAND};
+    s.addText('GO-TO-MARKET & MARKETING PLAN · '+reg.toUpperCase(),{x:.7,y:2.1,w:11,h:.4,fontFace:FB,fontSize:12,bold:true,charSpacing:3,color:'A8C3A0'});
+    s.addText(name,{x:.62,y:2.5,w:12,h:1.6,fontFace:FD,fontSize:60,bold:true,color:WHT});
+    s.addText((d.f_brief||cat).split(/[.\n]/)[0]+'.',{x:.7,y:4.15,w:10.5,h:.9,fontFace:FB,fontSize:15,color:'E8EDE4'});
+    s.addText([cat,d.f_for?'Prepared for '+d.f_for:'','Prepared by Sage Media'].filter(Boolean).join('    ·    '),{x:.7,y:6.6,w:12,h:.4,fontFace:FB,fontSize:11,color:'A8C3A0'});
+    /* 2 heard */
+    s=slide('The Brief','What we heard.'); bullets(s,(R.heard||sentences(d.f_brief)),.65,2,11.8,false,14);
+    /* 3 snapshot */
+    s=slide('Snapshot',name+' at a glance.');
+    cards(s,[{k:'Category',t:cat||'—'},{k:'Market',t:reg},{k:'Market size',t:R.mktsize||'—',d:R.mktlabel||''},{k:'Category CAGR',t:R.cagr?R.cagr+'%':'—'}],2.1,2.1);
+    s.addText('Scope: '+(d.needs||[]).join('  ·  '),{x:.65,y:4.6,w:12,h:.5,fontFace:FB,fontSize:12,color:MUTE});
+    /* 4 market forecast */
+    if((R.forecast||[]).length){s=slide('The Market','A market moving in '+name+"'s favour.");
+      s.addChart(p.ChartType.bar,[{name:'Market',labels:R.forecast.map(x=>String(x.y)),values:R.forecast.map(x=>x.v)}],
+        {x:.7,y:1.9,w:11.9,h:4.9,barDir:'col',chartColors:[ACC],catAxisLabelColor:MUTE,valAxisLabelColor:MUTE,dataLabelColor:HEAD,showValue:true,dataLabelFontSize:10,valAxisHidden:true,catAxisLineColor:'DDDDD0',valGridLine:{style:'none'}});
+      s.addText(R.mktlabel||'',{x:.7,y:6.85,w:12,h:.35,fontFace:FB,fontSize:10,color:MUTE})}
+    /* 5 tailwinds */
+    if((R.tailwinds||[]).length){s=slide('Tailwinds','Growth is compounding around the category.');
+      s.addChart(p.ChartType.bar,[{name:'CAGR %',labels:R.tailwinds.map(x=>x.l),values:R.tailwinds.map(x=>x.v)}],
+        {x:.7,y:1.9,w:11.9,h:4.9,barDir:'bar',chartColors:[ACC2],catAxisLabelColor:'333333',valAxisLabelColor:MUTE,showValue:true,dataLabelColor:HEAD,dataLabelFontSize:10,valAxisHidden:true,valGridLine:{style:'none'}})}
+    /* 6 channels */
+    s=slide('Where to Play','Marketplaces & channels.');
+    bullets(s,R.channels||['D2C / own store','Amazon','Flipkart','Quick-commerce','Offline & retail'],.65,2,11.8,false,14);
+    /* 7 personas */
+    const per=R.personas||[{t:'The Core Buyer',meta:'primary audience',d:'Defined from the brief + research.'},{t:'The Influencer',meta:'recommends & validates',d:'Category voices who shape the choice.'},{t:'The Explorer',meta:'growth audience',d:'The adjacent segment to unlock at scale.'}];
+    s=slide('The Consumer','Who we win.'); cards(s,per.map(x=>({k:x.meta||'persona',t:x.t,d:x.d})),2.05,3.6);
+    /* 8 competitors */
+    if((R.competitors||[]).length){s=slide('The Landscape','Top players — and the doors they leave open.');
+      table(s,['Brand','What they do well','Where they fall short'],R.competitors.map(c=>[c.n,c.g,c.b]),1.95,[2.2,5,5])}
+    /* 9 gap */
+    s=slide('The Gap',"What the market does — and doesn't.");
+    s.addText('THE CATEGORY DOES WELL',{x:.65,y:1.95,w:5.8,h:.35,fontFace:FB,fontSize:11,bold:true,color:ACC2});
+    bullets(s,R.doingwell||['—'],.65,2.35,5.7,false,12);
+    s.addText('WHERE IT FALLS SHORT',{x:6.9,y:1.95,w:5.8,h:.35,fontFace:FB,fontSize:11,bold:true,color:'A15A17'});
+    bullets(s,R.gaps||['—'],6.9,2.35,5.7,false,12);
+    /* 10 advantage (dark) */
+    s=slide('The Advantage','How '+name+' wins.',true);
+    cards(s,(R.advantage||[]).slice(0,3).map((a,i)=>({k:'Move 0'+(i+1),t:'',d:a})),2.1,2.6,true);
+    /* 11 positioning */
+    s=slide('Positioning','One line to own.');
+    s.addShape('roundRect',{x:.65,y:2.3,w:12,h:1.9,rectRadius:.1,fill:{color:BG2},line:{color:'DDDDD0',width:1}});
+    s.addText(R.positioning||('"'+name+'"'),{x:1,y:2.55,w:11.3,h:1.4,fontFace:FD,fontSize:20,bold:true,color:HEAD});
+    /* 12 audit */
+    s=slide('Brand Audit','Presence & perception today.');
+    cards(s,[{k:'Website',t:'',d:R.webaudit||'—'},{k:'Social',t:'',d:R.socialaudit||'—'}],1.95,2.5);
+    if(R.sentiment)s.addText('Sentiment '+R.sentiment+'/100 — '+(R.sentlabel||'')+'. '+(R.sentsummary||''),{x:.65,y:4.75,w:12,h:1.4,fontFace:FB,fontSize:12,color:'333333',lineSpacing:18});
+    /* 13 gtm */
+    const gtm=R.gtm||[]; if(gtm.length){s=slide('Go-to-Market','The strategy to launch & scale.');
+      cards(s,gtm.map((g,i)=>({k:'Phase 0'+(i+1),t:g.t,d:g.d})),2.05,3.4)}
+    /* 14 mix */
+    if((R.mix||[]).length){s=slide('Marketing Plan','Where the effort (and money) goes.');
+      s.addChart(p.ChartType.bar,[{name:'% of monthly spend',labels:R.mix.map(x=>x.l),values:R.mix.map(x=>x.v)}],
+        {x:.7,y:1.9,w:11.9,h:4.9,barDir:'bar',chartColors:[ACC],catAxisLabelColor:'333333',showValue:true,dataLabelColor:HEAD,dataLabelFontSize:10,valAxisHidden:true,valGridLine:{style:'none'}})}
+    /* 15 pillars */
+    const pil=R.pillars||[]; if(pil.length){s=slide('Content Strategy','The pillars that feed every channel.');
+      cards(s,pil.map((x,i)=>({k:'Pillar 0'+(i+1),t:x.t,d:x.d})),2.05,3.4)}
+    /* 16 funnel */
+    const fun=R.funnel||[]; if(fun.length){s=slide('The Funnel','From first scroll to loyal customer.');
+      fun.forEach((f,i)=>{const w=12.2-i*2.2,x=.6+(12.2-w)/2,y=2+i*1.15,cols=[BAND,ACC2,ACC2,ACC][i]||ACC;
+        s.addShape('roundRect',{x,y,w,h:.95,rectRadius:.12,fill:{color:[BAND,ACC2,ACC,ACC][i]||ACC}});
+        s.addText('0'+(i+1)+'  '+f.v,{x:x+.25,y:y+.12,w:w*.4,h:.7,fontFace:FD,fontSize:14,bold:true,color:WHT,valign:'middle'});
+        s.addText(f.l,{x:x+w*.42,y:y+.12,w:w*.55,h:.7,fontFace:FB,fontSize:10.5,color:'EFEFEA',align:'right',valign:'middle'})})}
+    /* 17 roadmap */
+    const road=R.roadmap||[]; if(road.length){s=slide('Roadmap','The 12-month build.');
+      cards(s,road.map(r=>({k:r.q,t:r.t,d:(r.items||[]).join('  ·  ')})),2.05,3.8)}
+    /* 18 kpis */
+    s=slide('Measurement','Reported monthly — against sales, not vanity.');
+    bullets(s,R.kpis||['CAC','ROAS','Repeat %','AOV / LTV'],.65,2,11.8,false,14);
+    /* 19 budget & returns */
+    const bp=R.budgetplan; if(bp){s=slide('Budget & Returns','What to invest — and what comes back, when.');
+      cards(s,(bp.tiers||[]).map(t=>({k:t.t,t:t.v,d:t.d})),1.85,1.9);
+      table(s,['Phase','Investment','What comes back','KPIs'],(bp.returns||[]).map(r=>[r.when,r.invest,r.back,(r.kpis||[]).join(' · ')]),4,[1.3,1.5,5.4,4])}
+    /* 20 pricing */
+    const needsSel=(d.needs&&d.needs.length?d.needs:['Branding & identity','Website / Shopify','Social media']);
+    s=slide('Investment','Scope & pricing.');
+    table(s,['#','Deliverable','Qty / term','Price (INR)'],needsSel.map((x,i)=>[String(i+1),x,'1 month','—']).concat([['','Total','','—']]),1.95,[.7,6.5,2.5,2.5]);
+    s.addText('GST, shoot actuals and third-party tools billed separately, as per the commercial proposal.',{x:.65,y:6.7,w:12,h:.4,fontFace:FB,fontSize:10,color:MUTE});
+    /* 21 CTA */
+    s=p.addSlide(); s.background={color:BAND};
+    s.addText("Let's build "+name+'.',{x:.7,y:2.8,w:12,h:1.1,fontFace:FD,fontSize:40,bold:true,color:WHT,align:'center'});
+    s.addText('business@sagemedia.in  ·  Sage Media  ·  Jaipur · Mumbai · Dubai',{x:.7,y:4.1,w:12,h:.5,fontFace:FB,fontSize:13,color:'A8C3A0',align:'center'});
+    await p.writeFile({fileName:(name.replace(/\W+/g,'-'))+'-pitch-SageMedia.pptx'});
+    toast('Slides downloaded — drag into Google Drive and it opens in Google Slides, fully editable');
+  }catch(e){toast('Slides failed: '+e.message)}
+  finally{pptBusy=false}
+}
 
 /* ================= demo ================= */
 const DEMO={f_name:'Mach Five',f_category:'Functional health drink',f_region:'India',f_website:'—',f_social:'@machfive',

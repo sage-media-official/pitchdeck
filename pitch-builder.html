@@ -334,6 +334,7 @@
 <div class="topbar">
   <div class="brand"><span class="mk">S</span>Pitch Builder <small>· Sage Media · v2</small></div>
   <div class="topbtns">
+    <button class="btn primary" onclick="openLib()">🗂 My pitches <span class="cnt" id="libCnt" style="background:var(--cream);color:var(--sage-9);font-family:var(--f-num);font-size:.72rem;border-radius:99px;padding:1px 7px">0</span></button>
     <button class="btn" onclick="loadDemo()">✦ Demo (Mach Five)</button>
     <button class="btn" onclick="exportBrief()">↓ Export</button>
     <button class="btn" onclick="document.getElementById('importFile').click()">↑ Import</button>
@@ -434,6 +435,17 @@
     <div class="ovtime num" id="ovTime">0s</div>
     <div class="ovnote">Live research: website · socials · market size · competitors · sentiment. Usually 30–90 seconds.</div>
     <div style="margin-top:14px"><button class="btn" onclick="cancelResearch()">Cancel</button></div>
+  </div>
+</div>
+
+<div class="ov" id="libModal">
+  <div class="ovcard" style="text-align:left;max-width:620px">
+    <h3>🗂 My pitches</h3>
+    <p class="small" style="margin:6px 0 12px">Every pitch you generate is saved automatically in this browser — reopen any of them to view, edit pricing, shuffle the design or download again.</p>
+    <div id="libList" style="max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:9px"></div>
+    <div style="margin-top:14px;display:flex;gap:8px">
+      <button class="btn" onclick="document.getElementById('libModal').classList.remove('show')">Close</button>
+    </div>
   </div>
 </div>
 
@@ -650,6 +662,7 @@ function generate(){
   $('pitchWrap').classList.add('show');$('pitchWrap').scrollTop=0;
   runAnims(); renderFlags();
   toast(research?'Pitch generated — 21 sections':'Generated — send brief to Claude to light up the research');
+  saveCurrent();
 }
 /* ===== 20 researched deck designs (industry-inspired) ===== */
 const DESIGNS=[
@@ -692,7 +705,7 @@ function shuffleDesign(){const jump=1+Math.floor(Math.random()*(DESIGNS.length-1
   if($('pitchWrap').classList.contains('show'))generate();
   toast(`🎨 ${curD+1}/${DESIGNS.length} · ${d.name} — ${d.tag}`)}
 applyDesign(14);
-function closePitch(){$('pitchWrap').classList.remove('show');document.body.classList.remove('magic');$('mgBtn').classList.remove('on');$('mgBtn').innerHTML='✨ Magic edit'}
+function closePitch(){saveCurrent();$('pitchWrap').classList.remove('show');document.body.classList.remove('magic');$('mgBtn').classList.remove('on');$('mgBtn').innerHTML='✨ Magic edit'}
 function slidesInfo(){alert('Editable Google Slides / PPTX:\n\nExport the brief (↓ Export) and hand it to Claude/Sage Media — the same JSON drives the editable .pptx deck template (like the Echon & Mach Five decks), so the web pitch and the slides always match.')}
 
 /* ================= demo ================= */
@@ -760,6 +773,46 @@ function finishAnims(){
   p.querySelectorAll('.fl[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
   p.querySelectorAll('.pin[data-left]').forEach(x=>x.style.left=x.dataset.left+'%');
 }
+/* ================= proposal library (saved in this browser) ================= */
+const LIB_KEY='sage_lib';
+function libAll(){try{return JSON.parse(localStorage.getItem(LIB_KEY)||'[]')}catch(e){return[]}}
+function libWrite(a){try{localStorage.setItem(LIB_KEY,JSON.stringify(a))}catch(e){toast('Could not save — browser storage full')}
+  $('libCnt').textContent=libAll().length}
+function capturePricing(){return[...document.querySelectorAll('#pitch .pricebox td[contenteditable]')].map(td=>td.innerHTML)}
+function restorePricing(arr){if(!arr)return;const tds=[...document.querySelectorAll('#pitch .pricebox td[contenteditable]')];arr.forEach((h,i)=>{if(tds[i]!==undefined)tds[i].innerHTML=h})}
+function saveCurrent(){
+  const d=collect(); if(!d.f_name)return;
+  const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');
+  const a=libAll(); const old=a.find(x=>x.id===id);
+  const entry={id,name:d.f_name,cat:d.f_category||'',created:old?old.created:new Date().toISOString(),
+    updated:new Date().toISOString(),design:curD,data:d,comments:comments,
+    pricing:$('pitchWrap').classList.contains('show')?capturePricing():(old?old.pricing:null)};
+  const i=a.findIndex(x=>x.id===id); if(i>=0)a[i]=entry; else a.unshift(entry);
+  libWrite(a)}
+function openLib(){renderLib();$('libModal').classList.add('show')}
+function renderLib(){
+  const a=libAll().slice().sort((x,y)=>(y.updated||'').localeCompare(x.updated||''));
+  $('libList').innerHTML=a.length?a.map(e=>`
+   <div class="mg-item" style="background:#fff">
+     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+       <div style="flex:1;min-width:150px"><b style="color:var(--sage-9)">${esc(e.name)}</b>
+         <div style="font-size:.72rem;color:var(--mute)">${esc(e.cat)} · ${e.data&&e.data.research?'researched ✓':'draft'} · updated ${new Date(e.updated).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</div></div>
+       <button class="btn primary" onclick="openFromLib('${e.id}')">Open</button>
+       <button class="btn" onclick="exportFromLib('${e.id}')">↓</button>
+       <button class="btn danger" onclick="deleteFromLib('${e.id}')">✕</button>
+     </div>
+   </div>`).join(''):'<p style="color:var(--mute);font-size:.9rem">Nothing saved yet — generate a pitch and it lands here automatically.</p>'}
+function openFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
+  apply(e.data); comments=e.comments||[];
+  applyDesign(e.design??14); $('libModal').classList.remove('show');
+  generate(); restorePricing(e.pricing); renderChanges(); renderFlags();
+  toast('Opened "'+e.name+'" — edit away, changes save automatically')}
+function exportFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
+  const b=new Blob([JSON.stringify(e.data,null,2)],{type:'application/json'});
+  const a2=document.createElement('a');a2.href=URL.createObjectURL(b);a2.download=e.id+'-pitch.json';a2.click()}
+function deleteFromLib(id){const a=libAll().filter(x=>x.id!==id);libWrite(a);renderLib();toast('Deleted')}
+document.addEventListener('DOMContentLoaded',()=>{$('libCnt').textContent=libAll().length});
+
 /* copy/paste-with-Claude flow: no API key needed */
 function openPasteModal(){
   const d=collect(); if(!d.f_name){toast('Add a brand name first');return}
@@ -781,7 +834,7 @@ function applyPasted(){
     generate();toast('Pitch built from Claude research ✨');
   }catch(e){toast('Invalid JSON: '+e.message)}
 }
-function printPitch(){finishAnims();setTimeout(()=>window.print(),80)}
+function printPitch(){saveCurrent();finishAnims();setTimeout(()=>window.print(),80)}
 window.addEventListener('beforeprint',finishAnims);
 
 /* ⬇ Download PDF — deck-style: each section rendered on its own landscape A4 page, centered.
@@ -790,7 +843,7 @@ let pdfBusy=false;
 function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=()=>rej(new Error('could not load the PDF engine — check internet, or use ⎙ Print'));document.head.appendChild(s)})}
 async function downloadPDF(){
   if(pdfBusy)return; pdfBusy=true;
-  finishAnims(); toast('Preparing PDF…');
+  saveCurrent(); finishAnims(); toast('Preparing PDF…');
   try{
     if(!window.html2canvas)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
     if(!window.jspdf)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');

@@ -398,6 +398,7 @@
       <button class="btn accent" onclick="downloadPDF()">⬇ Download PDF</button>
       <button class="btn" onclick="printPitch()">⎙ Print</button>
       <button class="btn" onclick="saveCurrent();toast('Saved to 🗂 My pitches')">Save</button>
+      <button class="btn primary" onclick="sharePitch()">Share link</button>
       <button class="btn accent" onclick="downloadSlides()">Slides (.pptx)</button>
     </div>
   </div>
@@ -463,6 +464,18 @@
       <button class="btn primary" onclick="applyPasted()">✨ Build the pitch</button>
       <button class="btn" onclick="document.getElementById('pasteModal').classList.remove('show')">Close</button>
       <button class="btn" style="margin-left:auto" onclick="document.getElementById('pasteModal').classList.remove('show');openKeyModal()">Use my own API key…</button>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="shareModal">
+  <div class="ovcard" style="text-align:left;max-width:600px">
+    <h3>Share this pitch</h3>
+    <p class="small" style="margin:6px 0 10px">Anyone with this link sees the full pitch (and can download the PDF) — no login needed. It stops working on <b id="shareExp"></b> (14 days). Your copy stays in 🗂 My pitches forever.</p>
+    <input id="shareOut" readonly onclick="this.select()" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--cream-2);font-family:monospace;font-size:.72rem">
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary" onclick="navigator.clipboard.writeText(document.getElementById('shareOut').value).then(()=>toast('Link copied'))">Copy link</button>
+      <button class="btn" onclick="document.getElementById('shareModal').classList.remove('show')">Close</button>
     </div>
   </div>
 </div>
@@ -952,6 +965,36 @@ function applyPasted(){
     generate();toast('Pitch built from Claude research ✨');
   }catch(e){toast('Invalid JSON: '+e.message)}
 }
+/* ============ share links: whole pitch packed into the URL, 14-day expiry ============ */
+function b64u(bytes){let s='';bytes.forEach(b=>s+=String.fromCharCode(b));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64ud(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';return Uint8Array.from(atob(str),c=>c.charCodeAt(0))}
+async function gzipStr(str){return new Uint8Array(await new Response(new Blob([str]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer())}
+async function gunzipBytes(bytes){return await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}
+async function sharePitch(){
+  const d=collect(); if(!d.f_name){toast('Generate a pitch first');return}
+  saveCurrent();
+  const payload={v:1,exp:Date.now()+14*864e5,design:curD,pricing:capturePricing(),d};
+  const link=location.origin+location.pathname+'#v='+b64u(await gzipStr(JSON.stringify(payload)));
+  $('shareOut').value=link;
+  $('shareExp').textContent=new Date(payload.exp).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  $('shareModal').classList.add('show');
+  try{await navigator.clipboard.writeText(link);toast('Link copied — valid 14 days')}catch(e){}
+}
+async function tryViewerMode(){
+  if(!location.hash.startsWith('#v='))return;
+  try{
+    const p=JSON.parse(await gunzipBytes(b64ud(location.hash.slice(3))));
+    if(p.exp&&Date.now()>p.exp){
+      document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Share links are valid for 14 days.<br>Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>';return}
+    apply(p.d); applyDesign(p.design??14); generate(); restorePricing(p.pricing);
+    document.querySelectorAll('.pitch-bar .btn').forEach(b=>{if(!/PDF|Print/.test(b.textContent))b.style.display='none'});
+    document.querySelector('.magic-fab').style.display='none';
+    document.querySelector('.pricehint')&&(document.querySelector('.pricehint').style.display='none');
+    toast('Valid till '+new Date(p.exp).toLocaleDateString('en-IN',{day:'numeric',month:'short'}));
+  }catch(e){toast('Could not open shared pitch: '+e.message)}
+}
+window.addEventListener('DOMContentLoaded',tryViewerMode);
+
 function printPitch(){saveCurrent();finishAnims();setTimeout(()=>window.print(),80)}
 window.addEventListener('beforeprint',finishAnims);
 

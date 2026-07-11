@@ -366,13 +366,18 @@
   .refcard img{width:30px;height:30px;border-radius:8px}
   .refcard b{display:block;color:var(--sage-9);font-size:.85rem}
   .refcard span{font-size:.7rem;color:var(--mute);word-break:break-all;display:block;max-height:2.1em;overflow:hidden}
-  .pimg{margin:-18px -18px 12px;height:150px;overflow:hidden;border-radius:var(--r) var(--r) 0 0}
+  .pimg{margin:-18px -18px 12px;height:172px;overflow:hidden;border-radius:var(--r) var(--r) 0 0}
+  .emb.wide{grid-column:1/-1;position:relative}
+  .emb.wide img{height:340px}
+  .embcap{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;font-size:.7rem;font-weight:600;padding:5px 12px;border-radius:99px;backdrop-filter:blur(4px)}
+  .blogo{display:block;height:58px;width:auto;border-radius:14px;background:#fff;padding:8px;box-shadow:var(--shadow-2);margin-bottom:18px;animation:float2 7s ease-in-out infinite}
   .pimg img{width:100%;height:100%;object-fit:cover;display:block}
 
   /* ===================== 20 STRUCTURAL THEMES (t-*) ===================== */
   /* motion variants */
   .t-rise .reveal{transform:translateY(26px)}
-  .t-scale .reveal{transform:scale(.93);opacity:0}.t-scale .reveal.in{transform:scale(1)}
+  .t-scale .reveal{transform:scale(.93)}
+  .t-rise .reveal.in,.t-scale .reveal.in,.t-pop .reveal.in,.t-drop .reveal.in,.t-tilt .reveal.in{transform:none;opacity:1}
   .t-left .reveal{transform:translateX(-32px)}.t-left .reveal.in{transform:none}
   .t-right .reveal{transform:translateX(32px)}.t-right .reveal.in{transform:none}
   .t-blur .reveal{transform:none;filter:blur(10px)}.t-blur .reveal.in{filter:none}
@@ -589,8 +594,8 @@
   <button class="btn accent big" onclick="openPasteModal()">With Claude (copy → paste)</button>
   <button class="btn" onclick="createPitchDeck()">Create pitch deck</button>
   <button class="btn" onclick="generate()">Instant preview</button>
-  <button class="btn" onclick="shuffleTheme()">Theme</button>
-  <button class="btn" onclick="shufflePalette()">Colours</button>
+  <button class="btn" onclick="nextTheme()">Theme <b class="dialT num">1/30</b> ›</button>
+  <button class="btn" onclick="nextPalette()">Colours <b class="dialP num">1/20</b> ›</button>
   <span class="note">Copy the request, paste it to Claude, paste the reply back — deck builds itself.</span>
 </div>
 
@@ -600,8 +605,8 @@
     <div class="brand"><span class="mk">S</span><span id="pbTitle">Pitch</span></div>
     <div class="topbtns">
       <button class="btn" onclick="closePitch()">← Builder</button>
-      <button class="btn" onclick="shuffleTheme()">Theme</button>
-      <button class="btn" onclick="shufflePalette()">Colours</button>
+      <button class="btn" onclick="nextTheme()">Theme <b class="dialT num">1/30</b> ›</button>
+      <button class="btn" onclick="nextPalette()">Colours <b class="dialP num">1/20</b> ›</button>
       <button class="btn accent" onclick="downloadPDF()">⬇ Download PDF</button>
       <button class="btn" onclick="printPitch()">⎙ Print</button>
       <button class="btn" onclick="saveCurrent();toast('Saved to 🗂 My pitches')">Save</button>
@@ -752,7 +757,9 @@ const S=(n,eyb,title,lead,body,cls)=>{const nn=++secN,ns=nn<10?'0'+nn:''+nn;retu
 function sentences(t){return (t||'').split(/(?<=[.!?])\s+|\n+/).map(x=>x.trim()).filter(x=>x.length>8).slice(0,7)}
 
 function parseLinks(t){return (t||'').split(/\s+/).map(x=>x.trim()).filter(x=>/^https?:\/\//i.test(x))}
-function aiImg(prompt,w,h,seed){return 'https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt)+'?width='+w+'&height='+h+'&seed='+seed+'&nologo=true'}
+const AI_STYLE=', shot on medium-format film, cinematic color grade, soft directional light, premium advertising campaign quality, art-directed, photorealistic, no text, no watermark, no logo';
+function aiImg(prompt,w,h,seed){return 'https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt+AI_STYLE)+'?width='+w+'&height='+h+'&seed='+seed+'&nologo=true&enhance=true'}
+function siteDomain(d){try{let u=(d.f_website||'').trim();if(!u)return null;if(!/^https?:/i.test(u))u='https://'+u;return new URL(u).hostname.replace('www.','')}catch(e){return null}}
 function assetEmbed(u){
   const yt=u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
   if(yt)return `<div class="emb vid" data-mg="Video asset"><iframe src="https://www.youtube.com/embed/${yt[1]}" loading="lazy" allowfullscreen></iframe></div>`;
@@ -790,7 +797,7 @@ function generate(){
   h+=`<section class="psec pcover" data-mg="Cover">
     <span class="blob a"></span><span class="blob b"></span>
     <div class="coverblocks"><div class="cblock"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8"/></svg></div><div class="cblock"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div><div class="cblock"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M12 3v18M3 12h18"/></svg></div></div>
-    <div class="reveal in"><span class="tag">📈 Go-to-Market &amp; Marketing Plan · ${reg}</span>
+    <div class="reveal in">${(()=>{const dm=siteDomain(d);return dm?`<img class="blogo" src="https://logo.clearbit.com/${esc(dm)}" alt="" onerror="this.remove()">`:''})()}<span class="tag">📈 Go-to-Market &amp; Marketing Plan · ${reg}</span>
     <h1 data-mg="Brand title"><span class="g">${name}</span></h1>
     <div class="sub2" data-mg="Cover subtitle">${esc((d.f_brief||'').split(/[.\n]/)[0]||cat)}.</div>
     <div class="meta"><span>${cat}</span>${d.f_for?`<span>Prepared for ${esc(d.f_for)}</span>`:''}<span>Prepared by Sage Media</span></div></div>
@@ -820,7 +827,7 @@ function generate(){
     `<div class="chips reveal d1" data-mg="Channels">${(R.channels||['D2C / own store','Amazon','Flipkart','Quick-commerce','Offline & retail']).map(c=>`<span class="chip">${esc(c)}</span>`).join('')}</div>`);
   /* 7 consumers */
   h+=S(7,'The Consumer','Who we win.','',
-    `<div class="pgrid g3">${per.map((p,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Persona: ${esc(p.t)}"><div class="pimg"><img src="${aiImg('editorial lifestyle photograph of '+(p.meta||'customer')+', '+(p.t||'')+', in the world of '+(d.f_category||'the brand')+', '+(d.f_region||'India')+', natural light, premium brand campaign, no text',640,320,11+i)}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.pimg').style.display='none'"></div><span class="tagm">${esc(p.meta||'persona')}</span><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p></div>`).join('')}</div>`);
+    `<div class="pgrid g3">${per.map((p,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Persona: ${esc(p.t)}"><div class="pimg"><img src="${aiImg('vogue-style editorial portrait, '+(p.meta||'customer')+', '+(p.t||'')+', immersed in the world of '+(d.f_category||'the brand')+' in '+(d.f_region||'India')+', shallow depth of field, muted tones',960,720,11+i)}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.pimg').style.display='none'"></div><span class="tagm">${esc(p.meta||'persona')}</span><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p></div>`).join('')}</div>`);
   /* 8 competitors */
   h+=S(8,'The Landscape','Top players — and the doors they leave open.',comp.length?'':'Top-5 real competitors with strengths &amp; gaps — filled by Claude research. '+PH,
     comp.length?`<div class="ctable reveal d1" data-mg="Competitor table"><table><thead><tr><th>Brand</th><th>What they do well</th><th>Where they fall short</th></tr></thead><tbody>${comp.map(c=>`<tr><td class="cn">${esc(c.n)}</td><td class="good">${esc(c.g)}</td><td class="gap">${esc(c.b)}</td></tr>`).join('')}</tbody></table></div>`:'');
@@ -840,14 +847,16 @@ function generate(){
     `<div class="pcard reveal d1" style="padding:28px" data-mg="Positioning statement"><span class="tagm">Positioning</span>
      <h3 style="font-size:clamp(1.15rem,2.5vw,1.6rem);line-height:1.25">${esc(R.positioning||`"${d.f_name} — the ${(d.f_category||'brand').toLowerCase()} built for ${d.f_region||'India'}'s next generation."`)}</h3></div>`);
   /* brand world: uploaded assets, else AI mood board for the brand & TG */
+  const dom=siteDomain(d);
   h+=S(0,'Brand World',assets.length?'The brand, in pictures.':'Visual direction.',
-    assets.length?'Assets shared by the brand — woven through the campaign.':'AI-generated mood — replace with brand shots anytime via References & assets.',
+    assets.length?'Assets shared by the brand — woven through the campaign.':(dom?'Pulled live from the brand + AI-art-directed mood.':'AI-art-directed mood — replace with brand shots anytime via References & assets.'),
     `<div class="gallery reveal d1" data-mg="Brand gallery">${
-      assets.length?assets.map(assetEmbed).join(''):
-      [aiImg('hero product photograph, '+(d.f_category||'brand')+' brand, premium minimal styling, studio light, no text',800,520,3),
-       aiImg('lifestyle campaign photo, target audience of '+(d.f_category||'the brand')+' in '+(d.f_region||'India')+', candid, warm, editorial, no text',800,520,4),
-       aiImg('brand texture macro detail, '+(d.f_category||'product')+', rich color, art direction, no text',800,520,5)
-      ].map(u=>`<div class="emb img"><img src="${u}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`).join('')
+      (dom?`<div class="emb img wide" data-mg="Live website"><img src="https://image.thum.io/get/width/1400/crop/760/https://${dom}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"><div class="embcap">Live · ${esc(dom)}</div></div>`:'')+
+      (assets.length?assets.map(assetEmbed).join(''):
+      [aiImg('luxury hero product photograph, '+(d.f_category||'the brand')+', dramatic studio lighting, premium minimalist set design',1200,800,3),
+       aiImg('cinematic lifestyle campaign photograph, the exact target audience of '+(d.f_category||'the brand')+' in '+(d.f_region||'India')+', candid golden-hour moment',1200,800,4),
+       aiImg('macro texture still life, materials and details of '+(d.f_category||'the product')+', rich tactile surfaces',1200,800,5)
+      ].map(u=>`<div class="emb img"><img src="${u}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`).join(''))
     }</div>`);
   /* 12 audit */
   h+=S(12,'Brand Audit','Presence & perception today.',(R.webaudit||R.socialaudit)?'':'Claude audits the real site, socials &amp; public sentiment. '+PH,
@@ -961,16 +970,16 @@ const THEMES=[
  {name:'Paper Layers',cls:'t-paper t-drop',layout:2,tag:'stacked tilt'},
  {name:'Neo Glass',cls:'t-glass t-blur',layout:1,tag:'frosted'},
  {name:'Timeline Spine',cls:'t-time t-left',layout:0,tag:'connected dots'},
- {name:'B2B SaaS',cls:'t-b2b t-rise',layout:0,tag:'Behance · SaaS B2B',font:{d:"'Manrope'",b:"'Manrope'"}},
- {name:'SaaS Modern',cls:'t-saas t-scale',layout:1,tag:'Behance · SaaS deck',font:{d:"'Sora'",b:"'Inter'"}},
- {name:'Chuckle Playful',cls:'t-chk t-pop',layout:2,tag:'Behance · creative fun',font:{d:"'Syne'",b:"'Inter'"}},
- {name:'Finora Finance',cls:'t-fin',layout:0,tag:'Behance · fintech elegant',font:{d:"'Fraunces'",b:"'Inter'"}},
- {name:'Vivid Gradient',cls:'t-grd2 t-blur',layout:1,tag:'Behance · gradient',font:{d:"'Poppins'",b:"'Poppins'"}},
- {name:'Sustainify',cls:'t-sus t-rise',layout:2,tag:'Behance · sustainability',font:{d:"'Urbanist'",b:"'Urbanist'"}},
- {name:'Gemini AI',cls:'t-ai t-clipL',layout:1,tag:'Behance · AI futuristic',font:{d:"'Unbounded'",b:"'Inter'"}},
- {name:'Folio Editorial',cls:'t-folio t-left',layout:0,tag:'Behance · portfolio 2026',font:{d:"'Playfair Display'",b:"'Inter'"}},
- {name:'Data Branding',cls:'t-data t-drop',layout:0,tag:'Behance · data creative',font:{d:"'IBM Plex Sans'",b:"'IBM Plex Sans'"}},
- {name:'Virtue Digital',cls:'t-virtue t-right',layout:1,tag:'Behance · innovation',font:{d:"'Outfit'",b:"'Outfit'"}}
+ {name:'B2B SaaS',cls:'t-b2b t-rise',layout:0,tag:'Behance · SaaS B2B',font:{d:"'Manrope'",b:"'Manrope'"},pal:{bg:'#F6F8FB',bg2:'#EDF1F7',bg3:'#E0E7F1',head:'#0A2540',acc:'#3B82F6',acc2:'#1D4ED8',accl:'#93C5FD',band:'#0A2540'}},
+ {name:'SaaS Modern',cls:'t-saas t-scale',layout:1,tag:'Behance · SaaS deck',font:{d:"'Sora'",b:"'Inter'"},pal:{bg:'#F7F7FD',bg2:'#EFEEFB',bg3:'#E4E2F7',head:'#17163A',acc:'#7C3AED',acc2:'#5B21B6',accl:'#C4B5FD',band:'#141235'}},
+ {name:'Chuckle Playful',cls:'t-chk t-pop',layout:2,tag:'Behance · creative fun',font:{d:"'Syne'",b:"'Inter'"},pal:{bg:'#FFF3E4',bg2:'#FFE9D1',bg3:'#FFDDB8',head:'#1A1A1A',acc:'#FF6B35',acc2:'#D74E12',accl:'#FFB38A',band:'#1A1A1A'}},
+ {name:'Finora Finance',cls:'t-fin',layout:0,tag:'Behance · fintech elegant',font:{d:"'Fraunces'",b:"'Inter'"},pal:{bg:'#F7F5F0',bg2:'#EFEBE1',bg3:'#E5DFD0',head:'#0B3B2E',acc:'#C9A96A',acc2:'#8F7440',accl:'#E5D3AC',band:'#0B3B2E'}},
+ {name:'Vivid Gradient',cls:'t-grd2 t-blur',layout:1,tag:'Behance · gradient',font:{d:"'Poppins'",b:"'Poppins'"},pal:{bg:'#FBF8FF',bg2:'#F4EEFC',bg3:'#EBE1F8',head:'#2B1055',acc:'#C026D3',acc2:'#7C3AED',accl:'#F0ABFC',band:'#2B1055'}},
+ {name:'Sustainify',cls:'t-sus t-rise',layout:2,tag:'Behance · sustainability',font:{d:"'Urbanist'",b:"'Urbanist'"},pal:{bg:'#EEF3EA',bg2:'#E3EBDD',bg3:'#D5E2CB',head:'#233A28',acc:'#7AAE3F',acc2:'#4C7A2F',accl:'#B9D98A',band:'#233A28'}},
+ {name:'Gemini AI',cls:'t-ai t-clipL',layout:1,tag:'Behance · AI futuristic',font:{d:"'Unbounded'",b:"'Inter'"},pal:{bg:'#0B0F19',bg2:'#111827',bg3:'#182130',head:'#F1F5FF',ink:'#E2E8F0',mute:'#8B98AC',acc:'#38BDF8',acc2:'#2563EB',accl:'#7DD3FC',band:'#070B12',card:'#131B29',thead:'#070B12',line:'rgba(255,255,255,.14)',line2:'rgba(255,255,255,.07)',bar:'rgba(11,15,25,.9)'}},
+ {name:'Folio Editorial',cls:'t-folio t-left',layout:0,tag:'Behance · portfolio 2026',font:{d:"'Playfair Display'",b:"'Inter'"},pal:{bg:'#F5F2EC',bg2:'#EDE8DE',bg3:'#E2DBCC',head:'#161412',acc:'#E63329',acc2:'#A81F17',accl:'#F19B95',band:'#161412'}},
+ {name:'Data Branding',cls:'t-data t-drop',layout:0,tag:'Behance · data creative',font:{d:"'IBM Plex Sans'",b:"'IBM Plex Sans'"},pal:{bg:'#F4F6EE',bg2:'#ECF0E0',bg3:'#E0E6CE',head:'#101410',acc:'#9EC209',acc2:'#5F7500',accl:'#D5EC72',band:'#101410'}},
+ {name:'Virtue Digital',cls:'t-virtue t-right',layout:1,tag:'Behance · innovation',font:{d:"'Outfit'",b:"'Outfit'"},pal:{bg:'#F2F6F9',bg2:'#E9F0F5',bg3:'#DCE7EF',head:'#101828',acc:'#0EA5E9',acc2:'#0369A1',accl:'#7DD3FC',band:'#101828'}}
 ];
 let curT=0;
 function applyTheme(i){curT=((i%THEMES.length)+THEMES.length)%THEMES.length;
@@ -980,7 +989,15 @@ function applyTheme(i){curT=((i%THEMES.length)+THEMES.length)%THEMES.length;
       p.style.setProperty('--f-num',(t.font.n||t.font.d)+',\"Space Grotesk\",sans-serif');
       p.style.setProperty('--f-body',(t.font.b||'\"Inter\"')+',system-ui,sans-serif')}
     else{p.style.removeProperty('--f-display');p.style.removeProperty('--f-num');p.style.removeProperty('--f-body')}}
+  if(t.pal)applyPalObj(t.pal);
+  updDials();
   return t}
+function nextTheme(){const t=applyTheme(curT+1);
+  if($('pitchWrap').classList.contains('show'))generate();
+  toast('Theme '+(curT+1)+'/'+THEMES.length+' · '+t.name+' — '+t.tag)}
+function nextPalette(){const d=applyDesign(curD+1);
+  if($('pitchWrap').classList.contains('show'))generate();
+  toast('Colours '+(curD+1)+'/'+DESIGNS.length+' · '+d.name+' — '+d.tag)}
 function shuffleTheme(){const t=applyTheme(curT+1+Math.floor(Math.random()*(THEMES.length-1)));
   if($('pitchWrap').classList.contains('show')){generate()}
   toast('Theme '+(curT+1)+'/'+THEMES.length+' · '+t.name+' — '+t.tag)}
@@ -991,7 +1008,7 @@ function shufflePalette(){const jump=1+Math.floor(Math.random()*(DESIGNS.length-
 let curD=0;
 function hexRgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
 function mixHex(a,b,t){const A=hexRgb(a),B=hexRgb(b);return'#'+[0,1,2].map(i=>Math.round(A[i]+(B[i]-A[i])*t).toString(16).padStart(2,'0')).join('')}
-function applyDesign(i){curD=((i%DESIGNS.length)+DESIGNS.length)%DESIGNS.length;const d=DESIGNS[curD],o=d.o;
+function applyPalObj(o){
   const[r0,g0,b0]=hexRgb(o.head);
   const m={'--cream':o.bg,'--cream-2':o.bg2,'--cream-3':o.bg3,'--sage':o.acc2,'--sage-7':o.head,'--sage-9':o.head,
    '--ink':o.ink||'#1A1D22','--mute':o.mute||'#6A7168',
@@ -999,8 +1016,11 @@ function applyDesign(i){curD=((i%DESIGNS.length)+DESIGNS.length)%DESIGNS.length;
    '--accent':o.acc,'--accent-2':o.acc2,'--accent-l':o.accl,'--accent-mid':mixHex(o.acc2,o.acc,.58),'--band':o.band,'--card':o.card||'#fff',
    '--thead':o.thead||o.band,'--r':o.r||'16px','--barbg':o.bar||'rgba(253,251,238,.88)'};
   const rs=document.documentElement.style;for(const k in m)rs.setProperty(k,m[k]);
-  $('f_accent').value=o.acc;$('f_theme').value=String(d.layout);
-  return d}
+  $('f_accent').value=o.acc}
+function updDials(){document.querySelectorAll('.dialT').forEach(x=>x.textContent=(curT+1)+'/'+THEMES.length);
+  document.querySelectorAll('.dialP').forEach(x=>x.textContent=(curD+1)+'/'+DESIGNS.length)}
+function applyDesign(i){curD=((i%DESIGNS.length)+DESIGNS.length)%DESIGNS.length;const d=DESIGNS[curD];
+  applyPalObj(d.o);$('f_theme').value=String(d.layout);updDials();return d}
 function shuffleDesign(){shufflePalette()}
 applyDesign(14);
 function closePitch(){saveCurrent();$('pitchWrap').classList.remove('show');document.body.classList.remove('magic');$('mgBtn').classList.remove('on');$('mgBtn').innerHTML='✨ Magic edit'}
@@ -1078,14 +1098,16 @@ async function downloadSlides(){
     s.addShape('roundRect',{x:.65,y:2.3,w:12,h:1.9,rectRadius:.1,fill:{color:BG2},line:{color:'DDDDD0',width:1}});
     s.addText(R.positioning||('"'+name+'"'),{x:1,y:2.55,w:11.3,h:1.4,fontFace:FD,fontSize:20,bold:true,color:HEAD});
     /* brand world: uploaded assets, else AI mood board for the brand & TG */
+  const dom=siteDomain(d);
   h+=S(0,'Brand World',assets.length?'The brand, in pictures.':'Visual direction.',
-    assets.length?'Assets shared by the brand — woven through the campaign.':'AI-generated mood — replace with brand shots anytime via References & assets.',
+    assets.length?'Assets shared by the brand — woven through the campaign.':(dom?'Pulled live from the brand + AI-art-directed mood.':'AI-art-directed mood — replace with brand shots anytime via References & assets.'),
     `<div class="gallery reveal d1" data-mg="Brand gallery">${
-      assets.length?assets.map(assetEmbed).join(''):
-      [aiImg('hero product photograph, '+(d.f_category||'brand')+' brand, premium minimal styling, studio light, no text',800,520,3),
-       aiImg('lifestyle campaign photo, target audience of '+(d.f_category||'the brand')+' in '+(d.f_region||'India')+', candid, warm, editorial, no text',800,520,4),
-       aiImg('brand texture macro detail, '+(d.f_category||'product')+', rich color, art direction, no text',800,520,5)
-      ].map(u=>`<div class="emb img"><img src="${u}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`).join('')
+      (dom?`<div class="emb img wide" data-mg="Live website"><img src="https://image.thum.io/get/width/1400/crop/760/https://${dom}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"><div class="embcap">Live · ${esc(dom)}</div></div>`:'')+
+      (assets.length?assets.map(assetEmbed).join(''):
+      [aiImg('luxury hero product photograph, '+(d.f_category||'the brand')+', dramatic studio lighting, premium minimalist set design',1200,800,3),
+       aiImg('cinematic lifestyle campaign photograph, the exact target audience of '+(d.f_category||'the brand')+' in '+(d.f_region||'India')+', candid golden-hour moment',1200,800,4),
+       aiImg('macro texture still life, materials and details of '+(d.f_category||'the product')+', rich tactile surfaces',1200,800,5)
+      ].map(u=>`<div class="emb img"><img src="${u}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`).join(''))
     }</div>`);
   /* 12 audit */
     s=slide('Brand Audit','Presence & perception today.');

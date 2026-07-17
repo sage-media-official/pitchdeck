@@ -753,7 +753,7 @@ const S=(n,eyb,title,lead,body,cls)=>{const nn=++secN,ns=nn<10?'0'+nn:''+nn;retu
 function sentences(t){return (t||'').split(/(?<=[.!?])\s+|\n+/).map(x=>x.trim()).filter(x=>x.length>8).slice(0,7)}
 
 function parseLinks(t){return (t||'').split(/\s+/).map(x=>x.trim()).filter(x=>/^https?:\/\//i.test(x))}
-function siteDomain(d){try{let u=(d.f_website||'').trim();if(!u)return null;if(!/^https?:/i.test(u))u='https://'+u;return new URL(u).hostname.replace('www.','')}catch(e){return null}}
+function siteDomain(d){try{let u=(d.f_website||'').trim();if(!u)return null;if(!/^https?:/i.test(u))u='https://'+u;const h=new URL(u).hostname.replace('www.','');return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(h)?h:null}catch(e){return null}}
 function assetEmbed(u){
   const yt=u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
   if(yt)return `<div class="emb vid" data-mg="Video asset"><iframe src="https://www.youtube.com/embed/${yt[1]}" loading="lazy" allowfullscreen></iframe></div>`;
@@ -1252,7 +1252,17 @@ function exportFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
   const b=new Blob([JSON.stringify(e.data,null,2)],{type:'application/json'});
   const a2=document.createElement('a');a2.href=URL.createObjectURL(b);a2.download=e.id+'-pitch.json';a2.click()}
 function deleteFromLib(id){const a=libAll().filter(x=>x.id!==id);libWrite(a);renderLib();toast('Deleted')}
-document.addEventListener('DOMContentLoaded',()=>{$('libCnt').textContent=libAll().length});
+/* the platform ships with the Mach Five proposal pre-saved (seeded once; stays deleted if you delete it) */
+function seedLib(){try{
+  if(localStorage.getItem('sage_lib_seed'))return;
+  const a=libAll();
+  if(!a.find(x=>x.id==='mach-five')){
+    const now=new Date().toISOString();
+    a.push({id:'mach-five',name:'Mach Five',cat:DEMO.f_category,created:now,updated:now,design:14,theme:0,data:DEMO,comments:[]});
+    libWrite(a)}
+  localStorage.setItem('sage_lib_seed','1')
+}catch(e){}}
+document.addEventListener('DOMContentLoaded',()=>{seedLib();$('libCnt').textContent=libAll().length});
 
 /* copy/paste-with-Claude flow: no API key needed */
 function openPasteModal(){

@@ -1293,7 +1293,10 @@ function b64ud(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length
 async function gzipStr(str){return new Uint8Array(await new Response(new Blob([str]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer())}
 async function gunzipBytes(bytes){return await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}
 async function mintLink(id,data,design,theme,pricing){
-  const body={v:1,design,theme,pricing:pricing||null,edits:edits.length?edits:null,d:data};
+  /* keep links as short as possible: drop untouched pricing; drop research when it matches the built-in demo (the viewer restores it) */
+  const pr=(pricing&&pricing.some(c=>!/^(1 month|—|)$/.test((c||'').trim())))?pricing:null;
+  const body={v:1,design,theme,pricing:pr,edits:edits.length?edits:null,d:data};
+  try{if(data.research&&JSON.stringify(data.research)===JSON.stringify(DEMO.research)){body.d={...data};delete body.d.research;body.dref='demo'}}catch(x){}
   try{ /* short brand link via server storage; falls back to the long self-contained link */
     const r=await fetch('/api/share?slug='+encodeURIComponent(id),{method:'POST',
       headers:{'content-type':'application/json'},body:JSON.stringify({slug:id,payload:body})});
@@ -1318,6 +1321,7 @@ async function sharePitch(){
 }
 function expiredScreen(){document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>'}
 function renderShared(p){
+  if(p.dref==='demo'&&p.d&&!p.d.research)p.d.research=DEMO.research;
   apply(p.d); if(p.edits)edits=p.edits; applyDesign(p.design??14); applyTheme(p.theme??0); generate(); restorePricing(p.pricing);
   document.querySelectorAll('.pitch-bar .btn').forEach(b=>{if(!/PDF|Print/.test(b.textContent))b.style.display='none'});
   document.querySelector('.magic-fab').style.display='none';

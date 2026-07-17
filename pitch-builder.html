@@ -1395,24 +1395,35 @@ async function downloadPDF(){
 /* ================= magic edit ================= */
 let mgTarget=null;
 function toggleMagic(){document.body.classList.toggle('magic');const on=document.body.classList.contains('magic');
-  $('mgBtn').classList.toggle('on',on);$('mgBtn').innerHTML=on?'✨ Magic on — click anything':'✨ Magic edit';
-  if(!on){closePop()}toast(on?'Click any element to comment on it':'Magic edit off')}
+  $('mgBtn').classList.toggle('on',on);$('mgBtn').innerHTML=on?'✨ Magic on — click text to edit':'✨ Magic edit';
+  if(!on){closePop()}toast(on?'Click any text to edit it directly · right-click to leave a comment':'Magic edit off')}
+function openMgPop(t){
+  document.querySelectorAll('.mg-sel').forEach(x=>x.classList.remove('mg-sel'));
+  t.classList.add('mg-sel');mgTarget=t;
+  $('mgPath').textContent=t.dataset.mg;
+  $('mgSnip').textContent=(t.innerText||'').trim().slice(0,140)||'(visual element)';
+  $('mgTxt').value='';
+  const pop=$('mgPop');
+  const r=t.getBoundingClientRect();const pw=Math.min(360,window.innerWidth*.9);
+  pop.style.left=Math.max(10,Math.min(window.innerWidth-pw-10,r.left))+'px';
+  pop.style.top=Math.min(window.innerHeight-280,Math.max(70,r.top+28))+'px';
+  pop.classList.add('show')}
 document.addEventListener('click',e=>{
   if(!document.body.classList.contains('magic'))return;
   const pop=$('mgPop'),panel=$('mgPanel');
   if(pop.contains(e.target)||panel.contains(e.target)||e.target.closest('.magic-fab')||e.target.closest('.pitch-bar'))return;
   const t=e.target.closest('[data-mg]');
   if(!t||!$('pitch').contains(t))return;
-  e.preventDefault();e.stopPropagation();
-  document.querySelectorAll('.mg-sel').forEach(x=>x.classList.remove('mg-sel'));
-  t.classList.add('mg-sel');mgTarget=t;
-  $('mgPath').textContent=t.dataset.mg;
-  $('mgSnip').textContent=(t.innerText||'').trim().slice(0,140)||'(visual element)';
-  $('mgTxt').value='';
-  const r=t.getBoundingClientRect();const pw=Math.min(360,window.innerWidth*.9);
-  pop.style.left=Math.max(10,Math.min(window.innerWidth-pw-10,r.left))+'px';
-  pop.style.top=Math.min(window.innerHeight-280,Math.max(70,r.top+28))+'px';
-  pop.classList.add('show');
+  if(t.getAttribute('contenteditable')==='true')return; /* already editing — let the click place the caret */
+  e.preventDefault();e.stopPropagation();closePop();
+  mgTarget=t;editInline();
+  try{const r=document.caretRangeFromPoint(e.clientX,e.clientY);if(r){const s=getSelection();s.removeAllRanges();s.addRange(r)}}catch(x){}
+},true);
+document.addEventListener('contextmenu',e=>{
+  if(!document.body.classList.contains('magic'))return;
+  const t=e.target.closest('[data-mg]');
+  if(!t||!$('pitch').contains(t))return;
+  e.preventDefault();openMgPop(t);
 },true);
 function closePop(){$('mgPop').classList.remove('show');document.querySelectorAll('.mg-sel').forEach(x=>x.classList.remove('mg-sel'))}
 function saveComment(){if(!mgTarget)return;const c=$('mgTxt').value.trim();if(!c){toast('Write what should change');return}

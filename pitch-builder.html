@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Sage Pitch Builder — brief in, pitch out</title>
+<script>/* viewer links render only the pitch — decide before first paint so the builder never flashes */
+if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.documentElement.classList.add('viewer');</script>
 <meta name="description" content="Sage Media Pitch Builder v2 — give the brand basics and a spoken or typed brief; get a dense 21-section research-backed pitch with a detailed marketing plan, editable pricing and magic-edit comments." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -215,6 +217,15 @@
   .tiercard.sel{border-color:var(--accent);border-width:2px;box-shadow:var(--shadow-2)}
   .tiercard .pick{position:absolute;top:14px;right:14px;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);opacity:0;transition:.2s}
   .tiercard.sel .pick{opacity:1}
+  /* ===== viewer mode: shared links show only the pitch, never the builder ===== */
+  html.viewer .topbar,html.viewer .builder,html.viewer .genbar,html.viewer .magic-fab,html.viewer .mg-pop,html.viewer .mg-panel,html.viewer #mgDel{display:none!important}
+  #vsplash{display:none}
+  html.viewer #vsplash{position:fixed;inset:0;z-index:400;background:var(--cream,#FDFBEE);display:grid;place-items:center;opacity:1;transition:opacity .5s ease .1s}
+  html.viewer.vready #vsplash{opacity:0;pointer-events:none}
+  #vsplash .vlogo{width:64px;height:64px;border-radius:18px;background:var(--sage-9,#22321F);color:var(--cream,#FDFBEE);display:grid;place-items:center;font-family:var(--f-disp,'Glacial Indifference',sans-serif);font-size:1.8rem;font-weight:700;margin:0 auto 18px;animation:vpulse 1.4s ease-in-out infinite}
+  #vsplash p{color:var(--mute,#6A7168);font-size:.92rem;letter-spacing:.04em;text-align:center}
+  @keyframes vpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.07);opacity:.82}}
+  @media(prefers-reduced-motion:reduce){#vsplash .vlogo{animation:none}}
   #mgDel{position:fixed;z-index:130;display:none;width:30px;height:30px;border-radius:99px;border:none;background:#C62828;color:#fff;font-size:.85rem;cursor:pointer;box-shadow:var(--shadow-2)}
   body.magic #mgDel.show{display:grid;place-items:center}
   #mgDel:hover{transform:scale(1.12)}
@@ -656,6 +667,7 @@
     <button class="btn danger" onclick="clearChanges()">Clear all</button>
   </footer>
 </div>
+<div id="vsplash"><div><div class="vlogo">S</div><p>Preparing your pitch…</p></div></div>
 <div class="toast" id="toast"></div>
 
 <div class="ov" id="ov">
@@ -945,7 +957,7 @@ function generate(){
   $('pbTitle').textContent=d.f_name+' · Pitch';
   $('pitchWrap').classList.add('show');$('pitchWrap').scrollTop=0;
   runAnims(); renderFlags(); applyEdits();
-  toast(research?('Pitch generated — '+secN+' sections'):'Generated — send brief to Claude to light up the research');
+  if(!document.documentElement.classList.contains('viewer'))toast(research?('Pitch generated — '+secN+' sections'):'Generated — send brief to Claude to light up the research');
   saveCurrent();
 }
 /* ===== 20 researched deck designs (industry-inspired) ===== */
@@ -1207,6 +1219,7 @@ function libWrite(a){try{localStorage.setItem(LIB_KEY,JSON.stringify(a))}catch(e
 function capturePricing(){return[...document.querySelectorAll('#pitch .pricebox td[contenteditable]')].map(td=>td.innerHTML)}
 function restorePricing(arr){if(!arr)return;const tds=[...document.querySelectorAll('#pitch .pricebox td[contenteditable]')];arr.forEach((h,i)=>{if(tds[i]!==undefined)tds[i].innerHTML=h})}
 function saveCurrent(){
+  if(document.documentElement.classList.contains('viewer'))return; /* viewers never write to their own library */
   /* safety: if an inline edit is still open (tab closing, ← Builder), capture it first */
   const live=document.querySelector('#pitch [data-mg][contenteditable="true"]');
   if(live&&document.activeElement!==live){const t=live;t.removeAttribute('contenteditable');
@@ -1260,6 +1273,7 @@ function exportFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
 function deleteFromLib(id){const a=libAll().filter(x=>x.id!==id);libWrite(a);renderLib();toast('Deleted')}
 /* the platform ships with the Mach Five proposal pre-saved (re-seeded when its content is upgraded; stays deleted if you delete it after that) */
 function seedLib(){try{
+  if(document.documentElement.classList.contains('viewer'))return;
   const V='sage_lib_seed_v5';
   if(localStorage.getItem(V))return;
   const a=libAll();const now=new Date().toISOString();
@@ -1324,13 +1338,14 @@ async function sharePitch(){
   if(!share.short)toast('Long link (enable Storage on Vercel for short brand links)');
   try{await navigator.clipboard.writeText(link);toast('Link copied — valid 14 days')}catch(e){}
 }
-function expiredScreen(){document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>'}
+function expiredScreen(){document.documentElement.classList.add('vready');document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>'}
 function renderShared(p){
   if(p.dref==='demo'&&p.d&&!p.d.research)p.d.research=DEMO.research;
   apply(p.d); if(p.edits)edits=p.edits; applyDesign(p.design??14); applyTheme(p.theme??0); generate(); restorePricing(p.pricing);
   document.querySelectorAll('.pitch-bar .btn').forEach(b=>{if(!/PDF|Print/.test(b.textContent))b.style.display='none'});
   document.querySelector('.magic-fab').style.display='none';
   document.querySelector('.pricehint')&&(document.querySelector('.pricehint').style.display='none');
+  setTimeout(()=>document.documentElement.classList.add('vready'),120);
   if(p.exp)toast('Valid till '+new Date(p.exp).toLocaleDateString('en-IN',{day:'numeric',month:'short'}))}
 async function tryShortViewer(){
   const m=location.pathname.match(/\/p\/([a-z0-9-]{1,60})/); if(!m)return false;
@@ -1339,7 +1354,7 @@ async function tryShortViewer(){
     if(r.status===410||r.status===404){expiredScreen();return true}
     if(!r.ok)throw new Error('HTTP '+r.status);
     const doc=await r.json(); renderShared({...doc.payload,exp:doc.exp});
-  }catch(e){toast('Could not open pitch: '+e.message)}
+  }catch(e){document.documentElement.classList.add('vready');toast('Could not open pitch: '+e.message)}
   return true}
 async function tryViewerMode(){
   if(await tryShortViewer())return;
@@ -1348,7 +1363,7 @@ async function tryViewerMode(){
     const p=JSON.parse(await gunzipBytes(b64ud(location.hash.slice(3))));
     if(p.exp&&Date.now()>p.exp){expiredScreen();return}
     renderShared(p);
-  }catch(e){toast('Could not open shared pitch: '+e.message)}
+  }catch(e){document.documentElement.classList.add('vready');toast('Could not open shared pitch: '+e.message)}
 }
 window.addEventListener('DOMContentLoaded',tryViewerMode);
 

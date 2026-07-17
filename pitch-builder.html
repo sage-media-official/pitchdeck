@@ -1202,6 +1202,12 @@ function libWrite(a){try{localStorage.setItem(LIB_KEY,JSON.stringify(a))}catch(e
 function capturePricing(){return[...document.querySelectorAll('#pitch .pricebox td[contenteditable]')].map(td=>td.innerHTML)}
 function restorePricing(arr){if(!arr)return;const tds=[...document.querySelectorAll('#pitch .pricebox td[contenteditable]')];arr.forEach((h,i)=>{if(tds[i]!==undefined)tds[i].innerHTML=h})}
 function saveCurrent(){
+  /* safety: if an inline edit is still open (tab closing, ← Builder), capture it first */
+  const live=document.querySelector('#pitch [data-mg][contenteditable="true"]');
+  if(live&&document.activeElement!==live){const t=live;t.removeAttribute('contenteditable');
+    const path=t.dataset.mg;const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===path);
+    const idx=els.indexOf(t);const i=edits.findIndex(e=>e.path===path&&(e.idx||0)===idx);
+    const rec={path,idx,html:t.innerHTML};if(i>=0)edits[i]=rec;else edits.push(rec)}
   const d=collect(); if(!d.f_name)return;
   const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');
   const a=libAll(); const old=a.find(x=>x.id===id);
@@ -1254,7 +1260,8 @@ function seedLib(){try{
   const a=libAll();const now=new Date().toISOString();
   const entry={id:'mach-five',name:'Mach Five',cat:DEMO.f_category,created:now,updated:now,design:8,theme:22,data:DEMO,comments:[],edits:[]};
   const i=a.findIndex(x=>x.id==='mach-five');
-  if(i>=0)a[i]={...a[i],...entry,created:a[i].created};else a.push(entry);
+  /* content upgrades must never wipe the user's own edits, pricing or live link */
+  if(i>=0)a[i]={...entry,created:a[i].created,edits:a[i].edits||[],pricing:a[i].pricing||null,share:a[i].share,comments:a[i].comments||[]};else a.push(entry);
   libWrite(a);localStorage.setItem(V,'1')
 }catch(e){}}
 document.addEventListener('DOMContentLoaded',()=>{seedLib();$('libCnt').textContent=libAll().length});
@@ -1420,8 +1427,10 @@ function applyEdits(){if(!edits.length)return;
   edits.forEach(e=>{const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===e.path);
     const el=els[e.idx||0];if(el)el.innerHTML=e.html})}
 function editInline(){if(!mgTarget)return;closePop();const t=mgTarget;t.setAttribute('contenteditable','true');t.focus();
-  const done=()=>{t.removeAttribute('contenteditable');t.removeEventListener('blur',done);recordEdit(t);toast('Edit saved with the pitch ✓')};
-  t.addEventListener('blur',done);toast('Editing inline — click away when done')}
+  let deb=null;
+  const onInput=()=>{clearTimeout(deb);deb=setTimeout(()=>recordEdit(t),400)}; /* autosave while typing */
+  const done=()=>{clearTimeout(deb);t.removeAttribute('contenteditable');t.removeEventListener('blur',done);t.removeEventListener('input',onInput);recordEdit(t);toast('Edit saved with the pitch ✓')};
+  t.addEventListener('input',onInput);t.addEventListener('blur',done);toast('Editing inline — autosaves as you type')}
 function renderChanges(){$('mgCnt').textContent=comments.length;$('mgReview').style.display=comments.length?'inline-flex':'none';
   $('mgList').innerHTML=comments.length?comments.map((c,i)=>`<div class="mg-item"><button class="del" onclick="delComment(${i})">remove</button><div class="pp">${esc(c.path)}</div><div class="cc">${esc(c.comment)}</div><div class="ss">"${esc(c.snippet)}"</div></div>`).join(''):'<p style="color:var(--mute);font-size:.9rem">No change requests yet. Turn on ✨ Magic edit and click any element.</p>'}
 function delComment(i){comments.splice(i,1);renderChanges();renderFlags()}

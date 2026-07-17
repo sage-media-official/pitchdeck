@@ -217,6 +217,9 @@
   .tiercard.sel{border-color:var(--accent);border-width:2px;box-shadow:var(--shadow-2)}
   .tiercard .pick{position:absolute;top:14px;right:14px;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);opacity:0;transition:.2s}
   .tiercard.sel .pick{opacity:1}
+  #mgDel{position:fixed;z-index:130;display:none;width:30px;height:30px;border-radius:99px;border:none;background:#C62828;color:#fff;font-size:.85rem;cursor:pointer;box-shadow:var(--shadow-2)}
+  body.magic #mgDel.show{display:grid;place-items:center}
+  #mgDel:hover{transform:scale(1.12)}
   .lst.warn li::before{background:#C9803B}
 
   .senti{display:grid;grid-template-columns:210px 1fr;gap:24px;align-items:center;margin-top:16px;background:var(--card,#fff);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow-1)}
@@ -641,9 +644,11 @@
   <div class="row">
     <button class="btn primary" onclick="saveComment()">Save comment</button>
     <button class="btn" onclick="editInline()">✏️ Edit text directly</button>
+    <button class="btn danger" onclick="delFromPop()">🗑 Delete element</button>
     <button class="btn" onclick="closePop()">Cancel</button>
   </div>
 </div>
+<button id="mgDel" title="Delete this element">🗑</button>
 <div class="mg-panel" id="mgPanel">
   <header><h3>✨ Change requests</h3><button class="btn" onclick="togglePanel()">Close</button></header>
   <div class="list" id="mgList"></div>
@@ -1442,14 +1447,58 @@ function recordEdit(t){const path=t.dataset.mg;if(!path)return;
   saveCurrent()}
 function applyEdits(){if(!edits.length)return;
   edits.forEach(e=>{const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===e.path);
-    const el=els[e.idx||0];if(el)el.innerHTML=e.html})}
+    const el=els[e.idx||0];if(!el)return;
+    if(e.del)el.remove();else el.innerHTML=e.html});
+  renumber()}
+/* after any deletion, section numbers and card numbering re-flow automatically */
+function renumber(){
+  const p=$('pitch');if(!p)return;
+  let n=1;
+  p.querySelectorAll('.psec').forEach(sec=>{
+    const g=sec.querySelector('.ghostnum'),eb=sec.querySelector('.peyebrow .n');
+    if(!g&&!eb)return;
+    n++;const ns=n<10?'0'+n:''+n;
+    if(g)g.textContent=ns;if(eb)eb.textContent=ns});
+  p.querySelectorAll('.pgrid').forEach(grid=>{
+    let i=0;
+    grid.querySelectorAll(':scope > .pcard > .tagm').forEach(tg=>{
+      const m=tg.textContent.trim().match(/^(★\s*)?(Move|Pillar|Phase|Note|Step)\s+\d+$/);
+      if(m){i++;tg.textContent=(m[1]||'')+m[2]+' '+(i<10?'0'+i:i)}})});
+  let c=0;p.querySelectorAll('.ctr .mv').forEach(x=>{c++;x.textContent=c<10?'0'+c:''+c});
+  let k=0;p.querySelectorAll('.cdeep .cdn').forEach(x=>{k++;x.textContent=k<10?'0'+k:''+k})}
+function delElement(t){const path=t.dataset.mg;if(!path)return;
+  const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===path);
+  const idx=els.indexOf(t);
+  edits.push({path,idx,del:1});
+  t.remove();renumber();saveCurrent();renderChanges();
+  toast('Deleted ✓ — undo from the ✨ panel')}
+function delFromPop(){if(!mgTarget)return;const t=mgTarget;closePop();delElement(t)}
+function undoEdit(i){edits.splice(i,1);generate();renderChanges();toast('Undone — pitch rebuilt')}
+/* hover 🗑 in magic mode */
+let mgHover=null;
+document.addEventListener('mousemove',e=>{
+  const btn=$('mgDel');if(!btn)return;
+  if(!document.body.classList.contains('magic')){btn.classList.remove('show');return}
+  if(e.target.closest&&e.target.closest('#mgDel'))return;
+  const t=e.target.closest?e.target.closest('[data-mg]'):null;
+  if(!t||!$('pitch').contains(t)||t.getAttribute('contenteditable')==='true'){btn.classList.remove('show');mgHover=null;return}
+  mgHover=t;const r=t.getBoundingClientRect();
+  btn.style.top=Math.max(58,r.top-6)+'px';
+  btn.style.left=Math.min(window.innerWidth-40,r.right-24)+'px';
+  btn.classList.add('show')});
+document.addEventListener('DOMContentLoaded',()=>{
+  $('mgDel').addEventListener('click',e=>{e.stopPropagation();e.preventDefault();
+    if(mgHover)delElement(mgHover);mgHover=null;$('mgDel').classList.remove('show')});
+  $('pitchWrap').addEventListener('scroll',()=>$('mgDel').classList.remove('show'),{passive:true})});
 function editInline(){if(!mgTarget)return;closePop();const t=mgTarget;t.setAttribute('contenteditable','true');t.focus();
   let deb=null;
   const onInput=()=>{clearTimeout(deb);deb=setTimeout(()=>recordEdit(t),400)}; /* autosave while typing */
   const done=()=>{clearTimeout(deb);t.removeAttribute('contenteditable');t.removeEventListener('blur',done);t.removeEventListener('input',onInput);recordEdit(t);toast('Edit saved with the pitch ✓')};
   t.addEventListener('input',onInput);t.addEventListener('blur',done);toast('Editing inline — autosaves as you type')}
-function renderChanges(){$('mgCnt').textContent=comments.length;$('mgReview').style.display=comments.length?'inline-flex':'none';
-  $('mgList').innerHTML=comments.length?comments.map((c,i)=>`<div class="mg-item"><button class="del" onclick="delComment(${i})">remove</button><div class="pp">${esc(c.path)}</div><div class="cc">${esc(c.comment)}</div><div class="ss">"${esc(c.snippet)}"</div></div>`).join(''):'<p style="color:var(--mute);font-size:.9rem">No change requests yet. Turn on ✨ Magic edit and click any element.</p>'}
+function renderChanges(){$('mgCnt').textContent=comments.length+edits.length;$('mgReview').style.display=comments.length?'inline-flex':'none';
+  const eh=edits.map((e,i)=>`<div class="mg-item"><button class="del" onclick="undoEdit(${i})">undo</button><div class="pp">${e.del?'🗑 Deleted':'✏️ Edited'} · ${esc(e.path)}</div></div>`).join('');
+  const ch=comments.map((c,i)=>`<div class="mg-item"><button class="del" onclick="delComment(${i})">remove</button><div class="pp">${esc(c.path)}</div><div class="cc">${esc(c.comment)}</div><div class="ss">"${esc(c.snippet)}"</div></div>`).join('');
+  $('mgList').innerHTML=(eh+ch)||'<p style="color:var(--mute);font-size:.9rem">Nothing yet. Turn on ✨ Magic edit — click text to edit it, hover &amp; hit 🗑 to delete, right-click to comment.</p>'}
 function delComment(i){comments.splice(i,1);renderChanges();renderFlags()}
 function clearChanges(){comments=[];renderChanges();renderFlags();toast('Cleared')}
 function togglePanel(){renderChanges();$('mgPanel').classList.toggle('show')}

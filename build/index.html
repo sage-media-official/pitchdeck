@@ -790,6 +790,7 @@ function selTier(i){BPSEL=i;document.querySelectorAll('#pitch .tiercard').forEac
   const tb=document.getElementById('bpBody');if(tb)tb.innerHTML=bpRowsHtml(i)}
 function generate(){
   const d=collect(); if(!d.f_name){toast('Add a brand name');return}
+  if(editsFor&&editsFor!==d.f_name)edits=[]; editsFor=d.f_name;
   const R=research||{};
   const heard=R.heard||sentences(d.f_brief);
   const name=esc(d.f_name), cat=esc(d.f_category||'—'), reg=esc(d.f_region||'India');
@@ -940,7 +941,7 @@ function generate(){
   pw.className='pitch theme-'+THEMES[curT].layout+' '+THEMES[curT].cls;
   $('pbTitle').textContent=d.f_name+' · Pitch';
   $('pitchWrap').classList.add('show');$('pitchWrap').scrollTop=0;
-  runAnims(); renderFlags();
+  runAnims(); renderFlags(); applyEdits();
   toast(research?('Pitch generated — '+secN+' sections'):'Generated — send brief to Claude to light up the research');
   saveCurrent();
 }
@@ -1224,7 +1225,7 @@ const DEMO={f_name:'Mach Five',f_category:'Functional health drink',f_region:'In
       {when:'M4–6',invest:'~28%',back:'₹12–16L/mo; marketing breakeven ~M6; ambassador signed.',kpis:['ROAS ≥ 2×','Repeat ≥ 15%','40k bottles / quarter']},
       {when:'M7–9',invest:'~24%',back:'₹18–24L/mo with SKU 2 and gym-fridge channel stacking on.',kpis:['ROAS ≥ 2.4×','Subscriptions ≥ 10%','Share of search 2×']},
       {when:'M10–12',invest:'~22%',back:'₹2–2.4Cr Year-1 revenue; Year-2 starts at national q-comm scale.',kpis:['LTV:CAC ≥ 3','30% revenue from repeat','Offline pilot proven']}]}]}}};
-function loadDemo(){apply(DEMO);toast('Mach Five demo loaded — hit ⚡ Generate')}
+function loadDemo(){apply(DEMO);edits=[];toast('Mach Five demo loaded — hit ⚡ Generate')}
 
 /* ================= animations ================= */
 function countUp(el){const target=parseFloat(el.dataset.count||'0');const suf=el.dataset.suffix||'';const t0=performance.now();const dec=(target%1!==0)?1:0;
@@ -1267,7 +1268,7 @@ function saveCurrent(){
   const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');
   const a=libAll(); const old=a.find(x=>x.id===id);
   const entry={id,name:d.f_name,cat:d.f_category||'',created:old?old.created:new Date().toISOString(),
-    updated:new Date().toISOString(),design:curD,theme:curT,data:d,comments:comments,
+    updated:new Date().toISOString(),design:curD,theme:curT,data:d,comments:comments,edits:edits,
     pricing:$('pitchWrap').classList.contains('show')?capturePricing():(old?old.pricing:null)};
   const i=a.findIndex(x=>x.id===id); if(i>=0)a[i]=entry; else a.unshift(entry);
   libWrite(a)}
@@ -1300,7 +1301,7 @@ async function offLinkFor(id){const a=libAll();const e=a.find(x=>x.id===id);if(!
   const wasShort=e.share.short; e.share.on=false;libWrite(a);renderLib();
   toast(wasShort?'Link killed — dead for everyone, immediately':'Link turned off here — copies already sent keep working until their 14-day expiry')}
 function openFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
-  apply(e.data); comments=e.comments||[];
+  apply(e.data); comments=e.comments||[]; edits=e.edits||[];
   applyDesign(e.design??14); applyTheme(e.theme??0); $('libModal').classList.remove('show');
   generate(); restorePricing(e.pricing); renderChanges(); renderFlags();
   toast('Opened "'+e.name+'" — edit away, changes save automatically')}
@@ -1310,10 +1311,10 @@ function exportFromLib(id){const e=libAll().find(x=>x.id===id); if(!e)return;
 function deleteFromLib(id){const a=libAll().filter(x=>x.id!==id);libWrite(a);renderLib();toast('Deleted')}
 /* the platform ships with the Mach Five proposal pre-saved (re-seeded when its content is upgraded; stays deleted if you delete it after that) */
 function seedLib(){try{
-  const V='sage_lib_seed_v3';
+  const V='sage_lib_seed_v4';
   if(localStorage.getItem(V))return;
   const a=libAll();const now=new Date().toISOString();
-  const entry={id:'mach-five',name:'Mach Five',cat:DEMO.f_category,created:now,updated:now,design:14,theme:0,data:DEMO,comments:[]};
+  const entry={id:'mach-five',name:'Mach Five',cat:DEMO.f_category,created:now,updated:now,design:8,theme:22,data:DEMO,comments:[],edits:[]};
   const i=a.findIndex(x=>x.id==='mach-five');
   if(i>=0)a[i]={...a[i],...entry,created:a[i].created};else a.push(entry);
   libWrite(a);localStorage.setItem(V,'1')
@@ -1347,7 +1348,7 @@ function b64ud(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length
 async function gzipStr(str){return new Uint8Array(await new Response(new Blob([str]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer())}
 async function gunzipBytes(bytes){return await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}
 async function mintLink(id,data,design,theme,pricing){
-  const body={v:1,design,theme,pricing:pricing||null,d:data};
+  const body={v:1,design,theme,pricing:pricing||null,edits:edits.length?edits:null,d:data};
   try{ /* short brand link via server storage; falls back to the long self-contained link */
     const r=await fetch('/api/share?slug='+encodeURIComponent(id),{method:'POST',
       headers:{'content-type':'application/json'},body:JSON.stringify({slug:id,payload:body})});
@@ -1372,7 +1373,7 @@ async function sharePitch(){
 }
 function expiredScreen(){document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;background:#FDFBEE;color:#22321F;text-align:center;padding:2rem"><div><div style="font-size:3rem">⏳</div><h1 style="font-family:inherit;font-size:1.7rem;margin-top:10px">This pitch link has expired</h1><p style="color:#6A7168;margin-top:8px">Write to <b>business@sagemedia.in</b> for a fresh one.</p></div></div>'}
 function renderShared(p){
-  apply(p.d); applyDesign(p.design??14); applyTheme(p.theme??0); generate(); restorePricing(p.pricing);
+  apply(p.d); if(p.edits)edits=p.edits; applyDesign(p.design??14); applyTheme(p.theme??0); generate(); restorePricing(p.pricing);
   document.querySelectorAll('.pitch-bar .btn').forEach(b=>{if(!/PDF|Print/.test(b.textContent))b.style.display='none'});
   document.querySelector('.magic-fab').style.display='none';
   document.querySelector('.pricehint')&&(document.querySelector('.pricehint').style.display='none');
@@ -1468,8 +1469,20 @@ function closePop(){$('mgPop').classList.remove('show');document.querySelectorAl
 function saveComment(){if(!mgTarget)return;const c=$('mgTxt').value.trim();if(!c){toast('Write what should change');return}
   comments.push({path:mgTarget.dataset.mg,snippet:(mgTarget.innerText||'').trim().slice(0,140),comment:c,ts:new Date().toISOString()});
   closePop();renderChanges();renderFlags();toast('Saved — '+comments.length+' change request'+(comments.length>1?'s':''))}
+/* inline edits persist: recorded per element, saved with the pitch, restored on open & in share links */
+let edits=[],editsFor='';
+function recordEdit(t){const path=t.dataset.mg;if(!path)return;
+  const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===path);
+  const idx=els.indexOf(t);
+  const i=edits.findIndex(e=>e.path===path&&(e.idx||0)===idx);
+  const rec={path,idx,html:t.innerHTML};
+  if(i>=0)edits[i]=rec;else edits.push(rec);
+  saveCurrent()}
+function applyEdits(){if(!edits.length)return;
+  edits.forEach(e=>{const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===e.path);
+    const el=els[e.idx||0];if(el)el.innerHTML=e.html})}
 function editInline(){if(!mgTarget)return;closePop();const t=mgTarget;t.setAttribute('contenteditable','true');t.focus();
-  const done=()=>{t.removeAttribute('contenteditable');t.removeEventListener('blur',done)};
+  const done=()=>{t.removeAttribute('contenteditable');t.removeEventListener('blur',done);recordEdit(t);toast('Edit saved with the pitch ✓')};
   t.addEventListener('blur',done);toast('Editing inline — click away when done')}
 function renderChanges(){$('mgCnt').textContent=comments.length;$('mgReview').style.display=comments.length?'inline-flex':'none';
   $('mgList').innerHTML=comments.length?comments.map((c,i)=>`<div class="mg-item"><button class="del" onclick="delComment(${i})">remove</button><div class="pp">${esc(c.path)}</div><div class="cc">${esc(c.comment)}</div><div class="ss">"${esc(c.snippet)}"</div></div>`).join(''):'<p style="color:var(--mute);font-size:.9rem">No change requests yet. Turn on ✨ Magic edit and click any element.</p>'}

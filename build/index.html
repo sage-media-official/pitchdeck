@@ -219,6 +219,61 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   .tiercard.sel{border-color:var(--accent);border-width:2px;box-shadow:var(--shadow-2)}
   .tiercard .pick{position:absolute;top:14px;right:14px;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);opacity:0;transition:.2s}
   .tiercard.sel .pick{opacity:1}
+  /* ===== mobile polish: one thin bar, feed-like sections, comfortable density ===== */
+  @media(max-width:640px){
+    .pitch-bar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 12px;gap:6px}
+    .pitch-bar::-webkit-scrollbar{display:none}
+    .pitch-bar .brand{flex:0 0 auto;gap:7px}
+    .pitch-bar .brand .mk{width:26px;height:26px;font-size:.8rem}
+    #pbTitle{font-size:.86rem;white-space:nowrap;max-width:34vw;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:middle}
+    .topbtns{flex:0 0 auto;display:flex;flex-wrap:nowrap;gap:6px}
+    .pitch-bar .btn{padding:7px 12px;font-size:.76rem;white-space:nowrap;flex:0 0 auto}
+    .pitch{padding:0 16px}
+    .psec{padding:44px 0}
+    .psec h2{font-size:clamp(1.5rem,7.4vw,2rem);line-height:1.12}
+    .psec .lead{font-size:.92rem}
+    .peyebrow{font-size:.64rem;letter-spacing:.16em}
+    .ghostnum{font-size:4.6rem;top:-14px;right:-4px}
+    .pcover{min-height:62vh}
+    .pcover h1{font-size:clamp(2.5rem,13vw,3.6rem)}
+    .pcover .sub2{font-size:1rem}
+    .pcover .meta{gap:8px 14px;font-size:.8rem}
+    .pcard{padding:16px}
+    .pcard h3{font-size:1rem}
+    .pcard p{font-size:.88rem}
+    .band{border-radius:18px;padding:22px 18px}
+    .statrow .st .v{font-size:1.05rem}
+    .chip{font-size:.76rem;padding:7px 12px}
+    .ctable{border-radius:12px}
+    .ctable table{font-size:.8rem;min-width:520px}
+    .ctable th{padding:9px 11px;font-size:.62rem}
+    .ctable td{padding:9px 11px}
+    .cdhead{gap:10px;margin:20px 0 10px}
+    .cdhead .cdn{width:30px;height:30px;border-radius:9px;font-size:.74rem}
+    .cdhead h3{font-size:1.02rem}
+    .cdpos{font-size:.74rem}
+    .lst{padding:15px}
+    .lst li{font-size:.84rem}
+    .ctr{padding:16px;grid-template-columns:38px 1fr;gap:12px}
+    .ctr .mv{width:30px;height:30px;border-radius:9px;font-size:.74rem}
+    .ctr h3{font-size:.96rem}
+    .ctr p{font-size:.86rem}
+    .ctrvs{font-size:.64rem;padding:3px 9px}
+    .tiercard h3.num{font-size:1.25rem}
+    .chartcard{padding:16px}
+    .chartcard h3{font-size:.95rem}
+    .cols{gap:7px}
+    .tq{padding:15px}
+    .tq li{font-size:.82rem}
+    .senti{padding:16px}
+    .gauge .sc{font-size:2rem}
+    .pricebox .pricehint{font-size:.72rem}
+    .cta2 h2{font-size:1.6rem}
+    .pfooter{font-size:.68rem}
+    .emb.wide img{height:210px}
+    .mg-panel{width:94vw}
+    #mgDel{width:34px;height:34px}
+  }
   /* ===== viewer mode: shared links show only the pitch, never the builder ===== */
   html.viewer .topbar,html.viewer .builder,html.viewer .genbar,html.viewer .magic-fab,html.viewer .mg-pop,html.viewer .mg-panel,html.viewer #mgDel{display:none!important}
   #vsplash{display:none}

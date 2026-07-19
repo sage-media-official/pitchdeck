@@ -507,7 +507,7 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   .t-zen .chips .chip{box-shadow:none;background:transparent;border:1px solid var(--line)}
   .t-zen .psec{border-bottom:1px solid var(--line)}
   /* 06 Deck Frame — every section is a slide card */
-  .t-deck .psec{background:var(--card,#fff);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,3.5vw,44px);margin:16px 0;border-bottom:1px solid var(--line);box-shadow:var(--shadow-1)}
+  .t-deck .psec:not(.pcover){background:var(--card,#fff);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,3.5vw,44px);margin:16px 0;border-bottom:1px solid var(--line);box-shadow:var(--shadow-1)}
   .t-deck .psec.dark{background:transparent;border:none;box-shadow:none;padding:0}
   .t-deck .pcard{background:var(--cream-2);box-shadow:none}
   .t-deck .ghostnum{top:6px;right:10px;font-size:clamp(3rem,6vw,4.5rem);opacity:.6}
@@ -645,6 +645,153 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   .idea .ihook{color:var(--accent-2);font-weight:600;font-size:.92rem;margin-bottom:8px}
   .idea p{color:var(--ink);font-size:.9rem;line-height:1.55}
   .idea .ich{display:inline-block;margin-top:12px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);background:var(--cream-2);padding:4px 12px;border-radius:99px}
+
+
+  /* ============ COVER IDENTITY PASS — 30 unique cover architectures ============ */
+  .pcover .coverblocks{display:none}
+  /* helpers to un-dark a layout-1 cover when a theme repaints it light */
+  /* 00 Classic Editorial — Swiss masthead */
+  .t-rise .pcover{border-top:6px solid var(--sage-9)}
+  .t-rise .pcover .tag{background:transparent;border:none;border-radius:0;padding:0;letter-spacing:.3em;text-transform:uppercase;font-size:.7rem;color:var(--mute)}
+  .t-rise .pcover h1{border-bottom:3px double var(--sage-9);padding-bottom:22px}
+  .t-rise .pcover .blob{display:none}
+  /* 01 Center Stage — keynote, everything centered huge */
+  .t-center .pcover h1{font-size:clamp(3rem,10vw,7rem)}
+  .t-center .pcover::after{content:"· · ·";display:block;text-align:center;color:var(--accent);letter-spacing:16px;margin-top:26px}
+  /* 02 Split Rail — vertical folio rail */
+  .t-rail .pcover{border-left:14px solid var(--accent);padding-left:clamp(22px,4vw,54px)}
+  .t-rail .pcover::before{content:"SAGE MEDIA · PITCH";position:absolute;left:-8px;top:50%;transform:rotate(180deg) translateY(50%);writing-mode:vertical-rl;font-family:var(--f-num);font-size:.66rem;font-weight:700;letter-spacing:.4em;color:#fff}
+  /* 03 Poster Bold — mega type + marquee foot */
+  .t-poster .pcover h1{text-transform:uppercase;font-size:clamp(3.4rem,11vw,8.5rem);line-height:.92;letter-spacing:-.02em}
+  .t-poster .pcover::after{content:"GO-TO-MARKET ✦ MARKETING PLAN ✦ GO-TO-MARKET ✦ MARKETING PLAN ✦ GO-TO-MARKET ✦ MARKETING PLAN ✦";position:absolute;left:0;right:0;bottom:0;padding:12px 0;background:var(--accent);color:#fff;font-family:var(--f-num);font-weight:700;font-size:.78rem;letter-spacing:.28em;white-space:nowrap;overflow:hidden}
+  /* 04 Minimal Zen — quiet, air, one hairline */
+  .t-zen .pcover{justify-content:flex-end;padding-bottom:12vh}
+  .t-zen .pcover h1{font-weight:400;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:.02em}
+  .t-zen .pcover .tag{background:transparent;border:none;padding:0;color:var(--mute);letter-spacing:.3em;text-transform:uppercase;font-size:.66rem}
+  .t-zen .pcover .sub2{border-left:1px solid var(--sage-9);padding-left:18px}
+  .t-zen .pcover .blob{display:none}
+  /* 05 Deck Frame — the cover is slide 01, framed */
+  .t-deck .psec.pcover{background:var(--band);border-radius:22px;margin:16px 0;padding:clamp(28px,4vw,54px);min-height:70vh;box-shadow:var(--shadow-2)}
+  .t-deck .psec.pcover::after{content:"SLIDE 01 · COVER";position:absolute;top:20px;right:24px;font-family:var(--f-num);font-size:.64rem;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:5px 12px}
+  /* 06 Gradient Ink — full gradient wash */
+  .t-grad .psec.pcover{background:linear-gradient(135deg,var(--cream) 30%,color-mix(in oklab,var(--accent) 22%,var(--cream)))}
+  .t-grad .pcover::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:60px solid color-mix(in oklab,var(--accent) 30%,transparent);filter:blur(8px)}
+  /* 07 Brutalist — cream cover, boxed title, hard offsets */
+  .t-brut .psec.pcover{background:var(--cream);border:3px solid var(--sage-9);border-radius:0;margin:14px 0}
+  .t-brut .pcover h1{background:var(--sage-9);display:inline-block;padding:8px 26px;box-shadow:12px 12px 0 var(--accent);text-transform:uppercase}
+  .t-brut .pcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--cream)}
+  .t-brut .pcover .tag{background:transparent;border:2px solid var(--sage-9);border-radius:0;color:var(--sage-9)}
+  .t-brut .pcover .sub2{color:var(--ink)}
+  .t-brut .pcover .meta,.t-brut .pcover .meta span{color:var(--mute)}
+  .t-brut .pcover .blob{display:none}
+  /* 08 Soft Orbs — floating orb field */
+  .t-orbs .pcover::before{content:"";position:absolute;right:8%;top:14%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle at 32% 30%,var(--accent-l),var(--accent));opacity:.5;filter:blur(2px)}
+  .t-orbs .pcover::after{content:"";position:absolute;right:26%;bottom:16%;width:120px;height:120px;border-radius:50%;background:var(--accent-2);opacity:.25;filter:blur(6px)}
+  .t-orbs .pcover .tag{border-radius:99px;background:var(--cream-2);border:none}
+  /* 09 Magazine — masthead & issue line */
+  .t-mag .pcover{border-top:8px solid var(--sage-9)}
+  .t-mag .pcover .tag{background:transparent;border:none;border-bottom:1.5px solid var(--sage-9);border-radius:0;padding:0 0 8px;text-transform:uppercase;letter-spacing:.24em;font-size:.7rem;color:var(--sage-9);width:100%}
+  .t-mag .pcover h1{text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(3rem,9.5vw,7rem)}
+  .t-mag .pcover .sub2{border-top:1px solid var(--line);padding-top:14px}
+  .t-mag .pcover .blob{display:none}
+  /* 10 Night Bands — dark cover + outline year */
+  .t-bands .pcover::after{content:"2026";position:absolute;right:24px;bottom:14px;font-family:var(--f-display);font-weight:700;font-size:clamp(4rem,10vw,8rem);color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.16);line-height:1}
+  /* 11 Number Spine — colossal outlined 01 */
+  .t-spine .pcover::before{content:"01";position:absolute;left:-10px;top:6%;font-family:var(--f-display);font-weight:700;font-size:clamp(9rem,26vw,20rem);line-height:1;color:transparent;-webkit-text-stroke:3px var(--accent-l);opacity:.75}
+  .t-spine .pcover>.reveal{position:relative;z-index:1;margin-left:clamp(40px,12vw,180px)}
+  /* 12 Capsule — title in a giant pill */
+  .t-caps .pcover h1{border:3px solid var(--accent);border-radius:999px;display:inline-block;padding:14px 44px}
+  .t-caps .pcover .tag{background:var(--accent);color:#fff;border:none}
+  .t-caps .pcover .meta span{border:1.5px solid var(--line);border-radius:99px;padding:5px 14px}
+  /* 13 Outline — stroke-only display type */
+  .t-line .pcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:transparent;-webkit-text-stroke:2.5px var(--sage-9)}
+  .t-line .pcover h1{font-size:clamp(3.2rem,10vw,7.5rem)}
+  .t-line .pcover .tag{background:transparent;border:1.5px solid var(--sage-9);color:var(--sage-9)}
+  .t-line .pcover .blob{display:none}
+  /* 14 Boardroom — document header, all business */
+  .t-corp .pcover{min-height:46vh;justify-content:flex-start;padding-top:9vh;border-bottom:4px solid var(--sage-9)}
+  .t-corp .pcover h1{font-size:clamp(2rem,5vw,3.4rem)}
+  .t-corp .pcover .meta{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;width:100%;text-transform:uppercase;font-size:.72rem;letter-spacing:.12em}
+  .t-corp .pcover .blob{display:none}
+  /* 15 Hero Strips — stacked colour strips */
+  .t-hero .psec.pcover{background:linear-gradient(180deg,var(--band) 0 68%,var(--accent-2) 68% 84%,var(--accent) 84% 100%)}
+  /* 16 Diagonal — skewed slab */
+  .t-diag .pcover::before{content:"";position:absolute;left:-6%;right:30%;top:34%;bottom:30%;background:var(--accent);transform:skewY(-7deg);opacity:.14}
+  .t-diag .pcover h1{transform:skewY(-3deg)}
+  .t-diag .pcover .tag{transform:skewY(-3deg)}
+  /* 17 Paper Layers — tilted sheet with tape */
+  .t-paper .pcover>.reveal{background:var(--card,#fff);padding:clamp(28px,5vw,60px);border-radius:6px;transform:rotate(-1.2deg);box-shadow:0 24px 60px -24px rgba(20,30,20,.35)}
+  .t-paper .pcover>.reveal::before{content:"";position:absolute;top:-12px;left:48px;width:90px;height:26px;background:rgba(236,224,180,.8);transform:rotate(-3deg);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+  .t-paper .pcover .blob{display:none}
+  /* 18 Neo Glass — frosted panel over aurora */
+  .t-glass .psec.pcover{background:linear-gradient(130deg,color-mix(in oklab,var(--accent) 30%,var(--cream)),var(--cream) 45%,color-mix(in oklab,var(--accent-2) 24%,var(--cream)))}
+  .t-glass .pcover>.reveal{background:rgba(255,255,255,.42);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);border-radius:26px;padding:clamp(26px,4.5vw,54px)}
+  .t-glass .pcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--sage-9)}
+  .t-glass .pcover .sub2{color:var(--ink)}
+  .t-glass .pcover .meta,.t-glass .pcover .meta span{color:var(--mute)}
+  .t-glass .pcover .tag{background:rgba(255,255,255,.6);color:var(--sage-9);border:none}
+  /* 19 Timeline — the journey starts here */
+  .t-time .pcover{border-left:2px solid var(--line);margin-left:14px;padding-left:clamp(26px,5vw,60px)}
+  .t-time .pcover::before{content:"";position:absolute;left:-9px;top:46%;width:16px;height:16px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px color-mix(in oklab,var(--accent) 25%,transparent)}
+  .t-time .pcover::after{content:"T-0 · THE STARTING LINE";position:absolute;left:clamp(26px,5vw,60px);bottom:8vh;font-family:var(--f-num);font-size:.68rem;font-weight:700;letter-spacing:.26em;color:var(--mute)}
+  /* 20 B2B SaaS — grid paper + KPI chips */
+  .t-b2b .psec.pcover{background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);background-size:44px 44px}
+  .t-b2b .pcover .meta span{background:var(--card,#fff);border:1px solid var(--line);border-radius:8px;padding:7px 14px;box-shadow:var(--shadow-1)}
+  /* 21 SaaS Modern — browser-window cover */
+  .t-saas .pcover>.reveal{background:var(--card,#fff);border:1px solid var(--line);border-radius:14px;padding:clamp(26px,4vw,50px);padding-top:58px;box-shadow:var(--shadow-2);position:relative}
+  .t-saas .pcover>.reveal::before{content:"● ● ●";position:absolute;top:0;left:0;right:0;padding:10px 18px;font-size:.6rem;letter-spacing:4px;color:var(--mute);border-bottom:1px solid var(--line);background:var(--cream-2);border-radius:14px 14px 0 0}
+  .t-saas .pcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--sage-9)}
+  .t-saas .pcover .sub2{color:var(--ink)}
+  .t-saas .pcover .meta,.t-saas .pcover .meta span{color:var(--mute)}
+  .t-saas .pcover .tag{background:var(--cream-2);color:var(--accent-2);border:1px solid var(--line)}
+  /* 22 Chuckle Playful — stickers & tilt */
+  .t-chk .pcover h1{transform:rotate(-2.5deg);display:inline-block}
+  .t-chk .pcover .tag{transform:rotate(2deg);background:var(--accent);color:#fff;border:3px solid var(--sage-9);border-radius:14px;font-weight:700}
+  .t-chk .pcover::after{content:"★";position:absolute;right:10%;top:18%;font-size:5rem;color:var(--accent);transform:rotate(14deg)}
+  /* 23 Finora Finance — engraved elegance */
+  .t-fin .pcover{text-align:center;align-items:center;display:flex;flex-direction:column;justify-content:center}
+  .t-fin .pcover .tag{background:transparent;border:none;color:var(--accent-2);letter-spacing:.4em;text-transform:uppercase;font-size:.66rem}
+  .t-fin .pcover h1{border-top:1px solid var(--accent);border-bottom:1px solid var(--accent);padding:26px 40px;font-weight:600}
+  .t-fin .pcover .sub2,.t-fin .pcover .meta{margin-left:auto;margin-right:auto}
+  .t-fin .pcover .blob{display:none}
+  /* 24 Vivid Gradient — full-bleed gradient world */
+  .t-grd2 .psec.pcover{background:linear-gradient(120deg,var(--accent-2),var(--accent) 55%,var(--accent-l))}
+  .t-grd2 .pcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:#fff}
+  .t-grd2 .pcover .sub2{color:rgba(255,255,255,.92)}
+  .t-grd2 .pcover .meta,.t-grd2 .pcover .meta span{color:rgba(255,255,255,.75)}
+  .t-grd2 .pcover .tag{background:rgba(255,255,255,.2);color:#fff;border:none}
+  /* 25 Sustainify — organic arch */
+  .t-sus .pcover::after{content:"";position:absolute;right:-8%;bottom:-30%;width:55%;height:110%;background:color-mix(in oklab,var(--accent) 30%,transparent);border-radius:50% 50% 0 0/60% 60% 0 0;opacity:.5}
+  .t-sus .pcover .tag{border-radius:99px;background:var(--accent);color:#fff;border:none}
+  /* 26 Gemini AI — HUD terminal */
+  .t-ai .psec.pcover{background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.014) 3px 4px),var(--band)}
+  .t-ai .pcover>.reveal{border:1px solid rgba(125,211,252,.35);padding:clamp(24px,4vw,50px);position:relative}
+  .t-ai .pcover>.reveal::before,.t-ai .pcover>.reveal::after{content:"";position:absolute;width:26px;height:26px;border:2px solid var(--accent)}
+  .t-ai .pcover>.reveal::before{left:-2px;top:-2px;border-right:none;border-bottom:none}
+  .t-ai .pcover>.reveal::after{right:-2px;bottom:-2px;border-left:none;border-top:none}
+  .t-ai .pcover .tag{background:transparent;border:1px solid var(--accent);border-radius:0;color:var(--accent);font-family:var(--f-num);letter-spacing:.2em;text-transform:uppercase;font-size:.66rem}
+  /* 27 Folio Editorial — folio number & fine rules */
+  .t-folio .pcover .tag{background:transparent;border:none;padding:0;color:var(--accent);letter-spacing:.3em;text-transform:uppercase;font-size:.68rem}
+  .t-folio .pcover::before{content:"N° 01";position:absolute;right:26px;top:8vh;font-family:var(--f-display);font-size:1.1rem;color:var(--sage-9);border:1.5px solid var(--sage-9);border-radius:50%;padding:16px 12px}
+  .t-folio .pcover h1{font-style:italic;font-weight:600}
+  .t-folio .pcover .sub2{border-top:1px solid var(--sage-9);padding-top:14px;max-width:46ch}
+  .t-folio .pcover .blob{display:none}
+  /* 28 Data Branding — bracketed, plotted */
+  .t-data .psec.pcover{background-image:radial-gradient(var(--line) 1.2px,transparent 1.2px);background-size:26px 26px}
+  .t-data .pcover h1::before{content:"[ "}
+  .t-data .pcover h1::after{content:" ]"}
+  .t-data .pcover h1::before,.t-data .pcover h1::after{color:var(--accent);-webkit-text-stroke:0}
+  .t-data .pcover .tag{font-family:var(--f-num);background:var(--sage-9);color:var(--cream);border-radius:4px;border:none;letter-spacing:.14em}
+  /* 29 Virtue Digital — split panel */
+  .t-virtue .psec.pcover{background:linear-gradient(100deg,var(--band) 0 38%,var(--cream) 38%)}
+  @media(max-width:860px){.t-virtue .psec.pcover{background:var(--band)}}
+  .t-virtue .pcover>.reveal{margin-left:clamp(20px,42%,44%)}
+  .t-virtue .pcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--sage-9)}
+  .t-virtue .pcover .sub2{color:var(--ink)}
+  .t-virtue .pcover .meta,.t-virtue .pcover .meta span{color:var(--mute)}
+  .t-virtue .pcover .tag{background:var(--sage-9);color:var(--cream);border:none}
+  @media(max-width:860px){.t-virtue .pcover>.reveal{margin-left:0}
+    .t-virtue .pcover h1 .g{color:#fff}.t-virtue .pcover .sub2{color:rgba(255,255,255,.85)}.t-virtue .pcover .meta,.t-virtue .pcover .meta span{color:rgba(255,255,255,.6)}}
 
   @media print{
     *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}

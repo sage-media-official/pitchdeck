@@ -807,6 +807,130 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   @media(max-width:860px){.t-virtue .pcover>.reveal{margin-left:0}
     .t-virtue .pcover h1 .g{color:#fff}.t-virtue .pcover .sub2{color:rgba(255,255,255,.85)}.t-virtue .pcover .meta,.t-virtue .pcover .meta span{color:rgba(255,255,255,.6)}}
 
+
+  /* ============ INTERIOR IDENTITY PASS — theme character on every page, not just the cover ============ */
+  /* Classic Editorial: chart & table become print artifacts */
+  .t-rise .chartcard{border:none;box-shadow:none;background:transparent;border-top:3px double var(--sage-9);border-radius:0}
+  .t-rise .ctable{border-radius:0;box-shadow:none}
+  .t-rise .band{border-radius:0}
+  /* Center Stage: bands & charts centered, funnel centered */
+  .t-center .chartcard h3{text-align:center}
+  .t-center .band{text-align:center}
+  .t-center .idea{text-align:center}
+  .t-center .idea .inum{position:static;display:block;margin:0 auto 8px}
+  /* Split Rail: charts share the rail hairline */
+  .t-rail .chartcard,.t-rail .ctable{border-left:4px solid var(--accent);border-radius:0 var(--r) var(--r) 0}
+  /* Poster: numbers & tags scream */
+  .t-poster .tagm{font-size:.8rem;letter-spacing:.22em}
+  .t-poster .ghostnum{opacity:1}
+  .t-poster .band h2{text-transform:uppercase;font-size:clamp(1.8rem,4.5vw,3rem)}
+  /* Zen: charts float free */
+  .t-zen .chartcard,.t-zen .ctable,.t-zen .senti{border:none;box-shadow:none;background:transparent}
+  .t-zen .band{background:transparent;color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0}
+  .t-zen .band h2,.t-zen .band h3{color:var(--sage-9)!important}
+  .t-zen .band .pcard.darkc{background:var(--cream-2);border-color:var(--line)}
+  .t-zen .band .pcard.darkc p{color:var(--ink)!important}
+  .t-zen .band .gridbg,.t-zen .band .ghostnum{display:none}
+  /* Deck Frame: interior keeps slide chips */
+  .t-deck .psec:not(.pcover)::after{content:"";position:absolute;top:14px;right:16px;width:34px;height:5px;background:var(--accent);border-radius:99px}
+  /* Gradient Ink: funnel & bars pick up the gradient */
+  .t-grad .fl{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .t-grad .col .bar{background:linear-gradient(180deg,var(--accent),var(--accent-2))}
+  .t-grad .idea .inum{-webkit-text-stroke:1.5px var(--accent)}
+  /* Brutalist: charts & funnel go hard */
+  .t-brut .chartcard,.t-brut .idea{border-radius:0;border:2px solid var(--sage-9);box-shadow:7px 7px 0 var(--sage-9)}
+  .t-brut .fstage{border:2px solid var(--sage-9)}
+  .t-brut .tq{border-radius:0}
+  .t-brut .timeline .tq{border:2px solid var(--sage-9);box-shadow:5px 5px 0 var(--sage-9)}
+  /* Orbs: chart cards blob too */
+  .t-orbs .chartcard{border-radius:30px}
+  .t-orbs .ctr{border-radius:26px 26px 26px 8px}
+  .t-orbs .idea{border-radius:26px}
+  /* Magazine: charts ruled, timeline as column rules */
+  .t-mag .chartcard{border:none;box-shadow:none;background:transparent;border-top:1.5px solid var(--sage-9);border-radius:0}
+  .t-mag .tq{border:none;box-shadow:none;background:transparent;border-top:1.5px solid var(--sage-9);border-radius:0}
+  .t-mag .idea{border:none;box-shadow:none;background:transparent;border-top:1.5px solid var(--sage-9);border-radius:0}
+  /* Number Spine: cards get stroke numbers */
+  .t-spine .tagm{color:transparent;-webkit-text-stroke:1px var(--accent-2);font-size:.9rem}
+  /* Capsule: everything rounder */
+  .t-caps .chartcard,.t-caps .ctable,.t-caps .idea{border-radius:26px}
+  .t-caps .fstage{border-radius:99px}
+  /* Outline: charts stroked */
+  .t-line .chartcard,.t-line .idea,.t-line .ctr,.t-line .cdeep .lst{background:transparent;box-shadow:none;border:1.5px solid var(--sage-9)}
+  .t-line .fl,.t-line .col .bar{background:transparent;border:1.5px solid var(--accent-2)}
+  .t-line .band{background:transparent;border:2px solid var(--sage-9);color:var(--ink)}
+  .t-line .band h2,.t-line .band h3{color:var(--sage-9)!important}
+  .t-line .band .pcard.darkc{background:transparent;border:1.5px solid var(--sage-9)}
+  .t-line .band .pcard.darkc p{color:var(--ink)!important}
+  .t-line .band .peyebrow{color:var(--accent-2)}
+  .t-line .band .gridbg{display:none}
+  /* Boardroom: charts & tables austere */
+  .t-corp .chartcard{border-radius:6px;box-shadow:none}
+  .t-corp .idea{border-radius:6px;box-shadow:none;border-left:3px solid var(--sage-9)}
+  .t-corp .band{border-radius:10px}
+  /* Hero Strips: interior heads carry band chips */
+  .t-hero .chartcard h3{display:inline-block;background:var(--band);color:#fff;padding:6px 14px;border-radius:8px}
+  /* Diagonal: charts notched */
+  .t-diag .chartcard,.t-diag .idea{clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);border-radius:3px}
+  /* Paper: charts stacked paper */
+  .t-paper .chartcard,.t-paper .idea{box-shadow:0 1px 2px rgba(20,30,20,.08),0 12px 24px -12px rgba(20,30,20,.25)}
+  .t-paper .idea{transform:rotate(.4deg)}
+  /* Glass: charts frosted */
+  .t-glass .chartcard,.t-glass .ctable,.t-glass .idea,.t-glass .ctr,.t-glass .cdeep .lst{background:rgba(255,255,255,.45);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.7)}
+  /* Timeline: cards dotted to the spine */
+  @media(min-width:980px){.t-time .pgrid .pcard{position:relative}}
+  /* B2B SaaS: grid paper behind charts, ticket timeline */
+  .t-b2b .chartcard{background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);background-size:36px 36px}
+  .t-b2b .tq{border-left:4px solid var(--accent);border-radius:8px}
+  .t-b2b .tagm{background:var(--cream-2);border-radius:6px;padding:3px 9px}
+  /* SaaS Modern: soft violet depth everywhere */
+  .t-saas .pcard,.t-saas .chartcard,.t-saas .idea{border:none;box-shadow:0 12px 30px -14px color-mix(in oklab,var(--accent-2) 35%,transparent);border-radius:16px}
+  .t-saas .fstage{border-radius:12px}
+  /* Chuckle: stickers, doodles, tilt */
+  .t-chk .tagm{background:var(--accent);color:#fff;border-radius:8px;padding:4px 10px;transform:rotate(-2deg);display:inline-block}
+  .t-chk .pgrid .pcard:nth-child(odd){transform:rotate(-.5deg)}
+  .t-chk .pgrid .pcard:nth-child(even){transform:rotate(.5deg)}
+  .t-chk .pcard,.t-chk .chartcard,.t-chk .idea{border:2.5px solid var(--sage-9);border-radius:18px;box-shadow:5px 5px 0 var(--accent-l)}
+  /* Finora: engraved lines, serif titles */
+  .t-fin .pcard h3,.t-fin .chartcard h3,.t-fin .idea h3,.t-fin .cdhead h3{font-family:var(--f-display)}
+  .t-fin .pcard,.t-fin .chartcard,.t-fin .idea{border-radius:4px;border-color:color-mix(in oklab,var(--accent) 45%,var(--line));box-shadow:none}
+  .t-fin .peyebrow{letter-spacing:.34em}
+  .t-fin .ctable{border-radius:4px}
+  /* Vivid Gradient: bands & funnel go full gradient */
+  .t-grd2 .band,.t-grd2 .cta2{background:linear-gradient(120deg,var(--accent-2),var(--accent))}
+  .t-grd2 .fl,.t-grd2 .col .bar{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .t-grd2 .pcard{border:none;box-shadow:0 10px 26px -12px color-mix(in oklab,var(--accent) 40%,transparent)}
+  /* Sustainify: organic radii, soft leaf shapes */
+  .t-sus .pcard,.t-sus .chartcard,.t-sus .idea{border-radius:22px 22px 22px 4px;border:none;box-shadow:0 10px 24px -14px rgba(35,58,40,.35)}
+  .t-sus .tagm{background:var(--cream-2);border-radius:99px;padding:4px 12px}
+  .t-sus .band{border-radius:36px 36px 36px 8px}
+  /* Gemini AI: bracket corners + mono data */
+  .t-ai .pcard,.t-ai .chartcard,.t-ai .idea{border-radius:2px;position:relative}
+  .t-ai .pcard::before,.t-ai .chartcard::before{content:"";position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-left:2px solid var(--accent);border-top:2px solid var(--accent)}
+  .t-ai .ctable table,.t-ai .num,.t-ai .tagm{font-family:var(--f-num)}
+  .t-ai .fl,.t-ai .col .bar{box-shadow:0 0 12px color-mix(in oklab,var(--accent) 55%,transparent)}
+  /* Folio: serif italics + index rules */
+  .t-folio .pcard h3,.t-folio .idea h3,.t-folio .cdhead h3{font-family:var(--f-display);font-style:italic}
+  .t-folio .pcard,.t-folio .idea{border:none;box-shadow:none;background:transparent;border-top:1px solid var(--sage-9);border-radius:0}
+  .t-folio .chartcard{border-radius:0}
+  .t-folio .tagm{color:var(--accent);letter-spacing:.24em}
+  /* Data Branding: plotted dots + hard mono */
+  .t-data .chartcard{background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:20px 20px;border-radius:4px}
+  .t-data .pcard,.t-data .idea{border-radius:4px}
+  .t-data .tagm{font-family:var(--f-num);background:var(--sage-9);color:var(--cream);border-radius:3px;padding:3px 8px}
+  /* Virtue: left accent spines */
+  .t-virtue .pcard,.t-virtue .chartcard,.t-virtue .idea{border-left:4px solid var(--accent);border-radius:0 var(--r) var(--r) 0}
+  .t-virtue .band{border-radius:0;margin-left:calc(-1*clamp(20px,3vw,64px));margin-right:calc(-1*clamp(20px,3vw,64px));padding-left:clamp(20px,3vw,64px);padding-right:clamp(20px,3vw,64px)}
+
+
+  /* ============ HARD GUARANTEES — no theme can break these ============ */
+  .pitch.t-orbs{overflow-x:clip}
+  .pricebox td[contenteditable]{color:#2A2A20}
+  /* the dark Advantage band always keeps dark-band cards, whatever the theme does to .pcard */
+  .pitch:not(.t-zen):not(.t-line) .band .pcard.darkc{background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.18)!important;box-shadow:none!important;clip-path:none!important;transform:none!important}
+  .pitch:not(.t-zen):not(.t-line) .band .pcard.darkc .tagm{color:var(--accent-l)!important;background:transparent!important;border:none!important;-webkit-text-stroke:0!important}
+  .pitch:not(.t-zen):not(.t-line) .band .pcard.darkc p{color:#fff!important}
+
   @media print{
     *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
     @page{margin:9mm}

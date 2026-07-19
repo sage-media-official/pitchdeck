@@ -58,6 +58,15 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   .panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-1);padding:22px;margin-bottom:16px}
   .panel h3{font-size:1.05rem;color:var(--sage-9);margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .panel h3 .n{width:24px;height:24px;border-radius:7px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:.78rem;font-family:var(--f-num);font-weight:600}
+  .pdone{width:20px;height:20px;border-radius:99px;background:var(--accent);color:#fff;display:none;place-items:center;font-size:.66rem;font-weight:800;vertical-align:middle}
+  .pdone.on{display:inline-grid;animation:popin .3s ease}
+  @keyframes popin{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+  #bpeek{display:none;width:26px;height:26px;border-radius:7px;background:#fff;padding:2px;box-shadow:var(--shadow-1);vertical-align:middle;margin-left:2px}
+  #bpeek.on{display:inline-block}
+  .ready{display:flex;align-items:center;gap:10px;min-width:210px}
+  .rtrack{flex:0 0 110px;height:7px;border-radius:99px;background:var(--cream-3);overflow:hidden}
+  .rtrack i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent-2),var(--accent));transition:width .5s ease}
+  #rlbl{font-size:.72rem;font-weight:600;color:var(--mute);letter-spacing:.02em}
   .panel h3 .why{font-weight:400;font-size:.8rem;color:var(--mute)}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
@@ -629,7 +638,7 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   <p class="sub">Just the basics and a quick brief — <b>type it or dictate it</b>. The AI (Claude) researches the market, sizes it, maps competitors, audits the brand and writes the full 21-section plan. You review, comment with the <b>✨ magic button</b>, and drop the pricing in at the end.</p>
 
   <div class="panel">
-    <h3><span class="n">1</span> Brand basics</h3>
+    <h3><span class="n">1</span> Brand basics <span class="pdone" id="pd1">✓</span><img id="bpeek" alt="" title="Pulled from the website"></h3>
     <div class="grid3">
       <div class="field"><label>Brand name *</label><input id="f_name" placeholder="e.g. Mach Five"></div>
       <div class="field"><label>Category</label><input id="f_category" placeholder="e.g. Functional health drink"></div>
@@ -641,12 +650,12 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   </div>
 
   <div class="panel">
-    <h3><span class="n">2</span> What do they need? <span class="why">— tap to select; these become the plan scope + pricing rows</span></h3>
+    <h3><span class="n">2</span> What do they need? <span class="pdone" id="pd2">✓</span> <span class="why">— tap to select; these become the plan scope + pricing rows</span></h3>
     <div class="needs" id="needs"></div>
   </div>
 
   <div class="panel">
-    <h3><span class="n">3</span> The brief <span class="why">— everything you know: product, USP, audience, meeting notes, goals. Speak or type.</span></h3>
+    <h3><span class="n">3</span> The brief <span class="pdone" id="pd3">✓</span> <span class="why">— everything you know: product, USP, audience, meeting notes, goals. Speak or type.</span></h3>
     <div class="brief-wrap">
       <textarea id="f_brief" placeholder="e.g. Health drink brand offering quality creatine, vitamin C… helps energy, strength, recovery, also brain health. Target young gym-goers and professionals. Discussed D2C-first launch in the meeting, they want a premium look…"></textarea>
       <div class="voicebar">
@@ -676,7 +685,8 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   <button class="btn" onclick="generate()">Instant preview</button>
   <button class="btn" onclick="nextTheme()">Theme <b class="dialT num">1/30</b> ›</button>
   <button class="btn" onclick="nextPalette()">Colours <b class="dialP num">1/20</b> ›</button>
-  <span class="note">Copy the request, paste it to Claude, paste the reply back — deck builds itself.</span>
+  <div class="ready"><div class="rtrack"><i id="rfill"></i></div><span id="rlbl">Start with the brand name</span></div>
+  <span class="note">Copy the request, paste it to Claude, paste the reply back <b>anywhere on this page</b> — the deck builds itself.</span>
 </div>
 
 <!-- ===================== PITCH ===================== -->
@@ -825,7 +835,61 @@ function collect(){return{f_name:$('f_name').value,f_category:$('f_category').va
  needs:selNeeds(),f_brief:$('f_brief').value,f_accent:$('f_accent').value,f_theme:$('f_theme').value,research}}
 function apply(d){['f_name','f_category','f_region','f_website','f_social','f_for','f_brief','f_theme','f_refs','f_assets'].forEach(k=>{if(d[k]!==undefined&&$(k))$(k).value=d[k]});
  if(d.needs)paintNeeds(d.needs);
- if(d.research)research=d.research}
+ if(d.research)research=d.research;
+ try{updReady();peekLogo()}catch(e){}}
+/* ===== builder quality-of-life: draft autosave, readiness meter, logo peek, paste-anywhere ===== */
+const DRAFT_KEY='sage_draft';
+let draftT=null;
+function saveDraft(){if(document.documentElement.classList.contains('viewer'))return;
+  clearTimeout(draftT);draftT=setTimeout(()=>{try{localStorage.setItem(DRAFT_KEY,JSON.stringify({...collect(),ts:Date.now()}))}catch(e){}},500)}
+function restoreDraft(){try{
+  if(document.documentElement.classList.contains('viewer'))return;
+  const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null');
+  if(!d||$('f_name').value)return;
+  if(!d.f_name&&!d.f_brief)return;
+  apply(d);
+  toast('Draft restored — everything you typed is still here')
+}catch(e){}}
+function updReady(){
+  const name=$('f_name').value.trim(),cat=$('f_category').value.trim(),brief=$('f_brief').value.trim();
+  const nd=(typeof selNeeds==='function'?selNeeds():[]).length;
+  let s=0,miss=[];
+  if(name)s+=30;else miss.push('brand name');
+  if(cat)s+=10;else miss.push('category');
+  if($('f_region').value.trim())s+=5;
+  if(brief.length>40)s+=25;else miss.push('the brief');
+  if(nd)s+=10;else miss.push('scope');
+  if(research)s+=20;else miss.push('research');
+  $('rfill').style.width=s+'%';
+  $('rlbl').textContent=s>=100?'Ready — full research-backed deck ✓':(s>=80?'Ready to generate · missing: '+miss.join(' · '):(name?'Add '+miss.slice(0,2).join(' & ')+'…':'Start with the brand name'));
+  const on=(id,ok)=>{const el=$(id);if(el)el.classList.toggle('on',ok)};
+  on('pd1',!!(name&&cat));on('pd2',nd>0);on('pd3',brief.length>40);
+}
+function peekLogo(){const el=$('bpeek');if(!el)return;
+  const dm=siteDomain({f_website:$('f_website').value});
+  if(dm){el.src='https://www.google.com/s2/favicons?domain='+encodeURIComponent(dm)+'&sz=64';el.classList.add('on');el.onerror=()=>el.classList.remove('on')}
+  else el.classList.remove('on')}
+function looksLikeResearch(t){t=(t||'').trim();return t.length>200&&/^[{\[`]/.test(t)&&/"(heard|budgetplan|competitors|mktsize)"/.test(t)}
+function parseResearchText(t){try{t=t.replace(/```json|```/g,'').trim();const a=t.indexOf('{'),b=t.lastIndexOf('}');if(a<0||b<=a)return null;const o=JSON.parse(t.slice(a,b+1));return o.research||o}catch(e){return null}}
+document.addEventListener('paste',e=>{
+  if(document.documentElement.classList.contains('viewer'))return;
+  if($('pitchWrap').classList.contains('show'))return;
+  const t=(e.clipboardData||window.clipboardData).getData('text')||'';
+  if(!looksLikeResearch(t))return;
+  const r=parseResearchText(t);
+  if(!r){toast('That looks like research JSON but didn’t parse — check the copy');return}
+  e.preventDefault();
+  research=r;saveDraft();updReady();
+  $('pasteModal').classList.remove('show');
+  if($('f_name').value.trim()){toast('Research detected ✓ — building the deck…');setTimeout(generate,300)}
+  else toast('Research loaded ✓ — add the brand name, then ⚡ Instant preview')
+});
+document.addEventListener('DOMContentLoaded',()=>{
+  ['f_name','f_category','f_region','f_website','f_social','f_for','f_brief','f_refs','f_assets'].forEach(k=>{
+    const el=$(k);if(el)el.addEventListener('input',()=>{saveDraft();updReady();if(k==='f_website')peekLogo()})});
+  const nd=$('needs');if(nd)nd.addEventListener('click',()=>{setTimeout(()=>{saveDraft();updReady()},50)});
+  restoreDraft();updReady();peekLogo();
+});
 function exportBrief(){const d=collect();const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(d.f_name||'brand').replace(/\W+/g,'-').toLowerCase()+'-pitch.json';a.click();toast('Exported')}
 function importBrief(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{apply(JSON.parse(r.result));toast('Imported — hit Generate')}catch(x){toast('Invalid JSON')}};r.readAsText(f)}
 function copyResearchRequest(){const d=collect();

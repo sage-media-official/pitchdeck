@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Sage Pitch Builder — brief in, pitch out</title>
 <script>/* viewer links render only the pitch — decide before first paint so the builder never flashes */
-if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.documentElement.classList.add('viewer');</script>
+if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.documentElement.classList.add('viewer');
+else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5cd5a21a33d09fb3beb5cef0e7fd8e0f8f')document.documentElement.classList.add('locked')}catch(e){document.documentElement.classList.add('locked')}}</script>
 <meta name="description" content="Sage Media Pitch Builder v2 — give the brand basics and a spoken or typed brief; get a dense 21-section research-backed pitch with a detailed marketing plan, editable pricing and magic-edit comments." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -291,6 +292,19 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   #vsplash .vlogo{width:64px;height:64px;border-radius:18px;background:var(--sage-9,#22321F);color:var(--cream,#FDFBEE);display:grid;place-items:center;font-family:var(--f-disp,'Glacial Indifference',sans-serif);font-size:1.8rem;font-weight:700;margin:0 auto 18px;animation:vpulse 1.4s ease-in-out infinite}
   #vsplash p{color:var(--mute,#6A7168);font-size:.92rem;letter-spacing:.04em;text-align:center}
   @keyframes vpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.07);opacity:.82}}
+  /* team gate: the builder is private — proposal links (viewer mode) never see this */
+  #gate{display:none;position:fixed;inset:0;z-index:500;background:var(--cream,#FDFBEE);place-items:center;padding:20px}
+  html.locked #gate{display:grid}
+  html.locked body>*:not(#gate){filter:blur(8px);pointer-events:none;user-select:none}
+  .gbox{text-align:center;max-width:400px}
+  .gbox .vlogo{width:64px;height:64px;border-radius:18px;background:var(--sage-9,#22321F);color:var(--cream,#FDFBEE);display:grid;place-items:center;font-family:var(--f-disp,'Glacial Indifference',sans-serif);font-size:1.8rem;font-weight:700;margin:0 auto 18px}
+  .gbox h2{color:var(--sage-9,#22321F);font-size:1.3rem;margin-bottom:8px}
+  .gbox p{color:var(--mute,#6A7168);font-size:.9rem;line-height:1.6;margin-bottom:20px}
+  .grow{display:flex;gap:8px;justify-content:center}
+  .grow input{flex:1;max-width:230px;border:1.5px solid var(--line,#E2DFCF);border-radius:12px;padding:11px 15px;font:600 .95rem var(--f-body,Inter,sans-serif);background:#fff;color:var(--sage-9,#22321F)}
+  .grow input:focus{outline:2px solid var(--accent,#5FA80E);border-color:transparent}
+  .gbox.bad .grow input{animation:gshake .35s ease}
+  @keyframes gshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
   @media(prefers-reduced-motion:reduce){#vsplash .vlogo{animation:none}}
   #mgDel{position:fixed;z-index:130;display:none;width:30px;height:30px;border-radius:99px;border:none;background:#C62828;color:#fff;font-size:.85rem;cursor:pointer;box-shadow:var(--shadow-2)}
   body.magic #mgDel.show{display:grid;place-items:center}
@@ -476,6 +490,8 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   .t-pop .reveal{transform:scale(.85);transition-timing-function:cubic-bezier(.34,1.56,.64,1)}
   .t-drop .reveal{transform:translateY(-22px)}
   .t-tilt .reveal{transform:rotate(1.2deg) translateY(18px)}.t-tilt .reveal.in{transform:none}
+  /* sections themselves are NEVER hidden by motion — only inner elements animate; kills every blank-section failure mode */
+  .pitch .psec.reveal{opacity:1!important;transform:none!important;clip-path:none!important;filter:none!important}
 
   /* 02 Center Stage — keynote: everything centered */
   .t-center .psec{text-align:center}
@@ -598,7 +614,7 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
 
   /* ===== distinctiveness pass v2 — every theme owns its card & header language ===== */
   /* Night Bands: dark sections re-scope ALL colour tokens — nothing can go dark-on-dark */
-  .t-bands .psec:nth-child(odd):not(.pcover){--sage-9:#fff;--sage-7:#CFE3C4;--ink:rgba(253,251,238,.88);--mute:rgba(253,251,238,.64);--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.16);--line-2:rgba(255,255,255,.1);--cream-2:rgba(255,255,255,.05);--cream-3:rgba(255,255,255,.12);--accent-2:var(--accent-l)}
+  .t-bands .psec:nth-child(odd):not(.pcover){--sage-9:#fff;--sage-7:#CFE3C4;--ink:rgba(253,251,238,.88);--mute:rgba(253,251,238,.64);--card:rgba(255,255,255,.07);--cream:rgba(255,255,255,.07);--line:rgba(255,255,255,.16);--line-2:rgba(255,255,255,.1);--cream-2:rgba(255,255,255,.05);--cream-3:rgba(255,255,255,.12);--accent-2:var(--accent-l)}
   .t-bands .psec:nth-child(odd):not(.pcover) .ctable th{background:rgba(0,0,0,.32);color:#fff}
   .t-bands .psec:nth-child(odd):not(.pcover) .pricebox td[contenteditable]{background:rgba(255,255,255,.12);color:#fff}
   .t-bands .psec:nth-child(odd):not(.pcover) .cdn{background:var(--accent);color:#fff}
@@ -932,6 +948,11 @@ if(/^\/p\//.test(location.pathname)||location.hash.indexOf('#v=')===0)document.d
   </footer>
 </div>
 <div id="vsplash"><div><div class="vlogo">S</div><p>Preparing your pitch…</p></div></div>
+<div id="gate"><div class="gbox"><div class="vlogo">S</div>
+  <h2>Sage Media · Pitch Builder</h2>
+  <p>This area is for the Sage Media team.<br>Received a proposal link? Open it exactly as it was sent to you.</p>
+  <div class="grow"><input id="gateIn" type="password" placeholder="Team access code" autocomplete="off"><button class="btn primary" onclick="tryGate()">Unlock</button></div>
+</div></div>
 <div class="toast" id="toast"></div>
 
 <div class="ov" id="ov">
@@ -1115,6 +1136,20 @@ function assetEmbed(u){
   return `<div class="emb img" data-mg="Image asset"><img src="${esc(u)}" loading="lazy" crossorigin="anonymous" onerror="this.closest('.emb').style.display='none'"></div>`}
 function refCard(u){let dom='link';try{dom=new URL(u).hostname.replace('www.','')}catch(e){}
   return `<a class="refcard" href="${esc(u)}" target="_blank" rel="noopener" data-mg="Reference: ${esc(dom)}"><img src="https://www.google.com/s2/favicons?domain=${esc(dom)}&sz=64" alt=""><div><b>${esc(dom)}</b><span>${esc(u.replace(/^https?:\/\//,'').slice(0,64))}</span></div></a>`}
+/* team gate — the builder is for the Sage team; proposal links never see it */
+const GATE_H='26112f6212bde152a3caf4c65fd6bf5cd5a21a33d09fb3beb5cef0e7fd8e0f8f';
+async function tryGate(){
+  const v=$('gateIn').value.trim();
+  if(!v)return;
+  let h='';
+  try{h=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)))].map(b=>b.toString(16).padStart(2,'0')).join('')}catch(e){}
+  if(h===GATE_H){try{localStorage.setItem('sage_gate',h)}catch(e){}
+    document.documentElement.classList.remove('locked');toast('Welcome back ✓')}
+  else{const g=document.querySelector('.gbox');g.classList.add('bad');$('gateIn').value='';
+    setTimeout(()=>g.classList.remove('bad'),400)}}
+document.addEventListener('DOMContentLoaded',()=>{
+  const gi=$('gateIn');if(gi)gi.addEventListener('keydown',e=>{if(e.key==='Enter')tryGate()});
+  if(document.documentElement.classList.contains('locked')&&gi)gi.focus()});
 /* budget tiers: clicking a tier swaps the returns table to that tier's payback plan */
 let BP=null,BPSEL=1;
 function bpRowsHtml(i){const bp=BP||{};const t=((bp.tiers||[])[i])||{};const rows=(t.returns&&t.returns.length)?t.returns:(bp.returns||[]);
@@ -1523,6 +1558,8 @@ function runAnims(){
     // also observe inner reveals
   });
   $('pitch').querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  /* failsafe: whatever the observer misses (fast scroll, theme switch, odd viewports), everything is visible after 2.2s */
+  setTimeout(()=>{const p=$('pitch');if(p)p.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in'))},2200);
   $('pitch').querySelectorAll('.bar[data-h]').forEach(b=>b.style.setProperty('--ph',b.dataset.h+'%'));
   $('pitch').querySelectorAll('.fl[data-w]').forEach(b=>b.style.setProperty('--pw',b.dataset.w+'%'));
   $('pitch').querySelectorAll('.pin[data-left]').forEach(p=>p.style.setProperty('--pl',p.dataset.left+'%'));

@@ -303,17 +303,40 @@ nav.solid .b,nav.solid .lk a{text-shadow:none}
 .stat .v,.pf .n{font-weight:600}
 .marq .tk{font-weight:600;font-size:.92rem}
 .mark .wm b{font-weight:700}
-/* consistent full-width text column: everything aligns to the nav edge (4vw) */
-.wrap{max-width:none;padding:0 4vw}
+/* consistent full-width text column: everything aligns to the nav edge (one gutter var) */
+:root{--gut:4vw}
+@media(min-width:1900px){:root{--gut:max(4vw,calc((100vw - 1800px)/2))}}
+.wrap{max-width:none;padding:0 var(--gut)}
 footer .cols{max-width:none;padding:0 0}
-footer{padding-left:4vw;padding-right:4vw}
+footer{padding-left:var(--gut);padding-right:var(--gut)}
+nav{padding-left:var(--gut);padding-right:var(--gut)}
 #hero .inner{padding-left:0;padding-right:0}
 #hero .inner .wrap{width:100%}
 .stage .lay{position:absolute;inset:0;pointer-events:none}
-.stage .hud{left:4vw;right:4vw}
-.stage .card{left:4vw}
+.stage .hud{left:var(--gut);right:var(--gut)}
+.stage .card{left:var(--gut);right:var(--gut);max-width:560px}
 .lead{max-width:760px}
 .namegrid{grid-template-columns:repeat(auto-fill,minmax(224px,1fr))}
+/* mobile nav: keep section links reachable, drop the right label */
+@media(max-width:760px){
+  nav .lk{display:flex;gap:13px}
+  nav .lk a{font-size:.6rem;letter-spacing:.06em}
+  nav span.b:last-child{display:none}
+  nav{padding-top:12px}
+  #hero .cta .btn{padding:13px 22px;font-size:.74rem}
+  .stage .card h3{font-size:1.45rem}
+  .stage .am span{font-size:.68rem;padding:6px 12px}
+  .stage .hud{font-size:.6rem;letter-spacing:.2em}
+  .marq .tk{font-size:.78rem}
+  #nmod .box{padding:24px 20px;border-radius:20px}
+  .bigname{font-size:clamp(2.6rem,16vw,4.4rem)}
+}
+@media(min-width:761px) and (max-width:1100px){
+  .landgrid,.seogrid{grid-template-columns:1fr;gap:44px}
+  .brgrid{grid-template-columns:1fr;gap:40px}
+  .whys{grid-template-columns:1fr}
+  .stats{max-width:640px}
+}
 </style>
 </head>
 <body>

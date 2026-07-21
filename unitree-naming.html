@@ -7,13 +7,13 @@
 <title>UNITREE — Township Landing & Naming Presentation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --forest:#0C231A; --forest-2:#123526; --moss:#1E4A35; --leaf:#3E7B5C;
   --cream:#F5F0E4; --cream-2:#EDE6D3; --gold:#C6A15B; --gold-2:#E0C68C;
   --ink:#132B20; --mute:#5C6E62; --line:rgba(19,43,32,.14);
-  --serif:'Fraunces',Georgia,serif; --sans:'Outfit',system-ui,sans-serif;
+  --serif:'Outfit',system-ui,sans-serif; --sans:'Outfit',system-ui,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -276,6 +276,39 @@ footer .fine{border-top:1px solid rgba(245,240,228,.1);margin-top:30px;padding-t
 }
 @media(max-width:520px){.stats{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.2s!important}#hero .bg{animation:none}}
+
+/* ===== v3: bold sleek display, visibility, alignment, perf ===== */
+h2{font-weight:700;letter-spacing:-.02em}
+#hero h1{font-weight:800;letter-spacing:-.02em;text-shadow:0 2px 30px rgba(8,24,18,.75),0 1px 4px rgba(8,24,18,.5)}
+#hero h1 em{font-style:normal}
+#hero .kick,#hero .sub{text-shadow:0 1px 14px rgba(8,24,18,.8)}
+#hero .veil{background:linear-gradient(178deg,rgba(12,35,26,.74) 0%,rgba(12,35,26,.38) 40%,rgba(12,35,26,.9) 80%,#0C231A 100%)}
+nav{background:linear-gradient(180deg,rgba(8,24,18,.72),rgba(8,24,18,0));padding-bottom:26px}
+nav .b,nav .lk a{text-shadow:0 1px 8px rgba(8,24,18,.7)}
+nav .lk a{color:#F5F0E4;font-weight:600}
+nav.solid{padding-bottom:15px}
+nav.solid .b,nav.solid .lk a{text-shadow:none}
+.bigname{font-weight:800}
+#fin .lock{font-weight:800}
+#fin .lock b{font-weight:800}
+.onetree,#fin .tg{font-style:normal;font-weight:500}
+.stage .card h3{font-weight:700}
+.stage .card .no,.stage .hud{text-shadow:0 1px 8px rgba(8,24,18,.7)}
+.stage .card h3{text-shadow:0 2px 18px rgba(8,24,18,.7)}
+.stage .am span{backdrop-filter:none;background:rgba(8,24,18,.62)}
+.stage .veil{background:linear-gradient(180deg,rgba(12,35,26,.55) 0%,rgba(12,35,26,.12) 34%,rgba(12,35,26,.86) 100%)}
+#nmod .nm{font-weight:700}
+.wy h4,.tmc h4,.wm2 h4,.mo h4,.seoplay h4{font-weight:700}
+.nc h3,.sl h3{font-weight:700}
+.stat .v,.pf .n{font-weight:600}
+.marq .tk{font-weight:600;font-size:.92rem}
+.mark .wm b{font-weight:700}
+/* consistent text column: hero + tour align to the same 1180px container as .wrap */
+#hero .inner{padding-left:0;padding-right:0}
+#hero .inner .wrap{width:100%}
+.stage .lay{position:absolute;inset:0;max-width:1180px;margin:0 auto;pointer-events:none}
+.stage .hud{left:5vw;right:5vw}
+.stage .card{left:5vw}
 </style>
 </head>
 <body>
@@ -296,7 +329,7 @@ footer .fine{border-top:1px solid rgba(245,240,228,.1);margin-top:30px;padding-t
 <section id="hero">
   <div class="bg" data-par="0.1"></div>
   <div class="veil"></div>
-  <div class="inner">
+  <div class="inner"><div class="wrap">
     <div class="kick rv">Unitree Product Pvt. Ltd. · Sawantwadi, Sindhudurg</div>
     <h1 class="rv d1">A 15-acre forest township, <em>minutes from Goa.</em></h1>
     <p class="sub rv d2">Hills, dense forest, a valley floor and a natural creek through the land — plotted for villas, second homes and legacy. Scroll to fly the property, then choose its name.</p>
@@ -304,7 +337,7 @@ footer .fine{border-top:1px solid rgba(245,240,228,.1);margin-top:30px;padding-t
       <a class="btn gold" href="#tourhead">▶ Take the drone tour</a>
       <a class="btn ghost" href="#names">Explore name options</a>
     </div>
-  </div>
+  </div></div>
 </section>
 
 <div class="marq" aria-hidden="true"><div class="tk">
@@ -360,8 +393,8 @@ footer .fine{border-top:1px solid rgba(245,240,228,.1);margin-top:30px;padding-t
 <!-- NAMES -->
 <section id="names"><div class="wrap">
   <div class="eyebrow rv">04 — Name Options</div>
-  <h2 class="rv d1">Eighteen names.<br>Tap any to see its case.</h2>
-  <p class="lead rv d2" style="margin-top:20px">Every option follows the brand — <b>UNITREE + one word</b>. Each card opens the full picture: meaning, real SEO landscape, and whether a trademark is realistically ownable.</p>
+  <h2 class="rv d1">Our pick, plus twenty<br>English routes. Tap any.</h2>
+  <p class="lead rv d2" style="margin-top:20px">Per the brief — the second word complements <b>UNITREE</b> and the Konkan: peaceful, natural, premium, easy to pronounce. Our recommendation leads; twenty unique English options follow. Each card opens meaning, real SEO landscape, and whether a trademark is realistically ownable.</p>
   <div class="namegrid" id="namegrid"></div>
   <div class="hint rv">Legend: <b style="color:#2C6247">TM Favourable</b> · <b style="color:#8A6A2E">TM Caution</b> · <b style="color:#9C4630">TM Risky</b> — tap a card for the why.</div>
 </div></section>
@@ -522,9 +555,11 @@ document.getElementById('tour').innerHTML=TOUR.map((s,i)=>`
   <div class="stick">
     <div class="img" style="background-image:url(/unitree/${s.img}.jpg)"></div>
     <div class="veil"></div>
+    <div class="lay">
     <div class="hud"><span>Drone Tour · 0${i+1} / 0${TOUR.length}</span><span class="dotl">${TOUR.map((_,j)=>`<i${j===i?' class="on"':''}></i>`).join('')}</span></div>
     <div class="card"><div class="no">— ZONE 0${i+1}</div><h3>${s.t}</h3><p>${s.d}</p>
       <div class="am">${s.am.map(a=>`<span>${a}</span>`).join('')}</div></div>
+    </div>
   </div>
 </div>`).join('');
 
@@ -532,77 +567,89 @@ document.getElementById('tour').innerHTML=TOUR.map((s,i)=>`
 /* seo levels: 0=clean 1=moderate 2=crowded ; tm: g=favourable a=caution r=risky */
 const NAMES=[
  {n:'ARANYA',d:'अरण्य',m:'Sanskrit — the deep forest',rec:1,tm:'g',seo:[2,0,0],
-  s:'"Aranya" alone is used in Indian real estate (Raheja Gurugram, Forum Kolkata, Doshi Indore) — but none in Konkan. The compound and every geo phrase are wide open.',
+  s:'\"Aranya\" alone is used in Indian real estate (Raheja Gurugram, Forum Kolkata, Doshi Indore) — but none in Konkan. The compound and every geo phrase are wide open.',
   t:'Dictionary word alone is weak, but the UNITREE ARANYA compound wordmark is distinctive and registrable in Class 36/37 — the same way Raheja Aranya and Forum Aranya co-exist.',
   v:'<b>Our recommendation.</b> Truth of the land + completes the one-tree story + clean compound runway.'},
- {n:'VANYA',d:'वन्य',m:'Sanskrit — wild, of the forest',tm:'a',seo:[2,0,0],
-  s:'Popular as a girl’s name and in wellness brands, so bare-word search is noisy. Compound is clean.',
-  t:'Several VANYA marks exist across classes (cosmetics, textiles). Compound registrable, but expect a crowded-word examination.',
-  v:'Beautiful and feminine — a strong runner-up if Aranya feels too heavy.'},
- {n:'VANAM',d:'वनम्',m:'Sanskrit/Tamil — forest, grove',tm:'g',seo:[1,0,0],
-  s:'Some South-Indian resort/restaurant use; near-zero real-estate collision in Maharashtra. Compound clean.',
-  t:'Few conflicting marks in Class 36/37 — a genuinely ownable compound.',
-  v:'The quiet sleeper pick — distinct, soft, and very protectable.'},
- {n:'KANAN',d:'कानन',m:'Sanskrit — forest, garden',tm:'a',seo:[2,1,0],
-  s:'Common as a first name (and Kanan Devan tea) — search will always be split. Geo long-tail still winnable.',
-  t:'Existing KANAN marks in several classes; compound helps but distinctiveness is middling.',
-  v:'Lovely meaning, but the name-collision with people dilutes it.'},
- {n:'BANYAN',d:'वट',m:'English — the great Indian fig tree',tm:'r',seo:[2,1,0],
-  s:'Instantly evocative, but "Banyan" search is owned by global hospitality.',
-  t:'<b>Banyan Tree</b> (global luxury resorts) holds broad marks incl. hospitality/real-estate adjacency — a well-funded opposition risk. Avoid.',
-  v:'Perfect metaphor, wrong legal neighbourhood. Skip.'},
- {n:'NISARG',d:'निसर्ग',m:'Marathi — nature itself',tm:'a',seo:[2,1,0],
-  s:'Extremely common in Maharashtra RE ("Nisarg" societies everywhere) + the 2020 cyclone owns news search.',
-  t:'Dozens of NISARG-formative marks in Class 36/37 in Maharashtra — registrable but weak and hard to police.',
-  v:'Feels local and warm, but too generic in this exact market.'},
- {n:'SAHYA',d:'सह्य',m:'From Sahyadri — the Western Ghats',tm:'g',seo:[1,0,0],
-  s:'Short, ownable, low collision; needs education that it refers to the Ghats.',
-  t:'Few conflicts; distinctive truncation makes a good mark.',
-  v:'Smart geographic nod — slightly cryptic to non-Marathi buyers.'},
- {n:'KINARA',d:'किनारा',m:'Hindi/Marathi — the shore, the edge',tm:'a',seo:[2,1,0],
-  s:'Famous song + many restaurants named Kinara; search is nostalgic-noisy.',
-  t:'Multiple KINARA marks (food, hospitality). Compound registrable.',
-  v:'Romantic, but the property is valley-forest — shore reads slightly off.'},
- {n:'TARANG',d:'तरंग',m:'Sanskrit — wave, ripple',tm:'a',seo:[2,1,0],
-  s:'Common brand word (media, events); moderate collision everywhere.',
-  t:'Crowded formative across classes; ownable as compound only.',
-  v:'Suits the creek, but sounds more festival than township.'},
- {n:'SARITA',d:'सरिता',m:'Sanskrit — river',tm:'a',seo:[2,1,0],
-  s:'Very common female first name — search will never be clean.',
-  t:'Many SARITA marks; person-name weakness in examination.',
-  v:'Honours the creek, but too person-name to own.'},
- {n:'GULMOHAR',d:'गुलमोहर',m:'The flame tree of May',tm:'a',seo:[2,1,0],
-  s:'One of India’s most-used colony names — high familiarity, low distinctiveness.',
-  t:'Heavily used in RE naming; compound registrable, weak to police.',
-  v:'Instantly pretty, instantly forgettable in a listings page.'},
- {n:'VATIKA',d:'वाटिका',m:'Sanskrit — garden, orchard',tm:'r',seo:[2,1,0],
-  s:'"Vatika" search is owned by a large NCR developer + a haircare brand.',
-  t:'<b>Vatika Group</b> holds real-estate marks in exactly our classes — direct conflict territory. Avoid.',
-  v:'Disqualified on trademark, whatever its charm.'},
- {n:'SHIVAR',d:'शिवार',m:'Marathi — open farmland, the village commons',tm:'g',seo:[1,0,0],
-  s:'Deeply Marathi, low national collision; niche familiarity outside Maharashtra.',
-  t:'Sparse conflicts; distinctive in Class 36/37.',
-  v:'The most rooted-in-soil option — earthy rather than premium.'},
- {n:'ANANT',d:'अनंत',m:'Sanskrit — endless, infinite',tm:'a',seo:[2,1,0],
-  s:'Common name (and very famous bearers) — bare search unwinnable.',
-  t:'Many ANANT marks incl. real estate; compound-only protection.',
-  v:'Grand meaning, crowded reality.'},
- {n:'VALE',d:'—',m:'English — a valley, poetic register',tm:'g',seo:[2,0,0],
-  s:'Generic English word; the compound "Unitree Vale" is clean and airy.',
-  t:'Generic alone; compound easily registrable. Low conflict.',
-  v:'The international-polish option — easy, elegant, less rooted.'},
- {n:'SPRINGS',d:'—',m:'English — water rising from the land',tm:'g',seo:[2,1,0],
-  s:'Very common globally (Sandy Springs…); compound moderately clean in India.',
+ {n:'CANOPY',d:'—',m:'The forest roof — what this land holds overhead',tm:'g',seo:[2,0,0],
+  s:'Generic-word search is noisy globally, but no Indian township owns it; the compound and every geo phrase are clean.',
+  t:'Common noun is weak alone; UNITREE CANOPY as a compound is distinctive in Class 36/37 with few conflicts.',
+  v:'<b>The strongest English option</b> — literally the tree, grown over the buyer.'},
+ {n:'RAINWOOD',d:'—',m:'Coined — the monsoon forest, written as one word',tm:'g',seo:[1,0,0],
+  s:'A coined word: near-zero collisions anywhere. The cleanest search runway on this wall.',
+  t:'Coined marks are the easiest to register and the easiest to defend — top-tier ownability.',
+  v:'The most protectable name of all 21 — and it smells like Konkan monsoon.'},
+ {n:'FERNVALE',d:'—',m:'Coined — a valley floored with ferns',tm:'g',seo:[1,0,0],
+  s:'A small suburb name in Singapore and Queensland; nothing in Indian real estate. Compound fully clean.',
+  t:'Low conflict; coined compound reads distinctive to an examiner.',
+  v:'A gentler, greener Vale — soft and easy to say.'},
+ {n:'CREEKSIDE',d:'—',m:'Beside the creek — literal to this site',tm:'a',seo:[2,1,0],
+  s:'A familiar US-style development word; Indian collisions low, global noise moderate.',
+  t:'Descriptive terms are weaker marks; registrable as the UNITREE compound.',
+  v:'Honest and literal — slightly plain for a premium board.'},
+ {n:'BROOKWOOD',d:'—',m:'Brook + wood — water running through forest',tm:'g',seo:[1,0,0],
+  s:'Rare in India; a few estates and schools abroad. Compound clean.',
+  t:'Low conflict, decent distinctiveness in Class 36/37.',
+  v:'Quietly classic, with an anglicised estate feel.'},
+ {n:'MISTVALE',d:'—',m:'Coined — morning mist settling in the valley',tm:'g',seo:[0,0,0],
+  s:'Effectively invented — zero meaningful collision even for the bare word.',
+  t:'Coined and fanciful — the strongest possible trademark category.',
+  v:'Atmospheric and fully ownable; a touch storybook in tone.'},
+ {n:'VALE',d:'—',m:'A valley, in its poetic register',tm:'g',seo:[2,0,0],
+  s:'Generic English word alone; the compound \"Unitree Vale\" is clean and airy.',
+  t:'Generic alone; compound easily registrable with low conflict.',
+  v:'The client’s own example — elegant, international, a little less rooted.'},
+ {n:'SPRINGS',d:'—',m:'Water rising from the land — creek and reservoir',tm:'g',seo:[2,1,0],
+  s:'Common worldwide; the compound is moderately clean in India.',
   t:'Generic; compound registrable. Low conflict, low distinctiveness.',
-  v:'Fresh and kinetic — nods to creek and reservoir.'},
- {n:'MEADOWS',d:'—',m:'English — open grassland',tm:'a',seo:[2,1,0],
-  s:'A default Indian township suffix for two decades — huge familiarity, zero freshness.',
-  t:'Everywhere in Class 36/37; compound registrable, generic feel.',
-  v:'Safe to the point of invisible.'},
- {n:'WOODS',d:'—',m:'English — the forest, casual register',tm:'a',seo:[2,1,0],
-  s:'Common RE suffix; compound moderately clean.',
-  t:'Widely used; compound registrable, weak mark.',
-  v:'Says forest without the poetry — Aranya says it better.'}
+  v:'Fresh and kinetic — nods to the water on site.'},
+ {n:'GROVE',d:'—',m:'A sheltered cluster of trees',tm:'a',seo:[2,1,0],
+  s:'One of the most-used suffixes in Indian real estate.',
+  t:'Heavily used in Class 36/37; weak to police.',
+  v:'Safe and familiar — and therefore forgettable.'},
+ {n:'HAVEN',d:'—',m:'A safe, sheltered place',tm:'a',seo:[2,1,0],
+  s:'A default premium suffix across Indian projects.',
+  t:'Crowded classes; compound-only protection.',
+  v:'Comforting, but it belongs to everyone.'},
+ {n:'RIDGE',d:'—',m:'The high line of the hills',tm:'a',seo:[2,1,0],
+  s:'Common on hill-project boards across India.',
+  t:'Crowded; registrable as compound only.',
+  v:'Suits the terrain, lacks the warmth.'},
+ {n:'DALE',d:'—',m:'An open valley among hills',tm:'g',seo:[1,0,0],
+  s:'Rarely used in Indian real estate; clean compound.',
+  t:'Low conflict; short marks examine well.',
+  v:'Short and sweet — slightly British in accent.'},
+ {n:'CREST',d:'—',m:'The very top of the hill',tm:'a',seo:[2,1,0],
+  s:'Common suffix plus heavy global brand noise.',
+  t:'Crowded formative; compound-only protection.',
+  v:'Fine, polished, not distinctive.'},
+ {n:'EVERGREEN',d:'—',m:'Green in every season — like this forest',tm:'a',seo:[2,1,0],
+  s:'Among the most-used property words in India.',
+  t:'Very crowded in exactly our classes.',
+  v:'Says the right thing — in everyone else’s voice.'},
+ {n:'WILDWOOD',d:'—',m:'The untouched, older forest',tm:'a',seo:[2,1,0],
+  s:'Folk-song and global brand usage; low Indian real-estate use.',
+  t:'Moderate conflicts; compound registrable.',
+  v:'Romantic — borderline rustic for a premium plot brand.'},
+ {n:'WILDS',d:'—',m:'The Wilds — land left untamed',tm:'a',seo:[2,1,0],
+  s:'Resort and safari brands use it; moderate noise.',
+  t:'Possible hospitality-class friction; compound registrable.',
+  v:'Bold, but reads safari lodge more than family township.'},
+ {n:'ROOTS',d:'—',m:'Where a family plants itself',tm:'a',seo:[2,1,0],
+  s:'Many existing brands across retail and food.',
+  t:'Crowded across classes; compound-only strength.',
+  v:'A great story next to UNITREE — hard to own in practice.'},
+ {n:'SANCTUARY',d:'—',m:'A protected, almost sacred place',tm:'a',seo:[2,1,0],
+  s:'Common in wellness and hospitality naming.',
+  t:'Crowded; compound registrable.',
+  v:'Premium tone, but it leans resort, not home.'},
+ {n:'HORIZON',d:'—',m:'The long view from these hills',tm:'a',seo:[2,1,0],
+  s:'An extremely common brand word in every sector.',
+  t:'Very crowded; weak even as compound.',
+  v:'Big-sky feel, zero uniqueness.'},
+ {n:'ORIGINS',d:'—',m:'Where everything begins',tm:'r',seo:[2,1,0],
+  s:'Search is owned by Estée Lauder’s Origins and science media.',
+  t:'ORIGINS marks are broad in cosmetics/retail; real-estate class is open but the brand shadow is heavy.',
+  v:'Strong idea, heavy shadow. Skip.'}
 ];
 const LVL=[['Clean runway','8%','grn'],['Moderate','48%','amb'],['Crowded','90%','red']];
 const TMP={g:['TM Favourable','grn'],a:['TM Caution','amb'],r:['TM Risky','red']};
@@ -660,7 +707,9 @@ function onScroll(){
     st.classList.toggle('live',p>.06&&p<1);
   });
 }
-addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});onScroll();
+let _tk=false;addEventListener('scroll',()=>{if(!_tk){_tk=true;requestAnimationFrame(()=>{onScroll();_tk=false})}},{passive:true});onScroll();
+/* pre-decode every tour image so scroll never hits a cold decode */
+addEventListener('load',()=>{setTimeout(()=>{['aerial','lawn','pavilion','featurewall','rockgarden','kidsplay','amphitheatre','masterplan'].forEach(n=>{const im=new Image();im.decoding='async';im.src='/unitree/'+n+'.jpg';im.decode&&im.decode().catch(()=>{})})},400)});
 
 /* reveals */
 const io=new IntersectionObserver(es=>es.forEach(e=>{

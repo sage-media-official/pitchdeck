@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>UNITREE ARANYA — Naming Presentation</title>
+<title>UNITREE — Township Landing & Naming Presentation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,8 +21,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--ink);overflow-x
 img{max-width:100%;display:block}
 ::selection{background:var(--gold);color:var(--forest)}
 
-/* ---------- splash ---------- */
-#splash{position:fixed;inset:0;z-index:99;background:var(--forest);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .7s ease,visibility .7s}
+#splash{position:fixed;inset:0;z-index:99;background:var(--forest);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .7s,visibility .7s}
 #splash.gone{opacity:0;visibility:hidden}
 #splash svg{width:64px;height:64px}
 #splash .ln{stroke:var(--gold-2);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1.6s ease forwards}
@@ -30,19 +29,19 @@ img{max-width:100%;display:block}
 #splash .sw{font-family:var(--serif);color:var(--cream);letter-spacing:.42em;font-size:.8rem;text-transform:uppercase;opacity:0;animation:fadeup 1s .5s forwards}
 @keyframes fadeup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ---------- progress + nav ---------- */
-#pbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:60;transition:width .1s linear}
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 4vw;mix-blend-mode:normal;transition:.3s;pointer-events:none}
-nav .b{font-family:var(--serif);letter-spacing:.28em;font-size:.72rem;text-transform:uppercase;color:var(--cream);transition:color .4s}
-nav.solid{background:rgba(245,240,228,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-nav.solid .b{color:var(--forest)}
+#pbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:70}
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:15px 4vw;transition:.3s}
+nav .b{font-family:var(--serif);letter-spacing:.26em;font-size:.72rem;text-transform:uppercase;color:var(--cream);white-space:nowrap}
+nav .lk{display:flex;gap:22px}
+nav .lk a{color:rgba(245,240,228,.85);text-decoration:none;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+nav.solid{background:rgba(245,240,228,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav.solid .b{color:var(--forest)} nav.solid .lk a{color:var(--moss)}
+@media(max-width:760px){nav .lk{display:none}}
 
-/* ---------- reveal system ---------- */
 .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
 .rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.36s}.rv.d4{transition-delay:.48s}.rv.d5{transition-delay:.6s}
 
-/* ---------- shared layout ---------- */
 .wrap{max-width:1180px;margin:0 auto;padding:0 5vw}
 section{position:relative}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600}
@@ -50,29 +49,32 @@ section{position:relative}
 h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.08;margin:18px 0 0;letter-spacing:-.01em}
 .lead{font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.75;color:var(--mute);max-width:640px;font-weight:300}
 .lead b{color:var(--ink);font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:100px;padding:15px 30px;font-family:var(--sans);font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+.btn:active{transform:scale(.96)}
+.btn.gold{background:var(--gold);color:var(--forest)}
+.btn.gold:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(198,161,91,.6)}
+.btn.ghost{border-color:rgba(245,240,228,.4);color:var(--cream)}
+.btn.ghost:hover{border-color:var(--gold-2);color:var(--gold-2)}
 
-/* ---------- hero ---------- */
-#hero{height:104svh;min-height:620px;position:relative;overflow:clip;display:flex;align-items:flex-end;background:var(--forest)}
+/* hero */
+#hero{height:104svh;min-height:640px;position:relative;overflow:clip;display:flex;align-items:flex-end;background:var(--forest)}
 #hero .bg{position:absolute;inset:-6%;background:url(/unitree/aerial.jpg) center/cover;animation:kb 26s ease-in-out infinite alternate;will-change:transform}
-@keyframes kb{from{transform:scale(1) translateY(0)}to{transform:scale(1.12) translateY(-2.5%)}}
-#hero .veil{position:absolute;inset:0;background:linear-gradient(178deg,rgba(12,35,26,.42) 0%,rgba(12,35,26,.18) 38%,rgba(12,35,26,.86) 82%,#0C231A 100%)}
-#hero .inner{position:relative;width:100%;padding:0 5vw 11svh;color:var(--cream)}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.12) translateY(-2.5%)}}
+#hero .veil{position:absolute;inset:0;background:linear-gradient(178deg,rgba(12,35,26,.5) 0%,rgba(12,35,26,.22) 38%,rgba(12,35,26,.88) 82%,#0C231A 100%)}
+#hero .inner{position:relative;width:100%;padding:0 5vw 10svh;color:var(--cream)}
 #hero .kick{font-size:.74rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-2);font-weight:600;margin-bottom:22px}
-#hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,7.2vw,5.6rem);line-height:1.04;letter-spacing:-.015em;max-width:16ch}
+#hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,6.6vw,5.2rem);line-height:1.06;letter-spacing:-.015em;max-width:17ch}
 #hero h1 em{font-style:italic;color:var(--gold-2)}
-#hero .sub{margin-top:24px;font-weight:300;font-size:clamp(.95rem,1.3vw,1.1rem);color:rgba(245,240,228,.82);max-width:52ch;line-height:1.7}
-#hero .scr{position:absolute;right:5vw;bottom:11svh;display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(245,240,228,.7);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;writing-mode:vertical-rl}
-#hero .scr i{width:1px;height:56px;background:linear-gradient(var(--gold-2),transparent);display:block;animation:drip 2s ease-in-out infinite}
-@keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+#hero .sub{margin:22px 0 30px;font-weight:300;font-size:clamp(.95rem,1.3vw,1.1rem);color:rgba(245,240,228,.85);max-width:54ch;line-height:1.7}
+#hero .cta{display:flex;gap:14px;flex-wrap:wrap}
 
-/* ---------- marquee ---------- */
 .marq{background:var(--forest);color:var(--cream);overflow:clip;padding:20px 0;border-top:1px solid rgba(224,198,140,.25)}
 .marq .tk{display:flex;gap:56px;white-space:nowrap;width:max-content;animation:roll 70s linear infinite;font-family:var(--serif);font-size:1.02rem;letter-spacing:.18em;text-transform:uppercase}
-.marq .tk span{opacity:.85}.marq .tk .g{color:var(--gold-2)}
+.marq .tk span{opacity:.88}.marq .tk .g{color:var(--gold-2)}
 @keyframes roll{to{transform:translateX(-50%)}}
 
-/* ---------- land ---------- */
-#land{padding:120px 0 40px}
+/* land */
+#land{padding:110px 0 90px}
 .landgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:start;margin-top:56px}
 .terr{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
 .terr span{border:1px solid var(--line);border-radius:100px;padding:9px 18px;font-size:.8rem;font-weight:500;background:#fff;color:var(--moss)}
@@ -82,9 +84,28 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);l
 .stat.in::after{transform:scaleY(1)}
 .stat .v{font-family:var(--serif);font-size:2rem;color:var(--forest);line-height:1}
 .stat .v small{font-size:.9rem;color:var(--gold);font-family:var(--sans);font-weight:600;margin-left:2px}
-.stat .l{font-size:.76rem;letter-spacing:.06em;color:var(--mute);margin-top:8px;line-height:1.45}
+.stat .l{font-size:.76rem;color:var(--mute);margin-top:8px;line-height:1.45}
 
-/* ---------- master plan ---------- */
+/* ===== drone tour ===== */
+#tourhead{background:var(--forest);color:var(--cream);padding:110px 0 80px}
+#tourhead h2{color:var(--cream)} #tourhead .lead{color:rgba(245,240,228,.72)}
+.stage{height:200vh;position:relative;background:var(--forest)}
+.stage .stick{position:sticky;top:0;height:100svh;overflow:clip}
+.stage .img{position:absolute;inset:-4%;background-position:center;background-size:cover;will-change:transform;transform:scale(1)}
+.stage .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,35,26,.45) 0%,rgba(12,35,26,.05) 34%,rgba(12,35,26,.82) 100%)}
+.stage .hud{position:absolute;top:76px;left:5vw;right:5vw;display:flex;justify-content:space-between;align-items:center;color:rgba(245,240,228,.85);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600}
+.stage .hud .dotl{display:flex;gap:6px}
+.stage .hud .dotl i{width:16px;height:3px;border-radius:3px;background:rgba(245,240,228,.25)}
+.stage .hud .dotl i.on{background:var(--gold-2)}
+.stage .card{position:absolute;left:5vw;bottom:8svh;max-width:520px;color:var(--cream);opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.stage.live .card{opacity:1;transform:none}
+.stage .card .no{font-family:var(--serif);color:var(--gold-2);letter-spacing:.3em;font-size:.85rem}
+.stage .card h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.6rem);margin:10px 0 12px}
+.stage .card p{font-size:.92rem;font-weight:300;color:rgba(245,240,228,.85);line-height:1.65;text-shadow:0 1px 12px rgba(12,35,26,.5)}
+.stage .am{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.stage .am span{border:1px solid rgba(245,240,228,.35);background:rgba(12,35,26,.45);backdrop-filter:blur(6px);border-radius:100px;padding:7px 15px;font-size:.74rem;font-weight:500;color:var(--cream)}
+
+/* master plan */
 #plan{padding:110px 0}
 .plancard{margin-top:54px;background:#fff;border:1px solid var(--line);border-radius:26px;padding:clamp(14px,3vw,34px);box-shadow:0 30px 80px -30px rgba(12,35,26,.25)}
 .plancard img{border-radius:14px;width:100%}
@@ -92,49 +113,70 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);l
 .pf{padding:0 18px;border-left:1px solid var(--line)}
 .pf:first-child{border-left:0;padding-left:0}
 .pf .n{font-family:var(--serif);font-size:1.5rem;color:var(--forest)}
-.pf .t{font-size:.72rem;color:var(--mute);letter-spacing:.05em;margin-top:4px;line-height:1.4}
+.pf .t{font-size:.72rem;color:var(--mute);margin-top:4px;line-height:1.4}
 
-/* ---------- gallery panels ---------- */
-.panel{height:88svh;min-height:520px;position:relative;overflow:clip;display:flex;align-items:flex-end}
-.panel .pi{position:absolute;inset:-12% 0;background-position:center;background-size:cover;will-change:transform}
-.panel .pv{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,35,26,0) 45%,rgba(12,35,26,.72) 100%)}
-.panel .cap{position:relative;padding:0 5vw 54px;color:var(--cream);width:100%;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.panel .cap h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.8vw,2.3rem)}
-.panel .cap .no{font-family:var(--serif);font-size:.9rem;color:var(--gold-2);letter-spacing:.3em}
-.panel .cap p{font-size:.86rem;color:rgba(245,240,228,.8);max-width:44ch;font-weight:300;line-height:1.6}
-.gal-intro{padding:110px 0 70px;background:var(--forest);color:var(--cream)}
-.gal-intro .lead{color:rgba(245,240,228,.72)}
-.gal-intro h2{color:var(--cream)}
+/* ===== names wall ===== */
+#names{padding:120px 0;background:var(--cream-2)}
+.namegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:13px;margin-top:54px}
+.nc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;cursor:pointer;position:relative;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;user-select:none}
+.nc:hover{transform:translateY(-5px);box-shadow:0 20px 44px -20px rgba(12,35,26,.35)}
+.nc:active{transform:scale(.97)}
+.nc h3{font-family:var(--serif);font-weight:500;font-size:1.18rem;color:var(--forest);letter-spacing:.03em}
+.nc .mn{font-size:.74rem;color:var(--mute);margin-top:6px;line-height:1.45;min-height:32px}
+.nc .ft{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.nc .pill{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+.pill.grn{background:rgba(62,123,92,.13);color:#2C6247}
+.pill.amb{background:rgba(198,161,91,.18);color:#8A6A2E}
+.pill.red{background:rgba(180,84,62,.14);color:#9C4630}
+.nc .go{font-size:.68rem;color:var(--gold);font-weight:700;letter-spacing:.1em}
+.nc.rec{background:var(--forest);border-color:var(--forest)}
+.nc.rec h3{color:var(--cream)} .nc.rec .mn{color:rgba(245,240,228,.7)}
+.nc.rec::before{content:'RECOMMENDED';position:absolute;top:-10px;left:16px;background:var(--gold);color:var(--forest);font-size:.58rem;font-weight:700;letter-spacing:.18em;padding:4px 11px;border-radius:100px}
+.hint{margin-top:22px;font-size:.8rem;color:var(--mute)}
 
-/* ---------- criteria ---------- */
-#brief{padding:120px 0}
-.crit{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:54px}
-.cc{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 24px;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
-.cc:hover{transform:translateY(-6px);box-shadow:0 24px 50px -24px rgba(12,35,26,.3)}
-.cc .ic{font-family:var(--serif);font-size:1.1rem;color:var(--gold);letter-spacing:.2em}
-.cc h4{font-family:var(--serif);font-weight:500;font-size:1.12rem;margin:14px 0 10px;color:var(--forest)}
-.cc p{font-size:.83rem;color:var(--mute);line-height:1.65;font-weight:300}
+/* modal */
+#nmod{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:20px}
+#nmod.show{display:flex}
+#nmod .bg2{position:absolute;inset:0;background:rgba(12,35,26,.72);backdrop-filter:blur(8px)}
+#nmod .box{position:relative;background:var(--cream);border-radius:26px;max-width:640px;width:100%;max-height:88svh;overflow:auto;padding:clamp(26px,4vw,44px);animation:pop .45s cubic-bezier(.16,1,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+#nmod .x{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:1rem;cursor:pointer;color:var(--ink)}
+#nmod .nm{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.7rem);color:var(--forest)}
+#nmod .nm b{font-weight:500;color:var(--gold)}
+#nmod .dv{font-family:var(--serif);color:var(--gold);font-size:1.15rem;margin-top:2px}
+#nmod .mng{color:var(--mute);font-size:.92rem;line-height:1.65;margin:12px 0 4px;font-weight:300}
+#nmod .sec{margin-top:24px;border-top:1px solid var(--line);padding-top:20px}
+#nmod .sec .tt{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+.mbar{margin-bottom:14px}
+.mbar .t{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:6px;gap:12px}
+.mbar .t b{font-weight:600}
+.mbar .t span{color:var(--mute)}
+.mbar .tr{height:8px;border-radius:100px;background:rgba(19,43,32,.09);overflow:clip}
+.mbar .fl{height:100%;border-radius:100px;width:0;transition:width 1s cubic-bezier(.16,1,.3,1) .15s}
+.mbar.red .fl{background:linear-gradient(90deg,#B4543E,#D4795F)}
+.mbar.amb .fl{background:linear-gradient(90deg,#B9924D,#E0C68C)}
+.mbar.grn .fl{background:linear-gradient(90deg,#3E7B5C,#7FBF9C)}
+#nmod .note{font-size:.84rem;color:var(--mute);line-height:1.68;font-weight:300}
+#nmod .note b{color:var(--ink);font-weight:600}
+#nmod .tmrow{display:flex;align-items:flex-start;gap:14px}
+#nmod .verdict{margin-top:24px;background:var(--forest);color:var(--cream);border-radius:16px;padding:18px 22px;font-size:.86rem;line-height:1.6;font-weight:300}
+#nmod .verdict b{color:var(--gold-2);font-weight:600}
 
-/* ---------- reveal (the name) ---------- */
+/* reveal */
 #reveal{background:var(--forest);color:var(--cream);padding:140px 0;text-align:center;overflow:clip;position:relative}
 #reveal .glow{position:absolute;left:50%;top:42%;width:900px;height:900px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(198,161,91,.16),transparent 62%);pointer-events:none}
 #reveal .pre{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
-.bigname{font-family:var(--serif);font-weight:300;font-size:clamp(3.2rem,12vw,9.5rem);letter-spacing:.06em;line-height:1;margin:34px 0 8px;color:var(--cream)}
+.bigname{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,11vw,9rem);letter-spacing:.06em;line-height:1;margin:34px 0 8px;color:var(--cream)}
 .bigname .L{display:inline-block;opacity:0;transform:translateY(.45em) rotate(2deg);filter:blur(6px)}
 .bigname.play .L{animation:lt 1s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes lt{to{opacity:1;transform:none;filter:blur(0)}}
 #reveal .dev{font-family:var(--serif);font-size:clamp(1.3rem,3vw,2rem);color:var(--gold-2);margin-top:6px}
-#reveal .mean{margin:26px auto 0;max-width:56ch;color:rgba(245,240,228,.78);font-weight:300;line-height:1.8;font-size:clamp(.95rem,1.3vw,1.08rem)}
+#reveal .mean{margin:26px auto 0;max-width:56ch;color:rgba(245,240,228,.8);font-weight:300;line-height:1.8;font-size:clamp(.95rem,1.3vw,1.08rem)}
 #reveal .mean b{color:var(--gold-2);font-weight:600}
-.treeline{margin:56px auto 0;width:min(420px,80vw)}
-.treeline path{stroke:var(--gold-2);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-dasharray:1200;stroke-dashoffset:1200}
-.treeline.play path{animation:grow 3s ease forwards}
-.treeline.play path:nth-child(2){animation-delay:.5s}.treeline.play path:nth-child(3){animation-delay:1s}
-@keyframes grow{to{stroke-dashoffset:0}}
-.onetree{margin-top:22px;font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--cream)}
+.onetree{margin-top:34px;font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--cream)}
 .onetree .g{color:var(--gold-2)}
 
-/* ---------- why ---------- */
+/* why */
 #why{padding:120px 0}
 .whys{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:54px}
 .wy{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px;display:flex;gap:22px;align-items:flex-start}
@@ -143,50 +185,26 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);l
 .wy p{font-size:.88rem;color:var(--mute);line-height:1.7;font-weight:300}
 .wy p b{color:var(--ink);font-weight:600}
 
-/* ---------- shortlist ---------- */
-#short{padding:0 0 120px}
-.slgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:54px}
-.sl{border:1px solid var(--line);border-radius:24px;padding:34px 28px;background:#fff;position:relative;transition:transform .5s cubic-bezier(.16,1,.3,1)}
-.sl:hover{transform:translateY(-6px)}
-.sl.win{background:var(--forest);color:var(--cream);border-color:var(--forest);box-shadow:0 34px 70px -28px rgba(12,35,26,.5)}
-.sl .tag{position:absolute;top:-12px;left:26px;background:var(--gold);color:var(--forest);font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:6px 14px;border-radius:100px}
-.sl h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;letter-spacing:.04em}
-.sl .sub{font-size:.78rem;color:var(--mute);margin-top:6px;min-height:34px;line-height:1.5}
-.sl.win .sub{color:rgba(245,240,228,.7)}
-.sl .rows{margin-top:22px;display:grid;gap:13px}
-.sl .r{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;gap:10px}
-.sl .r .k{color:var(--mute)}.sl.win .r .k{color:rgba(245,240,228,.65)}
-.dots{display:flex;gap:4px}
-.dots i{width:8px;height:8px;border-radius:50%;background:var(--cream-2);border:1px solid var(--line)}
-.sl.win .dots i{background:rgba(245,240,228,.14);border-color:rgba(245,240,228,.2)}
-.dots i.f{background:var(--gold);border-color:var(--gold)}
-.expl{margin-top:60px}
-.expl .lbl{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
-.chips span{border:1px dashed rgba(19,43,32,.28);border-radius:100px;padding:8px 16px;font-size:.78rem;color:var(--mute);font-family:var(--serif);letter-spacing:.06em}
-
-/* ---------- seo ---------- */
+/* seo + tm */
 #seo{background:var(--forest-2);color:var(--cream);padding:120px 0}
-#seo h2{color:var(--cream)} #seo .lead{color:rgba(245,240,228,.72)}
+#seo h2{color:var(--cream)} #seo .lead{color:rgba(245,240,228,.75)}
 .seogrid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;margin-top:60px;align-items:start}
 .bars{display:grid;gap:26px}
 .bar .t{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:9px;gap:14px}
 .bar .t b{font-weight:600;color:var(--cream);font-size:.85rem}
-.bar .t span{color:rgba(245,240,228,.6);text-align:right}
+.bar .t span{color:rgba(245,240,228,.65);text-align:right}
 .bar .tr{height:9px;border-radius:100px;background:rgba(245,240,228,.1);overflow:clip}
 .bar .fl{height:100%;border-radius:100px;width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1) .2s}
 .bar.red .fl{background:linear-gradient(90deg,#B4543E,#D4795F)}
 .bar.amb .fl{background:linear-gradient(90deg,#B9924D,#E0C68C)}
 .bar.grn .fl{background:linear-gradient(90deg,#3E7B5C,#7FBF9C)}
-.bar .note{font-size:.74rem;color:rgba(245,240,228,.55);margin-top:8px;line-height:1.55}
+.bar .note{font-size:.75rem;color:rgba(245,240,228,.6);margin-top:8px;line-height:1.55}
 .seoplay{background:rgba(245,240,228,.05);border:1px solid rgba(245,240,228,.12);border-radius:22px;padding:32px}
 .seoplay h4{font-family:var(--serif);font-weight:500;font-size:1.15rem;color:var(--gold-2);margin-bottom:18px}
-.seoplay li{list-style:none;font-size:.86rem;font-weight:300;color:rgba(245,240,228,.82);line-height:1.65;padding:12px 0 12px 30px;position:relative;border-top:1px solid rgba(245,240,228,.08)}
+.seoplay li{list-style:none;font-size:.86rem;font-weight:300;color:rgba(245,240,228,.85);line-height:1.65;padding:12px 0 12px 30px;position:relative;border-top:1px solid rgba(245,240,228,.08)}
 .seoplay li:first-of-type{border-top:0;padding-top:0}
 .seoplay li::before{content:'→';position:absolute;left:0;color:var(--gold)}
 .seoplay li b{color:var(--cream);font-weight:600}
-
-/* ---------- trademark ---------- */
 #tm{padding:120px 0}
 .tmgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:54px}
 .tmc{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 26px}
@@ -198,37 +216,66 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);l
 .tmnote{margin-top:26px;background:var(--cream-2);border:1px solid var(--line);border-radius:16px;padding:20px 24px;font-size:.78rem;color:var(--mute);line-height:1.7}
 .tmnote b{color:var(--ink)}
 
-/* ---------- finale ---------- */
-#fin{position:relative;overflow:clip;padding:150px 0;text-align:center;background:var(--forest);color:var(--cream)}
-#fin .bg{position:absolute;inset:-8%;background:url(/unitree/amphitheatre.jpg) center/cover;opacity:.2;will-change:transform}
+/* ===== branding ===== */
+#brand{background:var(--forest);color:var(--cream);padding:120px 0}
+#brand h2{color:var(--cream)} #brand .lead{color:rgba(245,240,228,.75)}
+.brgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;margin-top:60px;align-items:center}
+.mark{background:rgba(245,240,228,.04);border:1px solid rgba(245,240,228,.14);border-radius:28px;padding:50px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center}
+.mark svg{width:150px;height:150px}
+.mark .ln{stroke:var(--gold-2);stroke-width:2;fill:none;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600}
+.mark.play .ln{animation:draw 2.4s ease forwards}
+.mark .wm{font-family:var(--serif);letter-spacing:.4em;font-size:1.05rem;text-transform:uppercase}
+.mark .wm b{color:var(--gold-2);font-weight:500}
+.mark p{font-size:.8rem;color:rgba(245,240,228,.65);line-height:1.65;font-weight:300;max-width:38ch}
+.whymark{display:grid;gap:14px}
+.wm2{background:rgba(245,240,228,.05);border:1px solid rgba(245,240,228,.12);border-radius:18px;padding:22px 24px}
+.wm2 h4{font-family:var(--serif);font-weight:500;font-size:1.05rem;color:var(--gold-2);margin-bottom:8px}
+.wm2 p{font-size:.83rem;color:rgba(245,240,228,.8);line-height:1.65;font-weight:300}
+.palette{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-top:60px}
+.sw2{border-radius:18px;overflow:clip;cursor:pointer;border:1px solid rgba(245,240,228,.14);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.sw2:hover{transform:translateY(-5px)} .sw2:active{transform:scale(.96)}
+.sw2 .c{height:104px}
+.sw2 .i{background:rgba(245,240,228,.05);padding:13px 15px}
+.sw2 .i b{font-size:.8rem;display:block}
+.sw2 .i span{font-size:.68rem;color:rgba(245,240,228,.6);letter-spacing:.08em}
+.sw2 .i em{display:block;font-style:normal;font-size:.68rem;color:rgba(245,240,228,.5);margin-top:5px;line-height:1.45}
+.motion{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px}
+.mo{background:rgba(245,240,228,.05);border:1px solid rgba(245,240,228,.12);border-radius:20px;padding:28px 24px}
+.mo h4{font-family:var(--serif);font-weight:500;font-size:1.05rem;color:var(--gold-2);margin-bottom:10px}
+.mo p{font-size:.8rem;color:rgba(245,240,228,.75);line-height:1.65;font-weight:300}
+.mo .demo{margin-top:18px;display:flex;align-items:center;gap:12px}
+.tapme{background:var(--gold);color:var(--forest);border:0;border-radius:100px;padding:12px 22px;font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:transform .18s cubic-bezier(.34,1.56,.64,1)}
+.tapme:active{transform:scale(.9)}
+.pulse{width:14px;height:14px;border-radius:50%;background:var(--gold-2);position:relative}
+.pulse::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--gold-2);animation:pl 1.8s ease-out infinite}
+@keyframes pl{from{transform:scale(.6);opacity:1}to{transform:scale(1.8);opacity:0}}
+
+/* finale + footer */
+#fin{position:relative;overflow:clip;padding:140px 0;text-align:center;background:var(--forest);color:var(--cream);border-top:1px solid rgba(224,198,140,.2)}
+#fin .bg{position:absolute;inset:-8%;background:url(/unitree/amphitheatre.jpg) center/cover;opacity:.18;will-change:transform}
 #fin .in2{position:relative}
 #fin .pre{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
-#fin .lock{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,7.5vw,6rem);letter-spacing:.08em;margin:30px 0 6px}
+#fin .lock{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,7vw,5.6rem);letter-spacing:.08em;margin:30px 0 6px}
 #fin .lock b{font-weight:500;color:var(--gold-2)}
-#fin .tg{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.4rem);color:rgba(245,240,228,.85);margin-top:14px}
-footer{background:#081812;color:rgba(245,240,228,.55);padding:34px 5vw;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.74rem;letter-spacing:.08em}
+#fin .tg{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.4rem);color:rgba(245,240,228,.85);margin:14px 0 34px}
+footer{background:#081812;color:rgba(245,240,228,.6);padding:44px 5vw 34px}
+footer .cols{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;max-width:1180px;margin:0 auto}
+footer .c1 .lg{font-family:var(--serif);letter-spacing:.32em;text-transform:uppercase;color:var(--cream);font-size:.9rem;margin-bottom:10px}
+footer p{font-size:.76rem;line-height:1.7;max-width:44ch}
 footer b{color:var(--cream);font-weight:600}
+footer .fine{border-top:1px solid rgba(245,240,228,.1);margin-top:30px;padding-top:20px;font-size:.68rem;color:rgba(245,240,228,.4);text-align:center;line-height:1.7}
 
-/* ---------- responsive ---------- */
 @media(max-width:900px){
-  .landgrid,.seogrid{grid-template-columns:1fr;gap:40px}
-  .crit{grid-template-columns:1fr 1fr}
+  .landgrid,.seogrid,.brgrid{grid-template-columns:1fr;gap:40px}
   .whys{grid-template-columns:1fr}
-  .slgrid,.tmgrid{grid-template-columns:1fr;max-width:480px}
+  .tmgrid,.motion{grid-template-columns:1fr;max-width:480px}
   .planfacts{grid-template-columns:1fr 1fr;gap:18px}
   .pf{border-left:0;padding:0}
-  .panel{height:72svh;min-height:420px}
-  #hero .scr{display:none}
+  .palette{grid-template-columns:repeat(2,1fr)}
+  .stage .card{right:5vw;max-width:none}
 }
-@media(max-width:520px){
-  .stats{grid-template-columns:1fr 1fr}
-  .crit{grid-template-columns:1fr}
-  .wy{flex-direction:column;gap:12px}
-}
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01s!important;transition-duration:.2s!important}
-  #hero .bg{animation:none}
-}
+@media(max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.2s!important}#hero .bg{animation:none}}
 </style>
 </head>
 <body>
@@ -239,34 +286,40 @@ footer b{color:var(--cream);font-weight:600}
 </div>
 <div id="pbar"></div>
 
-<nav id="nav"><span class="b">UNITREE · Naming</span><span class="b">Sage Media</span></nav>
+<nav id="nav">
+  <span class="b">UNITREE</span>
+  <div class="lk"><a href="#tourhead">Drone Tour</a><a href="#plan">Master Plan</a><a href="#names">Name Options</a><a href="#brand">Branding</a></div>
+  <span class="b">Sage Media</span>
+</nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="bg" data-par="0.12"></div>
+  <div class="bg" data-par="0.1"></div>
   <div class="veil"></div>
   <div class="inner">
-    <div class="kick rv">Unitree Product Pvt. Ltd. · Township Naming Presentation</div>
-    <h1 class="rv d1">Fifteen acres of forest, valley and creek.<br><em>Now it needs a name.</em></h1>
-    <p class="sub rv d2">Sawantwadi, Sindhudurg — where the Sahyadri hills fold into the Konkan coast. This is the story of what we should call it, and why.</p>
+    <div class="kick rv">Unitree Product Pvt. Ltd. · Sawantwadi, Sindhudurg</div>
+    <h1 class="rv d1">A 15-acre forest township, <em>minutes from Goa.</em></h1>
+    <p class="sub rv d2">Hills, dense forest, a valley floor and a natural creek through the land — plotted for villas, second homes and legacy. Scroll to fly the property, then choose its name.</p>
+    <div class="cta rv d3">
+      <a class="btn gold" href="#tourhead">▶ Take the drone tour</a>
+      <a class="btn ghost" href="#names">Explore name options</a>
+    </div>
   </div>
-  <div class="scr"><i></i>Scroll</div>
 </section>
 
 <div class="marq" aria-hidden="true"><div class="tk">
   <span>Open-Air Amphitheatre</span><span class="g">·</span><span>Yoga &amp; Meditation Deck</span><span class="g">·</span><span>Celebration Lawn</span><span class="g">·</span><span>Multi-Sport Arena</span><span class="g">·</span><span>Grand Gated Entrance Plaza</span><span class="g">·</span><span>Children&rsquo;s Adventure Play Park</span><span class="g">·</span><span>Open-Air Fitness Pavilion</span><span class="g">·</span><span>Reflexology Trail</span><span class="g">·</span><span>Landscaped Green Courtyards</span><span class="g">·</span><span>Garden Cabanas</span><span class="g">·</span><span>Pet-Friendly Activity Zone</span><span class="g">·</span><span>24×7 Smart Security</span><span class="g">·</span><span>Open-Air Amphitheatre</span><span class="g">·</span><span>Yoga &amp; Meditation Deck</span><span class="g">·</span><span>Celebration Lawn</span><span class="g">·</span><span>Multi-Sport Arena</span><span class="g">·</span><span>Grand Gated Entrance Plaza</span><span class="g">·</span><span>Children&rsquo;s Adventure Play Park</span><span class="g">·</span><span>Open-Air Fitness Pavilion</span><span class="g">·</span><span>Reflexology Trail</span><span class="g">·</span><span>Landscaped Green Courtyards</span><span class="g">·</span><span>Garden Cabanas</span><span class="g">·</span><span>Pet-Friendly Activity Zone</span><span class="g">·</span><span>24×7 Smart Security</span><span class="g">·</span>
 </div></div>
 
-<!-- THE LAND -->
+<!-- LAND -->
 <section id="land"><div class="wrap">
   <div class="eyebrow rv">01 — The Land</div>
-  <h2 class="rv d1">A rare pocket of the Konkan,<br>minutes from Goa.</h2>
+  <h2 class="rv d1">A rare pocket of the Konkan.</h2>
   <div class="landgrid">
     <div>
-      <p class="lead rv d2">A <b>15-acre plotted township</b> on the Madkhol–Kariwade–Charathe belt of Sawantwadi, Sindhudurg — a landscape most projects can only render: real hills, dense forest cover, a valley floor, and a <b>natural creek flowing through the property</b>, with a dam-fed reservoir nearby.</p>
-      <p class="lead rv d3" style="margin-top:18px">It sits inside Maharashtra's only eco-tourism district, on the quiet side of the Goa border — close enough for the airport run, far enough to stay a forest.</p>
-      <div class="terr rv d4">
-        <span>⛰ Rolling hills</span><span>🌳 Dense forest</span><span>🏞 Valley land</span><span>🌊 Natural creek on-site</span><span>💧 Dam &amp; reservoir nearby</span>
+      <p class="lead rv d2">On the Sawantwadi–Amboli belt of Sindhudurg — Maharashtra's only eco-tourism district — with <b>highway-touch frontage</b>, a gated master plan, and the kind of terrain most projects can only render: real hills, forest cover, and a <b>natural creek flowing through the property</b>.</p>
+      <div class="terr rv d3">
+        <span>⛰ Rolling hills</span><span>🌳 Dense forest</span><span>🏞 Valley land</span><span>🌊 Natural creek on-site</span><span>💧 Dam &amp; reservoir nearby</span><span>🛣 NH66 10–15 km</span>
       </div>
     </div>
     <div class="stats">
@@ -280,57 +333,61 @@ footer b{color:var(--cream);font-weight:600}
   </div>
 </div></section>
 
+<!-- DRONE TOUR -->
+<section id="tourhead"><div class="wrap">
+  <div class="eyebrow rv">02 — The Drone Tour</div>
+  <h2 class="rv d1">Fly the property,<br>gate to creek.</h2>
+  <p class="lead rv d2" style="margin-top:20px">Keep scrolling — the camera descends through each zone, and the amenities change with the terrain below you.</p>
+</div></section>
+
+<div id="tour"></div>
+
 <!-- MASTER PLAN -->
 <section id="plan"><div class="wrap">
-  <div class="eyebrow rv">02 — The Master Plan</div>
-  <h2 class="rv d1">Plotted like a garden,<br>not a grid.</h2>
+  <div class="eyebrow rv">03 — The Master Plan</div>
+  <h2 class="rv d1">Plotted like a garden, not a grid.</h2>
   <div class="plancard rv d2">
     <img src="/unitree/masterplan.jpg" alt="Landscape master plan" loading="lazy">
     <div class="planfacts">
       <div class="pf"><div class="n">100+</div><div class="t">Residential plots across the estate</div></div>
-      <div class="pf"><div class="n">5</div><div class="t">Dedicated amenity areas woven along the green edges</div></div>
-      <div class="pf"><div class="n">6,110 m²</div><div class="t">Single contiguous open space beside the river edge</div></div>
-      <div class="pf"><div class="n">9–12 m</div><div class="t">Wide internal roads on existing gram-panchayat alignments</div></div>
+      <div class="pf"><div class="n">5</div><div class="t">Amenity areas woven along the green edges</div></div>
+      <div class="pf"><div class="n">6,110 m²</div><div class="t">Contiguous open space on the river edge</div></div>
+      <div class="pf"><div class="n">9–12 m</div><div class="t">Wide internal roads, vastu-friendly alignment</div></div>
     </div>
   </div>
 </div></section>
 
-<!-- GALLERY -->
-<section class="gal-intro"><div class="wrap">
-  <div class="eyebrow rv">03 — Walk the Property</div>
-  <h2 class="rv d1">What life here actually looks like.</h2>
-  <p class="lead rv d2" style="margin-top:20px">Concept renders from the landscape design — every space built around the trees, not in spite of them.</p>
+<!-- NAMES -->
+<section id="names"><div class="wrap">
+  <div class="eyebrow rv">04 — Name Options</div>
+  <h2 class="rv d1">Eighteen names.<br>Tap any to see its case.</h2>
+  <p class="lead rv d2" style="margin-top:20px">Every option follows the brand — <b>UNITREE + one word</b>. Each card opens the full picture: meaning, real SEO landscape, and whether a trademark is realistically ownable.</p>
+  <div class="namegrid" id="namegrid"></div>
+  <div class="hint rv">Legend: <b style="color:#2C6247">TM Favourable</b> · <b style="color:#8A6A2E">TM Caution</b> · <b style="color:#9C4630">TM Risky</b> — tap a card for the why.</div>
 </div></section>
 
-<section class="panel"><div class="pi" data-par="0.16" style="background-image:url(/unitree/lawn.jpg)"></div><div class="pv"></div>
-  <div class="cap"><div><div class="no rv">— 01</div><h3 class="rv d1">Multipurpose Lawn</h3></div><p class="rv d2">Concentric seating rings around mature trees — the township's living room.</p></div></section>
-
-<section class="panel"><div class="pi" data-par="0.16" style="background-image:url(/unitree/pavilion.jpg)"></div><div class="pv"></div>
-  <div class="cap"><div><div class="no rv">— 02</div><h3 class="rv d1">Seating Pavilion</h3></div><p class="rv d2">A shaded deck folded into flowering jarul and palm canopy.</p></div></section>
-
-<section class="panel"><div class="pi" data-par="0.16" style="background-image:url(/unitree/featurewall.jpg)"></div><div class="pv"></div>
-  <div class="cap"><div><div class="no rv">— 03</div><h3 class="rv d1">Sculpture Court &amp; Feature Wall</h3></div><p class="rv d2">Laterite-toned walls and quiet sculpture — Konkan material, gallery calm.</p></div></section>
-
-<section class="panel"><div class="pi" data-par="0.16" style="background-image:url(/unitree/rockgarden.jpg)"></div><div class="pv"></div>
-  <div class="cap"><div><div class="no rv">— 04</div><h3 class="rv d1">Rock Garden &amp; Courts</h3></div><p class="rv d2">Raked stone, stepping slabs, and play courts at the active edge.</p></div></section>
-
-<section class="panel"><div class="pi" data-par="0.16" style="background-image:url(/unitree/kidsplay.jpg)"></div><div class="pv"></div>
-  <div class="cap"><div><div class="no rv">— 05</div><h3 class="rv d1">Kids' Play Area</h3></div><p class="rv d2">Climbing walls and soft courts under the tree line.</p></div></section>
-
-<section class="panel"><div class="pi" data-par="0.16" style="background-image:url(/unitree/amphitheatre.jpg)"></div><div class="pv"></div>
-  <div class="cap"><div><div class="no rv">— 06</div><h3 class="rv d1">Amphitheatre on the Creek</h3></div><p class="rv d2">Terraced steps facing the water — the property's natural stage.</p></div></section>
-
-<!-- BRIEF -->
-<section id="brief"><div class="wrap">
-  <div class="eyebrow rv">04 — The Naming Brief</div>
-  <h2 class="rv d1">What the second word<br>has to carry.</h2>
-  <div class="crit">
-    <div class="cc rv"><div class="ic">I</div><h4>Complement UNITREE</h4><p>It follows the brand, never fights it. UNITREE stays the hero; the second word gives it a home.</p></div>
-    <div class="cc rv d1"><div class="ic">II</div><h4>Essence of Konkan</h4><p>Peaceful, natural, rooted — it should smell like rain on laterite, not like a gated colony anywhere.</p></div>
-    <div class="cc rv d2"><div class="ic">III</div><h4>Premium by restraint</h4><p>Luxury here is silence and old trees. The name must feel expensive without saying "royal" or "grand".</p></div>
-    <div class="cc rv d3"><div class="ic">IV</div><h4>Easy to say</h4><p>Effortless in Marathi, Hindi and English — for a buyer in Mumbai, a broker in Sawantwadi, a signboard on the highway.</p></div>
+<!-- MODAL -->
+<div id="nmod" role="dialog" aria-modal="true">
+  <div class="bg2" onclick="closeMod()"></div>
+  <div class="box">
+    <button class="x" onclick="closeMod()" aria-label="Close">✕</button>
+    <div class="nm">UNITREE <b id="mN"></b></div>
+    <div class="dv" id="mD"></div>
+    <p class="mng" id="mM"></p>
+    <div class="sec">
+      <div class="tt">SEO Analysis</div>
+      <div class="mbar" id="mb1"><div class="t"><b>"<span class="w"></span>" searched alone</b><span class="s"></span></div><div class="tr"><div class="fl"></div></div></div>
+      <div class="mbar" id="mb2"><div class="t"><b>"Unitree <span class="w"></span>" compound</b><span class="s"></span></div><div class="tr"><div class="fl"></div></div></div>
+      <div class="mbar" id="mb3"><div class="t"><b>Compound + Sawantwadi / Konkan geo</b><span class="s"></span></div><div class="tr"><div class="fl"></div></div></div>
+      <p class="note" id="mSeo"></p>
+    </div>
+    <div class="sec">
+      <div class="tt">Trademark Read</div>
+      <div class="tmrow"><span class="pill" id="mTmPill"></span><p class="note" id="mTm" style="flex:1"></p></div>
+    </div>
+    <div class="verdict" id="mV"></div>
   </div>
-</div></section>
+</div>
 
 <!-- REVEAL -->
 <section id="reveal">
@@ -341,12 +398,7 @@ footer b{color:var(--cream);font-weight:600}
       <span class="L" style="animation-delay:.05s">A</span><span class="L" style="animation-delay:.15s">R</span><span class="L" style="animation-delay:.25s">A</span><span class="L" style="animation-delay:.35s">N</span><span class="L" style="animation-delay:.45s">Y</span><span class="L" style="animation-delay:.55s">A</span>
     </div>
     <div class="dev rv d3">अरण्य</div>
-    <p class="mean rv d4">Sanskrit — <b>"the forest."</b> Not a park, not a garden: the deep, old forest. The word the Aranyakas — the "forest texts" — were named for. It is exactly what this land is, in a language the whole country instinctively respects.</p>
-    <svg class="treeline" id="treeline" viewBox="0 0 420 120" aria-hidden="true">
-      <path d="M60 110 V60 C60 40 48 34 40 30 C46 42 52 48 60 54 C60 40 72 34 80 30 C74 42 68 48 60 54"/>
-      <path d="M210 110 V44 C210 28 194 22 182 18 C190 32 198 38 210 46 C210 28 226 22 238 18 C230 32 222 38 210 46 M180 110 V78 C180 68 172 64 166 62 M240 110 V78 C240 68 248 64 254 62"/>
-      <path d="M360 110 V50 M360 50 C360 34 344 28 332 24 C340 38 348 44 360 52 C360 34 376 28 388 24 C380 38 372 44 360 52 M330 110 V72 C330 62 320 58 314 56 M390 110 V72 C390 62 400 58 406 56 M300 110 H420"/>
-    </svg>
+    <p class="mean rv d4">Sanskrit — <b>"the forest."</b> Not a park, not a garden: the deep, old forest. It is exactly what this land is, in a language the whole country instinctively respects.</p>
     <div class="onetree rv d5">UNITREE is one tree. <span class="g">ARANYA is what it grows into.</span></div>
   </div>
 </section>
@@ -358,60 +410,16 @@ footer b{color:var(--cream);font-weight:600}
   <div class="whys">
     <div class="wy rv"><div class="n">01</div><div><h4>It's the truth of the land</h4><p>Most townships borrow nature words they can't back up. This property <b>is</b> forest, valley and creek — Aranya isn't a metaphor here, it's a description. Buyers feel the difference instantly.</p></div></div>
     <div class="wy rv d1"><div class="n">02</div><div><h4>It completes the brand story</h4><p><b>Uni-tree → Aranya:</b> one tree becoming a forest. The township name turns the company name into a narrative — growth, legacy, an ecosystem — without a single extra word of copy.</p></div></div>
-    <div class="wy rv d2"><div class="n">03</div><div><h4>Premium heritage, zero buzzwords</h4><p>Aranya carries the weight of Sanskrit and the calm of the forest retreat — the same register as Amanvana or Vana Belagavi. It signals luxury through <b>rootedness</b>, not gold-plated English.</p></div></div>
+    <div class="wy rv d2"><div class="n">03</div><div><h4>Premium heritage, zero buzzwords</h4><p>Aranya carries the weight of Sanskrit and the calm of the forest retreat. It signals luxury through <b>rootedness</b>, not gold-plated English.</p></div></div>
     <div class="wy rv d3"><div class="n">04</div><div><h4>Three open syllables</h4><p><b>A-ran-ya</b> — flows naturally in Marathi, Hindi and English, ends on an open vowel (like Amboli, like Konkan itself), and is unmistakable on a phone call with a broker.</p></div></div>
-  </div>
-</div></section>
-
-<!-- SHORTLIST -->
-<section id="short"><div class="wrap">
-  <div class="eyebrow rv">07 — The Shortlist</div>
-  <h2 class="rv d1">How it compares.</h2>
-  <div class="slgrid">
-    <div class="sl win rv"><div class="tag">Recommended</div>
-      <h3>UNITREE ARANYA</h3><div class="sub">Sanskrit "forest" — names what the land already is.</div>
-      <div class="rows">
-        <div class="r"><span class="k">Fit with the land</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
-        <div class="r"><span class="k">Premium feel</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
-        <div class="r"><span class="k">Ease of pronunciation</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></div>
-        <div class="r"><span class="k">Story with UNITREE</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
-        <div class="r"><span class="k">SEO runway (compound)</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></div>
-      </div>
-    </div>
-    <div class="sl rv d1">
-      <h3>UNITREE VALE</h3><div class="sub">English "valley" — soft, international, easy.</div>
-      <div class="rows">
-        <div class="r"><span class="k">Fit with the land</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></div>
-        <div class="r"><span class="k">Premium feel</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
-        <div class="r"><span class="k">Ease of pronunciation</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
-        <div class="r"><span class="k">Story with UNITREE</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
-        <div class="r"><span class="k">SEO runway (compound)</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
-      </div>
-    </div>
-    <div class="sl rv d2">
-      <h3>UNITREE SPRINGS</h3><div class="sub">Nods to the creek and reservoir — fresh, kinetic.</div>
-      <div class="rows">
-        <div class="r"><span class="k">Fit with the land</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></div>
-        <div class="r"><span class="k">Premium feel</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
-        <div class="r"><span class="k">Ease of pronunciation</span><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
-        <div class="r"><span class="k">Story with UNITREE</span><span class="dots"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></div>
-        <div class="r"><span class="k">SEO runway (compound)</span><span class="dots"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></div>
-      </div>
-    </div>
-  </div>
-  <div class="expl rv">
-    <div class="lbl">Also explored</div>
-    <div class="chips">
-      <span>Unitree Vanam</span><span>Unitree Kinara</span><span>Unitree Sahya</span><span>Unitree Greens</span><span>Unitree Vailly</span><span>Unitree Woods</span><span>Unitree Konkan</span><span>Unitree Tarang</span><span>Unitree Nisarg</span><span>Unitree Estates</span>
-    </div>
   </div>
 </div></section>
 
 <!-- SEO -->
 <section id="seo"><div class="wrap">
-  <div class="eyebrow rv">08 — Name SEO, Honestly</div>
-  <h2 class="rv d1">What Google will do<br>with this name.</h2>
-  <p class="lead rv d2" style="margin-top:20px">We checked the real search landscape before recommending anything. Here's the unvarnished picture — and the play that wins anyway.</p>
+  <div class="eyebrow rv">07 — Name SEO, Honestly</div>
+  <h2 class="rv d1">What Google will do with this name.</h2>
+  <p class="lead rv d2" style="margin-top:20px">We checked the real search landscape before recommending anything. The unvarnished picture — and the play that wins anyway.</p>
   <div class="seogrid">
     <div class="bars">
       <div class="bar red rv"><div class="t"><b>"Unitree" alone</b><span>Heavy collision</span></div><div class="tr"><div class="fl" data-w="92%"></div></div>
@@ -425,59 +433,231 @@ footer b{color:var(--cream);font-weight:600}
       <h4>The winning search play</h4>
       <ul>
         <li><b>Always market the compound.</b> The project is "UNITREE ARANYA" everywhere — site, boards, brochures, maps. Never "Aranya" alone.</li>
-        <li><b>Own the geo long-tail.</b> "Unitree Aranya Sawantwadi", "township near Goa border", "plots in Sindhudurg", "second home near MOPA airport" — low competition, high intent.</li>
-        <li><b>Google Business Profile first.</b> A pinned listing for UNITREE ARANYA, Sawantwadi makes local searches bypass the robotics noise entirely.</li>
-        <li><b>Let the land do the content.</b> Creek, Amboli, palace-town heritage — searchable stories no Gurugram "Aranya" can write.</li>
+        <li><b>Own the geo long-tail.</b> "Unitree Aranya Sawantwadi", "township near Goa border", "plots in Sindhudurg", "second home near MOPA airport".</li>
+        <li><b>Google Business Profile first.</b> A pinned listing makes local searches bypass the robotics noise entirely.</li>
+        <li><b>Let the land do the content.</b> Creek, Amboli, palace-town heritage — stories no Gurugram "Aranya" can write.</li>
       </ul>
     </div>
   </div>
 </div></section>
 
-<!-- TRADEMARK -->
+<!-- TM -->
 <section id="tm"><div class="wrap">
-  <div class="eyebrow rv">09 — Trademark Snapshot</div>
+  <div class="eyebrow rv">08 — Trademark Snapshot</div>
   <h2 class="rv d1">Can we own it?</h2>
-  <p class="lead rv d2" style="margin-top:20px">A preliminary desk check — the practical read before your attorney runs the formal registry search.</p>
   <div class="tmgrid">
     <div class="tmc rv"><span class="cls ok">Favourable</span><h4>The compound is the mark</h4><p>"Aranya" alone is a dictionary word — weak to monopolise. But <b style="color:var(--ink)">UNITREE ARANYA</b> as a combined wordmark (with logo) is distinctive and registrable the way "Raheja Aranya" and "Forum Aranya" co-exist today.</p></div>
     <div class="tmc rv d1"><span class="cls ok">Favourable</span><h4>Different class, different world</h4><p>Unitree Robotics' filings sit in robotics territory (goods classes like 9, 12, 28). Real-estate services live in <b style="color:var(--ink)">Class 36 &amp; 37</b> — separate class space, separate trade channels, low confusion risk.</p></div>
-    <div class="tmc rv d2"><span class="cls wr">Action needed</span><h4>File early, file both</h4><p>Existing "Aranya" projects mean the crowded-field defence works both ways. Register <b style="color:var(--ink)">UNITREE ARANYA in Class 36 (real estate) and 37 (construction)</b> before public launch, alongside the domain and handles.</p></div>
+    <div class="tmc rv d2"><span class="cls wr">Action needed</span><h4>File early, file both</h4><p>Register <b style="color:var(--ink)">UNITREE ARANYA in Class 36 (real estate) and 37 (construction)</b> before public launch, alongside the domain and social handles.</p></div>
   </div>
-  <div class="tmnote rv d3"><b>Honest disclaimer:</b> this is a desk-level availability read based on public sources, not a legal clearance. Before signage and RERA filings, commission a formal trademark search and file through your IP attorney — typically a 1–2 week turnaround for the search, and protection dates from the day you file.</div>
+  <div class="tmnote rv d3"><b>Honest disclaimer:</b> this is a desk-level availability read based on public sources, not a legal clearance. Before signage and RERA filings, commission a formal trademark search and file through your IP attorney — typically a 1–2 week turnaround, and protection dates from the day you file.</div>
+</div></section>
+
+<!-- BRANDING -->
+<section id="brand"><div class="wrap">
+  <div class="eyebrow rv">09 — Brand Identity</div>
+  <h2 class="rv d1">The mark, the palette,<br>the feel.</h2>
+  <div class="brgrid">
+    <div class="mark rv" id="markbox">
+      <svg viewBox="0 0 64 64"><path class="ln" d="M32 54 V26 M32 26 C32 14 22 10 16 8 C20 18 24 22 32 26 M32 26 C32 14 42 10 48 8 C44 18 40 22 32 26 M20 54 H44"/></svg>
+      <div class="wm">UNITREE <b>ARANYA</b></div>
+      <p>A single tree drawn in one continuous line, standing on the land line. Line-drawn, never filled — like a surveyor's mark on a map of forest.</p>
+    </div>
+    <div class="whymark">
+      <div class="wm2 rv"><h4>Why this icon</h4><p>One trunk, two branches opening into canopy — the literal "uni-tree", growing outward the way the township grows into Aranya. The baseline under it is the plot: land you own, holding the tree you plant.</p></div>
+      <div class="wm2 rv d1"><h4>Drawn, not printed</h4><p>The mark animates by drawing itself — a growing gesture used on the website loader, hoardings-to-reel transitions and site film titles. Growth is the brand's only animation metaphor.</p></div>
+      <div class="wm2 rv d2"><h4>Gold on forest, always</h4><p>The mark lives in Laterite Gold on Aranya Green — never multicolour, never gradient-filled. One combination, repeated until it's recognisable from a moving car on NH66.</p></div>
+    </div>
+  </div>
+
+  <div class="palette">
+    <div class="sw2 rv" data-hex="#0C231A"><div class="c" style="background:#0C231A"></div><div class="i"><b>Aranya Green</b><span>#0C231A</span><em>The forest at dusk — primary ground for everything.</em></div></div>
+    <div class="sw2 rv d1" data-hex="#1E4A35"><div class="c" style="background:#1E4A35"></div><div class="i"><b>Moss</b><span>#1E4A35</span><em>Secondary surfaces, section changes, depth.</em></div></div>
+    <div class="sw2 rv d2" data-hex="#3E7B5C"><div class="c" style="background:#3E7B5C"></div><div class="i"><b>Leaf</b><span>#3E7B5C</span><em>Live accents — links, ticks, growth moments.</em></div></div>
+    <div class="sw2 rv d3" data-hex="#C6A15B"><div class="c" style="background:#C6A15B"></div><div class="i"><b>Laterite Gold</b><span>#C6A15B</span><em>Konkan's laterite stone — the premium signal, used sparingly.</em></div></div>
+    <div class="sw2 rv d4" data-hex="#F5F0E4"><div class="c" style="background:#F5F0E4"></div><div class="i"><b>Konkan Cream</b><span>#F5F0E4</span><em>Paper, brochures, breathing space between greens.</em></div></div>
+  </div>
+
+  <div class="motion">
+    <div class="mo rv"><h4>Motion language</h4><p>Everything eases like canopy in wind — slow starts, soft landings (cubic-bezier .16,1,.3,1). Nothing snaps; nothing bounces more than once. You've felt it on every scroll of this page.</p><div class="demo"><span class="pulse"></span><span style="font-size:.72rem;color:rgba(245,240,228,.6)">ambient pulse — used on live markers</span></div></div>
+    <div class="mo rv d1"><h4>Haptics</h4><p>On touch devices, key confirmations give one short, quiet tap — never a buzz. Try it: <b style="color:var(--cream)">every name card and swatch on this page vibrates once on tap.</b></p><div class="demo"><button class="tapme" onclick="hap(12)">Tap to feel</button></div></div>
+    <div class="mo rv d2"><h4>Type pairing</h4><p><b style="font-family:var(--serif);color:var(--cream);font-size:.95rem">Fraunces</b> for headlines — old-style serif with warmth and land in it. <b style="color:var(--cream)">Outfit</b> for everything functional — modern, geometric, quiet.</p></div>
+  </div>
 </div></section>
 
 <!-- FINALE -->
 <section id="fin">
-  <div class="bg" data-par="0.1"></div>
+  <div class="bg" data-par="0.08"></div>
   <div class="in2 wrap">
     <div class="pre rv">The Name</div>
     <div class="lock rv d1">UNITREE <b>ARANYA</b></div>
     <div class="tg rv d2">"Where one tree becomes a forest."</div>
+    <a class="btn gold rv d3" href="#names">Compare all 18 names again</a>
   </div>
 </section>
 
 <footer>
-  <span>Prepared for <b>Unitree Product Pvt. Ltd.</b> · Sawantwadi, Sindhudurg</span>
-  <span>by <b>Sage Media</b> · July 2026</span>
+  <div class="cols">
+    <div class="c1"><div class="lg">Unitree Aranya</div>
+      <p>15-acre plotted township · Madkhol–Kariwade–Charathe belt, Sawantwadi–Amboli State Highway, Sindhudurg, Maharashtra 416510.</p></div>
+    <div><p><b>Developer</b><br>Unitree Product Pvt. Ltd.</p></div>
+    <div><p><b>Naming, strategy &amp; brand</b><br>Sage Media · team@sagemedia.in</p></div>
+  </div>
+  <div class="fine">Naming presentation — internal decision document. Renders are concept visualisations; distances are indicative from the project location. Trademark and SEO reads are desk-level checks, not legal clearance. © 2026 Sage Media.</div>
 </footer>
 
 <script>
+/* ---------- data: drone tour ---------- */
+const TOUR=[
+ {img:'aerial',t:'Lift-off · The Central Spine',d:'The drone rises over the heart of the estate — sculpted walks, orange feature walls and the amphitheatre ring reading like a garden from above.',am:['Landscaped Green Courtyards','Signature Entrance Sculpture','Art Installation Zones']},
+ {img:'lawn',t:'The Celebration Lawn',d:'Concentric seating rings around mature trees — the township’s living room for evenings, festivals and slow Sundays.',am:['Celebration Lawn','Multipurpose Lawn & Seating','Outdoor Lounge Seating']},
+ {img:'pavilion',t:'The Seating Pavilion',d:'A shaded deck folded into flowering jarul and palm canopy — the quiet middle of the estate.',am:['Relaxation Gazebo','Garden Cabanas','Shaded Play Gazebo']},
+ {img:'featurewall',t:'The Sculpture Court',d:'Laterite-toned walls, quiet sculpture and lit pathways — Konkan material with gallery calm.',am:['Feature Walls','Wellness & Walking Pathway','Designer LED Avenue Lighting']},
+ {img:'rockgarden',t:'The Wellness Edge',d:'Raked stone and stepping slabs beside the courts — the active spine of the community.',am:['Nature-Inspired Reflexology Trail','Multi-Sport Arena','Open-Air Fitness Pavilion']},
+ {img:'kidsplay',t:'The Family Zone',d:'Climbing walls, soft courts and sand play under the tree line — built for children and grandparents alike.',am:['Children’s Adventure Play Park','Kids’ Sand Play Zone','Senior Citizens Harmony Court','Pet-Friendly Zone']},
+ {img:'amphitheatre',t:'Touchdown · The Creek',d:'Terraced steps face the water — the property’s natural stage, and the reason this land can honestly be called Aranya.',am:['Open-Air Amphitheatre','Creek-Side Deck','Yoga & Meditation Deck']}
+];
+document.getElementById('tour').innerHTML=TOUR.map((s,i)=>`
+<div class="stage" id="st${i}">
+  <div class="stick">
+    <div class="img" style="background-image:url(/unitree/${s.img}.jpg)"></div>
+    <div class="veil"></div>
+    <div class="hud"><span>Drone Tour · 0${i+1} / 0${TOUR.length}</span><span class="dotl">${TOUR.map((_,j)=>`<i${j===i?' class="on"':''}></i>`).join('')}</span></div>
+    <div class="card"><div class="no">— ZONE 0${i+1}</div><h3>${s.t}</h3><p>${s.d}</p>
+      <div class="am">${s.am.map(a=>`<span>${a}</span>`).join('')}</div></div>
+  </div>
+</div>`).join('');
+
+/* ---------- data: names ---------- */
+/* seo levels: 0=clean 1=moderate 2=crowded ; tm: g=favourable a=caution r=risky */
+const NAMES=[
+ {n:'ARANYA',d:'अरण्य',m:'Sanskrit — the deep forest',rec:1,tm:'g',seo:[2,0,0],
+  s:'"Aranya" alone is used in Indian real estate (Raheja Gurugram, Forum Kolkata, Doshi Indore) — but none in Konkan. The compound and every geo phrase are wide open.',
+  t:'Dictionary word alone is weak, but the UNITREE ARANYA compound wordmark is distinctive and registrable in Class 36/37 — the same way Raheja Aranya and Forum Aranya co-exist.',
+  v:'<b>Our recommendation.</b> Truth of the land + completes the one-tree story + clean compound runway.'},
+ {n:'VANYA',d:'वन्य',m:'Sanskrit — wild, of the forest',tm:'a',seo:[2,0,0],
+  s:'Popular as a girl’s name and in wellness brands, so bare-word search is noisy. Compound is clean.',
+  t:'Several VANYA marks exist across classes (cosmetics, textiles). Compound registrable, but expect a crowded-word examination.',
+  v:'Beautiful and feminine — a strong runner-up if Aranya feels too heavy.'},
+ {n:'VANAM',d:'वनम्',m:'Sanskrit/Tamil — forest, grove',tm:'g',seo:[1,0,0],
+  s:'Some South-Indian resort/restaurant use; near-zero real-estate collision in Maharashtra. Compound clean.',
+  t:'Few conflicting marks in Class 36/37 — a genuinely ownable compound.',
+  v:'The quiet sleeper pick — distinct, soft, and very protectable.'},
+ {n:'KANAN',d:'कानन',m:'Sanskrit — forest, garden',tm:'a',seo:[2,1,0],
+  s:'Common as a first name (and Kanan Devan tea) — search will always be split. Geo long-tail still winnable.',
+  t:'Existing KANAN marks in several classes; compound helps but distinctiveness is middling.',
+  v:'Lovely meaning, but the name-collision with people dilutes it.'},
+ {n:'BANYAN',d:'वट',m:'English — the great Indian fig tree',tm:'r',seo:[2,1,0],
+  s:'Instantly evocative, but "Banyan" search is owned by global hospitality.',
+  t:'<b>Banyan Tree</b> (global luxury resorts) holds broad marks incl. hospitality/real-estate adjacency — a well-funded opposition risk. Avoid.',
+  v:'Perfect metaphor, wrong legal neighbourhood. Skip.'},
+ {n:'NISARG',d:'निसर्ग',m:'Marathi — nature itself',tm:'a',seo:[2,1,0],
+  s:'Extremely common in Maharashtra RE ("Nisarg" societies everywhere) + the 2020 cyclone owns news search.',
+  t:'Dozens of NISARG-formative marks in Class 36/37 in Maharashtra — registrable but weak and hard to police.',
+  v:'Feels local and warm, but too generic in this exact market.'},
+ {n:'SAHYA',d:'सह्य',m:'From Sahyadri — the Western Ghats',tm:'g',seo:[1,0,0],
+  s:'Short, ownable, low collision; needs education that it refers to the Ghats.',
+  t:'Few conflicts; distinctive truncation makes a good mark.',
+  v:'Smart geographic nod — slightly cryptic to non-Marathi buyers.'},
+ {n:'KINARA',d:'किनारा',m:'Hindi/Marathi — the shore, the edge',tm:'a',seo:[2,1,0],
+  s:'Famous song + many restaurants named Kinara; search is nostalgic-noisy.',
+  t:'Multiple KINARA marks (food, hospitality). Compound registrable.',
+  v:'Romantic, but the property is valley-forest — shore reads slightly off.'},
+ {n:'TARANG',d:'तरंग',m:'Sanskrit — wave, ripple',tm:'a',seo:[2,1,0],
+  s:'Common brand word (media, events); moderate collision everywhere.',
+  t:'Crowded formative across classes; ownable as compound only.',
+  v:'Suits the creek, but sounds more festival than township.'},
+ {n:'SARITA',d:'सरिता',m:'Sanskrit — river',tm:'a',seo:[2,1,0],
+  s:'Very common female first name — search will never be clean.',
+  t:'Many SARITA marks; person-name weakness in examination.',
+  v:'Honours the creek, but too person-name to own.'},
+ {n:'GULMOHAR',d:'गुलमोहर',m:'The flame tree of May',tm:'a',seo:[2,1,0],
+  s:'One of India’s most-used colony names — high familiarity, low distinctiveness.',
+  t:'Heavily used in RE naming; compound registrable, weak to police.',
+  v:'Instantly pretty, instantly forgettable in a listings page.'},
+ {n:'VATIKA',d:'वाटिका',m:'Sanskrit — garden, orchard',tm:'r',seo:[2,1,0],
+  s:'"Vatika" search is owned by a large NCR developer + a haircare brand.',
+  t:'<b>Vatika Group</b> holds real-estate marks in exactly our classes — direct conflict territory. Avoid.',
+  v:'Disqualified on trademark, whatever its charm.'},
+ {n:'SHIVAR',d:'शिवार',m:'Marathi — open farmland, the village commons',tm:'g',seo:[1,0,0],
+  s:'Deeply Marathi, low national collision; niche familiarity outside Maharashtra.',
+  t:'Sparse conflicts; distinctive in Class 36/37.',
+  v:'The most rooted-in-soil option — earthy rather than premium.'},
+ {n:'ANANT',d:'अनंत',m:'Sanskrit — endless, infinite',tm:'a',seo:[2,1,0],
+  s:'Common name (and very famous bearers) — bare search unwinnable.',
+  t:'Many ANANT marks incl. real estate; compound-only protection.',
+  v:'Grand meaning, crowded reality.'},
+ {n:'VALE',d:'—',m:'English — a valley, poetic register',tm:'g',seo:[2,0,0],
+  s:'Generic English word; the compound "Unitree Vale" is clean and airy.',
+  t:'Generic alone; compound easily registrable. Low conflict.',
+  v:'The international-polish option — easy, elegant, less rooted.'},
+ {n:'SPRINGS',d:'—',m:'English — water rising from the land',tm:'g',seo:[2,1,0],
+  s:'Very common globally (Sandy Springs…); compound moderately clean in India.',
+  t:'Generic; compound registrable. Low conflict, low distinctiveness.',
+  v:'Fresh and kinetic — nods to creek and reservoir.'},
+ {n:'MEADOWS',d:'—',m:'English — open grassland',tm:'a',seo:[2,1,0],
+  s:'A default Indian township suffix for two decades — huge familiarity, zero freshness.',
+  t:'Everywhere in Class 36/37; compound registrable, generic feel.',
+  v:'Safe to the point of invisible.'},
+ {n:'WOODS',d:'—',m:'English — the forest, casual register',tm:'a',seo:[2,1,0],
+  s:'Common RE suffix; compound moderately clean.',
+  t:'Widely used; compound registrable, weak mark.',
+  v:'Says forest without the poetry — Aranya says it better.'}
+];
+const LVL=[['Clean runway','8%','grn'],['Moderate','48%','amb'],['Crowded','90%','red']];
+const TMP={g:['TM Favourable','grn'],a:['TM Caution','amb'],r:['TM Risky','red']};
+document.getElementById('namegrid').innerHTML=NAMES.map((x,i)=>`
+ <div class="nc${x.rec?' rec':''}" onclick="openMod(${i})">
+   <h3>${x.n}</h3><div class="mn">${x.m}</div>
+   <div class="ft"><span class="pill ${TMP[x.tm][1]}">${TMP[x.tm][0]}</span><span class="go">VIEW →</span></div>
+ </div>`).join('');
+
+function hap(ms){try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
+function openMod(i){const x=NAMES[i];hap(10);
+  document.getElementById('mN').textContent=x.n;
+  document.getElementById('mD').textContent=x.d==='—'?'':x.d;
+  document.getElementById('mM').textContent=x.m;
+  ['mb1','mb2','mb3'].forEach((id,k)=>{const el=document.getElementById(id);const L=LVL[x.seo[k]];
+    el.className='mbar '+L[2];
+    el.querySelectorAll('.w').forEach(w=>w.textContent=x.n.charAt(0)+x.n.slice(1).toLowerCase());
+    el.querySelector('.s').textContent=L[0];
+    const f=el.querySelector('.fl');f.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=L[1]))});
+  document.getElementById('mSeo').innerHTML=x.s;
+  document.getElementById('mTm').innerHTML=x.t;
+  const p=document.getElementById('mTmPill');p.className='pill '+TMP[x.tm][1];p.textContent=TMP[x.tm][0];
+  document.getElementById('mV').innerHTML=x.v;
+  document.getElementById('nmod').classList.add('show');document.body.style.overflow='hidden'}
+function closeMod(){document.getElementById('nmod').classList.remove('show');document.body.style.overflow=''}
+addEventListener('keydown',e=>{if(e.key==='Escape')closeMod()});
+
+/* swatch copy + haptic */
+document.querySelectorAll('.sw2').forEach(s=>s.addEventListener('click',()=>{hap(10);
+  const h=s.dataset.hex;try{navigator.clipboard.writeText(h)}catch(e){}
+  const b=s.querySelector('.i b'),o=b.textContent;b.textContent=h+' copied';setTimeout(()=>b.textContent=o,1200)}));
+
 /* splash */
 addEventListener('load',()=>{setTimeout(()=>document.getElementById('splash').classList.add('gone'),900)});
-setTimeout(()=>document.getElementById('splash').classList.add('gone'),2600); /* failsafe */
+setTimeout(()=>document.getElementById('splash').classList.add('gone'),2600);
 
-/* progress + nav */
+/* scroll: progress, nav, parallax, drone zoom */
 const nav=document.getElementById('nav'),pbar=document.getElementById('pbar');
 function onScroll(){
   const h=document.documentElement,max=h.scrollHeight-innerHeight;
-  pbar.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+  pbar.style.width=(max>0?scrollY/max*100:0)+'%';
   nav.classList.toggle('solid',scrollY>innerHeight*.85);
-  /* parallax */
   document.querySelectorAll('[data-par]').forEach(el=>{
     const r=el.parentElement.getBoundingClientRect();
     if(r.bottom<0||r.top>innerHeight)return;
     const p=(r.top+r.height/2-innerHeight/2)/innerHeight;
     el.style.transform='translateY('+(p*r.height*+el.dataset.par).toFixed(1)+'px)';
+  });
+  document.querySelectorAll('.stage').forEach(st=>{
+    const r=st.getBoundingClientRect();
+    if(r.bottom<0||r.top>innerHeight)return;
+    const p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));
+    const img=st.querySelector('.img');
+    img.style.transform='scale('+(1+.22*p).toFixed(3)+') translateY('+(-3*p).toFixed(2)+'%)';
+    st.classList.toggle('live',p>.06&&p<1);
   });
 }
 addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});onScroll();
@@ -487,18 +667,16 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(!e.isIntersecting)return;
   e.target.classList.add('in');
   if(e.target.id==='bigname')e.target.classList.add('play');
-  if(e.target.id==='treeline')e.target.classList.add('play');
-  if(e.target.classList.contains('fl'))e.target.style.width=e.target.dataset.w;
+  if(e.target.id==='markbox')e.target.classList.add('play');
+  if(e.target.classList.contains('fl')&&e.target.dataset.w)e.target.style.width=e.target.dataset.w;
   if(e.target.dataset.cnt)runCnt(e.target);
   io.unobserve(e.target);
 }),{threshold:.18});
-document.querySelectorAll('.rv,.stat,#bigname,#treeline,.fl,[data-cnt]').forEach(el=>io.observe(el));
-
-/* count-up */
+document.querySelectorAll('.rv,.stat,#bigname,#markbox,.bar .fl,[data-cnt]').forEach(el=>io.observe(el));
 function runCnt(el){
   const end=+el.dataset.cnt,t0=performance.now(),dur=1300;
-  function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
-    el.textContent=Math.round(end*e);if(p<1)requestAnimationFrame(step)}
+  function step(t){const p=Math.min(1,(t-t0)/dur),e2=1-Math.pow(1-p,3);
+    el.textContent=Math.round(end*e2);if(p<1)requestAnimationFrame(step)}
   requestAnimationFrame(step);
 }
 </script>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Indian Watch Gallery — Typographic Logo Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Italiana&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Marcellus&family=Jost:wght@200;300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14161A; --ivory:#F4F0E8; --paper:#FAF7F1; --gold:#C0964F; --gold-2:#D9BC85;
+  --mute:#6E6A61; --line:rgba(20,22,26,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:clip}
+.wrap{max-width:1240px;margin:0 auto;padding:0 4vw}
+header{padding:90px 0 60px;border-bottom:1px solid var(--line)}
+.kick{font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:700}
+h1{font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(2.2rem,5vw,3.8rem);margin:16px 0 14px;letter-spacing:.01em}
+.lead{color:var(--mute);max-width:64ch;line-height:1.7;font-weight:300;font-size:1.02rem}
+.concept{padding:70px 0;border-bottom:1px solid var(--line)}
+.chead{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.cno{font-size:.7rem;letter-spacing:.3em;color:var(--gold);font-weight:700;text-transform:uppercase}
+.chead h2{font-family:'Bodoni Moda',serif;font-weight:500;font-size:1.7rem}
+.chead .fonts{font-size:.74rem;color:var(--mute);letter-spacing:.06em}
+.boards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.board{border:1px solid var(--line);border-radius:18px;min-height:300px;display:flex;align-items:center;justify-content:center;padding:48px 30px;position:relative;overflow:clip}
+.board.light{background:var(--ivory)}
+.board.dark{background:var(--ink)}
+.board .tag{position:absolute;top:14px;left:18px;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;font-weight:700;color:var(--mute);opacity:.7}
+.board.dark .tag{color:var(--gold-2)}
+.why{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.why p{font-size:.86rem;color:var(--mute);line-height:1.7;font-weight:300}
+.why p b{color:var(--ink);font-weight:600}
+.why .use{font-size:.78rem;line-height:1.8}
+.lk{text-align:center}
+
+/* C1 — Didone House */
+.c1 .top{font-family:'Bodoni Moda',serif;font-size:clamp(2rem,4.6vw,3.4rem);font-weight:500;letter-spacing:.04em;color:var(--ink)}
+.c1 .top em{font-style:italic;font-weight:400}
+.c1 .sub{margin-top:10px;font-family:'Outfit';font-weight:500;font-size:.66rem;letter-spacing:.62em;text-transform:uppercase;color:var(--gold)}
+.dark .c1 .top{color:var(--ivory)} .dark .c1 .sub{color:var(--gold-2)}
+
+/* C2 — Dial monogram */
+.c2{display:flex;flex-direction:column;align-items:center;gap:18px}
+.c2 svg{width:150px;height:150px}
+.c2 .wm{font-family:'Italiana',serif;font-size:clamp(1.3rem,2.6vw,1.9rem);letter-spacing:.34em;text-transform:uppercase;color:var(--ink);text-align:center;padding-left:.34em}
+.dark .c2 .wm{color:var(--ivory)}
+
+/* C3 — Deco stack */
+.c3{text-align:center}
+.c3 .l1{font-family:'Cinzel',serif;font-weight:500;font-size:clamp(1.4rem,3vw,2.1rem);letter-spacing:.5em;padding-left:.5em;color:var(--ink)}
+.c3 .rule{display:flex;align-items:center;gap:14px;margin:12px 0}
+.c3 .rule i{flex:1;height:1px;background:var(--gold)}
+.c3 .rule span{font-family:'Cinzel';font-size:.66rem;letter-spacing:.5em;padding-left:.5em;color:var(--gold);font-weight:600}
+.c3 .l3{font-family:'Cinzel',serif;font-weight:400;font-size:clamp(.95rem,1.9vw,1.3rem);letter-spacing:.72em;padding-left:.72em;color:var(--ink)}
+.dark .c3 .l1,.dark .c3 .l3{color:var(--ivory)}
+
+/* C4 — Editorial */
+.c4{text-align:center}
+.c4 .in{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(2.2rem,5vw,3.6rem);color:var(--ink);line-height:1}
+.c4 .wg{font-family:'Cinzel',serif;font-weight:500;font-size:clamp(1rem,2.2vw,1.5rem);letter-spacing:.42em;padding-left:.42em;color:var(--ink);margin-top:8px}
+.c4 .est{margin-top:14px;font-size:.6rem;letter-spacing:.4em;color:var(--gold);font-weight:700;text-transform:uppercase}
+.dark .c4 .in,.dark .c4 .wg{color:var(--ivory)}
+
+/* C5 — Modern vault */
+.c5{text-align:center}
+.c5 .row{font-family:'Jost',sans-serif;font-weight:300;font-size:clamp(1.1rem,2.6vw,1.8rem);letter-spacing:.58em;padding-left:.58em;text-transform:uppercase;color:var(--ink)}
+.c5 .mid{display:flex;align-items:center;justify-content:center;gap:16px;margin:14px 0}
+.c5 .mid i{width:44px;height:1px;background:var(--gold)}
+.c5 .mid b{font-family:'Jost';font-weight:500;font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:.5em;padding-left:.5em;color:var(--ink)}
+.dark .c5 .row,.dark .c5 .mid b{color:var(--ivory)}
+
+/* C6 — Ten past ten */
+.c6{display:flex;flex-direction:column;align-items:center;gap:16px}
+.c6 .mono{font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(3rem,7vw,5rem);letter-spacing:.08em;color:var(--ink);line-height:1;display:flex;align-items:baseline}
+.c6 .mono .vv{position:relative;display:inline-block}
+.c6 .mono .vv svg{position:absolute;left:50%;top:54%;width:.52em;height:.52em;transform:translate(-50%,-50%)}
+.c6 .wm2{font-family:'Marcellus',serif;font-size:clamp(.9rem,1.9vw,1.25rem);letter-spacing:.4em;padding-left:.4em;text-transform:uppercase;color:var(--ink)}
+.dark .c6 .mono,.dark .c6 .wm2{color:var(--ivory)}
+
+/* verdict + palette */
+.verd{padding:80px 0}
+.verd h2{font-family:'Bodoni Moda',serif;font-weight:500;font-size:2rem;margin-bottom:16px}
+.verd p{color:var(--mute);max-width:70ch;line-height:1.75;font-weight:300}
+.verd p b{color:var(--ink);font-weight:600}
+.pal{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.pal .s{width:150px;border-radius:14px;overflow:clip;border:1px solid var(--line)}
+.pal .c{height:76px}
+.pal .i{padding:10px 12px;font-size:.66rem;color:var(--mute);letter-spacing:.05em;line-height:1.5}
+.pal .i b{display:block;color:var(--ink);font-size:.74rem;letter-spacing:0}
+footer{padding:40px 4vw;text-align:center;font-size:.72rem;color:var(--mute);letter-spacing:.1em;border-top:1px solid var(--line)}
+@media(max-width:860px){.boards,.why{grid-template-columns:1fr}.board{min-height:240px}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="kick">Sage Media · Brand Identity</div>
+  <h1>Indian Watch Gallery</h1>
+  <p class="lead">Six typographic logo directions for a luxury watch house — buying, selling and curating fine timepieces. Pure type, no gimmicks: the letters themselves must feel like a well-finished dial. Each direction is shown on ivory and on charcoal with champagne gold.</p>
+</div></header>
+
+<!-- C1 -->
+<section class="concept"><div class="wrap">
+  <div class="chead"><div><div class="cno">Direction 01</div><h2>The Didone House</h2></div><div class="fonts">Bodoni Moda + Outfit caps</div></div>
+  <div class="boards">
+    <div class="board light"><div class="tag">Primary · Ivory</div><div class="c1 lk"><div class="top">Indian <em>Watch</em> Gallery</div><div class="sub">Fine Timepieces · Bought & Sold</div></div></div>
+    <div class="board dark"><div class="tag">Primary · Charcoal</div><div class="c1 lk"><div class="top">Indian <em>Watch</em> Gallery</div><div class="sub">Fine Timepieces · Bought & Sold</div></div></div>
+  </div>
+  <div class="why"><p><b>Why it works:</b> Bodoni is the typeface of Vogue and vintage Rolex adverts — high-contrast strokes that read as precision engineering. The italic "Watch" adds a collector's flourish without any icon.</p><p class="use"><b>Best for:</b> storefront fascia, certificates of authenticity, hang tags, Instagram grid covers.</p></div>
+</div></section>
+
+<!-- C2 -->
+<section class="concept"><div class="wrap">
+  <div class="chead"><div><div class="cno">Direction 02</div><h2>The Dial Monogram</h2></div><div class="fonts">Italiana + custom dial ring</div></div>
+  <div class="boards">
+    <div class="board light"><div class="tag">Monogram + wordmark</div><div class="c2">
+      <svg viewBox="0 0 120 120"><g fill="none" stroke="#C0964F" stroke-width="1.6"><circle cx="60" cy="60" r="55"/><circle cx="60" cy="60" r="49" opacity=".35"/><path d="M60 6v7M60 107v7M6 60h7M107 60h7" stroke-width="2"/><path d="M87 13.2l-3.5 6M33 100.8l3.5-6M13.2 33l6 3.5M100.8 87l-6-3.5M33 13.2l3.5 6M87 100.8l-3.5-6M13.2 87l6-3.5M100.8 33l-6 3.5" opacity=".5"/></g><text x="60" y="72" text-anchor="middle" font-family="Italiana,serif" font-size="34" letter-spacing="2" fill="#14161A">IWG</text></svg>
+      <div class="wm">Indian Watch Gallery</div></div></div>
+    <div class="board dark"><div class="tag">Monogram + wordmark</div><div class="c2">
+      <svg viewBox="0 0 120 120"><g fill="none" stroke="#D9BC85" stroke-width="1.6"><circle cx="60" cy="60" r="55"/><circle cx="60" cy="60" r="49" opacity=".35"/><path d="M60 6v7M60 107v7M6 60h7M107 60h7" stroke-width="2"/><path d="M87 13.2l-3.5 6M33 100.8l3.5-6M13.2 33l6 3.5M100.8 87l-6-3.5M33 13.2l3.5 6M87 100.8l-3.5-6M13.2 87l6-3.5M100.8 33l-6 3.5" opacity=".5"/></g><text x="60" y="72" text-anchor="middle" font-family="Italiana,serif" font-size="34" letter-spacing="2" fill="#F4F0E8">IWG</text></svg>
+      <div class="wm">Indian Watch Gallery</div></div></div>
+  </div>
+  <div class="why"><p><b>Why it works:</b> the IWG monogram sits inside a minute-track ring — the one drawing every watch lover recognises. Italiana's hairline caps keep it gallery-thin. Works at 24px as an app icon or wax seal.</p><p class="use"><b>Best for:</b> social avatar, watch cushions, packaging seal, embroidery on service pouches.</p></div>
+</div></section>
+
+<!-- C3 -->
+<section class="concept"><div class="wrap">
+  <div class="chead"><div><div class="cno">Direction 03</div><h2>The Deco Marquee</h2></div><div class="fonts">Cinzel, letterspaced stack</div></div>
+  <div class="boards">
+    <div class="board light"><div class="tag">Stacked · Ivory</div><div class="c3 lk"><div class="l1">INDIAN</div><div class="rule"><i></i><span>WATCH</span><i></i></div><div class="l3">GALLERY</div></div></div>
+    <div class="board dark"><div class="tag">Stacked · Charcoal</div><div class="c3 lk"><div class="l1">INDIAN</div><div class="rule"><i></i><span>WATCH</span><i></i></div><div class="l3">GALLERY</div></div></div>
+  </div>
+  <div class="why"><p><b>Why it works:</b> Cinzel's Roman capitals with art-deco letterspacing echo the 1930s jewellery-house marquees of Bombay's heritage arcades — "gallery" energy, Indian deco heritage, zero cliché.</p><p class="use"><b>Best for:</b> door signage, window vinyl, velvet display trays, invoice masthead.</p></div>
+</div></section>
+
+<!-- C4 -->
+<section class="concept"><div class="wrap">
+  <div class="chead"><div><div class="cno">Direction 04</div><h2>The Editorial Mix</h2></div><div class="fonts">Cormorant italic + Cinzel caps</div></div>
+  <div class="boards">
+    <div class="board light"><div class="tag">Primary · Ivory</div><div class="c4 lk"><div class="in">Indian</div><div class="wg">WATCH GALLERY</div><div class="est">Curators of Fine Time</div></div></div>
+    <div class="board dark"><div class="tag">Primary · Charcoal</div><div class="c4 lk"><div class="in">Indian</div><div class="wg">WATCH GALLERY</div><div class="est">Curators of Fine Time</div></div></div>
+  </div>
+  <div class="why"><p><b>Why it works:</b> the italic "Indian" is warm and human — a signature — while the caps beneath do the institutional work. The contrast says "personally curated, professionally run", which is exactly a resale house's promise.</p><p class="use"><b>Best for:</b> website masthead, lookbook covers, framed in-store heritage wall.</p></div>
+</div></section>
+
+<!-- C5 -->
+<section class="concept"><div class="wrap">
+  <div class="chead"><div><div class="cno">Direction 05</div><h2>The Modern Vault</h2></div><div class="fonts">Jost light, wide tracking</div></div>
+  <div class="boards">
+    <div class="board light"><div class="tag">Primary · Ivory</div><div class="c5 lk"><div class="row">Indian</div><div class="mid"><i></i><b>WATCH</b><i></i></div><div class="row">Gallery</div></div></div>
+    <div class="board dark"><div class="tag">Primary · Charcoal</div><div class="c5 lk"><div class="row">Indian</div><div class="mid"><i></i><b>WATCH</b><i></i></div><div class="row">Gallery</div></div></div>
+  </div>
+  <div class="why"><p><b>Why it works:</b> geometric light caps with vault-door symmetry — the direction for a brand that wants to feel like Chrono24 met a private bank. Cleanest at small digital sizes of all six.</p><p class="use"><b>Best for:</b> app UI, listing watermarks, dark-mode website, YouTube end cards.</p></div>
+</div></section>
+
+<!-- C6 -->
+<section class="concept"><div class="wrap">
+  <div class="chead"><div><div class="cno">Direction 06</div><h2>Ten Past Ten</h2></div><div class="fonts">Bodoni Moda monogram + Marcellus</div></div>
+  <div class="boards">
+    <div class="board light"><div class="tag">Monogram + wordmark</div><div class="c6 lk">
+      <div class="mono">I<span class="vv">O<svg viewBox="0 0 40 40"><g stroke="#C0964F" stroke-width="3" stroke-linecap="round"><path d="M20 22V8"/><path d="M20 22L9 13"/></g><circle cx="20" cy="22" r="2.6" fill="#C0964F"/></svg></span>G</div>
+      <div class="wm2">Indian Watch Gallery</div></div></div>
+    <div class="board dark"><div class="tag">Monogram + wordmark</div><div class="c6 lk">
+      <div class="mono">I<span class="vv">O<svg viewBox="0 0 40 40"><g stroke="#D9BC85" stroke-width="3" stroke-linecap="round"><path d="M20 22V8"/><path d="M20 22L9 13"/></g><circle cx="20" cy="22" r="2.6" fill="#D9BC85"/></svg></span>G</div>
+      <div class="wm2">Indian Watch Gallery</div></div></div>
+  </div>
+  <div class="why"><p><b>Why it works:</b> the W becomes an O-cased dial holding hands at <b>10:10</b> — the position every watch is photographed in. It's still a three-letter typographic mark (I·O·G reads as the case around IWG), but collectors will smile the moment they see it.</p><p class="use"><b>Best for:</b> the brand's "hidden detail" — watch pouches, buckle engraving, loading animation on the site.</p></div>
+</div></section>
+
+<!-- verdict -->
+<section class="verd"><div class="wrap">
+  <h2>Our recommendation</h2>
+  <p><b>Lead with Direction 01 (The Didone House)</b> as the primary wordmark — it carries the most luxury authority per square inch — and pair it with <b>Direction 02 (The Dial Monogram)</b> as the compact mark for avatars, seals and packaging. The two share the same champagne-gold-on-charcoal system and cover every size from a hoarding to a WhatsApp DP. Direction 06 is the collector's easter egg if the brand wants one.</p>
+  <div class="pal">
+    <div class="s"><div class="c" style="background:#14161A"></div><div class="i"><b>Case-back Charcoal</b>#14161A · primary ground</div></div>
+    <div class="s"><div class="c" style="background:#C0964F"></div><div class="i"><b>Champagne Gold</b>#C0964F · the metal, used sparingly</div></div>
+    <div class="s"><div class="c" style="background:#F4F0E8"></div><div class="i"><b>Ivory Dial</b>#F4F0E8 · paper & light ground</div></div>
+    <div class="s"><div class="c" style="background:#2E4038"></div><div class="i"><b>Vault Green</b>#2E4038 · optional accent (velvet trays)</div></div>
+  </div>
+</div></section>
+
+<footer>Indian Watch Gallery — typographic logo concepts · prepared by Sage Media · July 2026</footer>
+</body>
+</html>

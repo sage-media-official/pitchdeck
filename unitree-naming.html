@@ -303,12 +303,17 @@ nav.solid .b,nav.solid .lk a{text-shadow:none}
 .stat .v,.pf .n{font-weight:600}
 .marq .tk{font-weight:600;font-size:.92rem}
 .mark .wm b{font-weight:700}
-/* consistent text column: hero + tour align to the same 1180px container as .wrap */
+/* consistent full-width text column: everything aligns to the nav edge (4vw) */
+.wrap{max-width:none;padding:0 4vw}
+footer .cols{max-width:none;padding:0 0}
+footer{padding-left:4vw;padding-right:4vw}
 #hero .inner{padding-left:0;padding-right:0}
 #hero .inner .wrap{width:100%}
-.stage .lay{position:absolute;inset:0;max-width:1180px;margin:0 auto;pointer-events:none}
-.stage .hud{left:5vw;right:5vw}
-.stage .card{left:5vw}
+.stage .lay{position:absolute;inset:0;pointer-events:none}
+.stage .hud{left:4vw;right:4vw}
+.stage .card{left:4vw}
+.lead{max-width:760px}
+.namegrid{grid-template-columns:repeat(auto-fill,minmax(224px,1fr))}
 </style>
 </head>
 <body>

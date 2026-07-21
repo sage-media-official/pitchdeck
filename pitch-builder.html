@@ -1722,6 +1722,18 @@ function openLib(){renderLib();$('libModal').classList.add('show')}
 function renderLib(){
   const a=libAll().slice().sort((x,y)=>(y.updated||'').localeCompare(x.updated||''));
   $('libList').innerHTML=a.length?a.map(e=>{
+    if(e.ext){ /* standalone presentation pages hosted on the platform (not builder pitches) */
+      return `
+   <div class="mg-item" style="background:#fff">
+     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+       <div style="flex:1;min-width:150px"><b style="color:var(--sage-9)">${esc(e.name)}</b>
+         <div style="font-size:.72rem;color:var(--mute)">${esc(e.cat)} · standalone presentation</div>
+         <div style="font-size:.72rem;margin-top:3px;font-weight:600;color:var(--accent-2)">● Always live</div></div>
+       <button class="btn primary" onclick="window.open('https://pitchdeck-phi-weld.vercel.app${e.ext}','_blank')">Open</button>
+       <button class="btn" onclick="copyExtLink('${e.ext}')">Copy link</button>
+       <button class="btn danger" onclick="deleteFromLib('${e.id}')">✕</button>
+     </div>
+   </div>`}
     const live=e.share&&e.share.on!==false&&e.share.exp>Date.now();
     const till=live?new Date(e.share.exp).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):null;
     return `
@@ -1736,6 +1748,8 @@ function renderLib(){
        <button class="btn danger" onclick="deleteFromLib('${e.id}')">✕</button>
      </div>
    </div>`}).join(''):'<p style="color:var(--mute);font-size:.9rem">Nothing saved yet — generate a pitch and it lands here automatically.</p>'}
+async function copyExtLink(p){const u='https://pitchdeck-phi-weld.vercel.app'+p;
+  try{await navigator.clipboard.writeText(u);toast('Link copied')}catch(e){prompt('Copy link:',u)}}
 async function copyLinkFor(id){const a=libAll();const e=a.find(x=>x.id===id);if(!e)return;
   let live=e.share&&e.share.on!==false&&e.share.exp>Date.now();
   if(!live){e.share=await mintLink(e.id,e.data,e.design??14,e.theme??0,e.pricing);libWrite(a)}
@@ -1758,13 +1772,16 @@ function deleteFromLib(id){const a=libAll().filter(x=>x.id!==id);libWrite(a);ren
 /* the platform ships with the Mach Five proposal pre-saved (re-seeded when its content is upgraded; stays deleted if you delete it after that) */
 function seedLib(){try{
   if(document.documentElement.classList.contains('viewer'))return;
-  const V='sage_lib_seed_v6';
+  const V='sage_lib_seed_v7';
   if(localStorage.getItem(V))return;
   const a=libAll();const now=new Date().toISOString();
   const entry={id:'mach-five',name:'Mach Five',cat:DEMO.f_category,created:now,updated:now,design:8,theme:22,data:DEMO,comments:[],edits:[]};
   const i=a.findIndex(x=>x.id==='mach-five');
   /* content upgrades must never wipe the user's own edits, pricing or live link */
   if(i>=0)a[i]={...entry,created:a[i].created,edits:a[i].edits||[],pricing:a[i].pricing||null,share:a[i].share,comments:a[i].comments||[]};else a.push(entry);
+  const u={id:'unitree-naming',name:'UNITREE ARANYA — Township Naming',cat:'Real Estate',created:now,updated:now,ext:'/unitree-naming'};
+  const j=a.findIndex(x=>x.id==='unitree-naming');
+  if(j>=0)a[j]={...u,created:a[j].created};else a.unshift(u);
   libWrite(a);localStorage.setItem(V,'1')
 }catch(e){}}
 document.addEventListener('DOMContentLoaded',()=>{seedLib();$('libCnt').textContent=libAll().length});

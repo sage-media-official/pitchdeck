@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Shabbir Enterprises × Sage Media — Social Media & Content Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#161513; --bg2:#1E1C19; --card:#211F1C; --ivory:#F4F1EA; --paper:#F7F4EE;
+  --orange:#E8541F; --orange2:#F07B4A; --mute:#9C968A; --mute-d:#6E695F; --line:rgba(244,241,234,.12); --line-l:rgba(22,21,19,.12);
+  --slab:'Roboto Slab',Georgia,serif; --sans:'Outfit',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ivory);-webkit-font-smoothing:antialiased;overflow-x:clip}
+.wrap{max-width:1160px;margin:0 auto;padding:0 5vw}
+section{position:relative}
+.eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);font-weight:700}
+h2{font-family:var(--slab);font-weight:700;font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.14;margin:16px 0 0}
+.lead{color:var(--mute);max-width:640px;line-height:1.75;font-weight:300;font-size:1rem;margin-top:18px}
+.lead b{color:var(--ivory);font-weight:600}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+/* cover */
+#cover{min-height:92svh;display:flex;align-items:center;position:relative;overflow:clip}
+#cover .rings{position:absolute;right:-160px;bottom:-160px;width:560px;height:560px;pointer-events:none}
+#cover .rings div{position:absolute;border-radius:50%}
+#cover .r1{inset:0;background:#3A2318}
+#cover .r2{inset:90px;background:#6B3018}
+#cover .r3{inset:190px;background:var(--orange)}
+#cover .inner{position:relative;width:100%;padding:80px 0}
+#cover .pre{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--orange);font-weight:700}
+#cover h1{font-family:var(--slab);font-weight:700;font-size:clamp(2.3rem,6vw,4.4rem);line-height:1.12;margin:26px 0 0;max-width:19ch}
+#cover h1 em{font-style:normal;color:var(--orange)}
+#cover .sub{margin-top:26px;color:var(--mute);max-width:56ch;line-height:1.75;font-weight:300}
+#cover .sig{margin-top:56px;border-top:2px solid var(--orange);padding-top:14px;display:inline-block;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+
+/* scope checklist */
+#scope{background:var(--paper);color:#161513;padding:110px 0}
+#scope .eyebrow{color:var(--orange)}
+#scope .lead{color:#5C574D}
+.scopegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:50px}
+.sc{background:#fff;border:1px solid var(--line-l);border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;gap:12px}
+.sc .tick{width:30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700}
+.sc b{font-family:var(--slab);font-weight:600;font-size:1.02rem}
+.sc span{font-size:.78rem;color:#6E695F;line-height:1.55;font-weight:300}
+
+/* deliverables */
+#deliver{padding:110px 0}
+.delgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:50px}
+.dc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 22px}
+.dc .n{font-family:var(--slab);font-size:2.4rem;font-weight:700;color:var(--orange);line-height:1}
+.dc .n small{font-size:1rem;color:var(--mute)}
+.dc b{display:block;margin-top:10px;font-size:.95rem;font-weight:600}
+.dc span{display:block;margin-top:6px;font-size:.76rem;color:var(--mute);line-height:1.55;font-weight:300}
+.delnote{margin-top:22px;background:var(--orange);color:#fff;border-radius:12px;padding:16px 22px;font-size:.86rem;font-weight:500;line-height:1.6}
+
+/* pillars */
+#pillars{background:var(--bg2);padding:110px 0}
+.pilgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:50px}
+.pil{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 26px}
+.pil .tag{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);font-weight:700}
+.pil h3{font-family:var(--slab);font-weight:600;font-size:1.2rem;margin:10px 0 10px}
+.pil p{font-size:.85rem;color:var(--mute);line-height:1.7;font-weight:300}
+.pil p b{color:var(--ivory);font-weight:600}
+
+/* rhythm */
+#rhythm{padding:110px 0}
+.steps{margin-top:50px;display:grid;gap:0}
+.step{display:grid;grid-template-columns:130px 220px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .w{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);font-weight:700}
+.step b{font-family:var(--slab);font-weight:600;font-size:1.05rem}
+.step p{font-size:.85rem;color:var(--mute);line-height:1.65;font-weight:300}
+
+/* ads */
+#ads{background:var(--paper);color:#161513;padding:110px 0}
+#ads .lead{color:#5C574D}
+.adgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:50px}
+.adc{background:#fff;border:1px solid var(--line-l);border-radius:16px;padding:28px 26px}
+.adc h3{font-family:var(--slab);font-weight:600;font-size:1.15rem;margin-bottom:12px}
+.adc li{list-style:none;font-size:.85rem;color:#5C574D;line-height:1.65;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line-l);font-weight:300}
+.adc li:first-of-type{border-top:0;padding-top:0}
+.adc li::before{content:'→';position:absolute;left:0;color:var(--orange);font-weight:600}
+.adc li b{color:#161513;font-weight:600}
+.adnote{margin-top:22px;background:#161513;color:var(--ivory);border-radius:12px;padding:18px 24px;font-size:.82rem;font-weight:300;line-height:1.7}
+.adnote b{color:var(--orange2);font-weight:600}
+
+/* pricing */
+#price{padding:110px 0}
+.pricegrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:50px}
+.pc{border:1px solid var(--line);border-radius:20px;padding:36px 32px;background:var(--card);position:relative}
+.pc.hero{background:var(--orange);border-color:var(--orange)}
+.pc .t{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;font-weight:700;color:var(--orange)}
+.pc.hero .t{color:rgba(255,255,255,.85)}
+.pc h3{font-family:var(--slab);font-weight:700;font-size:1.4rem;margin:12px 0 4px}
+.pc .amt{font-family:var(--slab);font-weight:700;font-size:clamp(2.2rem,4.5vw,3.2rem);margin:14px 0 2px}
+.pc .per{font-size:.78rem;color:var(--mute);font-weight:400}
+.pc.hero .per{color:rgba(255,255,255,.8)}
+.pc ul{margin-top:22px}
+.pc li{list-style:none;font-size:.85rem;line-height:1.6;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line);font-weight:300;color:var(--mute)}
+.pc.hero li{border-top-color:rgba(255,255,255,.25);color:rgba(255,255,255,.92)}
+.pc li::before{content:'✓';position:absolute;left:0;color:var(--orange);font-weight:700}
+.pc.hero li::before{color:#fff}
+.pc li:first-of-type{border-top:0;padding-top:0}
+.totbar{margin-top:22px;border:1px dashed rgba(232,84,31,.5);border-radius:14px;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.totbar b{font-family:var(--slab);font-size:1.2rem}
+.totbar .amt2{font-family:var(--slab);font-weight:700;font-size:1.7rem;color:var(--orange)}
+.finep{margin-top:16px;font-size:.74rem;color:var(--mute-d);line-height:1.7}
+
+/* proof + next */
+#proof{background:var(--bg2);padding:110px 0}
+.proofgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:50px}
+.pf2{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 28px}
+.pf2 h3{font-family:var(--slab);font-weight:600;font-size:1.15rem;margin-bottom:10px}
+.pf2 p{font-size:.85rem;color:var(--mute);line-height:1.7;font-weight:300}
+.pf2 a{display:inline-flex;margin-top:16px;background:var(--orange);color:#fff;text-decoration:none;border-radius:100px;padding:12px 24px;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+#next{padding:110px 0 90px}
+footer{background:#0F0E0C;padding:38px 5vw;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.76rem;color:var(--mute)}
+footer b{color:var(--ivory)}
+footer .o{color:var(--orange)}
+
+@media(max-width:960px){.scopegrid,.delgrid{grid-template-columns:1fr 1fr}.pilgrid,.adgrid,.pricegrid,.proofgrid{grid-template-columns:1fr}.step{grid-template-columns:1fr;gap:6px}}
+@media(max-width:520px){.scopegrid,.delgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="rings"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
+  <div class="wrap inner">
+    <div class="pre rv">Prepared for Shabbir Enterprises LLC · Dubai, UAE</div>
+    <h1 class="rv d1">Social media &amp; content creation.<br><em>Scoped exactly as you asked.</em></h1>
+    <p class="sub rv d2">Following our meeting and the full growth proposal, this is the focused plan for the piece you want to start with: content production, publishing and ads for @shabbirenterprises — done to the standard of the demo posts we've already shared.</p>
+    <div class="sig rv d3">Sage Media · Jaipur · Mumbai · Dubai</div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section id="scope"><div class="wrap">
+  <div class="eyebrow rv">01 — The Scope</div>
+  <h2 class="rv d1">Everything you listed. Nothing you didn't.</h2>
+  <div class="scopegrid">
+    <div class="sc rv"><div class="tick">✓</div><b>Static posts</b><span>Product, certification and safety creatives in the LIFMEX visual system.</span></div>
+    <div class="sc rv d1"><div class="tick">✓</div><b>Reels</b><span>Jobsite-grade product and education reels, shot and cut for Instagram &amp; Facebook.</span></div>
+    <div class="sc rv d2"><div class="tick">✓</div><b>Script writing</b><span>Every reel scripted — hook, beats, VO and captions — before anything is shot.</span></div>
+    <div class="sc rv d3"><div class="tick">✓</div><b>Shoots</b><span>Scheduled shoot days at your warehouse and client sites, planned shot-lists.</span></div>
+    <div class="sc rv"><div class="tick">✓</div><b>Editing</b><span>Full post-production — grade, cut, motion text, subtitles, sound.</span></div>
+    <div class="sc rv d1"><div class="tick">✓</div><b>Posting on platforms</b><span>Instagram, Facebook &amp; LinkedIn — published by us, captions and alt-text included.</span></div>
+    <div class="sc rv d2"><div class="tick">✓</div><b>Scheduling</b><span>A monthly content calendar, approved by you before anything goes live.</span></div>
+    <div class="sc rv d3"><div class="tick">✓</div><b>Running ads</b><span>Meta &amp; Google campaigns built from the same creative — managed end to end.</span></div>
+  </div>
+</div></section>
+
+<!-- DELIVERABLES -->
+<section id="deliver"><div class="wrap">
+  <div class="eyebrow rv">02 — Every Month, Delivered</div>
+  <h2 class="rv d1">What lands on your pages each month.</h2>
+  <div class="delgrid">
+    <div class="dc rv"><div class="n">10</div><b>Static posts</b><span>Product heroes, certification proof, safety education — designed like the demos.</span></div>
+    <div class="dc rv d1"><div class="n">6</div><b>Reels</b><span>Scripted, shot and edited — product-in-action, jobsite stories, quick safety explainers.</span></div>
+    <div class="dc rv d2"><div class="n">2</div><b>Carousels</b><span>Deeper educational sets — "how to inspect a sling", "CE vs no CE", buyer checklists.</span></div>
+    <div class="dc rv d3"><div class="n">1<small>–2</small></div><b>Shoot days</b><span>Warehouse and on-site production days each month, with planned shot-lists.</span></div>
+  </div>
+  <div class="delnote rv">18 pieces of content a month · stories reposting on posting days · all captions, hashtags and posting handled by us — you only approve the calendar.</div>
+</div></section>
+
+<!-- PILLARS -->
+<section id="pillars"><div class="wrap">
+  <div class="eyebrow rv">03 — What The Content Says</div>
+  <h2 class="rv d1">Four pillars. Problem-first, not product-first.</h2>
+  <p class="lead rv d2">From our audit: catalogue-style posts only speak to people already shopping. This content mix speaks to the procurement heads, HSE managers and site engineers who <b>aren't following you yet.</b></p>
+  <div class="pilgrid">
+    <div class="pil rv"><div class="tag">Pillar 1 · Proof</div><h3>Product in real work</h3><p>LIFMEX and the range under real load, on real sites — the certifications visible, the ratings stated. <b>Trust is built in 4:5, not in a brochure.</b></p></div>
+    <div class="pil rv d1"><div class="tag">Pillar 2 · Safety</div><h3>Education buyers save</h3><p>Inspection checklists, rigging mistakes, load-limit explainers. The content HSE managers forward to their teams — <b>and remember you for.</b></p></div>
+    <div class="pil rv d2"><div class="tag">Pillar 3 · Operations</div><h3>Behind the business</h3><p>30 years in Dubai, the warehouse, fabrication, after-sales. The scale that separates you from trading-only competitors.</p></div>
+    <div class="pil rv d3"><div class="tag">Pillar 4 · Credentials</div><h3>Certified. Tested. Trusted.</h3><p>CE, ISO, OSHA, proof-testing — shown as stories, not stamps. The reason to choose you over a cheaper import.</p></div>
+  </div>
+</div></section>
+
+<!-- RHYTHM -->
+<section id="rhythm"><div class="wrap">
+  <div class="eyebrow rv">04 — How A Month Runs</div>
+  <h2 class="rv d1">A rhythm you can set your watch to.</h2>
+  <div class="steps">
+    <div class="step rv"><span class="w">Day 1–3</span><b>Calendar &amp; scripts</b><p>Full month planned — every static, reel script and carousel outlined. Sent for your approval on WhatsApp.</p></div>
+    <div class="step rv"><span class="w">Day 4–8</span><b>Shoot</b><p>Production day(s) at your warehouse / sites against the approved shot-list. We direct, you just give access.</p></div>
+    <div class="step rv"><span class="w">Day 8–14</span><b>Edit &amp; design</b><p>Reels cut and graded; statics and carousels designed in the brand system. Revisions handled here.</p></div>
+    <div class="step rv"><span class="w">All month</span><b>Post &amp; schedule</b><p>Published on Instagram, Facebook and LinkedIn at optimised times. Community basics covered — comments flagged to your team.</p></div>
+    <div class="step rv"><span class="w">Month end</span><b>Report</b><p>One clear report: what ran, what grew, what the ads brought in, and what we're changing next month.</p></div>
+  </div>
+</div></section>
+
+<!-- ADS -->
+<section id="ads"><div class="wrap">
+  <div class="eyebrow rv">05 — Running Ads</div>
+  <h2 class="rv d1">The same creative, put to work.</h2>
+  <p class="lead rv d2">Organic builds the credibility; ads put it in front of the right rooms — by job title, industry and geography, not hashtags.</p>
+  <div class="adgrid">
+    <div class="adc rv"><h3>What the ad service covers</h3><ul>
+      <li><b>Campaign build &amp; management</b> on Meta (Instagram + Facebook) and Google, from the month's best creative.</li>
+      <li><b>Proper targeting</b> — procurement, HSE, ops and site roles across the UAE; retargeting for everyone who engaged.</li>
+      <li><b>Lead handling</b> — enquiries routed to WhatsApp/email so your sales team responds while interest is hot.</li>
+      <li><b>Monthly optimisation &amp; reporting</b> — budget moves to what performs; you always see cost per enquiry.</li>
+    </ul></div>
+    <div class="adc rv d1"><h3>What it needs from you</h3><ul>
+      <li><b>Ad budget, paid directly to the platforms</b> — separate from our fee, always in your control.</li>
+      <li>A workable starting point: <b>AED 3,000–5,000/month</b> — enough for Meta to learn and deliver steady enquiries.</li>
+      <li>Access to your Meta Business Manager and page (we'll set this up with you in week one).</li>
+      <li>A WhatsApp number where leads should land.</li>
+    </ul></div>
+  </div>
+  <div class="adnote rv"><b>Straight with you:</b> the first month of ads is calibration — real enquiry costs replace estimates by month two, and budget follows whatever the numbers say. When you're ready to scale into lead-gen campaigns and Africa distributor outreach, the full growth plan we presented is ready to switch on.</div>
+</div></section>
+
+<!-- PRICING -->
+<section id="price"><div class="wrap">
+  <div class="eyebrow rv">06 — The Investment</div>
+  <h2 class="rv d1">Two lines. No hidden ones.</h2>
+  <div class="pricegrid">
+    <div class="pc hero rv">
+      <div class="t">Core · Monthly</div>
+      <h3>Social Media Marketing</h3>
+      <div class="amt">AED 6,500</div><div class="per">per month</div>
+      <ul>
+        <li>10 static posts + 6 reels + 2 carousels every month</li>
+        <li>All scripting, shoot days, editing &amp; design</li>
+        <li>Posting &amp; scheduling on Instagram, Facebook, LinkedIn</li>
+        <li>Monthly content calendar, approved by you</li>
+        <li>Month-end performance report</li>
+      </ul>
+    </div>
+    <div class="pc rv d1">
+      <div class="t">Add-on · Monthly</div>
+      <h3>Ad Services</h3>
+      <div class="amt">AED 2,000</div><div class="per">per month · excludes ad budget paid to platforms</div>
+      <ul>
+        <li>Meta &amp; Google campaign setup and management</li>
+        <li>Audience targeting, retargeting &amp; lead routing</li>
+        <li>Ad creative adapted from the month's content</li>
+        <li>Optimisation + cost-per-enquiry reporting</li>
+      </ul>
+    </div>
+  </div>
+  <div class="totbar rv"><b>Both together</b><span style="font-size:.8rem;color:var(--mute)">content engine + ads running on it</span><span class="amt2">AED 8,500 / month</span></div>
+  <p class="finep rv">Billed monthly · ad budget is separate and paid by you directly to Meta/Google · content shot for social remains yours to use anywhere — website, WhatsApp catalogues, trade shows.</p>
+</div></section>
+
+<!-- PROOF -->
+<section id="proof"><div class="wrap">
+  <div class="eyebrow rv">07 — Already In Your Hands</div>
+  <h2 class="rv d1">You've seen the standard.</h2>
+  <div class="proofgrid">
+    <div class="pf2 rv"><h3>The demo statics</h3><p>Two LIFMEX demo posts are already with you — "Lift 1½ Tonnes. Zero Doubt." and the certified-tested-trusted set. That's the design system every static in this plan ships in.</p></div>
+    <div class="pf2 rv d1"><h3>The wider portfolio</h3><p>Brands we've built content engines for — across D2C, real estate and industrial.</p><a href="https://sage-portfolio-chi.vercel.app/#global" target="_blank" rel="noopener">View portfolio →</a></div>
+  </div>
+</div></section>
+
+<!-- NEXT -->
+<section id="next"><div class="wrap">
+  <div class="eyebrow rv">08 — Next Step</div>
+  <h2 class="rv d1">Say go, and month one starts this week.</h2>
+  <p class="lead rv d1">Day 1–3 we lock the first calendar; the first shoot lands within the week; ads go live once Business Manager access is set. One WhatsApp is all it takes.</p>
+</div></section>
+
+<footer>
+  <span><b>SAGE MEDIA</b> · Creative-first. Results-driven. · Jaipur · Mumbai · Dubai</span>
+  <span><b>Rhythm Dadhich</b> — Founder · <span class="o">+971 585426279</span> · team@sagemedia.in</span>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

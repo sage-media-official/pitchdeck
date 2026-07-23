@@ -926,6 +926,16 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   /* ============ HARD GUARANTEES — no theme can break these ============ */
   .pitch.t-orbs{overflow-x:clip}
   .pricebox td[contenteditable]{color:#2A2A20}
+  /* demo-creative carousels: each strip scrolls one Instagram panel at a time */
+  .caro{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
+  .caro::-webkit-scrollbar{display:none}
+  .caro .cslice{flex:0 0 100%;aspect-ratio:81/100;background-size:300% 100%;background-repeat:no-repeat;scroll-snap-align:start}
+  .caro .cslice:nth-child(2){background-position:50% 0}
+  .caro .cslice:nth-child(3){background-position:100% 0}
+  .carodots{display:flex;gap:6px;justify-content:center;margin-top:10px}
+  .carodots i{width:7px;height:7px;border-radius:50%;background:var(--line);display:block}
+  .carodots i.on{background:var(--accent)}
+  @media print{.caro{overflow:visible}.caro .cslice{flex:0 0 33.333%;aspect-ratio:27/100;background-size:300% 100%}}
   /* the dark Advantage band always keeps dark-band cards, whatever the theme does to .pcard */
   .pitch:not(.t-zen):not(.t-line) .band .pcard.darkc{background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.18)!important;box-shadow:none!important;clip-path:none!important;transform:none!important}
   .pitch:not(.t-zen):not(.t-line) .band .pcard.darkc .tagm{color:var(--accent-l)!important;background:transparent!important;border:none!important;-webkit-text-stroke:0!important}
@@ -1313,7 +1323,7 @@ function generate(){
   if(R.doconly){
     (R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'Proposal',ds.t||'',ds.lead||'',ds.body||'')});
     if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this proposal ships in.',
-      R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" alt="${esc(g.cap||'Demo creative')}" style="width:100%;border-radius:12px;display:block" onerror="this.closest('.pcard').style.display='none'"><p style="margin-top:10px;font-size:.85rem" data-mg="Demo caption ${i+1}">${esc(g.cap||'')}</p></div>`).join(''));
+      R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="caro" onscroll="const d=this.parentElement.querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><div class="carodots"><i class="on"></i><i></i><i></i></div><p style="margin-top:8px;font-size:.85rem;text-align:center" data-mg="Demo caption ${i+1}">${esc(g.cap||'')} · swipe →</p></div>`).join(''));
     h+=S(0,'Thank You','We are looking forward to work with you.','',
       `<div class="cta2 reveal d1" data-mg="CTA"><span class="blob a" style="opacity:.16"></span><h2>Let's build ${name}.</h2><p class="off"><a href="mailto:business@sagemedia.in">business@sagemedia.in</a> · Sagemedia.in</p>${R.portfolio?`<p style="margin-top:14px" data-mg="Portfolio link"><a href="${esc(R.portfolio)}" target="_blank" rel="noopener" style="display:inline-block;background:var(--accent);color:#fff;border-radius:100px;padding:12px 26px;font-weight:700;text-decoration:none;font-size:.85rem">View our portfolio →</a></p>`:''}</div>
        <div class="pfooter">Prepared by Sage Media · ${name}</div>`);
@@ -1429,7 +1439,7 @@ function generate(){
   /* exact-text proposal sections + demo creatives (rendered only when the research provides them) */
   (R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'From the Proposal',ds.t||'',ds.lead||'',ds.body||'')});
   if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this plan ships in.',
-    R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" alt="${esc(g.cap||'Demo creative')}" style="width:100%;border-radius:12px;display:block" onerror="this.closest('.pcard').style.display='none'"><p style="margin-top:10px;font-size:.85rem" data-mg="Demo caption ${i+1}">${esc(g.cap||'')}</p></div>`).join(''));
+    R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="caro" onscroll="const d=this.parentElement.querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><div class="carodots"><i class="on"></i><i></i><i></i></div><p style="margin-top:8px;font-size:.85rem;text-align:center" data-mg="Demo caption ${i+1}">${esc(g.cap||'')} · swipe →</p></div>`).join(''));
   /* 20 pricing */
   h+=S(20,'Investment','Scope & pricing.','Every cell below is editable — click and type when commercials are ready.',
     `<div class="pricebox reveal d1" data-mg="Pricing table"><div class="pricehint">✏️ Editable — click any cell. Rows come from the selected scope.</div>

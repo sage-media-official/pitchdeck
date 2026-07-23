@@ -952,6 +952,14 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .cnav:hover{transform:translateY(-50%) scale(1.08);box-shadow:0 8px 22px rgba(0,0,0,.35)}
   .cnav:active{transform:translateY(-50%) scale(.94)}
   .cnav.l{left:10px}.cnav.r{right:10px}
+  /* phones: tables swipe inside their card instead of clipping */
+  @media(max-width:660px){
+    .pitch .ctable{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .pitch .ctable table{min-width:540px}
+    .pitch .ctable th,.pitch .ctable td{font-size:.78rem;padding:9px 10px}
+    .pitch .pricebox{overflow-x:auto}
+    .pitch .pricebox table{min-width:520px}
+  }
   /* scope-of-work flow rows */
   .pitch .sfgrid{display:grid;gap:10px;margin-top:6px}
   .pitch .pcard.sf{display:flex;gap:16px;align-items:flex-start;padding:16px 20px}

@@ -947,6 +947,11 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   #pfMod .pfhead .hbtn{border:1px solid rgba(0,0,0,.14);background:#fff;color:#1E241E;border-radius:100px;padding:8px 15px;font-size:.74rem;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit}
   #pfMod .pfhead .hbtn:hover{background:#F4F4EE}
   #pfMod iframe{flex:1;width:100%;border:0;background:#F7F7F3}
+  .cwrap{position:relative}
+  .cnav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.94);color:#1E241E;font-size:1.35rem;line-height:1;cursor:pointer;z-index:2;box-shadow:0 4px 16px rgba(0,0,0,.28);transition:transform .2s,box-shadow .2s;display:grid;place-items:center;padding-bottom:3px}
+  .cnav:hover{transform:translateY(-50%) scale(1.08);box-shadow:0 8px 22px rgba(0,0,0,.35)}
+  .cnav:active{transform:translateY(-50%) scale(.94)}
+  .cnav.l{left:10px}.cnav.r{right:10px}
   /* demo-creative carousels: each strip scrolls one Instagram panel at a time */
   .caro{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
   .caro::-webkit-scrollbar{display:none}
@@ -1354,7 +1359,7 @@ function generate(){
   if(R.doconly){
     (R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'Proposal',ds.t||'',ds.lead||'',ds.body||'')});
     if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this proposal ships in.',
-      `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="caro" onscroll="const d=this.parentElement.querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><div class="carodots"><i class="on"></i><i></i><i></i></div><p style="margin-top:8px;font-size:.85rem;text-align:center" data-mg="Demo caption ${i+1}">${esc(g.cap||'')} · swipe →</p></div>`).join('')+`</div>`);
+      `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="cwrap"><div class="caro" onscroll="const d=this.closest('.pcard').querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><button class="cnav l" onclick="caroNav(this,-1)" aria-label="Previous">‹</button><button class="cnav r" onclick="caroNav(this,1)" aria-label="Next">›</button></div><div class="carodots"><i class="on"></i><i></i><i></i></div></div>`).join('')+`</div>`);
     h+=S(0,'Thank You','We are looking forward to work with you.','',
       `<div class="cta2 reveal d1" data-mg="CTA"><span class="blob a" style="opacity:.16"></span><h2>Let's build ${name}.</h2><p class="off"><a href="mailto:business@sagemedia.in">business@sagemedia.in</a> · Sagemedia.in</p>${(R.portfolios||(R.portfolio?[{t:'View our portfolio',url:R.portfolio}]:[])).length?`<div class="pfrow" data-mg="Portfolio links">${(R.portfolios||[{t:'View our portfolio',url:R.portfolio}]).map(pf=>`<a class="pfbtn" href="${esc(pf.url)}" onclick="openPf(event,'${esc(pf.url)}','${esc(pf.t)}')">${esc(pf.t)} →</a>`).join('')}</div>`:''}</div>
        <div class="pfooter">Prepared by Sage Media · ${name}</div>`);
@@ -1470,7 +1475,7 @@ function generate(){
   /* exact-text proposal sections + demo creatives (rendered only when the research provides them) */
   (R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'From the Proposal',ds.t||'',ds.lead||'',ds.body||'')});
   if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this plan ships in.',
-    `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="caro" onscroll="const d=this.parentElement.querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><div class="carodots"><i class="on"></i><i></i><i></i></div><p style="margin-top:8px;font-size:.85rem;text-align:center" data-mg="Demo caption ${i+1}">${esc(g.cap||'')} · swipe →</p></div>`).join('')+`</div>`);
+    `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="cwrap"><div class="caro" onscroll="const d=this.closest('.pcard').querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><button class="cnav l" onclick="caroNav(this,-1)" aria-label="Previous">‹</button><button class="cnav r" onclick="caroNav(this,1)" aria-label="Next">›</button></div><div class="carodots"><i class="on"></i><i></i><i></i></div></div>`).join('')+`</div>`);
   /* 20 pricing */
   h+=S(20,'Investment','Scope & pricing.','Every cell below is editable — click and type when commercials are ready.',
     `<div class="pricebox reveal d1" data-mg="Pricing table"><div class="pricehint">✏️ Editable — click any cell. Rows come from the selected scope.</div>
@@ -1872,6 +1877,7 @@ function b64u(bytes){let s='';bytes.forEach(b=>s+=String.fromCharCode(b));return
 function b64ud(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';return Uint8Array.from(atob(str),c=>c.charCodeAt(0))}
 async function gzipStr(str){return new Uint8Array(await new Response(new Blob([str]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer())}
 async function gunzipBytes(bytes){return await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}
+function caroNav(btn,dir){const c=btn.parentElement.querySelector('.caro');c.scrollBy({left:dir*c.clientWidth,behavior:'smooth'})}
 function openPf(ev,url,title){if(ev)ev.preventDefault();
   const m=document.getElementById('pfMod');document.getElementById('pfTitle').textContent=title||'Portfolio';
   document.getElementById('pfNew').href=url;document.getElementById('pfFrame').src=url;

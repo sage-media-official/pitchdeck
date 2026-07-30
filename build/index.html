@@ -690,8 +690,8 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-deck .psec.pcover{background:var(--band);border-radius:22px;margin:16px 0;padding:clamp(28px,4vw,54px);min-height:70vh;box-shadow:var(--shadow-2)}
   .t-deck .psec.pcover::after{content:"SLIDE 01 · COVER";position:absolute;top:20px;right:24px;font-family:var(--f-num);font-size:.64rem;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:5px 12px}
   /* 06 Gradient Ink — full gradient wash */
-  .t-grad .psec.pcover{background:linear-gradient(135deg,var(--cream) 30%,color-mix(in oklab,var(--accent) 22%,var(--cream)))}
-  .t-grad .pcover::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:60px solid color-mix(in oklab,var(--accent) 30%,transparent);filter:blur(8px)}
+  .t-grad .psec.pcover{background:linear-gradient(135deg,var(--cream) 30%,color-mix(in srgb,var(--accent) 22%,var(--cream)))}
+  .t-grad .pcover::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:60px solid color-mix(in srgb,var(--accent) 30%,transparent);filter:blur(8px)}
   /* 07 Brutalist — cream cover, boxed title, hard offsets */
   .t-brut .psec.pcover{background:var(--cream);border:3px solid var(--sage-9);border-radius:0;margin:14px 0}
   .t-brut .pcover h1{background:var(--sage-9);display:inline-block;padding:8px 26px;box-shadow:12px 12px 0 var(--accent);text-transform:uppercase}
@@ -740,7 +740,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-paper .pcover>.reveal::before{content:"";position:absolute;top:-12px;left:48px;width:90px;height:26px;background:rgba(236,224,180,.8);transform:rotate(-3deg);box-shadow:0 1px 3px rgba(0,0,0,.12)}
   .t-paper .pcover .blob{display:none}
   /* 18 Neo Glass — frosted panel over aurora */
-  .t-glass .psec.pcover{background:linear-gradient(130deg,color-mix(in oklab,var(--accent) 30%,var(--cream)),var(--cream) 45%,color-mix(in oklab,var(--accent-2) 24%,var(--cream)))}
+  .t-glass .psec.pcover{background:linear-gradient(130deg,color-mix(in srgb,var(--accent) 30%,var(--cream)),var(--cream) 45%,color-mix(in srgb,var(--accent-2) 24%,var(--cream)))}
   .t-glass .pcover>.reveal{background:rgba(255,255,255,.42);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);border-radius:26px;padding:clamp(26px,4.5vw,54px)}
   .t-glass .pcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--sage-9)}
   .t-glass .pcover .sub2{color:var(--ink)}
@@ -748,7 +748,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-glass .pcover .tag{background:rgba(255,255,255,.6);color:var(--sage-9);border:none}
   /* 19 Timeline — the journey starts here */
   .t-time .pcover{border-left:2px solid var(--line);margin-left:14px;padding-left:clamp(26px,5vw,60px)}
-  .t-time .pcover::before{content:"";position:absolute;left:-9px;top:46%;width:16px;height:16px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px color-mix(in oklab,var(--accent) 25%,transparent)}
+  .t-time .pcover::before{content:"";position:absolute;left:-9px;top:46%;width:16px;height:16px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 25%,transparent)}
   .t-time .pcover::after{content:"T-0 · THE STARTING LINE";position:absolute;left:clamp(26px,5vw,60px);bottom:8vh;font-family:var(--f-num);font-size:.68rem;font-weight:700;letter-spacing:.26em;color:var(--mute)}
   /* 20 B2B SaaS — grid paper + KPI chips */
   .t-b2b .psec.pcover{background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);background-size:44px 44px}
@@ -777,7 +777,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-grd2 .pcover .meta,.t-grd2 .pcover .meta span{color:rgba(255,255,255,.75)}
   .t-grd2 .pcover .tag{background:rgba(255,255,255,.2);color:#fff;border:none}
   /* 25 Sustainify — organic arch */
-  .t-sus .pcover::after{content:"";position:absolute;right:-8%;bottom:-30%;width:55%;height:110%;background:color-mix(in oklab,var(--accent) 30%,transparent);border-radius:50% 50% 0 0/60% 60% 0 0;opacity:.5}
+  .t-sus .pcover::after{content:"";position:absolute;right:-8%;bottom:-30%;width:55%;height:110%;background:color-mix(in srgb,var(--accent) 30%,transparent);border-radius:50% 50% 0 0/60% 60% 0 0;opacity:.5}
   .t-sus .pcover .tag{border-radius:99px;background:var(--accent);color:#fff;border:none}
   /* 26 Gemini AI — HUD terminal */
   .t-ai .psec.pcover{background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.014) 3px 4px),var(--band)}
@@ -886,7 +886,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-b2b .tq{border-left:4px solid var(--accent);border-radius:8px}
   .t-b2b .tagm{background:var(--cream-2);border-radius:6px;padding:3px 9px}
   /* SaaS Modern: soft violet depth everywhere */
-  .t-saas .pcard,.t-saas .chartcard,.t-saas .idea{border:none;box-shadow:0 12px 30px -14px color-mix(in oklab,var(--accent-2) 35%,transparent);border-radius:16px}
+  .t-saas .pcard,.t-saas .chartcard,.t-saas .idea{border:none;box-shadow:0 12px 30px -14px color-mix(in srgb,var(--accent-2) 35%,transparent);border-radius:16px}
   .t-saas .fstage{border-radius:12px}
   /* Chuckle: stickers, doodles, tilt */
   .t-chk .tagm{background:var(--accent);color:#fff;border-radius:8px;padding:4px 10px;transform:rotate(-2deg);display:inline-block}
@@ -895,13 +895,13 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-chk .pcard,.t-chk .chartcard,.t-chk .idea{border:2.5px solid var(--sage-9);border-radius:18px;box-shadow:5px 5px 0 var(--accent-l)}
   /* Finora: engraved lines, serif titles */
   .t-fin .pcard h3,.t-fin .chartcard h3,.t-fin .idea h3,.t-fin .cdhead h3{font-family:var(--f-display)}
-  .t-fin .pcard,.t-fin .chartcard,.t-fin .idea{border-radius:4px;border-color:color-mix(in oklab,var(--accent) 45%,var(--line));box-shadow:none}
+  .t-fin .pcard,.t-fin .chartcard,.t-fin .idea{border-radius:4px;border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:none}
   .t-fin .peyebrow{letter-spacing:.34em}
   .t-fin .ctable{border-radius:4px}
   /* Vivid Gradient: bands & funnel go full gradient */
   .t-grd2 .band,.t-grd2 .cta2{background:linear-gradient(120deg,var(--accent-2),var(--accent))}
   .t-grd2 .fl,.t-grd2 .col .bar{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-  .t-grd2 .pcard{border:none;box-shadow:0 10px 26px -12px color-mix(in oklab,var(--accent) 40%,transparent)}
+  .t-grd2 .pcard{border:none;box-shadow:0 10px 26px -12px color-mix(in srgb,var(--accent) 40%,transparent)}
   /* Sustainify: organic radii, soft leaf shapes */
   .t-sus .pcard,.t-sus .chartcard,.t-sus .idea{border-radius:22px 22px 22px 4px;border:none;box-shadow:0 10px 24px -14px rgba(35,58,40,.35)}
   .t-sus .tagm{background:var(--cream-2);border-radius:99px;padding:4px 12px}
@@ -910,7 +910,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-ai .pcard,.t-ai .chartcard,.t-ai .idea{border-radius:2px;position:relative}
   .t-ai .pcard::before,.t-ai .chartcard::before{content:"";position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-left:2px solid var(--accent);border-top:2px solid var(--accent)}
   .t-ai .ctable table,.t-ai .num,.t-ai .tagm{font-family:var(--f-num)}
-  .t-ai .fl,.t-ai .col .bar{box-shadow:0 0 12px color-mix(in oklab,var(--accent) 55%,transparent)}
+  .t-ai .fl,.t-ai .col .bar{box-shadow:0 0 12px color-mix(in srgb,var(--accent) 55%,transparent)}
   /* Folio: serif italics + index rules */
   .t-folio .pcard h3,.t-folio .idea h3,.t-folio .cdhead h3{font-family:var(--f-display);font-style:italic}
   .t-folio .pcard,.t-folio .idea{border:none;box-shadow:none;background:transparent;border-top:1px solid var(--sage-9);border-radius:0}

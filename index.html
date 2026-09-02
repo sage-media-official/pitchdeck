@@ -1891,7 +1891,7 @@ function deleteFromLib(id){const a=libAll().filter(x=>x.id!==id);libWrite(a);ren
 /* the platform ships with the Mach Five proposal pre-saved (re-seeded when its content is upgraded; stays deleted if you delete it after that) */
 function seedLib(){try{
   if(document.documentElement.classList.contains('viewer'))return;
-  const V='sage_lib_seed_v28';
+  const V='sage_lib_seed_v29';
   if(localStorage.getItem(V))return;
   const a=libAll();const now=new Date().toISOString();
   const entry={id:'mach-five',name:'Mach Five',cat:DEMO.f_category,created:now,updated:now,design:8,theme:22,data:DEMO,comments:[],edits:[]};
@@ -1920,7 +1920,7 @@ function seedLib(){try{
   const nr={id:'nerah-skin',name:'Nerah Skin',cat:'Calm-Clinical Skincare · D2C',created:now,updated:now,design:4,theme:9,data:NER,comments:[],edits:[]};
   const ni=a.findIndex(x=>x.id==='nerah-skin');
   if(ni>=0)a[ni]={...nr,created:a[ni].created,edits:a[ni].edits||[],pricing:a[ni].pricing||null,share:a[ni].share,comments:a[ni].comments||[]};else a.unshift(nr);
-  const ec={id:'echon',name:'Echon',cat:'Building Materials · Year-1 Plan',created:now,updated:now,design:13,theme:22,data:ECHON,comments:[],edits:[]};
+  const ec={id:'echon',name:'Echon',cat:'Building Materials · Year-1 Plan',created:now,updated:now,design:13,theme:14,data:ECHON,comments:[],edits:[]};
   const ei=a.findIndex(x=>x.id==='echon');
   if(ei>=0)a[ei]={...ec,created:a[ei].created,edits:a[ei].edits||[],pricing:a[ei].pricing||null,share:a[ei].share,comments:a[ei].comments||[]};else a.unshift(ec);
   libWrite(a);localStorage.setItem(V,'1')

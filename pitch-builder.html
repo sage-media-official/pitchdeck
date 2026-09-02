@@ -926,12 +926,12 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   /* ============ HARD GUARANTEES — no theme can break these ============ */
   .pitch.t-orbs{overflow-x:clip}
   .pricebox td[contenteditable]{color:#2A2A20}
-  .pitch .wkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:18px}
+  .pitch .wkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;margin-top:18px}
   .pitch .wk{background:var(--card,rgba(127,127,127,.06));border:1px solid var(--line,rgba(127,127,127,.18));border-radius:16px;padding:16px;overflow:hidden}
-  .pitch .wkhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .pitch .wkhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:8px 10px}
   .pitch .wkh{font-weight:700;font-size:1.02rem;color:var(--accent);text-decoration:none}
   .pitch .wkn{font-size:.82rem;color:var(--mute);margin-top:2px}
-  .pitch .wkstat{font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:var(--accent-l,rgba(127,127,127,.12));color:var(--accent);white-space:nowrap}
+  .pitch .wkstat{font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:var(--accent-l,rgba(127,127,127,.12));color:var(--accent);white-space:normal;line-height:1.3}
   .pitch .wknote{font-size:.86rem;color:var(--mute);margin:8px 0 0;line-height:1.45}
   .pitch .wkimgs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
   .pitch .wkimgs:empty{display:none}

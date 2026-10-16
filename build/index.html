@@ -1048,6 +1048,121 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
     .fstage{padding:12px 26px}
     .fstage .fv,.fstage .fl2{color:#fff!important}
   }
+  /* ===== Sage Signature — the hero template, built from sagemedia.in (Glacial display, Inter body, ink + sage, lanes, marquee, word reveals) ===== */
+  .t-sage{--r:18px;--sg-ink:#0B0C0B;--sg-sage:#536F50;--sg-sage2:#93AC8F;--sg-mute:#5E635D}
+  .t-sage .ghostnum,.t-sage .blob{display:none}
+  .t-sage .psec{padding:clamp(48px,6vw,92px) 0;border-bottom:none;border-top:1px solid var(--line)}
+  .t-sage .psec.pcover{border-top:none}
+  .t-sage .peyebrow{font-family:'Inter',system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:.4em;color:var(--sg-sage);gap:12px}
+  .t-sage .peyebrow .n{color:var(--sg-mute);opacity:1;letter-spacing:.2em}
+  .t-sage .psec h2{font-family:var(--f-display);font-weight:400;font-size:clamp(2.1rem,5.2vw,4.6rem);line-height:.96;letter-spacing:-.035em;text-transform:uppercase;color:var(--sg-ink);max-width:20ch;margin:18px 0 14px}
+  .t-sage .psec .lead{font-size:clamp(.98rem,1.2vw,1.12rem);line-height:1.6;color:var(--sg-mute);max-width:56ch}
+  .t-sage .reveal.in h2{animation:sgWord 1s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes sgWord{from{opacity:0;transform:translateY(14px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+  .t-sage .pcard,.t-sage .chartcard,.t-sage .idea,.t-sage .cdeep,.t-sage .ctr,.t-sage .tq{border:1px solid var(--line);box-shadow:none;border-radius:var(--r);background:#fff;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .35s}
+  .t-sage .pcard:hover,.t-sage .tq:hover,.t-sage .ctr:hover{transform:translateY(-4px);border-color:var(--sg-sage2)}
+  .t-sage .pcard h3,.t-sage .cdhead h3,.t-sage .tq h4{font-family:var(--f-display);font-weight:400;letter-spacing:-.02em;font-size:clamp(1.25rem,1.8vw,1.6rem);line-height:1.05}
+  .t-sage .tagm{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--sg-mute);font-weight:500}
+  .t-sage .chip{border-radius:99px;border:1px solid rgba(11,12,11,.18);box-shadow:none;background:transparent;color:var(--sg-ink);font-weight:500;letter-spacing:.02em;transition:background .3s,color .3s}
+  .t-sage .chip:hover{background:var(--sg-ink);color:#fff}
+  .t-sage .statrow .st .v,.t-sage .num{font-family:var(--f-display)}
+  .t-sage .ctable th{background:var(--sg-ink);font-family:'Inter',sans-serif;font-weight:500;letter-spacing:.14em;font-size:.68rem;text-transform:uppercase}
+  /* hero */
+  .t-sage .sgcover{min-height:88vh;margin:0 calc(-1*clamp(20px,3vw,64px));padding:0 clamp(20px,3vw,64px);justify-content:center;background:#fff}
+  .sglanes{position:absolute;top:0;bottom:0;right:0;width:58%;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 10px;overflow:hidden;pointer-events:none}
+  .sglane{display:flex;flex-direction:column;gap:10px;animation:sgLaneUp 46s linear infinite;will-change:transform}
+  .sglane:nth-child(even){animation-name:sgLaneDown;animation-duration:54s}
+  .sglane img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;display:block;background:#EEF0EC}
+  @keyframes sgLaneUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+  @keyframes sgLaneDown{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+  .sgfade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fff 0 36%,rgba(255,255,255,.86) 50%,rgba(255,255,255,0) 72%),linear-gradient(180deg,#fff 0,rgba(255,255,255,0) 14%,rgba(255,255,255,0) 84%,#fff 100%)}
+  .sghero{position:relative;z-index:2;max-width:min(680px,56%)}
+  .sgpill{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--sg-ink);border:1px solid rgba(11,12,11,.14);background:rgba(255,255,255,.8);padding:7px 13px;border-radius:99px}
+  .sgpill i{width:6px;height:6px;border-radius:50%;background:var(--sg-sage);box-shadow:0 0 0 4px rgba(83,111,80,.18);animation:sgPulse 2.4s ease-in-out infinite}
+  @keyframes sgPulse{50%{box-shadow:0 0 0 8px rgba(83,111,80,0)}}
+  .sgkick{font-family:var(--f-display);font-size:clamp(1.4rem,2.6vw,2.4rem);letter-spacing:-.02em;color:var(--sg-ink);margin-top:26px;line-height:1.1}
+  .t-sage .sgcover h1{font-family:var(--f-display);font-weight:400;font-size:clamp(3rem,8.4vw,7.6rem);line-height:.92;letter-spacing:-.045em;color:var(--sg-sage);margin:8px 0 6px;min-height:1em;white-space:nowrap}
+  .t-sage .sgcover h1 .g{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--sg-sage)}
+  .sgcaret{display:inline-block;width:3px;height:.82em;background:var(--sg-ink);margin-left:6px;vertical-align:-.04em;animation:sgBlink 1s steps(1) infinite}
+  @keyframes sgBlink{50%{opacity:0}}
+  .t-sage .sgcover .sub2{font-family:'Inter',sans-serif;font-size:clamp(.92rem,1.1vw,1.05rem);color:var(--sg-mute);max-width:46ch;margin-top:14px;line-height:1.55}
+  .sgbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .sgbtn{display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:13px 22px;border-radius:99px;border:1px solid rgba(11,12,11,.2);color:var(--sg-ink);text-decoration:none;background:transparent;cursor:pointer;transition:background .3s,color .3s,transform .3s}
+  .sgbtn:hover{transform:translateY(-2px)}
+  .sgbtn.dark{background:var(--sg-ink);color:#fff;border-color:var(--sg-ink)}
+  .sgbtn.dark:hover{background:var(--sg-sage);border-color:var(--sg-sage)}
+  .sgbtn.light{background:#fff;color:var(--sg-ink);border-color:#fff}
+  .sgbtn.ghostw{color:#fff;border-color:rgba(255,255,255,.3)}
+  .t-sage .sgcover .meta{margin-top:30px;font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.04em}
+  .t-sage .sgcover .meta span::before{background:var(--sg-sage)}
+  .t-sage .sgcover .blogo{max-height:34px;margin-bottom:18px}
+  /* marquee + proof strip */
+  .sgstrip{margin:0 calc(-1*clamp(20px,3vw,64px));background:var(--sg-ink);color:#fff;overflow:hidden}
+  .sgmarq{display:flex;width:max-content;animation:sgMarq 38s linear infinite;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .sgmarq span{font-family:var(--f-display);font-size:clamp(1.6rem,3.4vw,3rem);letter-spacing:-.02em;text-transform:uppercase;padding-right:.6em;white-space:nowrap}
+  .sgmarq span b{font-weight:400;color:var(--sg-sage2)}
+  @keyframes sgMarq{to{transform:translateX(-50%)}}
+  .sgstats{display:grid;grid-template-columns:repeat(4,1fr);padding:clamp(22px,3vw,40px) clamp(20px,3vw,64px)}
+  .sgstats>div{padding:0 18px;border-left:1px solid rgba(255,255,255,.12)}
+  .sgstats>div:first-child{border-left:none;padding-left:0}
+  .sgstats .v{font-family:var(--f-display);font-size:clamp(2rem,4.4vw,3.8rem);letter-spacing:-.04em;line-height:1}
+  .sgstats .l{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:10px}
+  /* case studies */
+  .sgcases{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,22px);margin-top:28px}
+  .sgcase{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;text-decoration:none;color:inherit;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .35s}
+  .sgcase:hover{transform:translateY(-6px);border-color:var(--sg-sage2)}
+  .sgcase .im{aspect-ratio:4/3;overflow:hidden;background:#EEF0EC}
+  .sgcase .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+  .sgcase:hover .im img{transform:scale(1.06)}
+  .sgcase .bd{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .sgcase .ind{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--sg-sage)}
+  .sgcase h3{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,2.2vw,2rem);letter-spacing:-.03em;margin:0;line-height:1}
+  .sgcase p{margin:0;font-size:.88rem;line-height:1.55;color:var(--sg-mute)}
+  .sgres{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:auto;padding-top:14px;gap:8px}
+  .sgres .v{font-family:var(--f-display);font-size:1.35rem;letter-spacing:-.03em;color:var(--sg-ink);line-height:1}
+  .sgres .k{font-size:.7rem;color:var(--sg-mute);margin-top:5px;line-height:1.3}
+  .sgcase .go{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sg-ink);margin-top:6px}
+  .sgmore{display:flex;justify-content:flex-end;margin-top:18px}
+  /* testimonials */
+  .sgquotes{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,1.6vw,22px);margin-top:26px}
+  .sgq{border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,2.4vw,30px);background:#fff;display:flex;flex-direction:column;gap:18px}
+  .sgq blockquote{margin:0;font-family:var(--f-display);font-size:clamp(1.1rem,1.6vw,1.45rem);line-height:1.3;letter-spacing:-.01em;color:var(--sg-ink)}
+  .sgq .who{display:flex;align-items:center;gap:12px;font-size:.84rem;color:var(--sg-mute)}
+  .sgq .who img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .sgq .who b{display:block;color:var(--sg-ink);font-weight:600}
+  .sgq .stars{color:var(--sg-sage);letter-spacing:.2em;font-size:.8rem}
+  /* how we work */
+  .sgsteps{border-top:1px solid var(--line);margin-top:24px}
+  .sgstep{display:grid;grid-template-columns:70px minmax(0,1fr) minmax(0,1.2fr);gap:12px 24px;align-items:baseline;padding:clamp(18px,2vw,28px) 0;border-bottom:1px solid var(--line);transition:padding .45s cubic-bezier(.2,.8,.2,1)}
+  .sgstep:hover{padding-left:12px}
+  .sgstep .n{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.2em;color:var(--sg-mute)}
+  .sgstep:hover .n{color:var(--sg-sage)}
+  .sgstep h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.4rem);letter-spacing:-.03em;line-height:1}
+  .sgstep p{margin:0;font-size:.92rem;line-height:1.55;color:var(--sg-mute);max-width:52ch}
+  /* closing CTA, as on the website footer */
+  .sgcta{position:relative;overflow:hidden;background:var(--sg-ink);color:#fff;border-radius:28px;padding:clamp(30px,5vw,70px);margin-top:20px;text-align:left}
+  .sgcta .glow{position:absolute;width:70%;aspect-ratio:1;right:-20%;top:-40%;background:radial-gradient(closest-side,rgba(147,172,143,.42),rgba(83,111,80,.12) 55%,transparent);animation:sgGlow 14s ease-in-out infinite alternate;pointer-events:none}
+  @keyframes sgGlow{to{transform:translate(-18%,22%) scale(1.15)}}
+  .sgcta .lab{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--sg-sage2);position:relative}
+  .t-sage .psec .sgcta h2,.sgcta h2{position:relative;font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:clamp(2.2rem,6vw,5.4rem);line-height:.94;letter-spacing:-.04em;margin:18px 0;color:#fff;max-width:16ch}
+  .sgcta h2 span{display:block;color:var(--sg-sage2)}
+  .sgcta p{position:relative;color:rgba(255,255,255,.72);max-width:48ch;line-height:1.55;margin:0}
+  .sgcta .sgbtns{position:relative}
+  .sgoffices{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:clamp(28px,4vw,48px);border-top:1px solid rgba(255,255,255,.14)}
+  .sgoffices>div{padding:18px 18px 0 0}
+  .sgoffices .c{font-family:var(--f-display);font-size:clamp(1.4rem,2.4vw,2.2rem);letter-spacing:-.02em}
+  .sgoffices .t{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.2em;color:var(--sg-sage2);margin-top:4px}
+  .sgoffices .a{font-size:.78rem;color:rgba(255,255,255,.55);margin-top:8px;line-height:1.45}
+  .t-sage .pfrow .pfbtn{border-radius:99px}
+  @media(max-width:860px){
+    .sglanes{width:100%;opacity:.35}.sgfade{background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.92))}
+    .sghero{max-width:100%}.t-sage .sgcover h1{white-space:normal}
+    .sgstats{grid-template-columns:repeat(2,1fr);row-gap:22px}.sgstats>div:nth-child(3){border-left:none;padding-left:0}
+    .sgcases,.sgquotes{grid-template-columns:1fr}.sgstep{grid-template-columns:44px 1fr}.sgstep p{grid-column:2}
+    .sgoffices{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.sglane,.sgmarq,.sgcta .glow,.sgcaret,.sgpill i{animation:none}}
+  @media print{.sglane,.sgmarq{animation:none!important}.sgcaret{display:none}.t-sage .sgcover{min-height:auto;padding-top:30px;padding-bottom:30px}.sgcase,.sgq,.sgstep{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -1347,6 +1462,90 @@ const PH='<span class="todo">⟡ Claude research</span>';
 let secN=1;
 const S=(n,eyb,title,lead,body,cls)=>{const nn=++secN,ns=nn<10?'0'+nn:''+nn;return `<section class="psec ${cls||''}" data-mg="Section ${nn}: ${esc(eyb)}"><div class="ghostnum">${ns}</div>
   <div class="reveal"><span class="peyebrow"><span class="n">${ns}</span> ${esc(eyb)}</span><h2 data-mg="Heading: ${esc(eyb)}">${title}</h2>${lead?`<p class="lead" data-mg="Intro: ${esc(eyb)}">${lead}</p>`:''}</div>${body}</section>`};
+/* ===== Sage Signature (hero template) — content and pieces taken from sagemedia.in ===== */
+const SGU='https://sagemedia.in/wp-content/uploads/sage-media/2026/09/';
+const SG_TILES=['02_jpg','04-9_jpg','08_jpg','3-5_jpg','3_png','5_jpg','6_jpg','Artboard-1-21_png','Artboard-12_png','Artboard-2-1_jpg','Artboard-2_jpg','Artboard-8_png','Jaipur-Emporium-Onam-1_jpg','SIGMAC-38_jpg','av05_jpg','d01_jpg','d1_jpg','d3_jpg','e03_jpg','el-1_jpg','f1_jpg','n1','n2','n3','n4','n5','n6','n7','n8','o2_jpg'].map(x=>SGU+'tiles-'+x+'.jpg');
+const SG_CASES=[
+ {slug:'vamika-silver',n:'Vamika Silver',ind:'Jewellery',img:SGU+'vamika_3.jpg',kw:/jewel|silver|gold|diamond|luxury|heritage|craft/i,
+  d:'Jaipur silver and jadau house. A brand language rooted in heritage, grown without paid ads.',r:[['160K','Followers, from 3K'],['4.5 yrs','Organic growth'],['₹0','Paid promotion']]},
+ {slug:'aari-tari',n:'Aari Tari',ind:'Bridal jewellery',img:SGU+'Screenshot-2026-09-13-at-4.44.03-AM.png',kw:/bridal|wedding|jewel|ethnic|fashion/i,
+  d:'A full-property bridal shoot at Nahargarh, timed for wedding season, that went viral nationwide.',r:[['90K','Followers, from 30K'],['200%','Organic growth'],['Nahargarh','Bridal campaign']]},
+ {slug:'dicassa',n:'Dicassa',ind:'Luxury interiors',img:SGU+'IMG_0538-2.png',kw:/interior|furniture|decor|home|real estate|architect|luxury/i,
+  d:'From an unknown new showroom to Rajasthan’s go-to name for luxury interiors.',r:[['10K','Followers in 3 months'],['20–25','Creators a month'],['#1','Jaipur interiors']]},
+ {slug:'sutra-fine',n:'Sutra Fine',ind:'Fine jewellery',img:SGU+'06.jpg',kw:/jewel|premium|luxury|d2c|founder/i,
+  d:'A ₹50K+ jewellery brand built from zero on founder-led, transparent storytelling.',r:[['Zero','Starting presence'],['₹50K+','Segment owned'],['Founder','Led trust']]},
+ {slug:'krwa',n:'KRWA',ind:'Luxury menswear',img:SGU+'11-krwa.jpg',kw:/menswear|fashion|apparel|clothing|luxury|lifestyle|d2c|brand launch/i,
+  d:'Identity, campaign shoot, Instagram and website launched together, then grown with UGC.',r:[['₹5–6K','Price point'],['Day one','Site + IG launch'],['UGC','Growth engine']]},
+ {slug:'city-vibes',n:'City Vibes',ind:'Menswear retail',img:SGU+'Screenshot-2026-09-13-at-4.44.28-AM.png',kw:/retail|store|wedding|groom|ethnic|fashion|menswear/i,
+  d:'The “Nazrana” groom series that made an 11-store chain Rajasthan’s Dulhe Raja destination.',r:[['11','Stores'],['Nazrana','Groom series'],['Dulhe Raja','Positioning']]}
+];
+const SG_QUOTES=[
+ {q:'The team is extremely patient and hardworking, consistently delivering quality work while ensuring smooth communication and an effortless overall experience.',n:'Priyal Lakhotia',o:'Vamika Silver, Jaipur',img:'https://sagemedia.in/wp-content/uploads/2025/12/4-1.webp'},
+ {q:'Working closely with the Sage Media team has been wonderful; their creative vision, commitment, and dedication truly elevate every project they handle.',n:'Disha Parakh',o:'Atory.in',img:'https://sagemedia.in/wp-content/uploads/2025/12/3-1.webp'},
+ {q:'Sweetest founders and an amazing team! They always support you fully and genuinely care about your growth and success throughout.',n:'Kanan Jhunjhunwala',o:'Ethnic India',img:'https://sagemedia.in/wp-content/uploads/2025/12/5-1.webp'},
+ {q:'Sage helped me launch my jewellery brand with dedication and skill. A year later, the experience remains excellent and highly recommendable.',n:'Prakhar Sonkiya',o:'Sutra Fine Jewelry',img:'https://sagemedia.in/wp-content/uploads/2025/12/2-3.webp'}
+];
+const SG_STEPS=[
+ ['Discover','We listen first: your goals, numbers, audience and competition, so the plan starts from facts, not guesses.'],
+ ['Strategise','One clear plan: positioning, channels, content and budget, tied to the outcomes you care about.'],
+ ['Create','Our in-house team writes, designs, shoots and builds. One studio, one standard, no hand-offs.'],
+ ['Grow','Launch, measure, optimise. Reported monthly against sales and leads, not vanity metrics.']
+];
+const isSage=()=>!!(THEMES[curT]&&THEMES[curT].cls.indexOf('t-sage')>=0);
+function sgWords(needs){const m=s=>s.replace(/\s*[&\/(].*$/,'').trim();
+  const w=[...new Set((needs||[]).map(m).filter(x=>x&&x.length<=18))].slice(0,6);
+  return w.length?w:['Socials','Content','Campaigns','Website','Branding','Much More']}
+function sgCover(d,R,name,reg,cat,needsSel){
+  const lanes=[0,1,2,3].map(k=>{const a=SG_TILES.filter((_,i)=>i%4===k);const im=a.concat(a).map(u=>`<img src="${u}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`).join('');return `<div class="sglane">${im}</div>`}).join('');
+  const words=sgWords(needsSel), dm=siteDomain(d);
+  return `<section class="psec pcover sgcover" data-mg="Cover">
+    <div class="sglanes" aria-hidden="true">${lanes}</div><div class="sgfade"></div>
+    <div class="reveal in sghero">${dm?`<img class="blogo" src="https://logo.clearbit.com/${esc(dm)}" alt="" onerror="this.remove()">`:''}
+      <span class="sgpill"><i></i>${R.doconly?'Project proposal':'Growth proposal'} · ${reg}</span>
+      <div class="sgkick" data-mg="Cover kicker">We help <b style="font-weight:400">${name}</b> with</div>
+      <h1 data-mg="Brand title"><span class="sgtype" data-words="${esc(JSON.stringify(words))}">${esc(words[0])}</span><span class="sgcaret"></span></h1>
+      <div class="sub2" data-mg="Cover subtitle">${esc((d.f_brief||'').split(/[.\n]/)[0]||cat)}.</div>
+      <div class="sgbtns"><a class="sgbtn dark" href="#" onclick="event.preventDefault();const s=this.closest('.psec').nextElementSibling;s&&s.scrollIntoView({behavior:'smooth'})">See the plan ↓</a><a class="sgbtn" href="#" onclick="event.preventDefault();const s=document.getElementById('sgproof');s&&s.scrollIntoView({behavior:'smooth'})">Case studies</a></div>
+      <div class="meta"><span>${cat}</span>${d.f_for?`<span>Prepared for ${esc(d.f_for)}</span>`:''}<span>Prepared by Sage Media</span></div></div>
+  </section>
+  <div class="sgstrip" data-mg="Sage proof strip"><div class="sgmarq">${('<span>Data <b>•</b> Insights <b>•</b> Creativity <b>•</b> Expertise <b>•</b></span>').repeat(4)}</div>
+    <div class="sgstats reveal"><div><div class="v"><span class="num" data-count="1000" data-suffix="+">0</span></div><div class="l">Brands served</div></div><div><div class="v"><span class="num" data-count="1.3" data-suffix="B">0</span></div><div class="l">Views delivered</div></div><div><div class="v"><span class="num" data-count="1800" data-suffix="+">0</span></div><div class="l">Shoots produced</div></div><div><div class="v"><span class="num" data-count="95" data-suffix="%">0</span></div><div class="l">Client retention</div></div></div></div>`}
+function sgPickCases(d){const hay=[d.f_category,d.f_brief,(d.needs||[]).join(' ')].join(' ');
+  const sc=SG_CASES.map((c,i)=>({c,i,s:(c.kw.test(hay)?2:0)-i*.01}));sc.sort((a,b)=>b.s-a.s);return sc.slice(0,3).map(x=>x.c)}
+function sgExtras(d,name,withQuotes){
+  const cases=sgPickCases(d);
+  let h=S(0,'Case studies','Work that moved the numbers.','A few brands we have grown, in their own words and numbers. Every study opens on sagemedia.in.',
+    `<div class="sgcases">${cases.map((c,i)=>`<a class="sgcase reveal d${i+1}" href="https://sagemedia.in/pages/case-studies/${c.slug}/" target="_blank" rel="noopener" data-mg="Case study: ${esc(c.n)}"><div class="im"><img src="${c.img}" alt="${esc(c.n)}" loading="lazy" onerror="this.style.visibility='hidden'"></div><div class="bd"><span class="ind">${esc(c.ind)}</span><h3>${esc(c.n)}</h3><p>${esc(c.d)}</p><div class="sgres">${c.r.map(r=>`<div><div class="v">${esc(r[0])}</div><div class="k">${esc(r[1])}</div></div>`).join('')}</div><span class="go">Read the study ↗</span></div></a>`).join('')}</div>
+     <div class="sgmore"><a class="sgbtn" href="https://sagemedia.in/pages/portfolio/" target="_blank" rel="noopener">See all our work ↗</a></div>`,'sgproofsec');
+  h=h.replace('<section class="psec sgproofsec"','<section id="sgproof" class="psec sgproofsec"');
+  if(withQuotes)h+=S(0,'Testimonials','What our clients say.','',
+    `<div class="sgquotes">${SG_QUOTES.map((t,i)=>`<figure class="sgq reveal d${(i%2)+1}" data-mg="Testimonial: ${esc(t.n)}"><span class="stars">★★★★★</span><blockquote>“${esc(t.q)}”</blockquote><figcaption class="who"><img src="${t.img}" alt="" loading="lazy" onerror="this.remove()"><span><b>${esc(t.n)}</b>${esc(t.o)}</span></figcaption></figure>`).join('')}</div>`);
+  h+=S(0,'How we work','Four steps, no surprises.',`How we take ${name} from this proposal to results.`,
+    `<div class="sgsteps reveal d1">${SG_STEPS.map((s,i)=>`<div class="sgstep" data-mg="Step: ${s[0]}"><span class="n">0${i+1}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('')}</div>`);
+  return h}
+function sgCTA(name,R){
+  const pf=(R.portfolios||(R.portfolio?[{t:'View our portfolio',url:R.portfolio}]:[]));
+  return `<div class="sgcta reveal d1" data-mg="CTA"><span class="glow"></span><span class="lab">Say hello</span>
+    <h2>You've built something real.<span>Let's make ${name} impossible to ignore.</span></h2>
+    <p>One message, and a real human replies within one business day with a point of view, not a sales script.</p>
+    <div class="sgbtns"><a class="sgbtn light" href="mailto:business@sagemedia.in?subject=${encodeURIComponent('Proposal: '+(name||'').replace(/&amp;/g,'&'))}">Start the project →</a><a class="sgbtn ghostw" href="https://wa.me/917355004934" target="_blank" rel="noopener">WhatsApp us</a>${pf.map(p=>`<a class="sgbtn ghostw" href="${esc(p.url)}" onclick="openPf(event,'${esc(p.url)}','${esc(p.t)}')">${esc(p.t)} ↗</a>`).join('')}</div>
+    <div class="sgoffices"><div><div class="c">Jaipur</div><div class="t"><span class="sgclock" data-tz="Asia/Kolkata">--:--</span> · HQ, India</div><div class="a">904–905 Golden Leaf, Tonk Road, Jaipur</div></div><div><div class="c">Mumbai</div><div class="t"><span class="sgclock" data-tz="Asia/Kolkata">--:--</span> · India</div><div class="a">Andheri East, Mumbai</div></div><div><div class="c">Dubai</div><div class="t"><span class="sgclock" data-tz="Asia/Dubai">--:--</span> · UAE</div><div class="a">IFZA Business Park, Dubai Silicon Oasis</div></div></div>
+  </div>`}
+let sgTimer=null,sgClockT=null;
+function sgStart(){
+  clearInterval(sgTimer);clearInterval(sgClockT);
+  const el=document.querySelector('#pitch .sgtype');
+  const tick=()=>document.querySelectorAll('#pitch .sgclock').forEach(c=>{try{c.textContent=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:c.dataset.tz})}catch(e){}});
+  tick();sgClockT=setInterval(tick,30000);
+  if(!el)return;
+  let words=[];try{words=JSON.parse(el.dataset.words||'[]')}catch(e){}
+  if(words.length<2||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let wi=0,ci=words[0].length,del=true,hold=0;
+  sgTimer=setInterval(()=>{if(!document.body.contains(el)){clearInterval(sgTimer);return}
+    if(hold>0){hold--;return}
+    const w=words[wi];
+    if(del){ci--;el.textContent=w.slice(0,ci);if(ci<=0){del=false;wi=(wi+1)%words.length}}
+    else{const n=words[wi];ci++;el.textContent=n.slice(0,ci);if(ci>=n.length){del=true;hold=22}}},70)}
 function sentences(t){return (t||'').split(/(?<=[.!?])\s+|\n+/).map(x=>x.trim()).filter(x=>x.length>8).slice(0,7)}
 
 function parseLinks(t){return (t||'').split(/\s+/).map(x=>x.trim()).filter(x=>/^https?:\/\//i.test(x))}
@@ -1405,7 +1604,8 @@ function generate(){
   let h='';
 
   /* 1 cover */
-  h+=`<section class="psec pcover" data-mg="Cover">
+  const SG=isSage();
+  if(SG)h+=sgCover(d,R,name,reg,cat,needsSel); else h+=`<section class="psec pcover" data-mg="Cover">
     <span class="blob a"></span><span class="blob b"></span>
     <div class="coverblocks"><div class="cblock"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8"/></svg></div><div class="cblock"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div><div class="cblock"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M12 3v18M3 12h18"/></svg></div></div>
     <div class="reveal in">${(()=>{const dm=siteDomain(d);return dm?`<img class="blogo" src="https://logo.clearbit.com/${esc(dm)}" alt="" onerror="this.remove()">`:''})()}<span class="tag">${R.doconly?'📄 Project Proposal':'📈 Go-to-Market &amp; Marketing Plan'} · ${reg}</span>
@@ -1418,8 +1618,9 @@ function generate(){
     (R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'Proposal',ds.t||'',ds.lead||'',ds.body||'')});
     if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this proposal ships in.',
       `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="cwrap"><div class="caro" onscroll="const d=this.closest('.pcard').querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><button class="cnav l" onclick="caroNav(this,-1)" aria-label="Previous">‹</button><button class="cnav r" onclick="caroNav(this,1)" aria-label="Next">›</button></div><div class="carodots"><i class="on"></i><i></i><i></i></div></div>`).join('')+`</div>`);
+    if(SG)h+=sgExtras(d,name,true);
     h+=S(0,'Thank You','We are looking forward to work with you.','',
-      `<div class="cta2 reveal d1" data-mg="CTA"><span class="blob a" style="opacity:.16"></span><h2>Let's build ${name}.</h2><p class="off"><a href="mailto:business@sagemedia.in">business@sagemedia.in</a> · Sagemedia.in</p>${(R.portfolios||(R.portfolio?[{t:'View our portfolio',url:R.portfolio}]:[])).length?`<div class="pfrow" data-mg="Portfolio links">${(R.portfolios||[{t:'View our portfolio',url:R.portfolio}]).map(pf=>`<a class="pfbtn" href="${esc(pf.url)}" onclick="openPf(event,'${esc(pf.url)}','${esc(pf.t)}')">${esc(pf.t)} →</a>`).join('')}</div>`:''}</div>
+      `${SG?sgCTA(name,R):`<div class="cta2 reveal d1" data-mg="CTA"><span class="blob a" style="opacity:.16"></span><h2>Let's build ${name}.</h2><p class="off"><a href="mailto:business@sagemedia.in">business@sagemedia.in</a> · Sagemedia.in</p>${(R.portfolios||(R.portfolio?[{t:'View our portfolio',url:R.portfolio}]:[])).length?`<div class="pfrow" data-mg="Portfolio links">${(R.portfolios||[{t:'View our portfolio',url:R.portfolio}]).map(pf=>`<a class="pfbtn" href="${esc(pf.url)}" onclick="openPf(event,'${esc(pf.url)}','${esc(pf.t)}')">${esc(pf.t)} →</a>`).join('')}</div>`:''}</div>`}
        <div class="pfooter">Prepared by Sage Media · ${name}</div>`);
   } else {
   /* 2 what we heard */
@@ -1545,6 +1746,7 @@ function generate(){
   if(!R.trimcore)(R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'From the Proposal',ds.t||'',ds.lead||'',ds.body||'')});
   if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this plan ships in.',
     `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="cwrap"><div class="caro" onscroll="const d=this.closest('.pcard').querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><button class="cnav l" onclick="caroNav(this,-1)" aria-label="Previous">‹</button><button class="cnav r" onclick="caroNav(this,1)" aria-label="Next">›</button></div><div class="carodots"><i class="on"></i><i></i><i></i></div></div>`).join('')+`</div>`);
+  if(SG)h+=sgExtras(d,name);
   /* 20 pricing */
   h+=S(20,'Investment','Scope & pricing.','Every cell below is editable — click and type when commercials are ready.',
     `<div class="pricebox reveal d1" data-mg="Pricing table"><div class="pricehint">✏️ Editable — click any cell. Rows come from the selected scope.</div>
@@ -1556,7 +1758,7 @@ function generate(){
   /* 21 next steps + cta */
   h+=S(21,'Next Steps','From yes to launch.','',
     `<div class="pgrid g3">${['Onboarding & access','Research → brand & build','Launch, learn, scale'].map((x,i)=>`<div class="pcard reveal d${i+1}" data-mg="Next step ${i+1}"><span class="tagm">Step 0${i+1}</span><h3>${esc(x)}</h3></div>`).join('')}</div>
-     <div class="cta2 reveal d1" data-mg="CTA"><span class="blob a" style="opacity:.16"></span><h2>Let's build ${name}.</h2><p class="off"><a href="mailto:business@sagemedia.in">business@sagemedia.in</a> · Sage Media · Jaipur · Mumbai · Dubai</p>${(R.portfolios||(R.portfolio?[{t:'View our portfolio',url:R.portfolio}]:[])).length?`<div class="pfrow" data-mg="Portfolio links">${(R.portfolios||[{t:'View our portfolio',url:R.portfolio}]).map(pf=>`<a class="pfbtn" href="${esc(pf.url)}" onclick="openPf(event,'${esc(pf.url)}','${esc(pf.t)}')">${esc(pf.t)} →</a>`).join('')}</div>`:''}</div>
+     ${SG?sgCTA(name,R):`<div class="cta2 reveal d1" data-mg="CTA"><span class="blob a" style="opacity:.16"></span><h2>Let's build ${name}.</h2><p class="off"><a href="mailto:business@sagemedia.in">business@sagemedia.in</a> · Sage Media · Jaipur · Mumbai · Dubai</p>${(R.portfolios||(R.portfolio?[{t:'View our portfolio',url:R.portfolio}]:[])).length?`<div class="pfrow" data-mg="Portfolio links">${(R.portfolios||[{t:'View our portfolio',url:R.portfolio}]).map(pf=>`<a class="pfbtn" href="${esc(pf.url)}" onclick="openPf(event,'${esc(pf.url)}','${esc(pf.t)}')">${esc(pf.t)} →</a>`).join('')}</div>`:''}</div>`}
      <div class="pfooter">Prepared by Sage Media · ${name} · generated with the Sage Pitch Builder${research?'':' · research pending — send the brief to Claude'}</div>`);
 
   }
@@ -1621,7 +1823,8 @@ const THEMES=[
  {name:'Gemini AI',cls:'t-ai t-clipL',layout:1,tag:'Behance · AI futuristic',font:{d:"'Unbounded'",b:"'Inter'"},pal:{bg:'#0B0F19',bg2:'#111827',bg3:'#182130',head:'#F1F5FF',ink:'#E2E8F0',mute:'#8B98AC',acc:'#38BDF8',acc2:'#2563EB',accl:'#7DD3FC',band:'#070B12',card:'#131B29',thead:'#070B12',line:'rgba(255,255,255,.14)',line2:'rgba(255,255,255,.07)',bar:'rgba(11,15,25,.9)'}},
  {name:'Folio Editorial',cls:'t-folio t-left',layout:0,tag:'Behance · portfolio 2026',font:{d:"'Playfair Display'",b:"'Inter'"},pal:{bg:'#F5F2EC',bg2:'#EDE8DE',bg3:'#E2DBCC',head:'#161412',acc:'#E63329',acc2:'#A81F17',accl:'#F19B95',band:'#161412'}},
  {name:'Data Branding',cls:'t-data t-drop',layout:0,tag:'Behance · data creative',font:{d:"'IBM Plex Sans'",b:"'IBM Plex Sans'"},pal:{bg:'#F4F6EE',bg2:'#ECF0E0',bg3:'#E0E6CE',head:'#101410',acc:'#9EC209',acc2:'#5F7500',accl:'#D5EC72',band:'#101410'}},
- {name:'Virtue Digital',cls:'t-virtue t-right',layout:1,tag:'Behance · innovation',font:{d:"'Outfit'",b:"'Outfit'"},pal:{bg:'#F2F6F9',bg2:'#E9F0F5',bg3:'#DCE7EF',head:'#101828',acc:'#0EA5E9',acc2:'#0369A1',accl:'#7DD3FC',band:'#101828'}}
+ {name:'Virtue Digital',cls:'t-virtue t-right',layout:1,tag:'Behance · innovation',font:{d:"'Outfit'",b:"'Outfit'"},pal:{bg:'#F2F6F9',bg2:'#E9F0F5',bg3:'#DCE7EF',head:'#101828',acc:'#0EA5E9',acc2:'#0369A1',accl:'#7DD3FC',band:'#101828'}},
+ {name:'Sage Signature',cls:'t-sage',layout:0,tag:'Sage Media website · hero template',font:{d:"'Glacial Indifference'",b:"'Inter'",n:"'Glacial Indifference'"},pal:{bg:'#FFFFFF',bg2:'#F4F5F2',bg3:'#E9EBE6',head:'#0B0C0B',ink:'#1B1D1B',mute:'#5E635D',acc:'#536F50',acc2:'#37503B',accl:'#93AC8F',band:'#0B0C0B',card:'#FFFFFF',thead:'#0B0C0B',r:'18px'}}
 ];
 let curT=0;
 function applyTheme(i){curT=((i%THEMES.length)+THEMES.length)%THEMES.length;
@@ -1665,6 +1868,7 @@ function applyDesign(i){curD=((i%DESIGNS.length)+DESIGNS.length)%DESIGNS.length;
   applyPalObj(d.o);$('f_theme').value=String(d.layout);updDials();return d}
 function shuffleDesign(){shufflePalette()}
 applyDesign(14);
+applyTheme(THEMES.length-1); /* Sage Signature is the default for new pitches */
 function closePitch(){saveCurrent();$('pitchWrap').classList.remove('show');document.body.classList.remove('magic');$('mgBtn').classList.remove('on');$('mgBtn').innerHTML='✨ Magic edit'}
 /* real editable PPTX, generated in the browser — opens directly in Google Slides / PowerPoint */
 let pptBusy=false;
@@ -1825,6 +2029,7 @@ function runAnims(){
   $('pitch').querySelectorAll('.reveal').forEach(el=>io.observe(el));
   /* failsafe: whatever the observer misses (fast scroll, theme switch, odd viewports), everything is visible after 2.2s */
   setTimeout(()=>{const p=$('pitch');if(p)p.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in'))},2200);
+  sgStart();
   $('pitch').querySelectorAll('.bar[data-h]').forEach(b=>b.style.setProperty('--ph',b.dataset.h+'%'));
   $('pitch').querySelectorAll('.fl[data-w]').forEach(b=>b.style.setProperty('--pw',b.dataset.w+'%'));
   $('pitch').querySelectorAll('.pin[data-left]').forEach(p=>p.style.setProperty('--pl',p.dataset.left+'%'));

@@ -1293,18 +1293,20 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgindcard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent 45%);pointer-events:none}
   /* --- how we work: steps + studio panel --- */
   .sgstepswrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,72px);align-items:start}
-  .sgstepside{position:sticky;top:96px;aspect-ratio:4/5;max-height:calc(100vh - 140px);border-radius:8px;overflow:hidden;background:var(--bg2);box-shadow:inset 0 0 0 1px var(--ln)}
-  .sgstepside img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75;filter:saturate(.85)}
-  .sgstepside .sh{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,6,5,.92) 0%,rgba(5,6,5,.45) 45%,rgba(5,6,5,.1) 100%)}
-  .sgstepside .big{position:absolute;right:clamp(14px,2vw,26px);top:clamp(10px,1.4vw,18px);font-family:var(--f-display);font-size:clamp(90px,10vw,160px);line-height:1;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.55);height:1em;overflow:hidden}
-  .sgstepside .big b{display:block;font-weight:400;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-  .sgstepswrap[data-step="2"] .big b{transform:translateY(-100%)}.sgstepswrap[data-step="3"] .big b{transform:translateY(-200%)}.sgstepswrap[data-step="4"] .big b{transform:translateY(-300%)}
-  .sgstepside .cap{position:absolute;left:clamp(16px,2vw,28px);right:clamp(16px,2vw,28px);bottom:clamp(16px,2vw,28px);color:#fff}
-  .sgstepside .cap .lab{display:block;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#93AC8F;margin-bottom:10px}
-  .sgstepside .cap p{margin:0;font-family:var(--f-display);font-size:clamp(17px,1.5vw,24px);line-height:1.3;letter-spacing:-.01em}
+  .sgvalues{position:sticky;top:96px}
+  .sgvalues .lab{display:block;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--sage2);margin:0 0 14px}
+  .sgvalues .g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sgval{position:relative;overflow:hidden;border-radius:8px;background:var(--bg2);box-shadow:inset 0 0 0 1px var(--ln);padding:clamp(16px,1.6vw,22px);min-height:150px;display:flex;flex-direction:column;gap:8px;transition:transform .6s cubic-bezier(.2,.8,.2,1),box-shadow .6s}
+  .sgval::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 100% 0%,color-mix(in srgb,var(--va) 22%,transparent),transparent 70%);pointer-events:none}
+  .sgval:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--va) 45%,transparent)}
+  .sgval .n{font-size:10px;letter-spacing:.24em;color:var(--va);position:relative}
+  .sgval h4{margin:0;font-size:clamp(17px,1.35vw,21px);letter-spacing:-.02em;line-height:1.1;position:relative}
+  .sgval i{display:block;width:28px;height:1px;background:var(--va);position:relative}
+  .sgval p{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted);position:relative}
+  .sgval b{position:absolute;right:-6px;bottom:-22px;font-family:var(--f-display);font-weight:400;font-size:84px;line-height:1;letter-spacing:-.05em;color:var(--va);opacity:.14;pointer-events:none}
   .sgmeta2{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
   .sgmeta2 span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#536F50;margin-right:8px;vertical-align:middle}
-  @media(max-width:860px){.sgcomp{grid-template-columns:1fr;gap:18px}.sgcomp .id{position:static}.sgledger{grid-template-columns:1fr}.sgledger::before{display:none}.sgmixwrap{grid-template-columns:1fr}.sgdonut{max-width:220px;margin:0 auto}.sgrow-h{grid-template-columns:1fr auto;gap:8px 16px}.sgrow-h .sum,.sgrow-h .cnt{display:none}.sgrow-h .q{grid-column:1/-1}.sgrow-in{padding-left:0}.sgsite .chips.sgkpi{grid-template-columns:1fr 1fr}.sgby{grid-template-columns:1fr}.sgbycard{display:none}.sgstepswrap{grid-template-columns:1fr}.sgstepside{display:none}.sgdeck{display:none}.sgsite .hbar{grid-template-columns:1fr;gap:6px}.sgsite .hbar .lb{text-align:left}.sgsite .hbar .vv{text-align:left}}
+  @media(max-width:860px){.sgcomp{grid-template-columns:1fr;gap:18px}.sgcomp .id{position:static}.sgledger{grid-template-columns:1fr}.sgledger::before{display:none}.sgmixwrap{grid-template-columns:1fr}.sgdonut{max-width:220px;margin:0 auto}.sgrow-h{grid-template-columns:1fr auto;gap:8px 16px}.sgrow-h .sum,.sgrow-h .cnt{display:none}.sgrow-h .q{grid-column:1/-1}.sgrow-in{padding-left:0}.sgsite .chips.sgkpi{grid-template-columns:1fr 1fr}.sgby{grid-template-columns:1fr}.sgbycard{display:none}.sgstepswrap{grid-template-columns:1fr}.sgvalues{position:static}.sgdeck{display:none}.sgsite .hbar{grid-template-columns:1fr;gap:6px}.sgsite .hbar .lb{text-align:left}.sgsite .hbar .vv{text-align:left}}
   /* hero, as on the website home (no scroll stage) */
   .sgsite .psec.sgherowrap{padding:0;max-width:none;border-top:none;display:block;min-height:0;position:relative;overflow:hidden;background:var(--bg);height:calc(100vh - 64px);height:calc(100svh - 64px)}
   .sgcollage{position:absolute;inset:0;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%)}
@@ -1587,6 +1589,46 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
     .sgsite .sgcontact h2{font-size:clamp(34px,10vw,56px)}
   }
   @media(prefers-reduced-motion:reduce){.sgsite *{animation:none!important;transition:none!important}.sgsite .rise,.sgsite .w{opacity:1!important;translate:0 0;transform:none!important;filter:none!important}}
+  /* ===== art-direction pass: website blacks, radii, per-page gradients, hover glow ===== */
+  .sgsite{--r:8px;--pa:#93AC8F;--pb:#D9E7D3;--pd:#1B3320}
+  .sgpage[data-page="market"]{--pa:#4F8BFF;--pb:#B9D4FF;--pd:#10236B}.sgpage[data-page="competition"]{--pa:#FF8A3D;--pb:#FFD8A6;--pd:#7A2A00}.sgpage[data-page="strategy"]{--pa:#7C5CFF;--pb:#C9B8FF;--pd:#241A6B}
+  .sgpage[data-page="plan"]{--pa:#25D3C0;--pb:#A8F2E7;--pd:#07474C}.sgpage[data-page="work"]{--pa:#FF5C8A;--pb:#FFC4A3;--pd:#8E1E4F}.sgpage[data-page="investment"]{--pa:#FFC93C;--pb:#FFE9A8;--pd:#7A4A00}.sgpage[data-page^="proposal"]{--pa:#25D3C0;--pb:#A8F2E7;--pd:#07474C}
+  .sgsite .psec.sgreel{background:#0B0C0B}
+  .sgreel .vg{background:radial-gradient(60% 70% at 50% 50%,transparent 30%,rgba(11,12,11,.85) 100%)}
+  .sgreel .sc{background:linear-gradient(90deg,rgba(11,12,11,.92) 0%,rgba(11,12,11,.64) 38%,transparent 68%)}
+  /* page hero: palette glows + gradient accent word, as the site colours its service worlds */
+  .sgphero .sgglow.a{background:radial-gradient(circle,color-mix(in srgb,var(--pa) 42%,transparent),color-mix(in srgb,var(--pd) 30%,transparent) 45%,transparent 70%)}
+  .sgphero .sgglow.b{background:radial-gradient(circle,color-mix(in srgb,var(--pb) 26%,transparent),transparent 70%)}
+  .sgsite .sgphero h1 .s{color:var(--pa);text-shadow:none}
+  .sgsite .sgphero h1 .s .w{background:linear-gradient(92deg,var(--pa) 0%,var(--pb) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.04em}
+  .sgsite .peyebrow::before{background:var(--pa);box-shadow:0 0 0 6px color-mix(in srgb,var(--pa) 25%,transparent)}
+  .sgsite .psec h2 .kw{background-image:linear-gradient(90deg,var(--bone) 0%,var(--pa) 40%,var(--bone) 60%,var(--bone) 100%)}
+  .sgsite .sgnext:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--pa) 14%,transparent),transparent 70%)}
+  /* layered blacks: cards sit on ink2, page on ink, radius like the site */
+  .sgsite .pcard,.sgsite .idea,.sgsite .ctr,.sgsite .tiercard,.sgsite .tq,.sgsite .sgkpi .chip,.sgsite .chartcard,.sgsite .senti,.sgsite .statrow .st{background:var(--bg2);border-radius:var(--r)}
+  .sgsite .statrow,.sgsite .chips.sgkpi,.sgsite .timeline,.sgsite .ctable,.sgsite .pricebox{border-radius:calc(var(--r) + 1px);overflow:hidden}
+  .sgsite .fstage{border-radius:var(--r)}
+  .sgsite .fstage:nth-child(4){background:linear-gradient(90deg,#536F50,#7E9A79)}
+  .sgsite .pcard,.sgsite .idea,.sgsite .ctr,.sgsite .tiercard,.sgsite .tq{position:relative;overflow:hidden;transition:transform .6s cubic-bezier(.2,.8,.2,1),box-shadow .6s,background .5s}
+  .sgsite .pcard::before,.sgsite .idea::before,.sgsite .ctr::before,.sgsite .tiercard::before,.sgsite .tq::after{content:"";position:absolute;width:70%;aspect-ratio:1;right:-25%;top:-35%;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--pa) 38%,transparent),transparent 70%);filter:blur(28px);opacity:0;transform:scale(.8);transition:opacity .6s,transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+  .sgsite .pcard:hover::before,.sgsite .idea:hover::before,.sgsite .ctr:hover::before,.sgsite .tiercard:hover::before,.sgsite .tq:hover::after{opacity:1;transform:scale(1.1)}
+  .sgsite .pcard:hover,.sgsite .idea:hover,.sgsite .ctr:hover,.sgsite .tiercard:hover{transform:translateY(-4px);box-shadow:0 0 0 1px color-mix(in srgb,var(--pa) 40%,transparent),0 30px 60px -40px rgba(0,0,0,.9)}
+  .sgsite .pcard>*,.sgsite .idea>*,.sgsite .ctr>*,.sgsite .tiercard>*{position:relative;z-index:1}
+  .sgsite .tagm{display:inline-flex;align-items:center;gap:8px;padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--pa) 14%,transparent);border:1px solid color-mix(in srgb,var(--pa) 30%,transparent);color:var(--pa);font-size:9px;letter-spacing:.22em;margin-bottom:12px}
+  .sgsite .tagm::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--pa)}
+  /* numerals carry the palette */
+  .sgsite .sgstats .v,.sgsite .statrow .st .v,.sgsite .sgidea .stat,.sgsite .hbar .vv,.sgsite .sgcase .res b{background:linear-gradient(90deg,var(--bone) 0%,var(--pa) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sgsite .hbar .fl,.sgsite .col .bar{background:linear-gradient(90deg,color-mix(in srgb,var(--pa) 55%,#536F50),var(--pa));box-shadow:0 0 24px color-mix(in srgb,var(--pa) 25%,transparent)}
+  .sgsite .col .bar{background:linear-gradient(180deg,var(--pa),color-mix(in srgb,var(--pa) 30%,transparent))}
+  .sgsite .sgcomp .id .num{-webkit-text-stroke:1px color-mix(in srgb,var(--pa) 65%,transparent)}
+  .sgsite .sgl li i,.sgl h4{color:var(--pa)}.sgl.down h4,.sgsite .sgl.down li i{color:#C9A06B}
+  .sgsite .sgrow-h .q,.sgsite .sgwhy>a,.sgsite .sgkpi .chip .n em{color:var(--pa)}
+  .sgsite .sgrow.open .pl{border-color:var(--pa);background:color-mix(in srgb,var(--pa) 18%,transparent)}
+  .sgsite .sgbtn.fill:hover{background:linear-gradient(135deg,var(--pb),var(--pa));color:#0B0C0B;border-color:transparent}
+  .sgsite .sgcopy .sgbtn.fill:hover{background:linear-gradient(135deg,#93AC8F,#536F50);color:#fff}
+  .sgsite .band{background:radial-gradient(80% 120% at 100% 0%,color-mix(in srgb,var(--pa) 30%,transparent),transparent 60%),radial-gradient(60% 90% at 0% 100%,color-mix(in srgb,var(--pd) 60%,transparent),transparent 60%),#0B0C0B}
+  .sgsite[data-mode="day"] .pcard,.sgsite[data-mode="day"] .idea,.sgsite[data-mode="day"] .ctr,.sgsite[data-mode="day"] .tiercard,.sgsite[data-mode="day"] .tq,.sgsite[data-mode="day"] .sgkpi .chip,.sgsite[data-mode="day"] .chartcard,.sgsite[data-mode="day"] .senti,.sgsite[data-mode="day"] .statrow .st{background:#F4F5F2}
+  .sgsite[data-mode="day"] .psec.sgreel{background:#0B0C0B}
   @media print{.sgnav,.sgnext,.sgscroll,.sgmarq,.sgloader{display:none!important}.sgpage{display:block!important;animation:none!important}.sgsite .psec.sgherowrap{height:auto!important;min-height:560px}.sgcopy{position:relative;inset:auto}.sgsite .rise,.sgsite .w{opacity:1!important;translate:0 0;transform:none!important;filter:none!important;animation:none!important}}
   body.pdfing .sgnav,body.pdfing .sgnext,body.pdfing .sgscroll,body.pdfing .sgmarq,body.pdfing .sgrail{-webkit-mask-image:none;mask-image:none}
   body.pdfing .sgnav,body.pdfing .sgnext,body.pdfing .sgscroll,body.pdfing .sgloader{display:none!important}
@@ -1950,6 +1992,7 @@ const SG_SVC=[
  [/email|crm|whatsapp|automation|retention/i,'CRM & Automation','Email, WhatsApp and lifecycle flows that bring customers back.','Repeat revenue · lower CAC'],
  [/.*/,'Strategy & Consulting','Positioning, planning and a monthly cadence that keeps everything moving.','One team · one plan']];
 const SG_P=[["#FF5C8A","#8E1E4F","#FFC4A3"],["#7C5CFF","#241A6B","#C9B8FF"],["#FF8A3D","#7A2A00","#FFD8A6"],["#25D3C0","#07474C","#A8F2E7"],["#4F8BFF","#10236B","#B9D4FF"],["#FFC93C","#7A4A00","#FFE9A8"],["#FF5F5F","#5E1010","#FFC0B8"],["#93AC8F","#1B3320","#D9E7D3"]];
+const SG_VALUES=[['Creativity','We challenge conventions with bold ideas that make brands stand out.','#FF5C8A'],['Collaboration','We work hand-in-hand with clients, aligned to their goals.','#7C5CFF'],['Strategic excellence','Every solution is rooted in data and thoughtful planning, built for long-term impact.','#FF8A3D'],['Transparency','Open processes, clear pricing, visible reporting. No smoke and mirrors.','#25D3C0'],['Client-centricity','Clients are at the heart of everything we do.','#4F8BFF'],['Honest communication','We tell you what works, what doesn\'t, and what we\'d do differently.','#FFC93C']];
 const SG_STEPS=[['Discover','We listen first: your goals, numbers, audience and competition, so the plan starts from facts, not guesses.'],['Strategise','One clear plan: positioning, channels, content and budget, tied to the outcomes you care about.'],['Create','Our in-house team writes, designs, shoots and builds. One studio, one standard, no hand-offs.'],['Grow','Launch, measure, optimise. Reported monthly against sales and leads, not vanity metrics.']];
 const isSage=()=>!!(THEMES[curT]&&THEMES[curT].cls.indexOf('t-sage')>=0);
 const sgMark=`<svg viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M13 2.5c-5 0-8.5 3.2-8.5 7.3 0 7.6 11.2 6.4 11.2 11.3 0 1.9-1.6 3-3.7 3-2.7 0-4.4-1.6-5.3-3.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 2.5c3.6 0 6.2 1.7 7.2 4.3" stroke="#93AC8F" stroke-width="1.6" stroke-linecap="round"/></svg>`;
@@ -2034,7 +2077,7 @@ function sgExtras(d,name,withQuotes){
      <div class="sgrail" style="margin-top:18px" data-mg="Testimonials"><div class="sgqs" data-r="in">${SG_Q_IN.map((t,i)=>sgQuote(t,i)).join('')}</div><div class="sgqs" data-r="gl" style="display:none">${SG_Q_GL.map((t,i)=>sgQuote(t,i)).join('')}</div></div>`);
   h+=S(0,'How we work','Four steps, <span class="kw">no surprises.</span>',`How we take ${name} from this proposal to results.`,
     `<div class="sgstepswrap"><div class="sgsteps">${SG_STEPS.map((s,i)=>`<div class="sgstep rise" style="--d:${i*45}ms" data-mg="Step: ${s[0]}" onmouseenter="const w=this.closest('.sgstepswrap');w.dataset.step=${i+1}"><span class="n">0${i+1}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('')}</div>
-      <aside class="sgstepside" data-mg="How we work · studio"><img src="${SG_WORK[10].img}" alt="" loading="lazy" onerror="this.remove()"><div class="sh"></div><span class="big">${['01','02','03','04'].map((n,i)=>`<b data-n="${i+1}">${n}</b>`).join('')}</span><div class="cap"><span class="lab">One in-house studio</span><p>Strategy, design, shoots and media under one roof in Jaipur, Mumbai and Dubai — so nothing is handed off, and nothing gets lost between agencies.</p><div class="sgmeta2"><span>1800+ shoots</span><span>1000+ brands</span><span>1.3B+ views</span></div></div></aside></div>`);
+      <aside class="sgvalues" data-mg="What we stand for"><span class="lab">What we stand for</span><div class="g">${SG_VALUES.map((v,i)=>`<div class="sgval" style="--va:${v[2]}"><span class="n">0${i+1}</span><h4>${v[0]}</h4><i></i><p>${v[1]}</p><b>0${i+1}</b></div>`).join('')}</div></aside></div>`);
   return h}
 function sgQuote(t,i){return `<figure class="sgq rise" style="--d:${i*45}ms" data-mg="Testimonial: ${esc(t.n)}"><span class="stars">★★★★★</span><blockquote>“${esc(t.q)}”</blockquote><figcaption>${t.img?`<img src="${t.img}" alt="" loading="lazy" onerror="this.remove()">`:''}<span><b>${esc(t.n)}</b>${esc(t.o)}</span></figcaption></figure>`}
 function sgRegion(btn,r){const w=btn.closest('.psec');w.querySelectorAll('.sgtog button').forEach(b=>b.classList.toggle('on',b===btn));w.querySelectorAll('.sgqs').forEach(q=>{q.style.display=q.dataset.r===r?'':'none';if(q.dataset.r===r)q.querySelectorAll('.rise').forEach(x=>x.classList.add('in'))})}

@@ -1055,7 +1055,6 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .t-sage .peyebrow .n{color:var(--sg-mute);opacity:1;letter-spacing:.2em}
   .t-sage .psec h2{font-family:var(--f-display);font-weight:400;font-size:clamp(2.1rem,5.2vw,4.6rem);line-height:.96;letter-spacing:-.035em;text-transform:uppercase;color:var(--sg-ink);max-width:20ch;margin:18px 0 14px}
   .t-sage .psec .lead{font-size:clamp(.98rem,1.2vw,1.12rem);line-height:1.6;color:var(--sg-mute);max-width:56ch}
-  .t-sage .reveal.in h2{animation:sgWord 1s cubic-bezier(.2,.8,.2,1) both}
   @keyframes sgWord{from{opacity:0;transform:translateY(14px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
   .t-sage .pcard,.t-sage .chartcard,.t-sage .idea,.t-sage .cdeep,.t-sage .ctr,.t-sage .tq{border:1px solid var(--line);box-shadow:none;border-radius:var(--r);background:#fff;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .35s}
   .t-sage .pcard:hover,.t-sage .tq:hover,.t-sage .ctr:hover{transform:translateY(-4px);border-color:var(--sg-sage2)}
@@ -1161,6 +1160,114 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   }
   @media(prefers-reduced-motion:reduce){.sglane,.sgmarq,.sgcta .glow,.sgcaret,.sgpill i{animation:none}}
   @media print{.sglane,.sgmarq{animation:none!important}.sgcaret{display:none}.t-sage .sgcover{min-height:auto;padding-top:30px;padding-bottom:30px}.sgcase,.sgq,.sgstep{break-inside:avoid}}
+  /* ===== Sage Signature v2 — the proposal as a multi-page website ===== */
+  .sgsite{position:relative;margin:0 calc(-1*clamp(20px,3vw,64px));padding:0 clamp(20px,3vw,64px)}
+  .sgnav{position:sticky;top:0;z-index:25;display:flex;align-items:center;gap:18px;margin:0 calc(-1*clamp(20px,3vw,64px));padding:12px clamp(20px,3vw,64px);background:rgba(255,255,255,.86);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+  .sgbrand{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-size:1.05rem;letter-spacing:-.01em;white-space:nowrap;color:var(--sg-ink)}
+  .sgbrand i{font-style:normal;color:var(--sg-sage)}
+  .sglinks{display:flex;gap:4px;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+  .sglinks::-webkit-scrollbar{display:none}
+  .sglinks a{position:relative;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--sg-mute);padding:9px 12px;border-radius:99px;cursor:pointer;white-space:nowrap;transition:color .3s,background .3s}
+  .sglinks a:hover{color:var(--sg-ink);background:#F4F5F2}
+  .sglinks a.on{color:#fff;background:var(--sg-ink)}
+  .sgnav .sgbtn{padding:10px 18px;white-space:nowrap}
+  .sgprog{position:absolute;left:0;bottom:-1px;height:2px;width:calc(var(--sgp,0)*100%);background:linear-gradient(90deg,var(--sg-sage2),var(--sg-sage));transition:width .12s linear}
+  .sgpage{display:none}
+  .sgpage.on{display:block;animation:sgPageIn .8s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes sgPageIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  .sgcurtain{position:fixed;inset:0;z-index:90;pointer-events:none;background:linear-gradient(180deg,var(--sg-sage) 0,var(--sg-ink) 100%);transform:translateY(100%)}
+  .sgsite.sgturn .sgcurtain{animation:sgCurtain .78s cubic-bezier(.7,0,.3,1) both}
+  @keyframes sgCurtain{0%{transform:translateY(100%)}45%,55%{transform:translateY(0)}100%{transform:translateY(-100%)}}
+  /* page header */
+  .sgphero{position:relative;overflow:hidden;margin:0 calc(-1*clamp(20px,3vw,64px));padding:clamp(70px,11vw,150px) clamp(20px,3vw,64px) clamp(36px,5vw,64px);border-bottom:1px solid var(--line)}
+  .sgphero .glow{position:absolute;border-radius:50%;filter:blur(10px);pointer-events:none}
+  .sgphero .g1{width:46vw;aspect-ratio:1;right:-10vw;top:-18vw;background:radial-gradient(closest-side,rgba(147,172,143,.42),transparent);animation:sgDrift 16s ease-in-out infinite alternate}
+  .sgphero .g2{width:30vw;aspect-ratio:1;left:30%;bottom:-16vw;background:radial-gradient(closest-side,rgba(83,111,80,.18),transparent);animation:sgDrift 20s ease-in-out infinite alternate-reverse}
+  @keyframes sgDrift{to{transform:translate(-8vw,6vw) scale(1.15)}}
+  .sgph-top{position:relative;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .sglab{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--sg-sage)}
+  .sglab.m{color:var(--sg-mute)}
+  .sgph-t{position:relative;font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:clamp(2.8rem,9vw,8.4rem);line-height:.9;letter-spacing:-.045em;margin:clamp(22px,3vw,40px) 0 0;color:var(--sg-ink)}
+  .sgph-t>span{display:block}.sgph-t>span.s{color:var(--sg-sage)}
+  .sgph-i{position:relative;max-width:52ch;margin:clamp(18px,2vw,28px) 0 0 auto;font-size:clamp(.98rem,1.25vw,1.18rem);line-height:1.55;color:var(--sg-mute)}
+  .sgph-marq{position:relative;overflow:hidden;margin-top:clamp(28px,4vw,52px);border-top:1px solid var(--line);padding-top:16px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .sgph-marq>div{display:flex;width:max-content;animation:sgMarq 30s linear infinite}
+  .sgph-marq span{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sg-mute);padding-right:46px;white-space:nowrap}
+  .sgph-marq span::before{content:"✦";color:var(--sg-sage);margin-right:14px}
+  /* word-by-word reveals (as on the website) */
+  .sgsite .w{display:inline-block}
+  .sgsite .reveal:not(.in) .w{opacity:0;transform:translateY(.45em);filter:blur(6px)}
+  .sgsite .reveal.in .w{animation:sgW .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*38ms)}
+  @keyframes sgW{from{opacity:0;transform:translateY(.45em);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+  /* section headers: split like the website (title left, intro right) */
+  .sgsite .psec>.reveal:has(>.peyebrow){display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:clamp(20px,4vw,64px);align-items:end}
+  .sgsite .psec>.reveal:has(>.peyebrow)>.peyebrow{grid-column:1/-1}
+  .sgsite .psec>.reveal:has(>.peyebrow)>h2{grid-column:1;margin-bottom:0}
+  .sgsite .psec>.reveal:has(>.peyebrow)>.lead{grid-column:2;margin:0;padding-bottom:.4em}
+  .sgsite .psec>.reveal:has(>.peyebrow)>:not(.peyebrow):not(h2):not(.lead){grid-column:1/-1}
+  /* components, redrawn in the website language */
+  .sgsite .pcard:hover,.sgsite .tq:hover,.sgsite .lst:hover,.sgsite .idea:hover,.sgsite .ctr:hover{background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(147,172,143,.18),transparent 65%),#fff}
+  .sgsite .chartcard{background:#F4F5F2;border:none;border-radius:24px;padding:clamp(18px,2.4vw,32px)}
+  .sgsite .chartcard h3{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--sg-mute)}
+  .sgsite .cols{height:240px}
+  .sgsite .col .bar{background:linear-gradient(180deg,var(--sg-sage2),var(--sg-sage));border-radius:14px 14px 4px 4px}
+  .sgsite .col .bar .v{font-family:var(--f-display)}
+  .sgsite .hbar .tr{height:8px;border-radius:99px;background:#E4E7E1}
+  .sgsite .hbar .fl{border-radius:99px;background:linear-gradient(90deg,var(--sg-sage),var(--sg-sage2))}
+  .sgsite .hbar .vv{font-family:var(--f-display);font-size:1.05rem}
+  .sgsite .statrow{border-radius:22px;background:var(--line)}
+  .sgsite .statrow .st{background:#fff;padding:22px}
+  .sgsite .statrow .st .v{font-size:clamp(1.4rem,2.6vw,2.2rem);letter-spacing:-.03em;font-weight:400}
+  .sgsite .band{background:var(--sg-ink);border-radius:28px}
+  .sgsite .band h2,.sgsite .psec.dark h2{color:#fff}
+  .sgsite .fstage{background:var(--sg-ink);border-radius:99px;padding:14px 26px 14px 14px}
+  .sgsite .fstage:nth-child(2){background:#24261F}.sgsite .fstage:nth-child(3){background:#37503B}.sgsite .fstage:nth-child(4){background:var(--sg-sage)}
+  .sgsite .fstage::before{border-radius:50%;background:rgba(255,255,255,.14)}
+  .sgsite .fstage .fv{font-family:var(--f-display);font-weight:400;font-size:1.1rem}
+  .sgsite .tq::before{height:3px;background:linear-gradient(90deg,var(--sg-sage2),var(--sg-sage))}
+  .sgsite .tq .q{font-family:'Inter',sans-serif;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--sg-sage)}
+  .sgsite .cdeep{border-top:1px solid var(--line);padding-top:6px}
+  .sgsite .cdhead .cdn{font-family:var(--f-display);font-size:clamp(2.4rem,4vw,3.6rem);color:var(--sg-sage2);letter-spacing:-.04em;background:none}
+  .sgsite .cdhead h3{font-size:clamp(1.6rem,2.6vw,2.4rem)}
+  .sgsite .lst{border-radius:20px;box-shadow:none}
+  .sgsite .ctr .mv{font-family:var(--f-display);color:var(--sg-sage)}
+  .sgsite .senti{border-radius:24px;box-shadow:none}
+  .sgsite .idea{border-radius:24px;box-shadow:none}
+  .sgsite .idea h3{font-family:var(--f-display);font-weight:400;font-size:clamp(1.4rem,2.2vw,2rem);letter-spacing:-.025em}
+  .sgsite .tiercard.sel{border-color:var(--sg-sage);background:#F4F5F2}
+  .sgsite .ctable{border-radius:20px;box-shadow:none;border:1px solid var(--line)}
+  .sgsite .ctable td{border-color:var(--line)}
+  .sgsite .pricebox{border-radius:24px}
+  .sgsite .sgcover{margin:0 calc(-1*clamp(20px,3vw,64px))}
+  .sgsite .sgstrip{margin:0 calc(-1*clamp(20px,3vw,64px))}
+  /* next-page link */
+  .sgnext{display:grid;grid-template-columns:1fr auto;align-items:end;gap:12px;margin:clamp(40px,6vw,90px) calc(-1*clamp(20px,3vw,64px)) 0;padding:clamp(34px,5vw,70px) clamp(20px,3vw,64px);border-top:1px solid var(--line);text-decoration:none;color:var(--sg-ink);cursor:pointer;position:relative;overflow:hidden}
+  .sgnext::before{content:"";position:absolute;inset:0;background:var(--sg-ink);transform:scaleY(0);transform-origin:bottom;transition:transform .7s cubic-bezier(.7,0,.2,1);z-index:0}
+  .sgnext:hover::before{transform:scaleY(1)}
+  .sgnext>*{position:relative;z-index:1;transition:color .5s}
+  .sgnext:hover>*{color:#fff}
+  .sgnext .t{grid-column:1;font-family:var(--f-display);text-transform:uppercase;font-size:clamp(2.4rem,7vw,6.4rem);line-height:.9;letter-spacing:-.045em}
+  .sgnext .arr{font-family:var(--f-display);font-size:clamp(2.4rem,6vw,5.4rem);line-height:.9;transition:transform .6s cubic-bezier(.2,.8,.2,1),color .5s}
+  .sgnext:hover .arr{transform:translateX(12px) rotate(-45deg)}
+  .sgnext .sglab{grid-column:1/-1}
+  .sgnext:hover .sglab{color:var(--sg-sage2)}
+  .sgcontact{border-top:none!important}
+  @media(max-width:860px){
+    .sgnav{gap:10px;padding:10px 16px}.sgbrand{display:none}.sglinks{margin:0}
+    .sgsite .psec>.reveal:has(>.peyebrow){display:block}
+    .sgsite .psec>.reveal:has(>.peyebrow)>.lead{margin-top:10px}
+    .sgph-i{margin-left:0}
+  }
+  @media print{
+    .sgnav,.sgcurtain,.sgnext,.sgph-marq{display:none!important}
+    .sgpage{display:block!important;animation:none!important}
+    .sgsite .w{opacity:1!important;transform:none!important;filter:none!important;animation:none!important}
+    .sgphero{padding:40px 0 20px;break-before:page}
+  }
+  body.pdfing .sgnav,body.pdfing .sgcurtain,body.pdfing .sgnext,body.pdfing .sgph-marq{display:none!important}
+  body.pdfing .sgpage{display:block!important;animation:none!important}
+  body.pdfing .sgsite .w{opacity:1!important;transform:none!important;filter:none!important;animation:none!important}
+  @media(prefers-reduced-motion:reduce){.sgpage.on,.sgsite .reveal.in .w,.sgphero .glow,.sgph-marq>div{animation:none}.sgsite.sgturn .sgcurtain{animation:none}}
 </style>
 </head>
 <body>
@@ -1503,7 +1610,7 @@ function sgCover(d,R,name,reg,cat,needsSel){
       <div class="sgkick" data-mg="Cover kicker">We help <b style="font-weight:400">${name}</b> with</div>
       <h1 data-mg="Brand title"><span class="sgtype" data-words="${esc(JSON.stringify(words))}">${esc(words[0])}</span><span class="sgcaret"></span></h1>
       <div class="sub2" data-mg="Cover subtitle">${esc((d.f_brief||'').split(/[.\n]/)[0]||cat)}.</div>
-      <div class="sgbtns"><a class="sgbtn dark" href="#" onclick="event.preventDefault();const s=this.closest('.psec').nextElementSibling;s&&s.scrollIntoView({behavior:'smooth'})">See the plan ↓</a><a class="sgbtn" href="#" onclick="event.preventDefault();const s=document.getElementById('sgproof');s&&s.scrollIntoView({behavior:'smooth'})">Case studies</a></div>
+      <div class="sgbtns"><a class="sgbtn dark" href="#" onclick="event.preventDefault();sgGo('next')">See the plan →</a><a class="sgbtn" href="#" onclick="event.preventDefault();sgGo('work')">Case studies</a></div>
       <div class="meta"><span>${cat}</span>${d.f_for?`<span>Prepared for ${esc(d.f_for)}</span>`:''}<span>Prepared by Sage Media</span></div></div>
   </section>
   <div class="sgstrip" data-mg="Sage proof strip"><div class="sgmarq">${('<span>Data <b>•</b> Insights <b>•</b> Creativity <b>•</b> Expertise <b>•</b></span>').repeat(4)}</div>
@@ -1529,6 +1636,124 @@ function sgCTA(name,R){
     <div class="sgbtns"><a class="sgbtn light" href="mailto:business@sagemedia.in?subject=${encodeURIComponent('Proposal: '+(name||'').replace(/&amp;/g,'&'))}">Start the project →</a><a class="sgbtn ghostw" href="https://wa.me/917355004934" target="_blank" rel="noopener">WhatsApp us</a>${pf.map(p=>`<a class="sgbtn ghostw" href="${esc(p.url)}" onclick="openPf(event,'${esc(p.url)}','${esc(p.t)}')">${esc(p.t)} ↗</a>`).join('')}</div>
     <div class="sgoffices"><div><div class="c">Jaipur</div><div class="t"><span class="sgclock" data-tz="Asia/Kolkata">--:--</span> · HQ, India</div><div class="a">904–905 Golden Leaf, Tonk Road, Jaipur</div></div><div><div class="c">Mumbai</div><div class="t"><span class="sgclock" data-tz="Asia/Kolkata">--:--</span> · India</div><div class="a">Andheri East, Mumbai</div></div><div><div class="c">Dubai</div><div class="t"><span class="sgclock" data-tz="Asia/Dubai">--:--</span> · UAE</div><div class="a">IFZA Business Park, Dubai Silicon Oasis</div></div></div>
   </div>`}
+/* ===== Sage Signature v2: the proposal rendered as a multi-page website ===== */
+const SG_PAGEMAP={'The Brief':'overview','Snapshot':'overview',
+ 'The Market':'market','Tailwinds':'market','Where to Play':'market',
+ 'The Landscape':'competition','Head-to-Head':'competition','The Gap':'competition','The Advantage':'competition','Brand World':'competition','Brand Audit':'competition',
+ 'The Big Ideas':'strategy','Go-to-Market':'strategy','Marketing Plan':'strategy','Content Strategy':'strategy','The Funnel':'strategy','Direction':'strategy','Demo Creatives':'strategy',
+ 'Plan of Action':'plan','Measurement':'plan','Budget & Returns':'plan',
+ 'Our Work':'work','Case studies':'work','Testimonials':'work','How we work':'work',
+ 'Investment':'investment','Next Steps':'investment','Thank You':'contact'};
+const SG_PAGES=[
+ ['overview','Overview'],
+ ['market','Market',['A market moving','in your favour.'],n=>`Where ${n} plays, how big the opportunity is, and where it’s heading.`],
+ ['competition','Competition',['Know the field.','Win the gaps.'],n=>`Who else is competing for ${n}’s customer, what works for them, and the doors they leave open.`],
+ ['strategy','Strategy',['The strategy','to launch & scale.'],n=>`How ${n} goes to market: the moves, the mix, the content and the funnel.`],
+ ['proposal','Proposal',['The proposal,','in detail.'],n=>`Everything we’ll do for ${n}, exactly as scoped.`],
+ ['plan','Plan',['The build,','month by month.'],n=>`What ships when, how we measure it, and what comes back.`],
+ ['work','Our work',['Proof,','not promises.'],n=>`Brands we have grown, what they say about us, and how we work.`],
+ ['investment','Investment',['Scope &','investment.'],n=>`What’s included and what it costs, then the first steps.`],
+ ['contact','Contact']];
+function sgGuess(lab,doc){
+  if(/commercial|budget option|pric|fee|investment|cost|what we need/i.test(lab))return 'investment';
+  if(/^scope/i.test(lab))return 'investment';
+  if(/kpi|result|measure|timeline|calendar|schedule|shoot day|launch plan|month runs|ticket math|stories plan|roadmap/i.test(lab))return 'plan';
+  if(doc&&/^the goal|what we found|opportunity|who buys|^the brief|^the plan$/i.test(lab))return 'overview';
+  return doc?'proposal':null}
+function sgSite(h,d,R,name){
+  const tpl=document.createElement('template');tpl.innerHTML=h;
+  const doc=!!R.doconly, buckets={};SG_PAGES.forEach(p=>buckets[p[0]]=[]);
+  const lb=e=>(e&&e.dataset&&e.dataset.mg||'').replace(/^Section \d+:\s*/,'');
+  let cur='overview';
+  [...tpl.content.children].forEach(el=>{
+    if(el.tagName==='SECTION'){
+      const lab=lb(el);
+      if(lab==='Cover')cur='overview';
+      else if(SG_PAGEMAP[lab])cur=(doc&&SG_PAGEMAP[lab]==='strategy')?'proposal':SG_PAGEMAP[lab];
+      else{const g=sgGuess(lab,doc);if(g)cur=g;else if(cur==='overview')cur='strategy'}
+      const cta=el.querySelector('.sgcta');
+      if(cta&&lab!=='Thank You'){const ft=el.querySelector('.pfooter');const sec=document.createElement('section');sec.className='psec sgcontact';sec.dataset.mg='Section: Contact';sec.appendChild(cta);if(ft)sec.appendChild(ft);buckets[cur].push(el);buckets.contact.push(sec);return}
+      buckets[cur].push(el);
+    } else buckets[cur].push(el);
+  });
+  /* one set of testimonials: keep the builder's own when it has them */
+  const tst=buckets.work.filter(e=>lb(e)==='Testimonials');
+  if(tst.length>1)tst.filter(e=>e.querySelector('.sgquotes')).forEach(e=>buckets.work.splice(buckets.work.indexOf(e),1));
+  const ord=['Case studies','Our Work','Testimonials','How we work'];
+  buckets.work.sort((x,y)=>ord.indexOf(lb(x))-ord.indexOf(lb(y)));
+  /* long proposals become several pages */
+  let pages=[];
+  SG_PAGES.forEach(p=>{const els=buckets[p[0]];if(!els.length)return;
+    const secs=els.filter(e=>e.tagName==='SECTION');
+    if(p[0]==='proposal'&&secs.length>7){const parts=Math.ceil(secs.length/6),per=Math.ceil(secs.length/parts);
+      for(let k=0;k<parts;k++){const ch=secs.slice(k*per,(k+1)*per);const first=lb(ch[0])||'Proposal';
+        pages.push({key:'proposal-'+(k+1),label:first.length>18?first.slice(0,17)+'…':first,title:[first+',',`part ${k+1} of ${parts}.`],intro:()=>`Inside: ${ch.map(lb).filter(Boolean).join(' · ')}.`,els:ch})}}
+    else pages.push({key:p[0],label:p[1],title:p[2],intro:p[3],els})});
+  const tot=pages.length, nn=i=>String(i+1).padStart(2,'0');
+  const secName=el=>{const l=lb(el);return l&&l!=='Cover'&&l!=='Contact'?l:''};
+  let out=`<div class="sgsite"><span class="sgcurtain" aria-hidden="true"></span>
+  <nav class="sgnav"><div class="sgbrand">Sage Media <i>×</i> ${name}</div><div class="sglinks">${pages.map(p=>`<a data-go="${p.key}" onclick="sgGo('${p.key}')">${esc(p.label)}</a>`).join('')}</div><a class="sgbtn dark" onclick="sgGo('contact')">Let's talk</a><span class="sgprog"></span></nav>`;
+  pages.forEach((p,i)=>{
+    const wrap=document.createElement('div');p.els.forEach(e=>wrap.appendChild(e));
+    const names=p.els.map(secName).filter(Boolean);
+    out+=`<article class="sgpage" data-page="${p.key}">`;
+    if(p.title)out+=`<header class="sgphero reveal"><span class="glow g1"></span><span class="glow g2"></span>
+      <div class="sgph-top"><span class="sglab">${nn(i)} / ${String(tot).padStart(2,'0')} · ${esc(p.label)}</span><span class="sglab m">Proposal for ${name}</span></div>
+      <h1 class="sgph-t"><span>${esc(p.title[0])}</span><span class="s">${esc(p.title[1])}</span></h1>
+      <p class="sgph-i">${esc(p.intro(d.f_name||''))}</p>
+      ${names.length?`<div class="sgph-marq" aria-hidden="true"><div>${names.concat(names,names,names).map(x=>`<span>${esc(x)}</span>`).join('')}</div></div>`:''}</header>`;
+    out+=wrap.innerHTML;
+    const nx=pages[i+1];
+    if(nx)out+=`<a class="sgnext" onclick="sgGo('${nx.key}')"><span class="sglab">Next · ${nn(i+1)}</span><span class="t">${esc(nx.label)}</span><span class="arr">→</span></a>`;
+    out+=`</article>`;
+  });
+  return out+`</div>`}
+let sgCur='overview',sgIO=null;
+function sgPages(){return [...document.querySelectorAll('#pitch .sgpage')]}
+function sgGo(k,instant){
+  const site=document.querySelector('#pitch .sgsite');if(!site)return;
+  const pages=sgPages();
+  if(k==='next'){const i=pages.findIndex(p=>p.dataset.page===sgCur);k=(pages[i+1]||pages[0]).dataset.page}
+  const pg=site.querySelector(`.sgpage[data-page="${k}"]`);if(!pg)return;
+  const swap=()=>{pages.forEach(p=>p.classList.toggle('on',p===pg));sgCur=k;
+    site.querySelectorAll('.sglinks a').forEach(a=>a.classList.toggle('on',a.dataset.go===k));
+    const w=$('pitchWrap');if(w)w.scrollTop=0;
+    const on=site.querySelector('.sglinks a.on');if(on)on.scrollIntoView({block:'nearest',inline:'center'});
+    if(!/^#v=/.test(location.hash)){try{history.replaceState(null,'',location.pathname+location.search+'#'+k)}catch(e){}}
+    sgReveal(pg)};
+  if(instant||matchMedia('(prefers-reduced-motion: reduce)').matches){swap();return}
+  site.classList.remove('sgturn');void site.offsetWidth;site.classList.add('sgturn');
+  setTimeout(swap,380);setTimeout(()=>site.classList.remove('sgturn'),820)}
+function sgReveal(pg){
+  if(sgIO)sgIO.disconnect();
+  const els=[...pg.querySelectorAll('.reveal,.psec')];
+  els.forEach(el=>el.classList.remove('in'));void pg.offsetWidth;
+  sgIO=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add('in');
+    el.querySelectorAll('[data-count]').forEach(countUp);
+    el.querySelectorAll('.bar[data-h]').forEach(b=>b.style.height=b.dataset.h+'%');
+    el.querySelectorAll('.fl[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
+    el.querySelectorAll('.pin[data-left]').forEach(p=>p.style.left=p.dataset.left+'%');
+    sgIO.unobserve(el)})},{threshold:.08,root:$('pitchWrap')});
+  els.forEach(el=>sgIO.observe(el));
+  setTimeout(()=>pg.querySelectorAll('.reveal:not(.in),.psec:not(.in)').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in')}),1600)}
+function sgSplit(el){if(el.dataset.split)return;el.dataset.split='1';let i=0;
+  const walk=n=>[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){if(!c.textContent.trim())return;const f=document.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach(p=>{if(!p)return;if(/^\s+$/.test(p))f.appendChild(document.createTextNode(p));else{const s=document.createElement('span');s.className='w';s.style.setProperty('--i',i++);s.textContent=p;f.appendChild(s)}});c.replaceWith(f)}
+    else if(c.nodeType===1&&!/^(SCRIPT|STYLE|IMG|SVG)$/i.test(c.tagName)&&!c.classList.contains('sgcaret')&&!c.classList.contains('sgtype'))walk(c)});
+  walk(el)}
+function sgSiteInit(){
+  const site=document.querySelector('#pitch .sgsite');if(!site)return;
+  site.querySelectorAll('.psec h2,.sgph-t').forEach(sgSplit);
+  const w=$('pitchWrap'),bar=w&&w.querySelector('.pitch-bar'),nav=site.querySelector('.sgnav');
+  if(nav&&bar)nav.style.top=(bar.offsetParent?bar.offsetHeight:0)+'px';
+  if(w&&!w.dataset.sgScroll){w.dataset.sgScroll='1';w.addEventListener('scroll',()=>{const n=document.querySelector('#pitch .sgnav');if(!n)return;const m=w.scrollHeight-w.clientHeight;n.style.setProperty('--sgp',m>0?(w.scrollTop/m).toFixed(3):0)},{passive:true})}
+  if(!site.dataset.sgMove){site.dataset.sgMove='1';site.addEventListener('pointermove',e=>{const c=e.target.closest('.pcard,.tq,.lst,.idea,.ctr');if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true})}
+  if(!window.__sgKeys){window.__sgKeys=1;document.addEventListener('keydown',e=>{const a=document.activeElement;if(!document.querySelector('#pitch .sgsite')||!$('pitchWrap').classList.contains('show'))return;if(a&&(a.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(a.tagName)))return;
+    const ps=sgPages(),i=ps.findIndex(p=>p.dataset.page===sgCur);
+    if(e.key==='ArrowRight'&&ps[i+1])sgGo(ps[i+1].dataset.page);if(e.key==='ArrowLeft'&&ps[i-1])sgGo(ps[i-1].dataset.page)})}
+  const h=(location.hash||'').slice(1);
+  sgGo(sgPages().some(p=>p.dataset.page===h)?h:'overview',true)}
 let sgTimer=null,sgClockT=null;
 function sgStart(){
   clearInterval(sgTimer);clearInterval(sgClockT);
@@ -1744,7 +1969,7 @@ function generate(){
   if(!R.trimcore)(R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'From the Proposal',ds.t||'',ds.lead||'',ds.body||'')});
   if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this plan ships in.',
     `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="cwrap"><div class="caro" onscroll="const d=this.closest('.pcard').querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><button class="cnav l" onclick="caroNav(this,-1)" aria-label="Previous">‹</button><button class="cnav r" onclick="caroNav(this,1)" aria-label="Next">›</button></div><div class="carodots"><i class="on"></i><i></i><i></i></div></div>`).join('')+`</div>`);
-  if(SG)h+=sgExtras(d,name);
+  if(SG)h+=sgExtras(d,name,true);
   /* 20 pricing */
   h+=S(20,'Investment','Scope & pricing.','Every cell below is editable — click and type when commercials are ready.',
     `<div class="pricebox reveal d1" data-mg="Pricing table"><div class="pricehint">✏️ Editable — click any cell. Rows come from the selected scope.</div>
@@ -1760,6 +1985,7 @@ function generate(){
      <div class="pfooter">Prepared by Sage Media · ${name} · generated with the Sage Pitch Builder${research?'':' · research pending — send the brief to Claude'}</div>`);
 
   }
+  if(SG)h=sgSite(h,d,R,name);
   const pw=$('pitch');pw.innerHTML=h;
   pw.className='pitch theme-'+THEMES[curT].layout+' '+THEMES[curT].cls;
   $('pbTitle').textContent=d.f_name+' · Pitch';
@@ -2027,7 +2253,7 @@ function runAnims(){
   $('pitch').querySelectorAll('.reveal').forEach(el=>io.observe(el));
   /* failsafe: whatever the observer misses (fast scroll, theme switch, odd viewports), everything is visible after 2.2s */
   setTimeout(()=>{const p=$('pitch');if(p)p.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in'))},2200);
-  sgStart();
+  sgStart();sgSiteInit();
   $('pitch').querySelectorAll('.bar[data-h]').forEach(b=>b.style.setProperty('--ph',b.dataset.h+'%'));
   $('pitch').querySelectorAll('.fl[data-w]').forEach(b=>b.style.setProperty('--pw',b.dataset.w+'%'));
   $('pitch').querySelectorAll('.pin[data-left]').forEach(p=>p.style.setProperty('--pl',p.dataset.left+'%'));

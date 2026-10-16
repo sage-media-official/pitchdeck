@@ -1257,7 +1257,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgdeck .ctl button:hover{background:#fff;color:#050605;transform:translateY(-2px)}
   .sgreel .sgin{align-items:center;padding-bottom:clamp(110px,12vw,180px)}
   /* --- work-by columns with a centre stage --- */
-  .sgby{display:grid;grid-template-columns:minmax(0,1fr) clamp(220px,19vw,280px) minmax(0,1fr);gap:clamp(20px,3vw,48px);margin-top:10px;align-items:start}
+  .sgby{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,72px);margin-top:10px;align-items:start;position:relative}
   .sgby h3{font-family:var(--f-body);font-weight:400;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--sage2);margin:0 0 6px;display:flex;align-items:center;gap:10px}
   .sgby h3::after{content:"";flex:1;height:1px;background:var(--ln)}
   .sgby ul{list-style:none;margin:0;padding:0}
@@ -1268,9 +1268,8 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgby li a .m{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:right;max-width:18ch;line-height:1.5}
   .sgby li a .ar{color:var(--sage2);transition:transform .4s}
   .sgby li a:hover .ar{transform:translate(4px,-4px)}
-  .sgbystage{position:relative;align-self:stretch;min-height:420px}
-  .sgbycard{position:absolute;left:0;right:0;top:var(--y,0px);aspect-ratio:4/5;transition:top .55s cubic-bezier(.2,.8,.2,1),opacity .3s,transform .3s;will-change:top}
-  .sgbycard.sw{opacity:0;transform:scale(.97)}
+  .sgbycard{position:absolute;width:clamp(180px,15vw,230px);aspect-ratio:4/5;z-index:12;pointer-events:none;opacity:0;transform:rotate(-4deg) scale(.85);transform-origin:center;transition:opacity .3s,transform .45s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1),left .35s cubic-bezier(.2,.8,.2,1)}
+  .sgbycard.on{opacity:1;transform:rotate(-4deg) scale(1);pointer-events:auto}
   .sgsvcard,.sgindcard{position:relative;display:block;width:100%;height:100%;border-radius:8px;overflow:hidden;color:#fff;text-decoration:none;container-type:inline-size;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 30px 60px -30px rgba(0,0,0,.8);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
   .sgsvcard:hover,.sgindcard:hover{transform:translateY(-6px)}
   .sgsvcard .g1{position:absolute;width:93.75cqw;height:93.75cqw;border-radius:50%;filter:blur(11.5cqw);opacity:.6;left:33.1cqw;top:-31.7cqw}
@@ -1307,7 +1306,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgstepside .cap p{margin:0;font-family:var(--f-display);font-size:clamp(17px,1.5vw,24px);line-height:1.3;letter-spacing:-.01em}
   .sgmeta2{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
   .sgmeta2 span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#536F50;margin-right:8px;vertical-align:middle}
-  @media(max-width:860px){.sgcomp{grid-template-columns:1fr;gap:18px}.sgcomp .id{position:static}.sgledger{grid-template-columns:1fr}.sgledger::before{display:none}.sgmixwrap{grid-template-columns:1fr}.sgdonut{max-width:220px;margin:0 auto}.sgrow-h{grid-template-columns:1fr auto;gap:8px 16px}.sgrow-h .sum,.sgrow-h .cnt{display:none}.sgrow-h .q{grid-column:1/-1}.sgrow-in{padding-left:0}.sgsite .chips.sgkpi{grid-template-columns:1fr 1fr}.sgby{grid-template-columns:1fr}.sgbystage{display:none}.sgstepswrap{grid-template-columns:1fr}.sgstepside{display:none}.sgdeck{display:none}.sgsite .hbar{grid-template-columns:1fr;gap:6px}.sgsite .hbar .lb{text-align:left}.sgsite .hbar .vv{text-align:left}}
+  @media(max-width:860px){.sgcomp{grid-template-columns:1fr;gap:18px}.sgcomp .id{position:static}.sgledger{grid-template-columns:1fr}.sgledger::before{display:none}.sgmixwrap{grid-template-columns:1fr}.sgdonut{max-width:220px;margin:0 auto}.sgrow-h{grid-template-columns:1fr auto;gap:8px 16px}.sgrow-h .sum,.sgrow-h .cnt{display:none}.sgrow-h .q{grid-column:1/-1}.sgrow-in{padding-left:0}.sgsite .chips.sgkpi{grid-template-columns:1fr 1fr}.sgby{grid-template-columns:1fr}.sgbycard{display:none}.sgstepswrap{grid-template-columns:1fr}.sgstepside{display:none}.sgdeck{display:none}.sgsite .hbar{grid-template-columns:1fr;gap:6px}.sgsite .hbar .lb{text-align:left}.sgsite .hbar .vv{text-align:left}}
   /* hero, as on the website home (no scroll stage) */
   .sgsite .psec.sgherowrap{padding:0;max-width:none;border-top:none;display:block;min-height:0;position:relative;overflow:hidden;background:var(--bg);height:calc(100vh - 64px);height:calc(100svh - 64px)}
   .sgcollage{position:absolute;inset:0;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%)}
@@ -1536,7 +1535,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgsite .psec.sgcontact{max-width:none;background:var(--bg2);border-top:1px solid var(--ln);padding:0;overflow:hidden}
   .sgcontact .sgglow{left:-8%;bottom:-30%;width:50vw;height:50vw;max-width:760px;max-height:760px;background:radial-gradient(circle,rgba(83,111,80,.34),rgba(83,111,80,.08) 45%,transparent 70%);animation-duration:18s}
   .sgcontact .sgin{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,4.5vw,80px);padding-top:clamp(44px,5.5vw,84px);padding-bottom:clamp(40px,4.8vw,72px)}
-  .sgsite .sgcontact h2{font-size:clamp(38px,5.6vw,96px);line-height:.94;letter-spacing:-.04em;text-transform:uppercase;margin:0;max-width:none;perspective:900px}
+  .sgsite .sgcontact h2{font-size:clamp(34px,4.6vw,78px);line-height:.94;letter-spacing:-.04em;text-transform:uppercase;margin:0;max-width:none;perspective:900px}
   .sgcontact h2 .kw{display:inline-block;color:var(--bone);background:none;-webkit-text-fill-color:currentColor;animation:none;transition:color .35s,transform .5s cubic-bezier(.2,.8,.2,1),text-shadow .5s;cursor:default}
   .sgcontact h2 .kw:hover{color:var(--sage2);transform:translateY(-.06em) skewX(-4deg);text-shadow:0 12px 34px rgba(83,111,80,.55)}
   .sgcontact h2 .kw.s{color:var(--sage2)}
@@ -1544,14 +1543,20 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgcontact .sgbtns{margin-top:clamp(22px,2.6vw,36px)}
   .sgoff{display:flex;flex-direction:column;border-top:1px solid var(--ln)}
   .sgoff .lab{padding:14px 0 6px}
-  .sgcity{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 18px;padding:clamp(16px,1.8vw,24px) 0;border-bottom:1px solid var(--ln);cursor:default;transition:padding .45s cubic-bezier(.2,.8,.2,1)}
-  .sgcity:hover{padding-left:10px}
-  .sgcity .c{font-family:var(--f-display);font-size:clamp(26px,2.6vw,40px);letter-spacing:-.03em;line-height:1;transition:color .35s}
-  .sgcity:hover .c{color:var(--sage2)}
-  .sgcity .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
-  .sgcity .a{grid-column:1/-1;font-size:12.5px;color:var(--muted);line-height:1.5;max-width:46ch}
-  .sgcity .a a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--ln)}
-  .sgcity .a a:hover{color:var(--sage2);border-color:var(--sage2)}
+  .sgcity{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 18px;padding:clamp(22px,2.6vw,36px) 0;border-bottom:1px solid var(--ln);cursor:default;align-items:center}
+  .sgcity .c{font-family:var(--f-display);font-size:clamp(40px,4.8vw,80px);letter-spacing:-.035em;line-height:1;transition:color .35s,text-shadow .35s}
+  .sgcity.on .c{color:var(--sage2);text-shadow:0 0 40px rgba(147,172,143,.35)}
+  .sgcity .t{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right;color:var(--muted);font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+  .sgcity .t b{font-family:var(--f-body);font-weight:400;font-size:clamp(16px,1.3vw,22px);letter-spacing:0;color:var(--bone)}
+  .sgcity .t span:last-child{text-transform:none;letter-spacing:.04em;font-size:11px}
+  .sgcity .d{grid-column:1/-1;display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.2,.8,.2,1)}
+  .sgcity.on .d{grid-template-rows:1fr}
+  .sgcity .d>div{overflow:hidden;min-height:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 32px}
+  .sgcity.on .d>div{padding-top:clamp(14px,1.6vw,24px)}
+  .sgcity .ph{font-family:var(--f-display);font-size:clamp(22px,2.3vw,38px);letter-spacing:-.02em;color:var(--bone);text-decoration:none;display:inline-flex;align-items:center;gap:10px;white-space:nowrap}
+  .sgcity .ph em{font-style:normal;color:var(--sage2);font-size:.6em;transition:transform .3s}
+  .sgcity .ph:hover em{transform:translate(3px,-3px)}
+  .sgcity .a{font-size:13px;color:var(--muted);line-height:1.5;max-width:30ch}
   .sgfoot{border-top:1px solid var(--ln);background:var(--bg)}
   .sgfoot .sgin{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;padding-bottom:28px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
   .sgfoot a{color:var(--bone);text-decoration:none}
@@ -1994,11 +1999,14 @@ function sgSvcCard(x,i){return `<a class="sgsvcard" href="https://sagemedia.in/#
 function sgIndCard(x,i){const st=x.st?`<div class="stats"><div><span>${esc(x.st[0])}</span><b>${esc(x.st[1])}</b></div><div><span>${esc(x.st[2])}</span><b>${esc(x.st[3])}</b></div></div>`:'';
   return `<a class="sgindcard" href="https://sagemedia.in/#/industries/${x.k}" target="_blank" rel="noopener"><div class="viz"><img src="${x.img}" alt="" loading="lazy" onerror="this.remove()"><sage-industry sector="${x.k}" mode="hero" label="off" stats="off"></sage-industry></div>${st}<div class="bt"><span class="lab">${String(i+1).padStart(2,'0')} · Industry</span><h4>${esc(x.t)}</h4><span class="see">See the work <em>→</em></span></div></a>`}
 function sgIndustryMotion(){if(window.__sgIndJs)return;window.__sgIndJs=1;if(customElements.get&&customElements.get('sage-industry'))return;const sc=document.createElement('script');sc.src='https://sagemedia.in/assets/sage-industry-motion.js?v=1';sc.async=true;document.head.appendChild(sc)}
-function sgByInit(site){site.querySelectorAll('.sgby').forEach(by=>{if(by.dataset.init)return;by.dataset.init='1';const stage=by.querySelector('.sgbystage'),card=by.querySelector('.sgbycard');if(!stage||!card)return;
-  const show=(kind,i,row)=>{const x=kind==='svc'?SG_BYSVC[i]:SG_BYIND[i];if(!x)return;if(card.dataset.key!==kind+i){card.dataset.key=kind+i;card.dataset.kind=kind;card.classList.add('sw');card.innerHTML=kind==='svc'?sgSvcCard(x,i):sgIndCard(x,i);requestAnimationFrame(()=>card.classList.remove('sw'))}
-    if(row){const sr=stage.getBoundingClientRect(),rr=row.getBoundingClientRect();const y=Math.max(0,Math.min(sr.height-card.offsetHeight,rr.top-sr.top+rr.height/2-card.offsetHeight/2));card.style.setProperty('--y',Math.round(y)+'px')}};
-  by.querySelectorAll('a[data-by]').forEach(a=>a.addEventListener('mouseenter',()=>{if(a.dataset.by==='ind')sgIndustryMotion();show(a.dataset.by,+a.dataset.i,a)}));
-  sgIndustryMotion()})}
+function sgByInit(site){site.querySelectorAll('.sgby').forEach(by=>{if(by.dataset.init)return;by.dataset.init='1';const card=by.querySelector('.sgbycard');if(!card)return;let hideT=0;
+  const show=(kind,i,row)=>{const x=kind==='svc'?SG_BYSVC[i]:SG_BYIND[i];if(!x)return;clearTimeout(hideT);
+    if(card.dataset.key!==kind+i){card.dataset.key=kind+i;card.innerHTML=kind==='svc'?sgSvcCard(x,i):sgIndCard(x,i)}
+    const br=by.getBoundingClientRect(),rr=row.getBoundingClientRect(),cw=card.offsetWidth||220,ch=cw*1.25;
+    card.style.left=Math.round(rr.right-br.left-cw-56)+'px';card.style.top=Math.round(rr.top-br.top+rr.height/2-ch/2)+'px';card.classList.add('on')};
+  const hide=()=>{hideT=setTimeout(()=>card.classList.remove('on'),80)};
+  by.querySelectorAll('a[data-by]').forEach(a=>{a.addEventListener('mouseenter',()=>{if(a.dataset.by==='ind')sgIndustryMotion();show(a.dataset.by,+a.dataset.i,a)});a.addEventListener('mouseleave',hide)});
+  card.addEventListener('mouseenter',()=>clearTimeout(hideT));card.addEventListener('mouseleave',hide);sgIndustryMotion()})}
 function sgDeck(d,cases){
   const own=(R=>{const g=(R&&R.gallery||[]).map(x=>({img:x.src,n:x.t||x.title||'Demo creative',s:x.s||'Concept'}));const a=parseLinks(d.f_assets).filter(u=>/\.(png|jpe?g|webp|gif)(\?|$)/i.test(u)).map(u=>({img:u,n:'Brand asset',s:d.f_name||''}));return g.concat(a)})(d.research||(typeof R!=='undefined'?R:null));
   const list=(own.length?own:SG_WORK.slice(0,8).map(w=>({img:w.img,n:w.n,s:'Sage Media'}))).slice(0,8);
@@ -2019,9 +2027,9 @@ function sgExtras(d,name,withQuotes){
     `<div class="sgrail" data-mg="Case study rail"><div>${SG_CASES.map((c,i)=>`<a class="sgcase rise" style="--d:${i*45}ms" href="https://sagemedia.in/pages/case-studies/${c.slug}/" target="_blank" rel="noopener" draggable="false" data-mg="Case study: ${esc(c.n)}"><img src="${c.img}" alt="${esc(c.n)}" loading="lazy" draggable="false" onerror="this.style.visibility='hidden'"><div class="ov"><span class="ind">${esc(c.ind)}</span><h3>${esc(c.n)}</h3></div><span class="go">→</span></a>`).join('')}</div></div>
      <a class="sglink" href="https://sagemedia.in/pages/case-studies/vamika-silver/" target="_blank" rel="noopener" style="margin-top:22px">All case studies <span>→</span></a>`);
   const byRow=(x,i,kind,href)=>`<li><a href="${href}" target="_blank" rel="noopener" data-by="${kind}" data-i="${i}"><span class="k">0${i+1}</span><span class="t">${esc(x.t)}</span><span class="m">${esc(x.m)}</span><span class="ar">↗</span></a></li>`;
-  h+=S(0,'Work by','Work by <span class="kw">service.</span> Work by <span class="kw">industry.</span>','Two ways into 1800+ shoots and 1000+ brands — by what we did, or by the world we did it in. Hover a row to open it.',
+  h+=S(0,'Work by','Work by <span class="kw">service.</span> Work by <span class="kw">industry.</span>','Two ways into 1800+ shoots and 1000+ brands — by what we did, or by the world we did it in.',
     `<div class="sgby reveal"><div data-mg="Work by service"><h3>By service</h3><ul>${SG_BYSVC.map((x,i)=>byRow(x,i,'svc','https://sagemedia.in/#/work/'+x.k)).join('')}</ul></div>
-     <div class="sgbystage" aria-hidden="true"><div class="sgbycard" data-kind="svc">${sgSvcCard(SG_BYSVC[0],0)}</div></div>
+     <div class="sgbycard" aria-hidden="true"></div>
      <div data-mg="Work by industry"><h3>By industry</h3><ul>${SG_BYIND.map((x,i)=>byRow(x,i,'ind','https://sagemedia.in/#/industries/'+x.k)).join('')}</ul></div></div>`);
   if(withQuotes)h+=S(0,'Testimonial','What our <span class="kw">clients say.</span>','',
     `<div class="sgtog rise" data-mg="Testimonial region"><button class="on" onclick="sgRegion(this,'in')">India</button><button onclick="sgRegion(this,'gl')">Across the globe</button></div>
@@ -2042,9 +2050,9 @@ function sgCTA(name,R){
       <div class="sgbtns"><a class="sgbtn acc sgmag" href="mailto:business@sagemedia.in?subject=${encodeURIComponent('Proposal: '+String(name).replace(/&amp;/g,'&'))}">Start a project →</a><a class="sgbtn sgmag" href="https://wa.me/917355004934" target="_blank" rel="noopener">WhatsApp us</a>${pf.map(p=>`<a class="sgbtn sgmag" href="${esc(p.url)}" onclick="openPf(event,'${esc(p.url)}','${esc(p.t)}')">${esc(p.t)} ↗</a>`).join('')}</div>
       <p class="say" style="font-size:12px;margin-top:18px">business@sagemedia.in · Replies within 1 business day</p></div>
     <div class="sgoff"><span class="lab">Three offices, 5+ timezones · hover a city</span>
-      <div class="sgcity"><span class="c">Jaipur</span><span class="t"><span class="sgclock" data-tz="Asia/Kolkata">--:--</span> · HQ · India</span><span class="a">Athah Mittal · <a href="tel:+917355004934">+91 73550 04934</a><br>904, 905 Golden Leaf, Tonk Road, Jaipur, Rajasthan</span></div>
-      <div class="sgcity"><span class="c">Mumbai</span><span class="t"><span class="sgclock" data-tz="Asia/Kolkata">--:--</span> · India</span><span class="a">Abhinav Tiwari · <a href="tel:+919509926094">+91 95099 26094</a><br>403, Akhand Anand, JB Nagar, Andheri East, Mumbai 400059</span></div>
-      <div class="sgcity"><span class="c">Dubai</span><span class="t"><span class="sgclock" data-tz="Asia/Dubai">--:--</span> · UAE</span><span class="a">Rhythm Dadhich · <a href="tel:+971585426279">+971 58 542 6279</a><br>SAGE MEDIA FZCO, IFZA Business Park, Dubai Silicon Oasis, Dubai</span></div></div></div>
+      <div class="sgcity on" onmouseenter="[...this.parentElement.querySelectorAll('.sgcity')].forEach(c=>c.classList.toggle('on',c===this))"><span class="c">Jaipur</span><span class="t"><b><span class="sgclock" data-tz="Asia/Kolkata">--:--</span></b><span>HQ · India</span><span>Athah Mittal</span></span><div class="d"><div><a class="ph" href="tel:+917355004934">+91 73550 04934 <em>↗</em></a><span class="a">904, 905 Golden Leaf, Tonk Road, Jaipur, Rajasthan</span></div></div></div>
+      <div class="sgcity" onmouseenter="[...this.parentElement.querySelectorAll('.sgcity')].forEach(c=>c.classList.toggle('on',c===this))"><span class="c">Mumbai</span><span class="t"><b><span class="sgclock" data-tz="Asia/Kolkata">--:--</span></b><span>India</span><span>Abhinav Tiwari</span></span><div class="d"><div><a class="ph" href="tel:+919509926094">+91 95099 26094 <em>↗</em></a><span class="a">403, Akhand Anand, JB Nagar, Andheri East, Mumbai 400059</span></div></div></div>
+      <div class="sgcity" onmouseenter="[...this.parentElement.querySelectorAll('.sgcity')].forEach(c=>c.classList.toggle('on',c===this))"><span class="c">Dubai</span><span class="t"><b><span class="sgclock" data-tz="Asia/Dubai">--:--</span></b><span>UAE</span><span>Rhythm Dadhich</span></span><div class="d"><div><a class="ph" href="tel:+971585426279">+971 58 542 6279 <em>↗</em></a><span class="a">SAGE MEDIA FZCO, IFZA Business Park, Dubai Silicon Oasis, Dubai</span></div></div></div></div></div>
     <div class="sgfoot"><div class="sgin"><span>© ${new Date().getFullYear()} Sage Media · All rights reserved</span><span>Prepared for ${name} · <a href="https://sagemedia.in" target="_blank" rel="noopener">sagemedia.in</a></span></div></div></section>`}
 /* ---- pages ---- */
 const SG_PAGEMAP={'The Brief':'overview','Snapshot':'overview',"What we'll do":'overview',

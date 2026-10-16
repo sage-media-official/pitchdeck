@@ -1939,7 +1939,7 @@ function sgExtras(d,name,withQuotes){
     `<div class="sgrail" data-mg="Case study rail"><div>${cases.map((c,i)=>`<a class="sgcase rise" style="--d:${i*45}ms" href="https://sagemedia.in/pages/case-studies/${c.slug}/" target="_blank" rel="noopener" draggable="false" data-mg="Case study: ${esc(c.n)}"><img src="${c.img}" alt="${esc(c.n)}" loading="lazy" draggable="false" onerror="this.style.visibility='hidden'"><div class="ov"><span class="ind">${esc(c.ind)}</span><h3>${esc(c.n)}</h3></div><span class="go">→</span></a>`).join('')}</div></div>
      <a class="sglink" href="https://sagemedia.in/pages/case-studies/vamika-silver/" target="_blank" rel="noopener" style="margin-top:22px">All case studies <span>→</span></a>`);
   const byRow=(x,i,base)=>`<li><a href="${base}${x.slug}/" target="_blank" rel="noopener"><span class="k">0${i+1}</span><span class="t">${esc(x.t)}</span><span class="m">${esc(x.m)}</span><span class="ar">↗</span></a></li>`;
-  h+=S(0,'Our work','Work by <span class="kw">service.</span> Work by <span class="kw">industry.</span>','Two ways into 1800+ shoots and 1000+ brands — by what we did, or by the world we did it in.',
+  h+=S(0,'Work by','Work by <span class="kw">service.</span> Work by <span class="kw">industry.</span>','Two ways into 1800+ shoots and 1000+ brands — by what we did, or by the world we did it in.',
     `<div class="sgby reveal"><div data-mg="Work by service"><h3>By service</h3><ul>${SG_BYSVC.map((x,i)=>byRow(x,i,'https://sagemedia.in/pages/services/')).join('')}</ul></div><div data-mg="Work by industry"><h3>By industry</h3><ul>${SG_BYIND.map((x,i)=>byRow(x,i,'https://sagemedia.in/pages/industries/')).join('')}</ul></div></div>`);
   if(withQuotes)h+=S(0,'Testimonial','What our <span class="kw">clients say.</span>','',
     `<div class="sgtog rise" data-mg="Testimonial region"><button class="on" onclick="sgRegion(this,'in')">India</button><button onclick="sgRegion(this,'gl')">Across the globe</button></div>
@@ -1969,7 +1969,7 @@ const SG_PAGEMAP={'The Brief':'overview','Snapshot':'overview',"What we'll do":'
  'The Landscape':'competition','Head-to-Head':'competition','The Gap':'competition','The Advantage':'competition','Brand World':'competition','Brand Audit':'competition',
  'The Big Ideas':'strategy','Go-to-Market':'strategy','Marketing Plan':'strategy','Content Strategy':'strategy','The Funnel':'strategy','Direction':'strategy','Demo Creatives':'strategy',
  'Plan of Action':'plan','Measurement':'plan','Budget & Returns':'plan',
- 'Our work':'work','Our Work':'work','Case studies':'work','Testimonial':'work','Testimonials':'work','How we work':'work',
+ 'Our work':'work','Our Work':'work','Case studies':'work','Work by':'work','Testimonial':'work','Testimonials':'work','How we work':'work',
  'Investment':'investment','Next Steps':'investment','Thank You':'contact','Contact':'contact'};
 const SG_PAGES=[
  ['overview','Overview'],
@@ -2005,7 +2005,7 @@ function sgSite(h,d,R,name){
   });
   const tst=buckets.work.filter(e=>/^Testimonial/.test(lb(e)));
   if(tst.length>1)tst.filter(e=>e.querySelector('.sgqs')).forEach(e=>buckets.work.splice(buckets.work.indexOf(e),1));
-  const ord=['Our work','Case studies','Our Work','Testimonial','Testimonials','How we work'];
+  const ord=['Our work','Case studies','Our Work','Work by','Testimonial','Testimonials','How we work'];
   buckets.work.sort((x,y)=>ord.indexOf(lb(x))-ord.indexOf(lb(y)));
   let pages=[];
   SG_PAGES.forEach(p=>{const els=buckets[p[0]];if(!els.length)return;

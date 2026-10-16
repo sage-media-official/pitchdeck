@@ -395,6 +395,9 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .mg-panel header{padding:16px 18px;border-bottom:1px solid var(--line-2);display:flex;align-items:center;justify-content:space-between}
   .mg-panel header h3{font-size:1.02rem;color:var(--sage-9)}
   .mg-panel .list{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+  #mgGrip{display:none;position:fixed;z-index:10001;width:28px;height:28px;border-radius:50%;background:#536F50;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:nwse-resize;touch-action:none}
+  #mgGrip.show{display:block}
+  .mg-stretch{outline:2px dashed #536F50!important;outline-offset:4px}
   .mg-item{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--cream)}
   .mg-item .pp{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
   .mg-item .cc{font-size:.86rem;color:var(--ink);margin-top:4px}
@@ -1268,8 +1271,8 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgby li a .m{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:right;max-width:18ch;line-height:1.5}
   .sgby li a .ar{color:var(--sage2);transition:transform .4s}
   .sgby li a:hover .ar{transform:translate(4px,-4px)}
-  .sgbycard{position:absolute;width:clamp(180px,15vw,230px);aspect-ratio:4/5;z-index:12;pointer-events:none;opacity:0;transform:rotate(-4deg) scale(.85);transform-origin:center;transition:opacity .3s,transform .45s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1),left .35s cubic-bezier(.2,.8,.2,1)}
-  .sgbycard.on{opacity:1;transform:rotate(-4deg) scale(1);pointer-events:auto}
+  .sgbycard{position:absolute;width:clamp(180px,15vw,230px);aspect-ratio:4/5;z-index:12;pointer-events:none;opacity:0;transform:scale(.9);transform-origin:center;transition:opacity .3s,transform .45s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1),left .35s cubic-bezier(.2,.8,.2,1)}
+  .sgbycard.on{opacity:1;transform:scale(1);pointer-events:auto}
   .sgsvcard,.sgindcard{position:relative;display:block;width:100%;height:100%;border-radius:8px;overflow:hidden;color:#fff;text-decoration:none;container-type:inline-size;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 30px 60px -30px rgba(0,0,0,.8);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
   .sgsvcard:hover,.sgindcard:hover{transform:translateY(-6px)}
   .sgsvcard .g1{position:absolute;width:93.75cqw;height:93.75cqw;border-radius:50%;filter:blur(11.5cqw);opacity:.6;left:33.1cqw;top:-31.7cqw}
@@ -1747,11 +1750,13 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   <div class="row">
     <button class="btn primary" onclick="saveComment()">Save comment</button>
     <button class="btn" onclick="editInline()">✏️ Edit text directly</button>
+    <button class="btn" onclick="startStretch()">↔ Stretch / resize</button>
     <button class="btn danger" onclick="delFromPop()">🗑 Delete element</button>
     <button class="btn" onclick="closePop()">Cancel</button>
   </div>
 </div>
 <button id="mgDel" title="Delete this element">🗑</button>
+<div id="mgGrip" title="Drag to stretch — text scales with the box"></div>
 <div class="mg-panel" id="mgPanel">
   <header><h3>✨ Change requests</h3><button class="btn" onclick="togglePanel()">Close</button></header>
   <div class="list" id="mgList"></div>
@@ -2122,8 +2127,8 @@ const SG_PAGES=[
  ['strategy','Strategy',['The strategy','to launch & scale.'],n=>`How ${n} goes to market: the moves, the mix, the content and the funnel.`],
  ['proposal','Proposal',['The proposal,','in detail.'],n=>`Everything we will do for ${n}, exactly as scoped.`],
  ['plan','Plan',['The build,','month by month.'],n=>`What ships when, how we measure it, and what comes back.`],
- ['work','Our work'],
  ['investment','Investment',['Scope &','investment.'],n=>`What is included and what it costs, then the first steps.`],
+ ['work','Our work'],
  ['contact','Contact']];
 function sgGuess(lab,doc){
   if(/commercial|budget option|pric|fee|investment|cost|what we need/i.test(lab))return 'investment';
@@ -2131,6 +2136,8 @@ function sgGuess(lab,doc){
   if(/kpi|result|measure|timeline|calendar|schedule|shoot day|launch plan|month runs|ticket math|stories plan|roadmap/i.test(lab))return 'plan';
   if(doc&&/^the goal|what we found|opportunity|who buys|^the brief|^the plan$/i.test(lab))return 'overview';
   return doc?'proposal':null}
+function sgPageHidden(k){const base=String(k).replace(/-\d+$/,'');return (typeof edits!=='undefined'?edits:[]).some(e=>e.hide&&e.path==='__page:'+base)}
+function sgTogglePage(k){const i=edits.findIndex(e=>e.hide&&e.path==='__page:'+k);if(i>=0)edits.splice(i,1);else edits.push({path:'__page:'+k,hide:1,theme:curT});generate();renderChanges();saveCurrent();toast(i>=0?'Page shown again':'Page hidden — numbering reflowed')}
 function sgSite(h,d,R,name){
   const tpl=document.createElement('template');tpl.innerHTML=h;
   const doc=!!R.doconly, buckets={};SG_PAGES.forEach(p=>buckets[p[0]]=[]);
@@ -2158,6 +2165,7 @@ function sgSite(h,d,R,name){
       for(let k=0;k<parts;k++){const ch=secs.slice(k*per,(k+1)*per);const first=lb(ch[0])||'Proposal';
         pages.push({key:'proposal-'+(k+1),label:first.length>18?first.slice(0,17)+'…':first,title:[first+',',`part ${k+1} of ${parts}.`],intro:()=>`Inside: ${ch.map(lb).filter(Boolean).join(' · ')}.`,els:ch})}}
     else pages.push({key:p[0],label:p[1],title:p[2],intro:p[3],els})});
+  pages=pages.filter(p=>!sgPageHidden(p.key));
   const tot=pages.length, nn=i=>String(i+1).padStart(2,'0');
   const secName=el=>{const l=lb(el);return l&&!/^(Cover|Contact|Sage proof strip)$/.test(l)?l:''};
   let out=`<div class="sgsite" data-mode="${sgMode()}">
@@ -2800,7 +2808,7 @@ function saveCurrent(){
   const live=document.querySelector('#pitch [data-mg][contenteditable="true"]');
   if(live&&document.activeElement!==live){const t=live;t.removeAttribute('contenteditable');
     const path=t.dataset.mg;const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===path);
-    const idx=els.indexOf(t);const i=edits.findIndex(e=>e.path===path&&(e.idx||0)===idx);
+    const idx=els.indexOf(t);const i=edits.findIndex(e=>e.path===path&&(e.idx||0)===idx&&!e.zoom&&!e.hide);
     const rec={path,idx,html:t.innerHTML,theme:curT};if(i>=0)edits[i]=rec;else edits.push(rec)}
   const d=collect(); if(!d.f_name)return;
   const id=d.f_name.trim().toLowerCase().replace(/\W+/g,'-');
@@ -3109,7 +3117,7 @@ let edits=[],editsFor='';
 function recordEdit(t){const path=t.dataset.mg;if(!path)return;
   const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===path);
   const idx=els.indexOf(t);
-  const i=edits.findIndex(e=>e.path===path&&(e.idx||0)===idx);
+  const i=edits.findIndex(e=>e.path===path&&(e.idx||0)===idx&&!e.zoom&&!e.hide);
   const rec={path,idx,html:t.innerHTML,theme:curT};
   if(i>=0)edits[i]=rec;else edits.push(rec);
   saveCurrent()}
@@ -3119,6 +3127,8 @@ function applyEdits(){if(!edits.length)return;
   edits.forEach(e=>{const els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===e.path);
     const el=els[e.idx||0];if(!el)return;
     if(e.del){el.remove();return}
+    if(e.zoom){el.style.zoom=e.zoom;return}
+    if(e.hide)return;
     if(blocky(e.html)&&((e.theme!==undefined&&e.theme!==curT)||(e.theme===undefined&&isSage())))return;
     if(isSage()&&blocky(e.html)&&!/^(Heading|Intro|Cover|Brand title|CTA|Pricing|About|Step|Plan item|Competitor|Big idea|Advantage|GTM|Pillar|Counter)/.test(e.path))return;
     el.innerHTML=e.html});
@@ -3146,6 +3156,19 @@ function delElement(t){const path=t.dataset.mg;if(!path)return;
   t.remove();renumber();saveCurrent();renderChanges();
   toast('Deleted ✓ — undo from the ✨ panel')}
 function delFromPop(){if(!mgTarget)return;const t=mgTarget;closePop();delElement(t)}
+/* stretch: drag the corner grip — the block and everything in it scale together (CSS zoom), saved with the pitch */
+function startStretch(){if(!mgTarget)return;const t=mgTarget;closePop();const g=$('mgGrip');g.classList.add('show');t.classList.add('mg-stretch');
+  const place=()=>{const r=t.getBoundingClientRect();g.style.left=(r.right-14)+'px';g.style.top=(r.bottom-14)+'px'};place();
+  let sx=0,sw=0,z0=parseFloat(t.style.zoom||getComputedStyle(t).zoom)||1;
+  const move=e=>{const r=t.getBoundingClientRect();const ratio=Math.max(.5,Math.min(2.5,(sw+(e.clientX-sx))/sw));t.style.zoom=(z0*ratio).toFixed(3);place();};
+  const up=()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);const z=parseFloat(t.style.zoom)||1;
+    const path=t.dataset.mg,els=[...$('pitch').querySelectorAll('[data-mg]')].filter(x=>x.dataset.mg===path),idx=els.indexOf(t);
+    const i=edits.findIndex(e=>e.zoom&&e.path===path&&(e.idx||0)===idx);if(Math.abs(z-1)<.02){if(i>=0)edits.splice(i,1);t.style.zoom=''}else{const rec={path,idx,zoom:+z.toFixed(3),theme:curT};if(i>=0)edits[i]=rec;else edits.push(rec)}
+    saveCurrent();renderChanges();toast('Stretched ×'+z.toFixed(2)+' — saved')};
+  const down=e=>{e.preventDefault();sx=e.clientX;sw=t.getBoundingClientRect().width;z0=parseFloat(t.style.zoom)||1;window.addEventListener('pointermove',move);window.addEventListener('pointerup',up)};
+  g.onpointerdown=down;
+  const end=ev=>{if(ev&&(g.contains(ev.target)))return;g.classList.remove('show');t.classList.remove('mg-stretch');document.removeEventListener('pointerdown',end,true)};
+  setTimeout(()=>document.addEventListener('pointerdown',end,true),0)}
 function undoEdit(i){edits.splice(i,1);generate();renderChanges();toast('Undone — pitch rebuilt')}
 /* hover 🗑 in magic mode */
 let mgHover=null;
@@ -3169,7 +3192,8 @@ function editInline(){if(!mgTarget)return;closePop();const t=mgTarget;t.setAttri
   const done=()=>{clearTimeout(deb);t.removeAttribute('contenteditable');t.removeEventListener('blur',done);t.removeEventListener('input',onInput);recordEdit(t);toast('Edit saved with the pitch ✓')};
   t.addEventListener('input',onInput);t.addEventListener('blur',done);toast('Editing inline — autosaves as you type')}
 function renderChanges(){$('mgCnt').textContent=comments.length+edits.length;$('mgReview').style.display=comments.length?'inline-flex':'none';
-  const eh=edits.map((e,i)=>`<div class="mg-item"><button class="del" onclick="undoEdit(${i})">undo</button><div class="pp">${e.del?'🗑 Deleted':'✏️ Edited'} · ${esc(e.path)}</div></div>`).join('');
+  const pg=isSage()?`<div class="mg-item"><div class="pp">📄 Pages shown in this proposal</div><div class="cc" style="display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:8px">${SG_PAGES.filter(p=>p[0]!=='overview').map(p=>`<label style="display:inline-flex;align-items:center;gap:6px;font-size:.84rem;cursor:pointer"><input type="checkbox" ${sgPageHidden(p[0])?'':'checked'} onchange="sgTogglePage('${p[0]}')"> ${esc(p[1])}</label>`).join('')}</div><div class="ss">Untick a page to hide it — nav, numbering and next-page links reflow.</div></div>`:'';
+  const eh=pg+edits.map((e,i)=>`<div class="mg-item"><button class="del" onclick="undoEdit(${i})">undo</button><div class="pp">${e.del?'🗑 Deleted':e.hide?'🙈 Hidden page':e.zoom?'↔ Stretched ×'+e.zoom:'✏️ Edited'} · ${esc(e.path.replace('__page:','Page: '))}</div></div>`).join('');
   const ch=comments.map((c,i)=>`<div class="mg-item"><button class="del" onclick="delComment(${i})">remove</button><div class="pp">${esc(c.path)}</div><div class="cc">${esc(c.comment)}</div><div class="ss">"${esc(c.snippet)}"</div></div>`).join('');
   $('mgList').innerHTML=(eh+ch)||'<p style="color:var(--mute);font-size:.9rem">Nothing yet. Turn on ✨ Magic edit — click text to edit it, hover &amp; hit 🗑 to delete, right-click to comment.</p>'}
 function delComment(i){comments.splice(i,1);renderChanges();renderFlags()}

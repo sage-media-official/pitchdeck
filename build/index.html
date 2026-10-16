@@ -1255,7 +1255,7 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgdeck .ctl .bt{display:flex;gap:8px}
   .sgdeck .ctl button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:16px;cursor:pointer;transition:background .3s,color .3s,transform .3s}
   .sgdeck .ctl button:hover{background:#fff;color:#050605;transform:translateY(-2px)}
-  .sgreel .sgin{align-items:center;padding-bottom:clamp(110px,12vw,180px)}
+  .sgreel .sgin{align-items:center;padding-top:clamp(32px,4vw,64px);padding-bottom:clamp(90px,9vw,140px)}
   /* --- work-by columns with a centre stage --- */
   .sgby{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,72px);margin-top:10px;align-items:start;position:relative}
   .sgby h3{font-family:var(--f-body);font-weight:400;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--sage2);margin:0 0 6px;display:flex;align-items:center;gap:10px}
@@ -1632,6 +1632,13 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgsite .band{background:radial-gradient(80% 120% at 100% 0%,color-mix(in srgb,var(--pa) 30%,transparent),transparent 60%),radial-gradient(60% 90% at 0% 100%,color-mix(in srgb,var(--pd) 60%,transparent),transparent 60%),#0B0C0B}
   .sgsite[data-mode="day"] .pcard,.sgsite[data-mode="day"] .idea,.sgsite[data-mode="day"] .ctr,.sgsite[data-mode="day"] .tiercard,.sgsite[data-mode="day"] .tq,.sgsite[data-mode="day"] .sgkpi .chip,.sgsite[data-mode="day"] .chartcard,.sgsite[data-mode="day"] .senti,.sgsite[data-mode="day"] .statrow .st{background:#F4F5F2}
   .sgsite[data-mode="day"] .psec.sgreel{background:#0B0C0B}
+  /* day mode: deeper palette so tinted type stays readable on white */
+  .sgsite[data-mode="day"] .sgpage{--pa:#3F5A3E;--pb:#536F50}
+  .sgsite[data-mode="day"] .sgpage[data-page="market"]{--pa:#2450B8;--pb:#4F8BFF}.sgsite[data-mode="day"] .sgpage[data-page="competition"]{--pa:#B0602A;--pb:#D97A2C}.sgsite[data-mode="day"] .sgpage[data-page="strategy"]{--pa:#4A38C8;--pb:#7C5CFF}
+  .sgsite[data-mode="day"] .sgpage[data-page="plan"]{--pa:#12908A;--pb:#25D3C0}.sgsite[data-mode="day"] .sgpage[data-page="work"]{--pa:#C43A6E;--pb:#FF5C8A}.sgsite[data-mode="day"] .sgpage[data-page="investment"]{--pa:#8A6A10;--pb:#C09020}.sgsite[data-mode="day"] .sgpage[data-page^="proposal"]{--pa:#12908A;--pb:#25D3C0}
+  .sgsite[data-mode="day"] .sgval .n{color:color-mix(in srgb,var(--va) 60%,#000)}
+  .sgsite[data-mode="day"] .sgphero .sgglow.a,.sgsite[data-mode="day"] .sgphero .sgglow.b{opacity:.55}
+  .sgsite[data-mode="day"] .sgscrim{background:linear-gradient(100deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 30%,rgba(255,255,255,.5) 56%,rgba(255,255,255,.12) 78%,transparent 100%)}
   @media print{.sgnav,.sgnext,.sgscroll,.sgmarq,.sgloader{display:none!important}.sgpage{display:block!important;animation:none!important}.sgsite .psec.sgherowrap{height:auto!important;min-height:560px}.sgcopy{position:relative;inset:auto}.sgsite .rise,.sgsite .w{opacity:1!important;translate:0 0;transform:none!important;filter:none!important;animation:none!important}}
   body.pdfing .sgnav,body.pdfing .sgnext,body.pdfing .sgscroll,body.pdfing .sgmarq,body.pdfing .sgrail{-webkit-mask-image:none;mask-image:none}
   body.pdfing .sgnav,body.pdfing .sgnext,body.pdfing .sgscroll,body.pdfing .sgloader{display:none!important}
@@ -2039,9 +2046,11 @@ function sgCover(d,R,name,reg,cat,needsSel){
     <div class="sgsvc">${svcs.map((s,i)=>{const P=SG_P[i%8];const base=`radial-gradient(120% 130% at 8% -5%,${P[0]} 0%,transparent 58%),radial-gradient(110% 120% at 100% 10%,${P[2]} 0%,transparent 60%),radial-gradient(140% 150% at 50% 120%,${P[1]} 0%,transparent 70%),linear-gradient(145deg,${P[1]} 0%,${P[0]} 100%)`;
       return `<article class="rise" style="--d:${i*45}ms" data-mg="Service: ${esc(s.t)}"><div class="spot"></div><div class="thumb" style="background:${base}"><div class="ba" style="background:radial-gradient(circle,${P[2]},transparent 60%)"></div><div class="bb" style="background:radial-gradient(circle,${P[0]},transparent 60%)"></div><div class="cells">${'<i></i>'.repeat(54)}</div><div class="sheen"></div><div class="shade"></div><span class="no">0${i+1}</span><span class="ghost">0${i+1}</span></div><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p><span class="kpi">${esc(s.k)}</span></article>`}).join('')}</div></section>`:''}`}
 function sgPickCases(d){const hay=[d.f_category,d.f_brief,(d.needs||[]).join(' ')].join(' ');const sc=SG_CASES.map((c,i)=>({c,s:(c.kw.test(hay)?2:0)-i*.01}));sc.sort((a,b)=>b.s-a.s);return sc.map(x=>x.c)}
-function sgSvcCard(x,i){return `<a class="sgsvcard" href="https://sagemedia.in/#/work/${x.k}" target="_blank" rel="noopener" style="background:${x.bg}"><i class="g1" style="background:${x.hi}"></i><i class="g2" style="background:${x.deep}"></i><div class="row"><span>${x.num}</span><span>${esc(x.count)}</span></div><div class="tt">${x.lines.map(l=>`<div>${esc(l)}</div>`).join('')}</div><span class="pill">View work <em>→</em></span></a>`}
+const SG_INDURL={fashion:'industries/fashion-menswear/',jewellery:'industries/jewellery/','real-estate':'#/industries/real-estate',interiors:'industries/luxury-interiors/'};
+function sgIndUrl(k){return 'https://sagemedia.in/'+(SG_INDURL[k]||('#/industries/'+k))}
+function sgSvcCard(x,i){return `<a class="sgsvcard" href="https://sagemedia.in/pages/portfolio/${x.k}/" target="_blank" rel="noopener" style="background:${x.bg}"><i class="g1" style="background:${x.hi}"></i><i class="g2" style="background:${x.deep}"></i><div class="row"><span>${x.num}</span><span>${esc(x.count)}</span></div><div class="tt">${x.lines.map(l=>`<div>${esc(l)}</div>`).join('')}</div><span class="pill">View work <em>→</em></span></a>`}
 function sgIndCard(x,i){const st=x.st?`<div class="stats"><div><span>${esc(x.st[0])}</span><b>${esc(x.st[1])}</b></div><div><span>${esc(x.st[2])}</span><b>${esc(x.st[3])}</b></div></div>`:'';
-  return `<a class="sgindcard" href="https://sagemedia.in/#/industries/${x.k}" target="_blank" rel="noopener"><div class="viz"><img src="${x.img}" alt="" loading="lazy" onerror="this.remove()"><sage-industry sector="${x.k}" mode="hero" label="off" stats="off"></sage-industry></div>${st}<div class="bt"><span class="lab">${String(i+1).padStart(2,'0')} · Industry</span><h4>${esc(x.t)}</h4><span class="see">See the work <em>→</em></span></div></a>`}
+  return `<a class="sgindcard" href="${sgIndUrl(x.k)}" target="_blank" rel="noopener"><div class="viz"><img src="${x.img}" alt="" loading="lazy" onerror="this.remove()"><sage-industry sector="${x.k}" mode="hero" label="off" stats="off"></sage-industry></div>${st}<div class="bt"><span class="lab">${String(i+1).padStart(2,'0')} · Industry</span><h4>${esc(x.t)}</h4><span class="see">See the work <em>→</em></span></div></a>`}
 function sgIndustryMotion(){if(window.__sgIndJs)return;window.__sgIndJs=1;if(customElements.get&&customElements.get('sage-industry'))return;const sc=document.createElement('script');sc.src='https://sagemedia.in/assets/sage-industry-motion.js?v=1';sc.async=true;document.head.appendChild(sc)}
 function sgByInit(site){site.querySelectorAll('.sgby').forEach(by=>{if(by.dataset.init)return;by.dataset.init='1';const card=by.querySelector('.sgbycard');if(!card)return;let hideT=0;
   const show=(kind,i,row)=>{const x=kind==='svc'?SG_BYSVC[i]:SG_BYIND[i];if(!x)return;clearTimeout(hideT);
@@ -2069,12 +2078,12 @@ function sgExtras(d,name,withQuotes){
       ${sgDeck(d,cases)}</div></section>`;
   h+=S(0,'Case studies','Work that moved <span class="kw">the numbers.</span>','Every case study from sagemedia.in. Drag the rail, or open any study.',
     `<div class="sgrail" data-mg="Case study rail"><div>${SG_CASES.map((c,i)=>`<a class="sgcase rise" style="--d:${i*45}ms" href="https://sagemedia.in/pages/case-studies/${c.slug}/" target="_blank" rel="noopener" draggable="false" data-mg="Case study: ${esc(c.n)}"><img src="${c.img}" alt="${esc(c.n)}" loading="lazy" draggable="false" onerror="this.style.visibility='hidden'"><div class="ov"><span class="ind">${esc(c.ind)}</span><h3>${esc(c.n)}</h3></div><span class="go">→</span></a>`).join('')}</div></div>
-     <a class="sglink" href="https://sagemedia.in/pages/case-studies/vamika-silver/" target="_blank" rel="noopener" style="margin-top:22px">All case studies <span>→</span></a>`);
+     <a class="sglink" href="https://sagemedia.in/pages/portfolio/" target="_blank" rel="noopener" style="margin-top:22px">All case studies <span>→</span></a>`);
   const byRow=(x,i,kind,href)=>`<li><a href="${href}" target="_blank" rel="noopener" data-by="${kind}" data-i="${i}"><span class="k">0${i+1}</span><span class="t">${esc(x.t)}</span><span class="m">${esc(x.m)}</span><span class="ar">↗</span></a></li>`;
   h+=S(0,'Work by','Work by <span class="kw">service.</span> Work by <span class="kw">industry.</span>','Two ways into 1800+ shoots and 1000+ brands — by what we did, or by the world we did it in.',
-    `<div class="sgby reveal"><div data-mg="Work by service"><h3>By service</h3><ul>${SG_BYSVC.map((x,i)=>byRow(x,i,'svc','https://sagemedia.in/#/work/'+x.k)).join('')}</ul></div>
+    `<div class="sgby reveal"><div data-mg="Work by service"><h3>By service</h3><ul>${SG_BYSVC.map((x,i)=>byRow(x,i,'svc','https://sagemedia.in/pages/portfolio/'+x.k+'/')).join('')}</ul></div>
      <div class="sgbycard" aria-hidden="true"></div>
-     <div data-mg="Work by industry"><h3>By industry</h3><ul>${SG_BYIND.map((x,i)=>byRow(x,i,'ind','https://sagemedia.in/#/industries/'+x.k)).join('')}</ul></div></div>`);
+     <div data-mg="Work by industry"><h3>By industry</h3><ul>${SG_BYIND.map((x,i)=>byRow(x,i,'ind',sgIndUrl(x.k))).join('')}</ul></div></div>`);
   if(withQuotes)h+=S(0,'Testimonial','What our <span class="kw">clients say.</span>','',
     `<div class="sgtog rise" data-mg="Testimonial region"><button class="on" onclick="sgRegion(this,'in')">India</button><button onclick="sgRegion(this,'gl')">Across the globe</button></div>
      <div class="sgrail" style="margin-top:18px" data-mg="Testimonials"><div class="sgqs" data-r="in">${SG_Q_IN.map((t,i)=>sgQuote(t,i)).join('')}</div><div class="sgqs" data-r="gl" style="display:none">${SG_Q_GL.map((t,i)=>sgQuote(t,i)).join('')}</div></div>`);
@@ -2152,7 +2161,7 @@ function sgSite(h,d,R,name){
   const tot=pages.length, nn=i=>String(i+1).padStart(2,'0');
   const secName=el=>{const l=lb(el);return l&&!/^(Cover|Contact|Sage proof strip)$/.test(l)?l:''};
   let out=`<div class="sgsite" data-mode="${sgMode()}">
-  <nav class="sgnav"><div class="sgin"><a class="sgmark" href="https://sagemedia.in" target="_blank" rel="noopener" aria-label="Sage Media"><img src="${SG_LOGO}" alt="Sage Media"><span><i>× ${name}</i></span></a>
+  <nav class="sgnav"><div class="sgin"><a class="sgmark" href="https://sagemedia.in" target="_blank" rel="noopener" aria-label="Sage Media" onclick="if(typeof sgCur!=='undefined'&&sgCur!=='overview'){event.preventDefault();sgGo('overview')}"><img src="${SG_LOGO}" alt="Sage Media"><span><i>× ${name}</i></span></a>
     <div class="sglinks">${pages.map(p=>`<a data-go="${p.key}" onclick="sgGo('${p.key}')">${esc(p.label)}</a>`).join('')}</div>
     <button class="sgcirc" onclick="sgToggleMode()" title="Day / night" aria-label="Toggle day and night">${sgMode()==='day'?'☾':'☀'}</button><a class="sgbtn acc" onclick="sgGo('contact')">Let's talk</a></div><span class="sgprog"></span></nav>`;
   pages.forEach((p,i)=>{

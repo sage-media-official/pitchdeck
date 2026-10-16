@@ -1892,8 +1892,8 @@ function sgPlan(road){
     return `<div class="sgrow ${i===0?'open':''}" data-mg="Roadmap ${esc(r.q)}"><div class="sgrow-h" onclick="this.parentElement.classList.toggle('open')"><span class="q">${esc(r.q)}</span><h4>${esc(r.t)}</h4><p class="sum">${esc(sum)}</p><span class="cnt">${items.length} ${items.length===1?'move':'moves'}</span><span class="pl"></span></div>
       <div class="sgrow-b"><div><div class="sgrow-in">${items.map(idea).join('')}</div></div></div></div>`}).join('')}</div>`}
 function sgCover(d,R,name,reg,cat,needsSel){
-  const L=innerWidth<940?3:5, img=u=>`https://wsrv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=640&output=webp&q=78`;
-  const lanes=Array.from({length:L},(_,k)=>{const a=SG_TILES.filter((_,i)=>i%L===k);return `<div><div class="sglane">${a.concat(a).map(u=>`<a><img src="${img(u)}" alt="" decoding="async" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${u}'}else this.remove()"></a>`).join('')}</div></div>`}).join('');
+  const L=innerWidth<940?3:5;
+  const lanes=Array.from({length:L},(_,k)=>{const a=SG_TILES.filter((_,i)=>i%L===k);return `<div><div class="sglane">${a.concat(a).map(u=>`<a><img src="${u}" alt="" decoding="async" onerror="this.parentElement.remove()"></a>`).join('')}</div></div>`}).join('');
   const words=sgWords(needsSel), dm=siteDomain(d);
   const svcs=sgSvcFor(needsSel);
   return `<section class="psec pcover sgherowrap" data-mg="Cover">

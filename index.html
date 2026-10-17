@@ -1643,6 +1643,52 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgsite[data-mode="day"] .sgval .n{color:color-mix(in srgb,var(--va) 60%,#000)}
   .sgsite[data-mode="day"] .sgphero .sgglow.a,.sgsite[data-mode="day"] .sgphero .sgglow.b{opacity:.55}
   .sgsite[data-mode="day"] .sgscrim{background:linear-gradient(100deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 30%,rgba(255,255,255,.5) 56%,rgba(255,255,255,.12) 78%,transparent 100%)}
+  /* ===== phone layout ===== */
+  @media(max-width:860px){
+    .topbar{max-width:100vw;overflow:hidden}.topbtns{max-width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}.topbtns::-webkit-scrollbar{display:none}
+    .genbar{max-width:100vw;flex-wrap:wrap;gap:8px;overflow:hidden}.genbar>*{min-width:0}
+    .pitch-bar{max-width:100vw;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}.pitch-bar::-webkit-scrollbar{display:none}
+    body{overflow-x:hidden}
+    .pitch-wrap{overflow-x:hidden}
+    .sgsite{overflow-x:clip}
+    .sgnav .sgin{gap:10px}
+    .sglinks{flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)}
+    .sglinks::-webkit-scrollbar{display:none}
+    .sgmark span{display:none}
+    .sgnav .sgbtn{padding:10px 14px;font-size:10px}
+    .sgsite .psec{padding-left:16px;padding-right:16px}
+    .sgsite .psec>.reveal:has(>.peyebrow){grid-template-columns:1fr}
+    .sgsite .psec>.reveal:has(>.peyebrow)>h2{grid-column:1;white-space:normal!important;text-wrap:balance;font-size:clamp(28px,8vw,36px)!important}
+    .sgsite .psec>.reveal:has(>.peyebrow)>.lead{grid-column:1;border-left:none;padding-left:0;font-size:15px}
+    .sgsite .sgphero h1{font-size:clamp(34px,9.5vw,44px)}
+    .sgsite .sgherowrap h1 .k{font-size:clamp(22px,6vw,28px)}
+    .sgsite .sgherowrap h1 .r{font-size:clamp(48px,14vw,64px)!important}
+    .sgcopy .sgbtn{padding:13px 20px;font-size:11px}
+    .sgsite .ctable,.sgsite .pricebox{overflow-x:auto}.sgsite .ctable table{min-width:520px}
+    .sgsite .psec .lead[data-mg="Pricing note"]{white-space:normal}
+    .sgtrust.sgabout{max-width:none}
+    .sgcomp{grid-template-columns:1fr;gap:16px}.sgcomp .id{position:static}
+    .sgledger{grid-template-columns:1fr;gap:28px}.sgledger::before{display:none}
+    .sgmixwrap{grid-template-columns:1fr}.sgdonut{max-width:200px;margin:0 auto}
+    .sgsite .hbar{grid-template-columns:1fr;gap:6px}.sgsite .hbar .lb,.sgsite .hbar .vv{text-align:left}
+    .sgrow-h{grid-template-columns:1fr auto;gap:6px 14px;padding:18px 0}.sgrow-h .sum,.sgrow-h .cnt{display:none}.sgrow-h .q{grid-column:1/-1}.sgrow-in{padding-left:0}
+    .sgidea .ih{grid-template-columns:24px 1fr}.sgidea .stat{grid-column:2;text-align:left;margin-top:6px}
+    .sgsite .chips.sgkpi{grid-template-columns:1fr 1fr}.sgsite .sgkpi .chip{min-height:110px;padding:16px}
+    .sgreel .sgin{display:block;padding-top:40px;padding-bottom:40px}
+    .sgdeck{display:block;width:min(70vw,300px);margin:36px auto 60px}
+    .sgdeck .arr.l{left:-22px}.sgdeck .arr.r{right:-22px}
+    .sgsite .sgreel h2{font-size:clamp(34px,10vw,48px)}
+    .sgcase{width:min(78vw,300px)}
+    .sgby{grid-template-columns:1fr;gap:28px}.sgbycard{display:none}
+    .sgstepswrap{grid-template-columns:1fr}.sgvalues{position:static}.sgvalues .g{grid-template-columns:1fr 1fr;gap:8px}.sgval{min-height:0;padding:14px}.sgval b{font-size:56px}
+    .sgsite .sgcontact h2{font-size:clamp(30px,9vw,40px)}
+    .sgcity .c{font-size:clamp(34px,11vw,44px)}.sgcity .ph{font-size:clamp(20px,6.5vw,28px)}
+    .sgsite .statrow{grid-template-columns:1fr 1fr}
+    .sgsite .pgrid.g2,.sgsite .pgrid.g3,.sgsite .pgrid.g4{grid-template-columns:1fr}
+    .sgsite .timeline{grid-template-columns:1fr}
+    .sgnext .sgin{padding:28px 16px}.sgnext .t{font-size:clamp(30px,9vw,40px)}
+    .sgsite .psec h3{font-size:clamp(18px,5vw,22px)}
+  }
   @media print{.sgnav,.sgnext,.sgscroll,.sgmarq,.sgloader{display:none!important}.sgpage{display:block!important;animation:none!important}.sgsite .psec.sgherowrap{height:auto!important;min-height:560px}.sgcopy{position:relative;inset:auto}.sgsite .rise,.sgsite .w{opacity:1!important;translate:0 0;transform:none!important;filter:none!important;animation:none!important}}
   body.pdfing .sgnav,body.pdfing .sgnext,body.pdfing .sgscroll,body.pdfing .sgmarq,body.pdfing .sgrail{-webkit-mask-image:none;mask-image:none}
   body.pdfing .sgnav,body.pdfing .sgnext,body.pdfing .sgscroll,body.pdfing .sgloader{display:none!important}
@@ -2243,6 +2289,7 @@ function sgFitHero(tries){const hw=document.querySelector('#pitch .sgherowrap');
   if(longest>box)h.style.fontSize=Math.max(64,Math.floor(base*box/longest))+'px';
   const k=h.parentElement.querySelector('.k'),ab=document.querySelector('#pitch .sgabout');if(k&&ab){const kw=k.getBoundingClientRect().width;if(kw>120)ab.style.setProperty('--kw',Math.round(kw)+'px')}}
 function sgFitH2(){document.querySelectorAll('#pitch .sgsite .sgpage.on .psec:not(.sgcontact)>.reveal>h2').forEach(h=>{const wrap=h.parentElement;h.style.fontSize='';h.classList.remove('wrap');wrap.classList.remove('stack');
+  if(innerWidth<=860){h.classList.add('wrap');wrap.classList.add('stack');return}
   let box=h.clientWidth;if(!box)return;const base=parseFloat(getComputedStyle(h).fontSize);let w=h.scrollWidth;if(w<=box+1)return;
   /* too long for the side-by-side column: give the heading the full row and move the lead under it */
   wrap.classList.add('stack');box=h.clientWidth;w=h.scrollWidth;if(w<=box+1)return;

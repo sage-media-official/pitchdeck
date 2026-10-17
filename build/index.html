@@ -1135,6 +1135,19 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sglinks a.on{color:var(--sage2)}
   .sgcirc{appearance:none;-webkit-appearance:none;width:36px;height:36px;min-width:36px;max-width:36px;flex:0 0 36px;padding:0;margin:0;font:inherit;line-height:1;box-shadow:none;border-radius:50%;border:1px solid var(--ln);background:transparent;color:var(--bone);display:grid;place-items:center;cursor:pointer;font-size:14px;transition:border-color .3s,color .3s,transform .5s}
   .sgcirc:hover{border-color:var(--sage2);color:var(--sage2);transform:rotate(25deg)}
+  .sgcirc svg{display:block}
+  .sgburger{display:none}.sgburger:hover{transform:none}
+  .sgmenu{position:fixed;inset:0;z-index:200;background:rgba(5,6,5,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .35s}
+  .sgmenu.open{opacity:1;pointer-events:auto}
+  .sgmenu .in{position:absolute;top:0;right:0;bottom:0;width:min(86vw,360px);background:var(--bg);border-left:1px solid var(--ln);padding:18px 20px 28px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);overflow-y:auto}
+  .sgmenu.open .in{transform:none}
+  .sgmenu .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .sgmenu .hd span{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+  .sgmenu ol{list-style:none;margin:0 0 22px;padding:0}
+  .sgmenu li a{display:flex;align-items:baseline;gap:14px;padding:14px 0;border-top:1px solid var(--ln);font-family:var(--f-display);font-size:24px;letter-spacing:-.01em;color:var(--bone);text-decoration:none;cursor:pointer}
+  .sgmenu li a span{font-family:var(--f-body);font-size:10px;letter-spacing:.18em;color:var(--sage2)}
+  .sgmenu li a.on{color:var(--sage2)}
+  .sgmenu .sgbtn{align-self:flex-start;margin-top:auto}
   .sgnav .sgbtn{padding:11px 20px}
   .sgprog{position:absolute;left:0;bottom:-1px;height:1px;width:calc(var(--sgp,0)*100%);background:var(--sage2);transition:width .1s linear}
   /* pages */
@@ -1621,7 +1634,13 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
   .sgsite .psec.in h2 .w,.sgsite .sgphero.in h1 .w{animation:sgWordIn .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*45ms)}
   .sgsite .sgphero h1 .w{display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px)}
   @media(max-width:940px){
-    .sgnav .sgin{height:56px;gap:10px}.sgmark span{display:none}.sgmark .sgbrand.haslogo{display:inline-flex;gap:6px}.sgmark .sgbrand img.sgbl{height:15px;max-width:64px}.sgmark .sgbrand img.fav{height:20px}.sglinks{margin:0}
+    .sgnav .sgin{height:auto;min-height:0;gap:8px;flex-wrap:wrap;row-gap:0;padding-top:10px}.sgmark span{display:none}.sgmark{gap:8px;margin-right:auto}.sgmark>img{margin-right:-4px}.sgmark .sgbrand.haslogo{display:inline-flex;gap:8px}.sgmark .sgbrand img.sgbl{height:15px;max-width:72px}.sgmark .sgbrand img.fav{height:20px}
+    .sgnav .sglinks{order:9;flex:0 0 100%;margin:10px -16px 0;padding:0 10px;width:calc(100% + 32px);max-width:none;border-top:1px solid var(--ln);height:42px;align-items:center}
+    .sgnav .sglinks a{font-size:10.5px;letter-spacing:.16em;padding:12px 11px}
+    .sgnav .sglinks a::after{left:11px;right:11px;bottom:6px}
+    .sgnav .sgcirc{width:34px;height:34px;min-width:34px;max-width:34px;flex:0 0 34px}
+    .sgnav .sgbtn.acc{padding:9px 13px;font-size:9.5px;letter-spacing:.12em}
+    .sgburger{display:grid}
     .sgsite .psec.sgherowrap{height:calc(100svh - 56px)}.sglanegrid{grid-template-columns:repeat(3,1fr);gap:7px;inset:0 16px}.sglane{gap:7px}.sgcollage{-webkit-mask-image:none;mask-image:none}
     .sgcopy{justify-content:flex-end;padding:0 16px 34px}.sgtrust{white-space:normal}.sgcopy .sgmeta{display:none}
     .sgscrim{background:linear-gradient(to top,rgba(var(--sc),.97) 0%,rgba(var(--sc),.9) 24%,rgba(var(--sc),.7) 42%,rgba(var(--sc),.28) 56%,transparent 68%)}
@@ -2294,7 +2313,8 @@ function sgSite(h,d,R,name){
   let out=`<div class="sgsite" data-mode="${sgMode()}">
   <nav class="sgnav"><div class="sgin"><a class="sgmark" href="https://sagemedia.in" target="_blank" rel="noopener" aria-label="Sage Media" onclick="if(typeof sgCur!=='undefined'&&sgCur!=='overview'){event.preventDefault();sgGo('overview')}"><img src="${SG_LOGO}" alt="Sage Media">${sgBrandMark(d,R,name)}</a>
     <div class="sglinks">${pages.map(p=>`<a data-go="${p.key}" onclick="sgGo('${p.key}')">${esc(p.label)}</a>`).join('')}</div>
-    <button class="sgcirc" onclick="sgToggleMode()" title="Day / night" aria-label="Toggle day and night">${sgMode()==='day'?'☾':'☀'}</button><a class="sgbtn acc" onclick="sgGo('contact')">Let's talk</a></div><span class="sgprog"></span></nav>`;
+    <button class="sgcirc" onclick="sgToggleMode()" title="Day / night" aria-label="Toggle day and night">${sgMode()==='day'?SG_ICO_MOON:SG_ICO_SUN}</button><a class="sgbtn acc" onclick="sgGo('contact')">Let's talk</a><button class="sgcirc sgburger" onclick="sgMenu(true)" aria-label="Open menu"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button></div><span class="sgprog"></span></nav>
+  <div class="sgmenu" onclick="if(event.target===this)sgMenu(false)"><div class="in"><div class="hd"><span>Menu</span><button class="sgcirc" onclick="sgMenu(false)" aria-label="Close menu"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><ol>${pages.map((p,i)=>`<li><a data-go="${p.key}" onclick="sgMenu(false);sgGo('${p.key}')"><span>${nn(i)}</span>${esc(p.label)}</a></li>`).join('')}</ol><a class="sgbtn acc" onclick="sgMenu(false);sgGo('contact')">Let's talk →</a></div></div>`;
   pages.forEach((p,i)=>{
     const wrap=document.createElement('div');p.els.forEach(e=>wrap.appendChild(e));
     const names=p.els.map(secName).filter(Boolean);
@@ -2312,9 +2332,13 @@ function sgSite(h,d,R,name){
   return out+`</div>`}
 /* ---- behaviour ---- */
 let sgCur='overview',sgIO=null,sgTimer=null,sgClockT=null,sgFlipT=null;
+/* day/night icons: the same line icons as sagemedia.in */
+const SG_ICO_SUN='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',SG_ICO_MOON='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.6 6.6 0 0 0 10.7 10.7z"/></svg>';
 function sgMode(){try{return localStorage.getItem('sg_mode')||'dark'}catch(e){return 'dark'}}
 function sgToggleMode(){const m=sgMode()==='day'?'dark':'day';try{localStorage.setItem('sg_mode',m)}catch(e){}
-  const s=document.querySelector('#pitch .sgsite');if(s){s.dataset.mode=m;const b=s.querySelector('.sgcirc');if(b)b.textContent=m==='day'?'☾':'☀'}sgPaintWrap()}
+  const s=document.querySelector('#pitch .sgsite');if(s){s.dataset.mode=m;const b=s.querySelector('.sgcirc');if(b)b.innerHTML=m==='day'?SG_ICO_MOON:SG_ICO_SUN}sgPaintWrap()}
+function sgMenu(open){const m=document.querySelector('#pitch .sgmenu');if(!m)return;m.classList.toggle('open',!!open);
+  if(open){const k=typeof sgCur!=='undefined'?sgCur:'';m.querySelectorAll('a[data-go]').forEach(a=>a.classList.toggle('on',a.dataset.go===k))}}
 function sgPaintWrap(){const w=$('pitchWrap');if(!w)return;const on=!!document.querySelector('#pitch .sgsite');w.style.background=on?(sgMode()==='day'?'#FFFFFF':'#0B0C0B'):''}
 function sgPages(){return [...document.querySelectorAll('#pitch .sgpage')]}
 function sgGo(k,instant){

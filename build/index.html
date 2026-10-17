@@ -1619,8 +1619,9 @@ else{try{if(localStorage.getItem('sage_gate')!=='26112f6212bde152a3caf4c65fd6bf5
     .sgnav .sgin{height:56px;gap:10px}.sgmark span{display:none}.sglinks{margin:0}
     .sgsite .psec.sgherowrap{height:calc(100svh - 56px)}.sglanegrid{grid-template-columns:repeat(3,1fr);gap:7px;inset:0 16px}.sglane{gap:7px}.sgcollage{-webkit-mask-image:none;mask-image:none}
     .sgcopy{justify-content:flex-end;padding:0 16px 34px}.sgtrust{white-space:normal}.sgcopy .sgmeta{display:none}
-    .sgscrim{background:linear-gradient(to top,rgba(var(--sc),.97) 0%,rgba(var(--sc),.9) 38%,rgba(var(--sc),.55) 62%,rgba(var(--sc),.12) 82%,transparent 100%)}
-    .sgsite[data-mode="day"] .sgscrim{background:linear-gradient(to top,rgba(255,255,255,.97) 0%,rgba(255,255,255,.9) 38%,rgba(255,255,255,.55) 62%,rgba(255,255,255,.12) 82%,transparent 100%)}
+    .sgscrim{background:linear-gradient(to top,rgba(var(--sc),.94) 0%,rgba(var(--sc),.84) 22%,rgba(var(--sc),.62) 40%,rgba(var(--sc),.22) 54%,transparent 66%)}
+    .sgsite[data-mode="day"] .sgscrim{background:linear-gradient(to top,rgba(255,255,255,.95) 0%,rgba(255,255,255,.86) 22%,rgba(255,255,255,.64) 40%,rgba(255,255,255,.22) 54%,transparent 66%)}
+    .sgcopy .sgtrust{font-size:12.5px;line-height:1.45;max-width:100%;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
     .sgsite .psec>.reveal:has(>.peyebrow){display:block}.sgsite .psec>.reveal:has(>.peyebrow)>.lead{border-left:none;padding-left:0;margin-top:12px}
     .sgphero .sgin{display:block}.sgphero .intro{border-left:none;padding-left:0;margin-top:18px}
     .sgreel .sgin{display:block}.sgtilt{display:none}
@@ -2169,7 +2170,7 @@ function sgByInit(site){site.querySelectorAll('.sgby').forEach(by=>{if(by.datase
 function sgDeck(d,cases){
   const own=(R=>{const g=(R&&R.gallery||[]).map(x=>({img:x.src,n:x.t||x.title||'Demo creative',s:x.s||'Concept'}));const a=parseLinks(d.f_assets).filter(u=>/\.(png|jpe?g|webp|gif)(\?|$)/i.test(u)).map(u=>({img:u,n:'Brand asset',s:d.f_name||''}));return g.concat(a)})(d.research||(typeof R!=='undefined'?R:null));
   const list=(own.length?own:SG_WORK.slice(0,8).map(w=>({img:w.img,n:w.n,s:'Sage Media'}))).slice(0,24);
-  return `<div class="sgdeck" data-mg="${own.length?'Demo creatives':'Work deck'}"><div class="cards">${list.map((c,i)=>`<div class="cd" style="--k:${i}"><img src="${esc(c.img)}" alt="" loading="lazy" onerror="this.parentElement.remove()"><span class="cap"><span>${esc(c.n)}</span><span>${esc(c.s)}</span></span></div>`).join('')}</div>
+  return `<div class="sgdeck" data-mg="${own.length?'Demo creatives':'Work deck'}"><div class="cards">${list.map((c,i)=>`<div class="cd" style="--k:${i}"><img src="${esc(c.img)}" alt="" loading="lazy" onerror="this.parentElement.remove()"></div>`).join('')}</div>
     <button type="button" class="arr l" aria-label="Previous creative" onclick="sgDeckGo(this,-1)">←</button><button type="button" class="arr r" aria-label="Next creative" onclick="sgDeckGo(this,1)">→</button>
     <div class="ctl"><span>${own.length?'Demo creatives for '+esc(d.f_name||'the brand'):'From the studio'} · <b class="ix">1</b>/${list.length}</span></div></div>`}
 function sgDeckGo(btn,dir){const deck=btn.closest('.sgdeck'),cards=[...deck.querySelectorAll('.cd')];if(!cards.length)return;let ix=+(deck.dataset.ix||0);ix=(ix+dir+cards.length)%cards.length;deck.dataset.ix=ix;
@@ -2341,7 +2342,11 @@ function sgFitHero(tries){const hw=document.querySelector('#pitch .sgherowrap');
   h.style.fontSize='';const base=parseFloat(getComputedStyle(h).fontSize);const c=document.createElement('canvas').getContext('2d');c.font=`400 ${base}px "Glacial Indifference","Jost","Inter",sans-serif`;
   const longest=Math.max(...words.join(' ').split(/\s+/).map(w=>c.measureText(w).width))+base*.12;
   if(longest>box)h.style.fontSize=Math.max(64,Math.floor(base*box/longest))+'px';
-  const k=h.parentElement.querySelector('.k'),ab=document.querySelector('#pitch .sgabout');if(k&&ab){const kw=k.getBoundingClientRect().width;if(kw>120)ab.style.setProperty('--kw',Math.round(kw)+'px')}}
+  const k=h.parentElement.querySelector('.k'),ab=document.querySelector('#pitch .sgabout');if(k&&ab){const kw=k.getBoundingClientRect().width;if(kw>120)ab.style.setProperty('--kw',Math.round(kw)+'px')}
+  /* phone: shrink the brand line until the whole thing fits in 3 lines (13px → 10.5px floor; clamp is only the last resort) */
+  if(ab){ab.style.fontSize='';if(innerWidth<=940){ab.style.display='block';ab.style.webkitLineClamp='none';let fs=13;ab.style.fontSize=fs+'px';
+    const lh=()=>parseFloat(getComputedStyle(ab).lineHeight)||fs*1.45;while(fs>10.5&&ab.scrollHeight>lh()*3+2){fs-=.5;ab.style.fontSize=fs+'px'}
+    ab.style.display='';ab.style.webkitLineClamp=''}}}
 function sgFitH2(){document.querySelectorAll('#pitch .sgsite .sgpage.on .psec:not(.sgcontact)>.reveal>h2').forEach(h=>{const wrap=h.parentElement;h.style.fontSize='';h.classList.remove('wrap');wrap.classList.remove('stack');
   if(innerWidth<=860){h.classList.add('wrap');wrap.classList.add('stack');return}
   let box=h.clientWidth;if(!box)return;const base=parseFloat(getComputedStyle(h).fontSize);let w=h.scrollWidth;if(w<=box+1)return;
@@ -2599,7 +2604,7 @@ function generate(){
     `<div class="refrow reveal d1" data-mg="Reference board">${refs.map(refCard).join('')}</div>`);
   /* exact-text proposal sections + demo creatives (rendered only when the research provides them) */
   if(!R.trimcore)(R.docsecs||[]).forEach(ds=>{h+=S(0,ds.k||'From the Proposal',ds.t||'',ds.lead||'',ds.body||'')});
-  if(SG&&(R.gallery||[]).length){h+=S(0,'Demo Creatives','Made for the <span class="kw">UAE feed.</span>','Demo creatives built from the real product — the standard this plan ships at.',`<div class="sggal">${R.gallery.map((g,i)=>`<figure class="rise" style="--d:${(i%4)*45}ms" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" alt="${esc(g.t||'')}" loading="lazy" onerror="this.closest('figure').remove()"><figcaption><b>${esc(g.t||'')}</b><span>${esc(g.s||'')}</span></figcaption></figure>`).join('')}</div>`)}else if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this plan ships in.',
+  if(SG&&(R.gallery||[]).length){h+=S(0,'Demo Creatives','Made for the <span class="kw">UAE feed.</span>','Demo creatives built from the real product — the standard this plan ships at.',`<div class="sggal">${R.gallery.map((g,i)=>`<figure class="rise" style="--d:${(i%4)*45}ms" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" alt="${esc(g.t||'')}" loading="lazy" onerror="this.closest('figure').remove()"></figure>`).join('')}</div>`)}else if((R.gallery||[]).length)h+=S(0,'Demo Creatives','The standard, already approved.','Live demo statics — the design system this plan ships in.',
     `<div class="pgrid g2">`+R.gallery.map((g,i)=>`<div class="pcard reveal d${(i%3)+1}" data-mg="Demo creative ${i+1}"><img src="${esc(g.src)}" style="display:none" onerror="this.closest('.pcard').style.display='none'" alt=""><div class="cwrap"><div class="caro" onscroll="const d=this.closest('.pcard').querySelectorAll('.carodots i');const k=Math.round(this.scrollLeft/this.clientWidth);d.forEach((x,j)=>x.classList.toggle('on',j===k))"><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div><div class="cslice" style="background-image:url('${esc(g.src)}')"></div></div><button class="cnav l" onclick="caroNav(this,-1)" aria-label="Previous">‹</button><button class="cnav r" onclick="caroNav(this,1)" aria-label="Next">›</button></div><div class="carodots"><i class="on"></i><i></i><i></i></div></div>`).join('')+`</div>`);
   if(SG)h+=sgExtras(d,name,true);
   /* 20 pricing (skipped when the budget plan already carries packages + scope of work) */

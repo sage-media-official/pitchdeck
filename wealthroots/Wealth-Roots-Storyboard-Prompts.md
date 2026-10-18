@@ -160,7 +160,7 @@ Attach: **crop_skyblue.jpg**
 
 ```
 Create one image: a 3x3 storyboard grid of nine portrait 9:16 frames with thin black gutters, frames in reading order. Photoreal cinematic stills for a luxury watch reel titled "60 Seconds". Whenever his wrist is in frame, the watch is the "Cerulean": sky-blue square case, white waffle-textured dial, navy rubber strap, navy crown — copy it exactly from the attached photo; it is always worn on his wrist, never lying on any surface. The man is Indian, mid-30s, athletic, short neat beard. Colour story: sky blue, white, navy, drafting paper. Wardrobe: Look 1: white shirt, sleeves rolled twice, navy trousers. Look 2: + navy blazer for C3. Setting: Study / library (drafting table) · rooftop under open sky · a mirror + door for C3. No text in the frames.
-Frame 1: Clock on the wall reads 9:59 — POV text.
+Frame 1: Clock on the wall reads 9:59.
 Frame 2: Mirror: he buttons the top collar.
 Frame 3: His fingers settle the Cerulean on the wrist.
 Frame 4: Macro: the clasp clicks shut.
